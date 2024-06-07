@@ -13,6 +13,7 @@ import { ClientCartComponent } from './components/admin/carts/client-cart/client
 import { DashboardComponent } from './components/admin/pages/dashboard/dashboard.component';
 import { ContractCartComponent } from './components/admin/carts/contract-cart/contract-cart.component';
 import { OfferCartComponent } from './components/admin/carts/offer-cart/offer-cart.component';
+import { provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { OfferCartComponent } from './components/admin/carts/offer-cart/offer-ca
     AppRoutingModule,
     NgbModule
   ],
-  providers: [],
+  providers: [provideHttpClient()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
