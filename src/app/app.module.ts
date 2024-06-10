@@ -14,6 +14,13 @@ import { DashboardComponent } from './components/admin/pages/dashboard/dashboard
 import { ContractCartComponent } from './components/admin/carts/contract-cart/contract-cart.component';
 import { OfferCartComponent } from './components/admin/carts/offer-cart/offer-cart.component';
 import { provideHttpClient } from '@angular/common/http';
+import { AdminComponent } from './components/admin/pages/admin/admin.component';
+import { ClientComponent } from './components/admin/pages/client/client.component';
+import { FreelancerComponent } from './components/admin/pages/freelancer/freelancer.component';
+import { RoleComponent } from './components/admin/pages/role/role.component';
+import { PermissionComponent } from './components/admin/pages/permission/permission.component';
+import { ContractComponent } from './components/admin/pages/contract/contract.component';
+import { OfferComponent } from './components/admin/pages/offer/offer.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +34,14 @@ import { provideHttpClient } from '@angular/common/http';
     DashboardComponent,
     
     ContractCartComponent,
-          OfferCartComponent
+          OfferCartComponent,
+          AdminComponent,
+          ClientComponent,
+          FreelancerComponent,
+          RoleComponent,
+          PermissionComponent,
+          ContractComponent,
+          OfferComponent
   ],
   imports: [
     BrowserModule,
