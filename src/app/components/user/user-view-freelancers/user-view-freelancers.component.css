@@ -1,54 +1,62 @@
 body {
-    background-color: #eee
-}
+    padding-top: 40px;
 
-.card {
-    border: none;
-    border-radius: 10px
-}
+  }
 
-.c-details span {
-    font-weight: 300;
-    font-size: 13px
-}
 
-.icon {
-    width: 50px;
-    height: 50px;
-    background-color: #eee;
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 39px
-}
+  .avatar-md {
+    height: 5rem;
+    width: 5rem;
+  }
 
-.badge span {
-    background-color: #fffbec;
-    width: 60px;
-    height: 25px;
-    padding-bottom: 3px;
-    border-radius: 5px;
-    display: flex;
-    color: #fed85d;
-    justify-content: center;
-    align-items: center
-}
+  .fs-19 {
+    font-size: 19px;
+  }
 
-.progress {
-    height: 10px;
-    border-radius: 10px
-}
+  .primary-link {
+    color: #314047;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+  }
 
-.progress div {
-    background-color: red
-}
+  a {
+    color: #000000;
+    text-decoration: none;
+  }
 
-.text1 {
+  .bookmark-post .favorite-icon a,
+  .job-box.bookmark-post .favorite-icon a {
+    background-color: #da3746;
+    color: #fff;
+    border-color: danger;
+  }
+  .favorite-icon a {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+    line-height: 30px;
+    text-align: center;
+    border: 1px solid #eff0f2;
+    border-radius: 6px;
+    color: rgba(173, 181, 189, 0.55);
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+  }
+
+  .candidate-list-box .favorite-icon {
+    position: absolute;
+    right: 22px;
+    top: 22px;
+  }
+  .fs-14 {
     font-size: 14px;
-    font-weight: 600
-}
+  }
+  .bg-soft-secondary {
+    background-color: rgba(116, 120, 141, 0.15) !important;
+    color: #74788d !important;
+  }
 
-.text2 {
-    color: #a5aec0
-}
+  .mt-1 {
+    margin-top: 0.25rem !important;
+  }
