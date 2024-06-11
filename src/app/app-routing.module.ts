@@ -8,6 +8,9 @@ import { UserHomeComponent } from './components/user/user-home/user-home.compone
 import { LoginComponent } from './components/auth/login/login.component';
 import { AuthentificationComponent } from './components/auth/authentification/authentification.component';
 import { UserViewFreelancersComponent } from './components/user/user-view-freelancers/user-view-freelancers.component';
+import { FreelancerProfileComponent } from './components/freelancer/freelancer-profile/freelancer-profile.component';
+import { UserAddOfferComponent } from './components/user/user-add-offer/user-add-offer.component';
+import { UserDashboardComponent } from './components/user/user-dashboard/user-dashboard.component';
 
 const routes: Routes = [
   {path:'admin',component:AdminDashboardComponent},
@@ -16,8 +19,10 @@ const routes: Routes = [
   {path:'about',component:UserAboutComponent},
   {path:'register',component:AuthentificationComponent},
   {path:'login',component:LoginComponent},
-  {path:'view-freelancers',component:UserViewFreelancersComponent}
-  
+  {path:'view-freelancers',component:UserViewFreelancersComponent},
+  {path:'freelancer-profile',component:FreelancerProfileComponent},
+  {path:'add-offer',component:UserAddOfferComponent},
+  {path:'client-dashboard',component:UserDashboardComponent}
 
 ];
 

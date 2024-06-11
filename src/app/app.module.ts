@@ -17,6 +17,9 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { AuthentificationComponent } from './components/auth/authentification/authentification.component';
 import { UserViewFreelancersComponent } from './components/user/user-view-freelancers/user-view-freelancers.component';
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
+import { FreelancerProfileComponent } from './components/freelancer/freelancer-profile/freelancer-profile.component';
+import { UserAddOfferComponent } from './components/user/user-add-offer/user-add-offer.component';
+import { UserDashboardComponent } from './components/user/user-dashboard/user-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,10 @@ import { UserProfileComponent } from './components/user/user-profile/user-profil
     LoginComponent,
     AuthentificationComponent,
     UserViewFreelancersComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    FreelancerProfileComponent,
+    UserAddOfferComponent,
+    UserDashboardComponent
   ],
   imports: [
     BrowserModule,
