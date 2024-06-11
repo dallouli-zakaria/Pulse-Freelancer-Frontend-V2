@@ -1,25 +1,15 @@
 <div  class="container">
-  <table class="table caption-top">
-    <caption><h1>Admins List</h1></caption>
-    <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">name</th>
-        <th scope="col">email</th>
-        <th scope="col">role</th>
-        <th scope="col">action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>Otto</td>
-        <td><button class="btn btn-primary">modifie</button></td>
-      </tr>
-      
-    </tbody>
-</table>    
+
+  <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#add">
+    Add admin
+  </button>
+  <app-admin-table></app-admin-table>   
 </div>
 
+  <!-- add -->
+  <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-m"><div class="modal-content">
+      <app-admin-add></app-admin-add>
+    </div>
+   </div>
+  </div>

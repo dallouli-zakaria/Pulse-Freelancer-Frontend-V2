@@ -18,15 +18,13 @@ ngOnInit(): void {
 
 
 count(){
-  this.numberClient=this.clients.count().subscribe({
+  this.clients.count().subscribe({
     next: (data:any)=>{
       this.numberClient=data
-      console.log(data);
-      
+      console.log(data);   
     },
     error: (eror:any)=>{
       console.log(eror);   
-    }
-    })
+    }});
   }
 }

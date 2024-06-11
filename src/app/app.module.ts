@@ -21,6 +21,18 @@ import { RoleComponent } from './components/admin/pages/role/role.component';
 import { PermissionComponent } from './components/admin/pages/permission/permission.component';
 import { ContractComponent } from './components/admin/pages/contract/contract.component';
 import { OfferComponent } from './components/admin/pages/offer/offer.component';
+import { ClientTableComponent } from './components/admin/table/client-table/client-table.component';
+import { FreelancerTableComponent } from './components/admin/table/freelancer-table/freelancer-table.component';
+import { ContractTableComponent } from './components/admin/table/contract-table/contract-table.component';
+import { OfferTableComponent } from './components/admin/table/offer-table/offer-table.component';
+import { RoleTableComponent } from './components/admin/table/role-table/role-table.component';
+import { PermissionTableComponent } from './components/admin/table/permission-table/permission-table.component';
+import { AdminEditComponent } from './components/admin/buttons/edit/admin-edit/admin-edit.component';
+import { ClientEditComponent } from './components/admin/buttons/edit/client-edit/client-edit.component';
+import { FreelancerEditComponent } from './components/admin/buttons/edit/freelancer-edit/freelancer-edit.component';
+import { AdminDeleteComponent } from './components/admin/buttons/delete/admin-delete/admin-delete.component';
+import { ClientDeleteComponent } from './components/admin/buttons/delete/client-delete/client-delete.component';
+import { AdminAddComponent } from './components/admin/buttons/add/admin-add/admin-add.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +53,19 @@ import { OfferComponent } from './components/admin/pages/offer/offer.component';
           RoleComponent,
           PermissionComponent,
           ContractComponent,
-          OfferComponent
+          OfferComponent,
+          ClientTableComponent,
+          FreelancerTableComponent,
+          ContractTableComponent,
+          OfferTableComponent,
+          RoleTableComponent,
+          PermissionTableComponent,
+          AdminEditComponent,
+          ClientEditComponent,
+          FreelancerEditComponent,
+          AdminDeleteComponent,
+          ClientDeleteComponent,
+          AdminAddComponent
   ],
   imports: [
     BrowserModule,
