@@ -1,0 +1,21 @@
+.vh-100 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+  }
+  .container-fluid.h-custom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+  }
+  .bg-primary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+  }
+  .bg-primary .text-white {
+    margin-bottom: 0;
+  }
