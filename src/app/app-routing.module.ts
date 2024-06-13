@@ -11,6 +11,15 @@ import { UserViewFreelancersComponent } from './components/user/user-view-freela
 import { FreelancerProfileComponent } from './components/freelancer/freelancer-profile/freelancer-profile.component';
 import { UserAddOfferComponent } from './components/user/user-add-offer/user-add-offer.component';
 import { UserDashboardComponent } from './components/user/user-dashboard/user-dashboard.component';
+import { Error404Component } from './components/errors/error404/error404.component';
+import { Error500Component } from './components/errors/error500/error500.component';
+import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
+import { UserContractComponent } from './components/user/user-contract/user-contract.component';
+import { ViewOffersComponent } from './components/freelancer/view-offers/view-offers.component';
+import { ViewClientOfferComponent } from './components/user/view-client-offer/view-client-offer.component';
+import { ContactUsComponent } from './components/user/contact-us/contact-us.component';
+import { ViewOffersDetailsComponent } from './components/freelancer/view-offers-details/view-offers-details.component';
+import { UserTestComponent } from './components/user/user-test/user-test.component';
 
 const routes: Routes = [
   {path:'admin',component:AdminDashboardComponent},
@@ -22,7 +31,17 @@ const routes: Routes = [
   {path:'view-freelancers',component:UserViewFreelancersComponent},
   {path:'freelancer-profile',component:FreelancerProfileComponent},
   {path:'add-offer',component:UserAddOfferComponent},
-  {path:'client-dashboard',component:UserDashboardComponent}
+  {path:'client-dashboard',component:UserDashboardComponent},
+  {path:'page-notfound',component:Error404Component},
+  {path:'server-error',component:Error500Component},
+  {path:'client-profile',component:UserProfileComponent},
+  {path:'client-contracts',component:UserContractComponent},
+  {path:'offers',component:ViewOffersComponent},
+  {path:'client-offer',component:ViewClientOfferComponent},
+  {path:'contact',component:ContactUsComponent},
+  {path:'offer-details',component:ViewOffersDetailsComponent},
+  {path:'test',component:UserTestComponent}
+
 
 ];
 

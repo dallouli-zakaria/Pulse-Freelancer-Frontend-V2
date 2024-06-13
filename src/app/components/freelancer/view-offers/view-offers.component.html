@@ -6,8 +6,13 @@
       crossorigin="anonymous"
     />
     <section class="section">
+      
       <div class="container">
+        <a routerLink="../home" class="text-danger">
+          <i class="fas fa-arrow-left"></i> Retour 
+        </a>
         <div class="justify-content-center row">
+          <h3 class="m-4">Découvrir les Différents offres</h3>
           <div class="col-lg-12">
             <div class="candidate-list-widgets mb-4">
               <form action="#" class>
@@ -73,6 +78,7 @@
             </div>
           </div>
         </div>
+        
         <div class="row">
           <div class="col-lg-12">
             <div class="align-items-center row">
@@ -171,7 +177,7 @@
                     </div>
                   </div>
                   <div class="postuler">
-                   <button class="btn btn-outline-danger" >postuler</button>
+                   <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">voir l'offre</button>
                    
                   </div>
                 </div>
@@ -227,7 +233,7 @@
                     </div>
                   </div>
                   <div class="postuler">
-                   <button class="btn btn-outline-danger">postuler</button>
+                   <button class="btn btn-outline-danger">voir l'offre</button>
                   </div>
                 </div>
               </div>
@@ -282,7 +288,7 @@
                     </div>
                   </div>
                   <div class="postuler">
-                   <button class="btn btn-outline-danger">postuler</button>
+                   <button class="btn btn-outline-danger">voir l'offre</button>
                   </div>
                 </div>
               </div>
@@ -319,5 +325,20 @@
         </div>
       </div>
     </section>
-  
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Voir l'offre</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-view-offers-details></app-view-offers-details>
+      </div>
+
+    </div>
+  </div>
+</div>
   </body>
