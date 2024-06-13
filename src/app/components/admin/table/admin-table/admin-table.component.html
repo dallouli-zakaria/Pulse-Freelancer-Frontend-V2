@@ -1,0 +1,58 @@
+
+<table class="table caption-top">
+  
+    <caption><h1>Admins List</h1> </caption>
+    
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">name</th>
+        <th scope="col">email</th>
+        
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+      
+        <td>
+           
+          <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-right: 5px;">
+            <i class="fas fa-pen"></i> 
+          </button> 
+          
+          <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete">
+            <i class="fas fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+      
+    </tbody>
+</table> 
+  <!-- add -->
+  <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-m"><div class="modal-content">
+      <app-admin-add></app-admin-add>
+    </div>
+   </div>
+  </div>
+
+     <!-- edit -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-m"><div class="modal-content">
+        <app-admin-edit></app-admin-edit>
+      </div>
+    </div>
+  </div>
+
+     <!-- delete -->
+     
+    <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm"><div class="modal-content">
+        <app-admin-delete></app-admin-delete>
+      </div>
+    </div>  
+    
