@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrl: './user-contract.component.css'
 })
 export class UserContractComponent {
+  isModalOpen = false;
 
+  openModal() {
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+  }
 }

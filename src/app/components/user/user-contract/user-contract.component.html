@@ -59,7 +59,7 @@
                     <div class="card-body ">
                       <div class="row ">
                         <div class="col-12">
-                          <h4 class="card-title"><a routerLink="../home">Contract #34 <span class="text-muted">- Application Mobile Innovante</span></a> </h4>
+                          <h4 class="card-title"><a (click)="openModal()">Contract #34 <span class="text-muted">- Application Mobile Innovante</span></a> </h4>
                         </div>
                         <div class="col">
                           <h6 class="row card-subtitle mb-2 ">
@@ -118,6 +118,21 @@
                 <!-- end -->
                  
                  
+
+                  <!-- Modal -->
+                  <div id="myModal" class="modal" [ngClass]="{'show': isModalOpen}">
+                    <div class="modal-content">
+                     <div class="row">
+                      <span class="col-10"></span>
+                      <span class="close col-2" (click)="closeModal()" >&times;</span>
+                     </div>
+                      
+                      <app-user-contract-download></app-user-contract-download>
+                    </div>
+                  </div>
+  
+
+
               </div>
             </div>
           </div>

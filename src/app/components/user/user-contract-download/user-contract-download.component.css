@@ -1,0 +1,18 @@
+.text-center {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .box {
+    display: inline-block; /* Ensure the box adjusts to the image size */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+    padding: 10px; /* Optional: Add padding if you want space between the image and shadow */
+    border-radius: 8px; /* Optional: Add rounded corners */
+    background-color: #fff; /* Optional: Add a background color */
+  }
+  
+  .box img {
+    display: block; /* Ensures no extra space below the image */
+    max-width: 100%; /* Ensures the image scales down on smaller screens */
+    border-radius: 8px; /* Optional: Match the border-radius of the box for a cohesive look */
+  }
