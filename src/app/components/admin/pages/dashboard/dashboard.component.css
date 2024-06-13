@@ -1,0 +1,15 @@
+.container-fluid{
+  color: rgb(8, 8, 8);
+ 
+}
+.d-sm-flex {
+    display: flex !important;
+  }
+  .d-sm-inline-flex {
+    display: inline-flex !important;
+  }
+
+  h3{
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }

@@ -1,0 +1,48 @@
+<table class="table caption-top">
+    <caption><h1>Contracts List</h1></caption>
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">title</th>
+        <th scope="col">period</th>
+        <th scope="col">buget</th>
+        <th scope="col">description</th>
+        <th scope="col">client</th>
+        <th scope="col">freelancer</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>ffgdg</td>
+        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia cumque esse, vitae tempore eligendi reiciendis totam error praesentium corporis recusandae eos illo tenetur mollitia cum corrupti magni fuga voluptatem aliquam.</td>
+        <td>Otto</td>
+        <td>Otto</td>
+        <td class=" justify-content-space-between">
+          <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#edit" style="margin-right: 5px;">
+            <i class="fas fa-pen"></i> 
+           </button>  
+           <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete">
+            <i class="fas fa-trash"></i> 
+           </button>
+          </td>
+      </tr>
+    </tbody>
+</table>
+  <!-- edit -->
+  <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-m"><div class="modal-content">
+      <app-contract-edit></app-contract-edit>
+    </div>
+  </div>
+  </div>
+  <!-- delete -->
+  <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-m"><div class="modal-content">
+      <app-contract-delete></app-contract-delete>
+    </div>
+  </div>  
+  
