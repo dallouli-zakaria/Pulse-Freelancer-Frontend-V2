@@ -1,5 +1,6 @@
 a {
   color: black; /* Change to your preferred color */
+  text-decoration: none;
 }
 .btn-link{
   color: black;
