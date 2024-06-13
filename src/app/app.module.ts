@@ -52,6 +52,7 @@ import { OfferTableComponent } from './components/admin/table/offer-table/offer-
 import { PermissionTableComponent } from './components/admin/table/permission-table/permission-table.component';
 import { RoleTableComponent } from './components/admin/table/role-table/role-table.component';
 import { UsersTableComponent } from './components/admin/table/users-table/users-table.component';
+import { ViewOffersDetailsComponent } from './components/freelancer/view-offers-details/view-offers-details.component';
 
 @NgModule({
   declarations: [
@@ -103,7 +104,8 @@ import { UsersTableComponent } from './components/admin/table/users-table/users-
           PermissionEditComponent,
           RoleAddComponent,
           PermissionAddComponent,
-          RoleDetailsComponent
+          RoleDetailsComponent,
+          ViewOffersDetailsComponent
   ],
   imports: [
       BrowserModule,
