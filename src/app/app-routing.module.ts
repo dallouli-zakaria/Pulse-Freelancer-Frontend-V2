@@ -11,6 +11,8 @@ import { RoleComponent } from './components/admin/pages/role/role.component';
 import { PermissionComponent } from './components/admin/pages/permission/permission.component';
 import { ContractComponent } from './components/admin/pages/contract/contract.component';
 import { OfferComponent } from './components/admin/pages/offer/offer.component';
+import { MailingComponent } from './components/admin/pages/mailing/mailing.component';
+import { UsersComponent } from './components/admin/pages/users/users.component';
 
 const routes: Routes = [
   {path:'top',component:AdminTopbarComponent},
@@ -22,7 +24,9 @@ const routes: Routes = [
   {path:'role',component:RoleComponent},
   {path:'permission',component:PermissionComponent},
   {path:'contract',component:ContractComponent},
-  {path:'offer',component:OfferComponent}
+  {path:'offer',component:OfferComponent},
+  {path:'mailing',component:MailingComponent},
+  {path:'users',component:UsersComponent}
 ];
 
 @NgModule({

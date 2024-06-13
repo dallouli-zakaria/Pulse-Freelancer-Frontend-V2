@@ -33,7 +33,25 @@ import { FreelancerEditComponent } from './components/admin/buttons/edit/freelan
 import { AdminDeleteComponent } from './components/admin/buttons/delete/admin-delete/admin-delete.component';
 import { ClientDeleteComponent } from './components/admin/buttons/delete/client-delete/client-delete.component';
 import { AdminAddComponent } from './components/admin/buttons/add/admin-add/admin-add.component';
-
+import { FreelancerDeleteComponent } from './components/admin/buttons/delete/freelancer-delete/freelancer-delete.component';
+import { ClientAddComponent } from './components/admin/buttons/add/client-add/client-add.component';
+import { FreelancerAddComponent } from './components/admin/buttons/add/freelancer-add/freelancer-add.component';
+import { MailingComponent } from './components/admin/pages/mailing/mailing.component';
+import { ContractAddComponent } from './components/admin/buttons/add/contract-add/contract-add.component';
+import { ContractDeleteComponent } from './components/admin/buttons/delete/contract-delete/contract-delete.component';
+import { ContractEditComponent } from './components/admin/buttons/edit/contract-edit/contract-edit.component';
+import { UsersComponent } from './components/admin/pages/users/users.component';
+import { UsersTableComponent } from './components/admin/table/users-table/users-table.component';
+import { UsersEditComponent } from './components/admin/buttons/edit/users-edit/users-edit.component';
+import { UsersDeleteComponent } from './components/admin/buttons/delete/users-delete/users-delete.component';
+import { UserDetailsComponent } from './components/admin/buttons/details/user-details/user-details.component';
+import { RoleDeleteComponent } from './components/admin/buttons/delete/role-delete/role-delete.component';
+import { PermissionDeleteComponent } from './components/admin/buttons/delete/permission-delete/permission-delete.component';
+import { RoleEditComponent } from './components/admin/buttons/edit/role-edit/role-edit.component';
+import { PermissionEditComponent } from './components/admin/buttons/edit/permission-edit/permission-edit.component';
+import { RoleAddComponent } from './components/admin/buttons/add/role-add/role-add.component';
+import { PermissionAddComponent } from './components/admin/buttons/add/permission-add/permission-add.component';
+import { RoleDetailsComponent } from './components/admin/buttons/details/role-details/role-details.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,12 +83,32 @@ import { AdminAddComponent } from './components/admin/buttons/add/admin-add/admi
           FreelancerEditComponent,
           AdminDeleteComponent,
           ClientDeleteComponent,
-          AdminAddComponent
+          AdminAddComponent,
+          FreelancerDeleteComponent,
+          ClientAddComponent,
+          FreelancerAddComponent,
+          MailingComponent,
+          ContractAddComponent,
+          ContractDeleteComponent,
+          ContractEditComponent,
+          UsersComponent,
+          UsersTableComponent,
+          UsersEditComponent,
+          UsersDeleteComponent,
+          UserDetailsComponent,
+          RoleDeleteComponent,
+          PermissionDeleteComponent,
+          RoleEditComponent,
+          PermissionEditComponent,
+          RoleAddComponent,
+          PermissionAddComponent,
+          RoleDetailsComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NgbModule
+      BrowserModule,
+      AppRoutingModule,
+      NgbModule
+      
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]
