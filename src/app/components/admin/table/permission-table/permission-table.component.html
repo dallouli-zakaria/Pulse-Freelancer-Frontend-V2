@@ -16,10 +16,27 @@
         <td>Otto</td>
         <td>Otto</td>
         <td>
-            <button class="btn btn-primary btn-sm" style="margin-right: 5px;"><i class="fas fa-pen"></i> </button> 
-            <button class="btn btn-danger btn-sm" style="margin: 2px;"><i class="fas fa-trash"></i> </button>
+          <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#edit" style="margin-right: 5px;"><i class="fas fa-pen"></i> </button> 
+          <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete" style="margin-right: 5px;"><i class="fas fa-trash"></i></button>
           </td>
       </tr>
       
     </tbody>
 </table>
+
+
+<!-- edit-->
+<div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-m"><div class="modal-content">
+    <app-permission-edit></app-permission-edit>
+  </div>
+ </div>
+</div>
+
+   <!-- delete-->
+  <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-m"><div class="modal-content">
+      <app-permission-delete></app-permission-delete>
+    </div>
+  </div>
+</div>
