@@ -31,6 +31,7 @@ import { ViewClientOfferComponent } from './components/user/view-client-offer/vi
 import { ContactUsComponent } from './components/user/contact-us/contact-us.component';
 import { ViewOffersDetailsComponent } from './components/freelancer/view-offers-details/view-offers-details.component';
 import { UserTestComponent } from './components/user/user-test/user-test.component';
+import { CheckmarkComponent } from './components/user/checkmark/checkmark.component';
 
 const routes: Routes = [
 
@@ -78,7 +79,8 @@ const routes: Routes = [
   { path: 'page-notfound', component: Error404Component },
   { path: 'server-error', component: Error500Component },
   { path: '', redirectTo: 'pulse/home', pathMatch: 'full' },
-  { path: '**', redirectTo: 'page-notfound', pathMatch: 'full' } 
+  { path: '**', redirectTo: 'page-notfound', pathMatch: 'full' },
+  
 ];
 
 @NgModule({

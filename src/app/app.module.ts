@@ -76,10 +76,8 @@ import { UserUpdateProfileComponent } from './components/user/user-update-profil
 import { UserViewFreelancersComponent } from './components/user/user-view-freelancers/user-view-freelancers.component';
 import { ViewClientOfferComponent } from './components/user/view-client-offer/view-client-offer.component';
 import { UserContractDownloadComponent } from './components/user/user-contract-download/user-contract-download.component';
-import { MainComponent } from './components/main/main/main.component';
-import { MainAdminComponent } from './components/main/main-admin/main-admin.component';
-import { MainLoginComponent } from './components/main/main-login/main-login.component';
-import { MainAuthComponent } from './components/main/main-auth/main-auth.component';
+import { CheckmarkComponent } from './components/user/checkmark/checkmark.component';
+
 
 @NgModule({
   declarations: [
@@ -162,10 +160,7 @@ import { MainAuthComponent } from './components/main/main-auth/main-auth.compone
           UserUpdateOfferComponent,
           UserTestComponent,
           UserContractDownloadComponent,
-          MainComponent,
-          MainAdminComponent,
-          MainLoginComponent,
-          MainAuthComponent,
+          CheckmarkComponent,
           
   ],
   imports: [
