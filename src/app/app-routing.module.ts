@@ -14,7 +14,6 @@ import { OfferComponent } from './components/admin/pages/offer/offer.component';
 import { MailingComponent } from './components/admin/pages/mailing/mailing.component';
 import { UsersComponent } from './components/admin/pages/users/users.component';
 import { UserIndexComponent } from './components/user/user-index/user-index.component';
-import { UserAboutComponent } from './components/user/user-about/user-about.component';
 import { UserHomeComponent } from './components/user/user-home/user-home.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { AuthentificationComponent } from './components/auth/authentification/authentification.component';
@@ -53,11 +52,14 @@ const routes: Routes = [
       { path: '**', redirectTo: 'dashboard', pathMatch: 'full' } 
     ]
   },
+  
+
+
+  
   {
     path: 'pulse',
     component: UserIndexComponent,
     children: [
-      { path: 'about', component: UserAboutComponent },
       { path: 'view-freelancers', component: UserViewFreelancersComponent },
       { path: 'add-offer', component: UserAddOfferComponent },
       { path: 'client-dashboard', component: UserDashboardComponent },
@@ -74,6 +76,9 @@ const routes: Routes = [
       { path: '**', redirectTo: 'home', pathMatch: 'full' } 
     ]
   },
+
+
+
   { path: 'register', component: AuthentificationComponent },
   { path: 'login', component: LoginComponent },
   { path: 'page-notfound', component: Error404Component },

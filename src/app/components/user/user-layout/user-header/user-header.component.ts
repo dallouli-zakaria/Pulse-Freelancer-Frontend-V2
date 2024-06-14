@@ -6,5 +6,15 @@ import { Component } from '@angular/core';
   styleUrl: './user-header.component.css'
 })
 export class UserHeaderComponent {
+  dropdownOpen = false;
+  selectedOption: string | null = null;
 
+  toggleDropdown() {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  selectOption(option: string) {
+    this.selectedOption = option;
+    this.dropdownOpen = false; // Close the dropdown after selecting an option
+  }
 }

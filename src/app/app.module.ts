@@ -61,7 +61,6 @@ import { ApplyOfferComponent } from './components/freelancer/apply-offer/apply-o
 import { FreelancerProfileComponent } from './components/freelancer/freelancer-profile/freelancer-profile.component';
 import { ViewOffersComponent } from './components/freelancer/view-offers/view-offers.component';
 import { ContactUsComponent } from './components/user/contact-us/contact-us.component';
-import { UserAboutComponent } from './components/user/user-about/user-about.component';
 import { UserAddOfferComponent } from './components/user/user-add-offer/user-add-offer.component';
 import { UserContractComponent } from './components/user/user-contract/user-contract.component';
 import { UserDashboardComponent } from './components/user/user-dashboard/user-dashboard.component';
@@ -138,7 +137,6 @@ import { CheckmarkComponent } from './components/user/checkmark/checkmark.compon
           UserIndexComponent,
           UserHeaderComponent,
           UserFooterComponent,
-          UserAboutComponent,
           UserHomeComponent,
           LoginComponent,
           AuthentificationComponent,
