@@ -75,6 +75,11 @@ import { UserUpdateOfferComponent } from './components/user/user-update-offer/us
 import { UserUpdateProfileComponent } from './components/user/user-update-profile/user-update-profile.component';
 import { UserViewFreelancersComponent } from './components/user/user-view-freelancers/user-view-freelancers.component';
 import { ViewClientOfferComponent } from './components/user/view-client-offer/view-client-offer.component';
+import { UserContractDownloadComponent } from './components/user/user-contract-download/user-contract-download.component';
+import { MainComponent } from './components/main/main/main.component';
+import { MainAdminComponent } from './components/main/main-admin/main-admin.component';
+import { MainLoginComponent } from './components/main/main-login/main-login.component';
+import { MainAuthComponent } from './components/main/main-auth/main-auth.component';
 
 @NgModule({
   declarations: [
@@ -155,7 +160,13 @@ import { ViewClientOfferComponent } from './components/user/view-client-offer/vi
           ContactUsComponent,
           ViewOffersDetailsComponent,
           UserUpdateOfferComponent,
-          UserTestComponent
+          UserTestComponent,
+          UserContractDownloadComponent,
+          MainComponent,
+          MainAdminComponent,
+          MainLoginComponent,
+          MainAuthComponent,
+          
   ],
   imports: [
       BrowserModule,

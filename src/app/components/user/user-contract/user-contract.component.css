@@ -287,12 +287,12 @@ a:hover{
   /* Modal Content */
   .modal-content {
     background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: 15% auto; 
     padding: 20px;
     border: 1px solid #888;
-    width: 50%; /* Adjusted width for a smaller modal */
-    max-width: 60%; /* Max width for smaller screens */
-    border-radius: 8px; /* Optional: rounded corners */
+    width: 50%; 
+    max-width: 60%; 
+    border-radius: 8px; 
   }
   
   /* The Close Button */

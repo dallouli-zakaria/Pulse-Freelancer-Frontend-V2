@@ -33,36 +33,52 @@ import { ViewOffersDetailsComponent } from './components/freelancer/view-offers-
 import { UserTestComponent } from './components/user/user-test/user-test.component';
 
 const routes: Routes = [
-  {path:'admin-dashboard',component:AdminDashboardComponent},
-  {path:'top',component:AdminTopbarComponent},
-  {path:'home',component:UserHomeComponent},
-  {path:'about',component:UserAboutComponent},
-  {path:'register',component:AuthentificationComponent},
-  {path:'login',component:LoginComponent},
-  {path:'view-freelancers',component:UserViewFreelancersComponent},
-  {path:'freelancer-profile',component:FreelancerProfileComponent},
-  {path:'add-offer',component:UserAddOfferComponent},
-  {path:'client-dashboard',component:UserDashboardComponent},
-  {path:'page-notfound',component:Error404Component},
-  {path:'server-error',component:Error500Component},
-  {path:'client-profile',component:UserProfileComponent},
-  {path:'client-contracts',component:UserContractComponent},
-  {path:'offers',component:ViewOffersComponent},
-  {path:'client-offer',component:ViewClientOfferComponent},
-  {path:'contact',component:ContactUsComponent},
-  {path:'offer-details',component:ViewOffersDetailsComponent},
-  {path:'test',component:UserTestComponent},
-  {path:'dashboard',component:DashboardComponent},
-  {path:'client',component:ClientComponent},
-  {path:'freelancer',component:FreelancerComponent},
-  {path:'admin',component:AdminComponent},
-  {path:'role',component:RoleComponent},
-  {path:'permission',component:PermissionComponent},
-  {path:'contract',component:ContractComponent},
-  {path:'offer',component:OfferComponent},
-  {path:'mailing',component:MailingComponent},
-  {path:'users',component:UsersComponent}
 
+  {
+    path: 'admin',
+    component: AdminDashboardComponent,
+    children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'admin', component: AdminComponent },
+      { path: 'mailing', component: MailingComponent },
+      { path: 'role', component: RoleComponent },
+      { path: 'permission', component: PermissionComponent },
+      { path: 'offer', component: OfferComponent },
+      { path: 'freelancer', component: FreelancerComponent },
+      { path: 'client', component: ClientComponent },
+      { path: 'users', component: UsersComponent },
+      { path: 'contract', component: ContractComponent },
+      { path: '**', redirectTo: 'dashboard', pathMatch: 'full' } 
+    ]
+  },
+  {
+    path: 'pulse',
+    component: UserIndexComponent,
+    children: [
+      { path: 'about', component: UserAboutComponent },
+      { path: 'view-freelancers', component: UserViewFreelancersComponent },
+      { path: 'add-offer', component: UserAddOfferComponent },
+      { path: 'client-dashboard', component: UserDashboardComponent },
+      { path: 'client-profile', component: UserProfileComponent },
+      { path: 'client-contracts', component: UserContractComponent },
+      { path: 'client-offer', component: ViewClientOfferComponent },
+      { path: 'test', component: UserTestComponent },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'offers', component: ViewOffersComponent },
+      { path: 'freelancer-profile', component: FreelancerProfileComponent },
+      { path: 'offer-details', component: ViewOffersDetailsComponent },
+      { path: 'contact', component: ContactUsComponent },
+      { path: 'home', component: UserHomeComponent },
+      { path: '**', redirectTo: 'home', pathMatch: 'full' } 
+    ]
+  },
+  { path: 'register', component: AuthentificationComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'page-notfound', component: Error404Component },
+  { path: 'server-error', component: Error500Component },
+  { path: '', redirectTo: 'pulse/home', pathMatch: 'full' },
+  { path: '**', redirectTo: 'page-notfound', pathMatch: 'full' } 
 ];
 
 @NgModule({
