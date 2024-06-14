@@ -6,15 +6,38 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mx-auto  pt-2 pt-lg-0">
           <li class="nav-item"><a class="nav-link active active" aria-current="page" routerLink="home">Acceuil</a></li>
-          <li class="nav-item"><a class="nav-link" href="home/#nosvaleurs">Nos valeurs</a></li>
-          <li class="nav-item"><a class="nav-link" href="home/#nospacks">Nos packs </a></li>
-          <li class="nav-item"><a class="nav-link" href="home/#avisclient">Avis client</a></li>
-          <li class="nav-item"><a class="nav-link" href="home/#contact">Contact </a></li>
+          <li class="nav-item"><a class="nav-link" href="#nosvaleurs">Nos valeurs</a></li>
+          <li class="nav-item"><a class="nav-link" href="#nospacks">Nos packs </a></li>
+          <li class="nav-item"><a class="nav-link" href="#avisclient">Avis client</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact </a></li>
         </ul>
-        <form class="d-flex py-3 py-lg-0">
-          <button class="btn btn-link text-1000 fw-medium order-1 order-lg-0" type="button" routerLink="login">Sign in</button>
-          <button class="btn btn-outline-danger rounded-pill order-0" type="submit" routerLink="register">Sign Up</button>
-        </form>
+        <span class="d-flex py-3 py-lg-0">
+          <button class="btn btn-link text-1000 fw-medium order-1 order-lg-0" type="button" routerLink="../login">Sign in</button>
+          <button class="btn btn-outline-danger rounded-pill order-0" type="submit" routerLink="../register">Sign Up</button>
+        </span>
       </div>
+
+
+
+      <div class="dropdown">
+        <img src="assets/img/gallery/user-2.png" alt="Dropdown Toggle" (click)="toggleDropdown()" class="dropdown-toggle-img">
+        <div class="dropdown-menu" [class.show]="dropdownOpen" aria-labelledby="dropdownMenuButton" style="cursor:default;">
+          <span class="dropdown-item text-muted">Amina Ben</span>
+          <a class="dropdown-item" href="#" (click)="selectOption('profile')">profile</a>
+          <a class="dropdown-item" href="#" (click)="selectOption('dashboard')">dashboard</a>
+          <a class="dropdown-item" href="#" (click)="selectOption('deconnecter')">deconnecter</a>
+        </div>
+      </div>
+      
+
+
+
+
+
     </div>
+    
+    
   </nav>
+
+
+  

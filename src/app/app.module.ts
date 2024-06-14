@@ -61,7 +61,6 @@ import { ApplyOfferComponent } from './components/freelancer/apply-offer/apply-o
 import { FreelancerProfileComponent } from './components/freelancer/freelancer-profile/freelancer-profile.component';
 import { ViewOffersComponent } from './components/freelancer/view-offers/view-offers.component';
 import { ContactUsComponent } from './components/user/contact-us/contact-us.component';
-import { UserAboutComponent } from './components/user/user-about/user-about.component';
 import { UserAddOfferComponent } from './components/user/user-add-offer/user-add-offer.component';
 import { UserContractComponent } from './components/user/user-contract/user-contract.component';
 import { UserDashboardComponent } from './components/user/user-dashboard/user-dashboard.component';
@@ -75,6 +74,9 @@ import { UserUpdateOfferComponent } from './components/user/user-update-offer/us
 import { UserUpdateProfileComponent } from './components/user/user-update-profile/user-update-profile.component';
 import { UserViewFreelancersComponent } from './components/user/user-view-freelancers/user-view-freelancers.component';
 import { ViewClientOfferComponent } from './components/user/view-client-offer/view-client-offer.component';
+import { UserContractDownloadComponent } from './components/user/user-contract-download/user-contract-download.component';
+import { CheckmarkComponent } from './components/user/checkmark/checkmark.component';
+
 
 @NgModule({
   declarations: [
@@ -135,7 +137,6 @@ import { ViewClientOfferComponent } from './components/user/view-client-offer/vi
           UserIndexComponent,
           UserHeaderComponent,
           UserFooterComponent,
-          UserAboutComponent,
           UserHomeComponent,
           LoginComponent,
           AuthentificationComponent,
@@ -155,7 +156,10 @@ import { ViewClientOfferComponent } from './components/user/view-client-offer/vi
           ContactUsComponent,
           ViewOffersDetailsComponent,
           UserUpdateOfferComponent,
-          UserTestComponent
+          UserTestComponent,
+          UserContractDownloadComponent,
+          CheckmarkComponent,
+          
   ],
   imports: [
       BrowserModule,
