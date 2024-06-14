@@ -6,4 +6,5 @@ export class Constant{
     public static readonly POSTS:string="posts";
     public static readonly OFFERS:string="offers";
     public static readonly CLIENTCOUNT:string="clientCount";
+    public static readonly PERMISSION:string="permission";
 }
