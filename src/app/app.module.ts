@@ -62,7 +62,6 @@ import { FreelancerProfileComponent } from './components/freelancer/freelancer-p
 import { ViewOffersComponent } from './components/freelancer/view-offers/view-offers.component';
 import { ContactUsComponent } from './components/user/contact-us/contact-us.component';
 import { UserAddOfferComponent } from './components/user/user-add-offer/user-add-offer.component';
-import { UserContractComponent } from './components/user/user-contract/user-contract.component';
 import { UserDashboardComponent } from './components/user/user-dashboard/user-dashboard.component';
 import { UserHomeComponent } from './components/user/user-home/user-home.component';
 import { UserIndexComponent } from './components/user/user-index/user-index.component';
@@ -76,6 +75,12 @@ import { UserViewFreelancersComponent } from './components/user/user-view-freela
 import { ViewClientOfferComponent } from './components/user/view-client-offer/view-client-offer.component';
 import { UserContractDownloadComponent } from './components/user/user-contract-download/user-contract-download.component';
 import { CheckmarkComponent } from './components/user/checkmark/checkmark.component';
+import { UserSideprofileComponent } from './components/user/user-profile/user-sideprofile/user-sideprofile.component';
+import { UserOffersComponent } from './components/user/user-profile/user-offers/user-offers.component';
+import { UsercontractsComponent } from './components/user/user-profile/usercontracts/usercontracts.component';
+import { UserinfosComponent } from './components/user/user-profile/userinfos/userinfos.component';
+import { UsersubscriptionsComponent } from './components/user/user-profile/usersubscriptions/usersubscriptions.component';
+import { UserUpdatecompanyComponent } from './components/user/user-updatecompany/user-updatecompany.component';
 
 
 @NgModule({
@@ -148,7 +153,7 @@ import { CheckmarkComponent } from './components/user/checkmark/checkmark.compon
         
           Error404Component,
           Error500Component,
-          UserContractComponent,
+          
           ViewOffersComponent,
           ApplyOfferComponent,
           ViewClientOfferComponent,
@@ -159,6 +164,12 @@ import { CheckmarkComponent } from './components/user/checkmark/checkmark.compon
           UserTestComponent,
           UserContractDownloadComponent,
           CheckmarkComponent,
+          UserSideprofileComponent,
+          UserOffersComponent,
+          UsercontractsComponent,
+          UserinfosComponent,
+          UsersubscriptionsComponent,
+          UserUpdatecompanyComponent,
           
   ],
   imports: [

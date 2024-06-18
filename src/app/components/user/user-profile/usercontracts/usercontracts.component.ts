@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-user-contract',
-  templateUrl: './user-contract.component.html',
-  styleUrl: './user-contract.component.css'
+  selector: 'app-usercontracts',
+  templateUrl: './usercontracts.component.html',
+  styleUrl: './usercontracts.component.css'
 })
-export class UserContractComponent {
+export class UsercontractsComponent {
   isModalOpen = false;
 
   openModal() {
