@@ -4,15 +4,16 @@ import { Constant } from '../Constant';
 import { Client } from '../models/Client';
 import { Observable } from 'rxjs';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class ClientService {
-client:any;
+client!:any;
 url=Constant.API_ENDPOINT
   constructor(private http:HttpClient) { }
 
-  public count(){
+  public count():Observable<Client>{
    this.client=this.http.get(`${this.url}/${Constant.CLIENTCOUNT}`);
    return this.client;
   }
