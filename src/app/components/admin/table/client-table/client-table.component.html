@@ -17,10 +17,10 @@
         <td>{{client.user.email}}</td>
       
         <td > 
-             <button type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal" data-bs-target="#edit" style="margin-right: 5px;">
+             <button type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal" data-bs-target="#edit" style="margin-right: 5px;"  (click)="trackClient(client,client.id)">
               <i class="fas fa-pen"></i> 
              </button>  
-             <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete">
+             <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete" (click)="trackClient(client,client.id)">
               <i class="fas fa-trash"></i> 
              </button>
         </td>
@@ -34,14 +34,14 @@
   <!-- edit -->
 <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-m"><div class="modal-content">
-    <app-client-edit></app-client-edit>
+    <app-client-edit [clientId]="selecteID"  [clientName]="selecteName" ></app-client-edit>
   </div>
 </div>
 </div>
 <!-- delete -->
 <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-m"><div class="modal-content">
-    <app-client-delete></app-client-delete>
+    <app-client-delete [clientId]="selecteID"  [clientName]="selecteName" ></app-client-delete>
   </div>
 </div>  
 
