@@ -28,8 +28,8 @@ url=Constant.API_ENDPOINT
     return this.client
   }
 
-  public update(id:any): Observable<Client> {
-   this.client=this.http.put(`${this.url}/${Constant.CLIENTS}`,id);
+  public update(id:any,data:Partial<Client>): Observable<Client> {
+   this.client=this.http.put<Client>(`http://localhost:8000/api/clients/2`,data);
    return this.client
   }
  

@@ -75,6 +75,7 @@ import { UserUpdateOfferComponent } from './components/user/user-update-offer/us
 import { UserUpdateProfileComponent } from './components/user/user-update-profile/user-update-profile.component';
 import { UserViewFreelancersComponent } from './components/user/user-view-freelancers/user-view-freelancers.component';
 import { ViewClientOfferComponent } from './components/user/view-client-offer/view-client-offer.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,7 @@ import { ViewClientOfferComponent } from './components/user/view-client-offer/vi
     FreelancerCartComponent,
     ClientCartComponent,
     DashboardComponent,
-    
+  
     ContractCartComponent,
           OfferCartComponent,
           AdminComponent,
@@ -160,8 +161,8 @@ import { ViewClientOfferComponent } from './components/user/view-client-offer/vi
   imports: [
       BrowserModule,
       AppRoutingModule,
-      NgbModule
-      
+      NgbModule,
+      ReactiveFormsModule
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]
