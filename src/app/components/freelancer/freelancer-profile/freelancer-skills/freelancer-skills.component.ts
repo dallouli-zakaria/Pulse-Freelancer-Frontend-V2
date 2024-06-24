@@ -7,4 +7,25 @@ import { Component } from '@angular/core';
 })
 export class FreelancerSkillsComponent {
 
+  displayAdd = "none";
+
+  openModalAdd() {
+      this.displayAdd = "block";
+    }
+  onCloseHandledAdd() {
+    this.displayAdd = "none";
+  }
+
+
+
+  displayEdit = "none";
+
+  openModalEdit() {
+      this.displayEdit = "block";
+    }
+  onCloseHandledEdit() {
+    this.displayEdit = "none";
+  }
+
+
 }

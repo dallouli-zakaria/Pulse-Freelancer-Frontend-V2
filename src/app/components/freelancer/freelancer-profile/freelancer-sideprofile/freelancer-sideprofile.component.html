@@ -1,6 +1,6 @@
 <div class="card-box text-center">
     <div class="text-end ">
-        <span class="col-6"><h4><a  class="text-danger" style="cursor: pointer;"><i class="bi bi-pencil-square"></i></a></h4></span>
+        <span class="col-6"><h4><a (click)="openModalEdit()" class="text-danger" style="cursor: pointer;"><i class="bi bi-pencil-square"></i></a></h4></span>
     </div>
     <img
       src="https://bootdey.com/img/Content/avatar/avatar1.png"
@@ -85,4 +85,24 @@
           ></a>
         </li>
       </ul> -->
+
+
   </div>
+  
+      <!-- modal edit -->
+      <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayEdit}">
+        <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                    <div class="modal-header">
+                          <h4 class="modal-title">Informations personnelle</h4>
+                          <button type="button" class="close btn btn-light" aria-label="Close" (click)="onCloseHandledEdit()"><span aria-hidden="true">&times;</span></button>
+                        </div>
+              <div class="modal-body">
+                          <app-update-freelancer-personal-infos></app-update-freelancer-personal-infos>
+                        </div>
+
+          </div>
+            </div>
+        </div>
+
+          <!-- end modal edit -->

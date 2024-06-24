@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrl: './freelancer-about.component.css'
 })
 export class FreelancerAboutComponent {
+  displayEdit = "none";
 
+  openModalEdit() {
+      this.displayEdit = "block";
+    }
+  onCloseHandledEdit() {
+    this.displayEdit = "none";
+  }
 }
