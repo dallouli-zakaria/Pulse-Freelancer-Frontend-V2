@@ -62,7 +62,6 @@ import { FreelancerProfileComponent } from './components/freelancer/freelancer-p
 import { ViewOffersComponent } from './components/freelancer/view-offers/view-offers.component';
 import { ContactUsComponent } from './components/user/contact-us/contact-us.component';
 import { UserAddOfferComponent } from './components/user/user-add-offer/user-add-offer.component';
-import { UserContractComponent } from './components/user/user-contract/user-contract.component';
 import { UserDashboardComponent } from './components/user/user-dashboard/user-dashboard.component';
 import { UserHomeComponent } from './components/user/user-home/user-home.component';
 import { UserIndexComponent } from './components/user/user-index/user-index.component';
@@ -77,6 +76,30 @@ import { ViewClientOfferComponent } from './components/user/view-client-offer/vi
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserContractDownloadComponent } from './components/user/user-contract-download/user-contract-download.component';
 import { CheckmarkComponent } from './components/user/checkmark/checkmark.component';
+import { UserSideprofileComponent } from './components/user/user-profile/user-sideprofile/user-sideprofile.component';
+import { UserOffersComponent } from './components/user/user-profile/user-offers/user-offers.component';
+import { UsercontractsComponent } from './components/user/user-profile/usercontracts/usercontracts.component';
+import { UserinfosComponent } from './components/user/user-profile/userinfos/userinfos.component';
+import { UsersubscriptionsComponent } from './components/user/user-profile/usersubscriptions/usersubscriptions.component';
+import { UserUpdatecompanyComponent } from './components/user/user-updatecompany/user-updatecompany.component';
+import { UserViewfreelancersProfileComponent } from './components/user/user-viewfreelancers-profile/user-viewfreelancers-profile.component';
+import { FreelancerSideprofileComponent } from './components/freelancer/freelancer-profile/freelancer-sideprofile/freelancer-sideprofile.component';
+import { FreelancerExperienceComponent } from './components/freelancer/freelancer-profile/freelancer-experience/freelancer-experience.component';
+import { FreelancerProjectsComponent } from './components/freelancer/freelancer-profile/freelancer-projects/freelancer-projects.component';
+import { FreelancerSkillsComponent } from './components/freelancer/freelancer-profile/freelancer-skills/freelancer-skills.component';
+import { FreelancerAboutComponent } from './components/freelancer/freelancer-profile/freelancer-about/freelancer-about.component';
+import { FreelancerDashboardComponent } from './components/freelancer/freelancer-profile/freelancer-dashboard/freelancer-dashboard.component';
+import { FreelancerOffersComponent } from './components/freelancer/freelancer-profile/freelancer-dashboard/freelancer-offers/freelancer-offers.component';
+import { FreelancerContractsComponent } from './components/freelancer/freelancer-profile/freelancer-dashboard/freelancer-contracts/freelancer-contracts.component';
+import { FreelancerAddAboutComponent } from './components/freelancer/freelancer-profile/freelancer-about/freelancer-add-about/freelancer-add-about.component';
+import { FreelancerUpdateAboutComponent } from './components/freelancer/freelancer-profile/freelancer-about/freelancer-update-about/freelancer-update-about.component';
+import { FreelancerAddExperienceComponent } from './components/freelancer/freelancer-profile/freelancer-experience/freelancer-add-experience/freelancer-add-experience.component';
+import { FreelancerUpdateExperienceComponent } from './components/freelancer/freelancer-profile/freelancer-experience/freelancer-update-experience/freelancer-update-experience.component';
+import { FreelancerAddProjectsComponent } from './components/freelancer/freelancer-profile/freelancer-projects/freelancer-add-projects/freelancer-add-projects.component';
+import { FreelancerUpdateProjectsComponent } from './components/freelancer/freelancer-profile/freelancer-projects/freelancer-update-projects/freelancer-update-projects.component';
+import { UpdateFreelancerPersonalInfosComponent } from './components/freelancer/freelancer-profile/freelancer-sideprofile/update-freelancer-personal-infos/update-freelancer-personal-infos.component';
+import { FreelancerAddSkillsComponent } from './components/freelancer/freelancer-profile/freelancer-skills/freelancer-add-skills/freelancer-add-skills.component';
+import { FreelancerUpdateSkillsComponent } from './components/freelancer/freelancer-profile/freelancer-skills/freelancer-update-skills/freelancer-update-skills.component';
 
 
 @NgModule({
@@ -149,7 +172,7 @@ import { CheckmarkComponent } from './components/user/checkmark/checkmark.compon
         
           Error404Component,
           Error500Component,
-          UserContractComponent,
+          
           ViewOffersComponent,
           ApplyOfferComponent,
           ViewClientOfferComponent,
@@ -160,6 +183,30 @@ import { CheckmarkComponent } from './components/user/checkmark/checkmark.compon
           UserTestComponent,
           UserContractDownloadComponent,
           CheckmarkComponent,
+          UserSideprofileComponent,
+          UserOffersComponent,
+          UsercontractsComponent,
+          UserinfosComponent,
+          UsersubscriptionsComponent,
+          UserUpdatecompanyComponent,
+          UserViewfreelancersProfileComponent,
+          FreelancerSideprofileComponent,
+          FreelancerExperienceComponent,
+          FreelancerProjectsComponent,
+          FreelancerSkillsComponent,
+          FreelancerAboutComponent,
+          FreelancerDashboardComponent,
+          FreelancerOffersComponent,
+          FreelancerContractsComponent,
+          FreelancerAddAboutComponent,
+          FreelancerUpdateAboutComponent,
+          FreelancerAddExperienceComponent,
+          FreelancerUpdateExperienceComponent,
+          FreelancerAddProjectsComponent,
+          FreelancerUpdateProjectsComponent,
+          UpdateFreelancerPersonalInfosComponent,
+          FreelancerAddSkillsComponent,
+          FreelancerUpdateSkillsComponent,
           
   ],
   imports: [

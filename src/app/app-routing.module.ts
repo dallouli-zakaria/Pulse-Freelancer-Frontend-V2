@@ -1,8 +1,6 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
-import { AdminTopbarComponent } from './components/admin/admin-layout/admin-topbar/admin-topbar.component';
-import { AdminTableComponent } from './components/admin/table/admin-table/admin-table.component';
 import { DashboardComponent } from './components/admin/pages/dashboard/dashboard.component';
 import { ClientComponent } from './components/admin/pages/client/client.component';
 import { FreelancerComponent } from './components/admin/pages/freelancer/freelancer.component';
@@ -24,13 +22,18 @@ import { UserDashboardComponent } from './components/user/user-dashboard/user-da
 import { Error404Component } from './components/errors/error404/error404.component';
 import { Error500Component } from './components/errors/error500/error500.component';
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
-import { UserContractComponent } from './components/user/user-contract/user-contract.component';
 import { ViewOffersComponent } from './components/freelancer/view-offers/view-offers.component';
 import { ViewClientOfferComponent } from './components/user/view-client-offer/view-client-offer.component';
 import { ContactUsComponent } from './components/user/contact-us/contact-us.component';
-import { ViewOffersDetailsComponent } from './components/freelancer/view-offers-details/view-offers-details.component';
 import { UserTestComponent } from './components/user/user-test/user-test.component';
-import { CheckmarkComponent } from './components/user/checkmark/checkmark.component';
+import { UserOffersComponent } from './components/user/user-profile/user-offers/user-offers.component';
+import { UsercontractsComponent } from './components/user/user-profile/usercontracts/usercontracts.component';
+import { UserinfosComponent } from './components/user/user-profile/userinfos/userinfos.component';
+import { UsersubscriptionsComponent } from './components/user/user-profile/usersubscriptions/usersubscriptions.component';
+import { UserViewfreelancersProfileComponent } from './components/user/user-viewfreelancers-profile/user-viewfreelancers-profile.component';
+import { FreelancerDashboardComponent } from './components/freelancer/freelancer-profile/freelancer-dashboard/freelancer-dashboard.component';
+import { FreelancerOffersComponent } from './components/freelancer/freelancer-profile/freelancer-dashboard/freelancer-offers/freelancer-offers.component';
+import { FreelancerContractsComponent } from './components/freelancer/freelancer-profile/freelancer-dashboard/freelancer-contracts/freelancer-contracts.component';
 
 const routes: Routes = [
 
@@ -63,19 +66,41 @@ const routes: Routes = [
       { path: 'view-freelancers', component: UserViewFreelancersComponent },
       { path: 'add-offer', component: UserAddOfferComponent },
       { path: 'client-dashboard', component: UserDashboardComponent },
-      { path: 'client-profile', component: UserProfileComponent },
-      { path: 'client-contracts', component: UserContractComponent },
+      // { path: 'client-profile', component: UserProfileComponent },
+      { path: 'client-profile', component: UserProfileComponent,
+        children:
+        [
+
+          {path:'client-infos',component:UserinfosComponent},
+          {path:'client-offers',component:UserOffersComponent},
+          {path:'client-contracts',component:UsercontractsComponent},
+          {path:'client-subscription',component:UsersubscriptionsComponent},
+          { path: '', redirectTo: 'client-infos', pathMatch: 'full' },
+          
+        ]
+       },
       { path: 'client-offer', component: ViewClientOfferComponent },
       { path: 'test', component: UserTestComponent },
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'offers', component: ViewOffersComponent },
       { path: 'freelancer-profile', component: FreelancerProfileComponent },
-      { path: 'offer-details', component: ViewOffersDetailsComponent },
       { path: 'contact', component: ContactUsComponent },
       { path: 'home', component: UserHomeComponent },
-      { path: '**', redirectTo: 'home', pathMatch: 'full' } 
+      {path:'view-freelancerprofile',component:UserViewfreelancersProfileComponent},
+      {path:'freelancer-dashboard',component:FreelancerDashboardComponent,
+        children:
+        [
+
+          {path:'freelancer-offers',component:FreelancerOffersComponent},
+          {path:'freelancer-contracts',component:FreelancerContractsComponent},
+          { path: '', redirectTo: 'freelancer-offers', pathMatch: 'full' },
+          
+        ]
+      },
+      { path: '**', redirectTo: 'home', pathMatch: 'full' } ,
+    
     ]
   },
+
 
 
 
@@ -85,6 +110,7 @@ const routes: Routes = [
   { path: 'server-error', component: Error500Component },
   { path: '', redirectTo: 'pulse/home', pathMatch: 'full' },
   { path: '**', redirectTo: 'page-notfound', pathMatch: 'full' },
+
   
 ];
 

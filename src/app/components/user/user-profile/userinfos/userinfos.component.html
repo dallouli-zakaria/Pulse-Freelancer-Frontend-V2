@@ -1,0 +1,80 @@
+<div class="card-box">
+    <div class="row mt-4 mb-4" >
+        
+        <span class="col-lg-11 col-sm-6 col-md-6"><h5>Informations personnelles</h5></span>
+        <span class="col-lg-1 col-sm-6 col-md-6">
+            <h5><a (click)="openModal()" class="text-danger" style="cursor: pointer;"><i class="bi bi-pencil-square"></i></a></h5>
+          </span>
+          
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-sm-6 ">
+            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt=""  class="rounded-circle avatar-xl img-thumbnail" />
+        </div>
+        <div class="col-lg-7 col-sm-6 ">
+            <div class="row">
+                
+                <span><strong> Nom :</strong></span>
+                <span>Alami</span>
+                <span><strong>Prenom :</strong></span>
+                <span>Khalil</span>
+                <span><strong>Email :</strong></span>
+                <span>khalil.alami&#64;gmail.com</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card-box">
+    <div class="row mt-4 mb-4" >
+        
+        <span class="col-lg-11 col-sm-6 col-md-6"><h5>Informations de l'entreprise</h5></span>
+        <span class="col-lg-1 col-sm-6 col-md-6"><h5><a (click)="openModal2()"class="text-danger" style="cursor: pointer;"><i class="bi bi-pencil-square"></i></a></h5>    
+        </span>
+        
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-sm-6 ">
+            <img src="assets/img/gallery/company-image.jpg" alt=""  class="rounded-circle avatar-xl img-thumbnail" />
+        </div>
+        <div class="col-lg-7 col-sm-6 ">
+            <div class="row">
+                <span><strong> Nom :</strong></span>
+                <span>Maroc telecom</span>
+                <span><strong>Domaine d'activité :</strong></span>
+                <span>Réseaux et télecom</span>
+                <span><strong>Email de l'entreprise :</strong></span>
+                <span>maroc&#64;telecom.ma  </span> 
+            </div>
+        </div>
+        
+                  <!-- Modal -->
+                  <div id="myModal" class="modal" [ngClass]="{'show': isModalOpen}">
+                    <div class="modal-content">
+                     <div class="row">
+                      <span class="col-10"></span>
+                      <span class="close col-2" (click)="closeModal()" >&times;</span>
+                     </div>
+                      
+                      <app-user-update-profile></app-user-update-profile>
+                    </div>
+                  </div>
+
+
+                    <!-- Modal -->
+                    <div id="myModal" class="modal" [ngClass]="{'show': isModalOpen2}">
+                        <div class="modal-content">
+                            <div class="row">
+                            <span class="col-10"></span>
+                            <span class="close col-2" (click)="closeModal2()" >&times;</span>
+                            </div>
+                            
+                            <app-user-updatecompany></app-user-updatecompany>
+                        </div>
+                        </div>
+
+
+    </div>
+
+
+</div>
+
