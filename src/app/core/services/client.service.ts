@@ -4,15 +4,16 @@ import { Constant } from '../Constant';
 import { Client } from '../models/Client';
 import { Observable } from 'rxjs';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class ClientService {
-client:any;
+client!:any;
 url=Constant.API_ENDPOINT
   constructor(private http:HttpClient) { }
 
-  public count(){
+  public count():Observable<Client>{
    this.client=this.http.get(`${this.url}/${Constant.CLIENTCOUNT}`);
    return this.client;
   }
@@ -27,8 +28,8 @@ url=Constant.API_ENDPOINT
     return this.client
   }
 
-  public update(id:any): Observable<Client> {
-   this.client=this.http.put(`${this.url}/${Constant.CLIENTS}`,id);
+  public update(id:any,data:Partial<Client>): Observable<Client> {
+   this.client=this.http.put<Client>(`http://localhost:8000/api/clients/2`,data);
    return this.client
   }
  

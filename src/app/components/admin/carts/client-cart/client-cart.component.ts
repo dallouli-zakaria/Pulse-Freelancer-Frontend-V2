@@ -25,6 +25,10 @@ count(){
     },
     error: (eror:any)=>{
       console.log(eror);   
-    }});
+    },
+    complete:()=>console.log('end operation')
+    
+  });
+    
   }
 }
