@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -210,6 +210,7 @@ import { FreelancerUpdateSkillsComponent } from './components/freelancer/freelan
       AppRoutingModule,
       NgbModule,
       ReactiveFormsModule
+
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]

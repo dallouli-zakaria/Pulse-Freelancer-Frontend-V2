@@ -26,7 +26,9 @@ export class ContractCartComponent {
       error:(error:any)=>{
         console.log(error);
         
-      }
+      },
+      complet:()=>console.log('endoperation')
+      
     })
   }
 }

@@ -24,7 +24,9 @@ export class FreelancerCartComponent {
       error: (error:any)=>{
         console.log(error);
         
-      }
+      },
+      complet:()=>console.log('end operation')
+      
     })
   }
 }
