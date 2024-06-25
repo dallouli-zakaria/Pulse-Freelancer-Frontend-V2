@@ -14,14 +14,9 @@ export class ClientEditComponent implements OnInit, OnChanges{
 @Input() clientName?: Client  ;
 @Input() clientId!: number;
 
-@Output()
-public eventEmitter : EventEmitter<any> = new EventEmitter;
-  
-clientNamevalue:any=this.clientName?.user;
 
 
 
-closed='modal'
 constructor(private clients :ClientService){}
 private fb : FormBuilder = inject(FormBuilder);
 
@@ -30,17 +25,17 @@ ngOnInit(): void {
   //Add 'implements OnInit' to the class.
 
   
- console.log(this.clientName);
+ console.log(this.clientName?.user.email);
  
    this.form=this.fb.group({
-    name:  this.fb.control(`${this.clientNamevalue}` ,[Validators.required]),
-    email: this.fb.control(`${this.clientName?.user.email}`, [Validators.required]),
-    profession:this.fb.control( `${this.clientName?.profession}`, [Validators.required])
-    
+     name: this.fb.control(this.clientName?.user.name, [Validators.required]),
+    email: this.fb.control(this.clientName?.user.email),
+    profession:this.fb.control( this.clientName?.profession, [Validators.required])
+   
   
   })
  
-  this.updated() 
+
 }
 
 form!:FormGroup
@@ -54,7 +49,7 @@ updated(){
   updatedData.id = this.clientId;
   this.clients.update(this.clientId,this.form.value).subscribe({
     next:(data:any)=>{this.updatedValue=true ;console.log(data);
-      this.eventEmitter.emit(updatedData);
+      this.clients.index()
  
     },
     error:(error:any)=>{console.log(error)
@@ -71,15 +66,15 @@ updated(){
 
 }
 
- chaged(){
-  if(this.updatedValue===true){
-this.close=true
-  }
- }
+//  chaged(){
+//   if(this.updatedValue===true){
+// this.close=true
+//   }
+//  }
 
  public ngOnChanges(): void {
   this.form=this.fb.group({
-    name:  this.fb.control(`${this.clientNamevalue}` ,[Validators.required]),
+    name:  this.fb.control(`${this.clientName?.user.name}` ,[Validators.required]),
     email: this.fb.control(`${this.clientName?.user.email}`, [Validators.required]),
     profession:this.fb.control( `${this.clientName?.profession}`, [Validators.required])
     

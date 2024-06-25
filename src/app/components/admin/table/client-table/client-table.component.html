@@ -9,9 +9,9 @@
         <th scope="col"></th>
       </tr>
     </thead>
-    <tbody *ngIf="client">
-   
-      <tr *ngFor="let client of client">
+    <tbody >
+       
+      <tr *ngFor="let client of clients">
         <th scope="row">{{client.id}}</th>
         <td>{{client.user.name}}</td>
         <td>{{client.profession}}</td>
@@ -35,14 +35,14 @@
   <!-- edit -->
 <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-m"><div class="modal-content">
-    <app-client-edit (eventEmitter)="afterUpdate($event)"  [clientId]="selecteID"  [clientName]="selecteName" ></app-client-edit>
+    <app-client-edit  [clientId]="selecteID"  [clientName]="selecteName" ></app-client-edit>
   </div>
 </div>
 </div>
 <!-- delete -->
 <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-m"><div class="modal-content">
-    <app-client-delete [clientId]="selecteID"  [clientName]="selecteName" ></app-client-delete>
+    <app-client-delete   [clientId]="selecteID"  [clientName]="selecteName" ></app-client-delete>
   </div>
 </div>  
 

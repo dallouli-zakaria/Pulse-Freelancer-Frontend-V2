@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Constant } from '../Constant';
-import { Observable, Observer } from 'rxjs';
+import { BehaviorSubject, Observable, Observer, shareReplay } from 'rxjs';
 import { Freelancer } from '../models/Freelancer';
 
 @Injectable({
@@ -10,17 +10,27 @@ import { Freelancer } from '../models/Freelancer';
 export class FreelancerService {
   freelancer:any
   url=Constant.API_ENDPOINT
+  conuntUrl:string='freelancerCount'
+  private readonly subjectBe:BehaviorSubject<Freelancer[]>=new BehaviorSubject<Freelancer[]>([])
   constructor(private http:HttpClient) { }
 
 
    public count(){
-    this.freelancer=this.http.get(`${this.url}/freelancerCount`);
+    this.freelancer=this.http.get(`${this.url}/${this.conuntUrl}`);
     return this.freelancer;
    }
     
-   public index():Observable<Freelancer>{
-    this.freelancer=this.http.get(`${this.url}/${Constant.FREELANCERS}`);
-    return this.freelancer
+   public index(){
+    this.freelancer=this.http.get(`${this.url}/${Constant.FREELANCERS}`).pipe(shareReplay(1)).subscribe({
+      next:(data:any)=>{ this.subjectBe.next(data)},
+      error:(error:any)=>console.log(error),
+      complete:()=>console.log('end get data')  
+    }).add(()=>console.log('freelancer subject') );
+   
+   }
+
+   get data():Observable<Freelancer[]>{
+   return this.subjectBe.asObservable();
    }
     public store(data:any):Observable<Freelancer>{
       this.freelancer=this.http.post(`${this.url}/${Constant.FREELANCERS}`,data);

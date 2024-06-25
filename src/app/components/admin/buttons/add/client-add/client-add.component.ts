@@ -28,7 +28,8 @@ ngOnInit(): void {
   
     this.clients.store(this.form.value)
       .subscribe({
-        next:(data:any)=>{console.log(data);
+        next:(data:any)=>{console.log(data)
+          this.clients.index();
         },
         erorr:(error:any)=>{console.log(error);
         },

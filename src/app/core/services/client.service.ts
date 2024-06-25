@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Constant } from '../Constant';
 import { Client } from '../models/Client';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, shareReplay } from 'rxjs';
 
 
 @Injectable({
@@ -10,7 +10,7 @@ import { Observable, Subject } from 'rxjs';
 })
 export class ClientService {
 client!:any;
-private dataSubject = new Subject<any>();
+private dataSubject:BehaviorSubject<Client[]> = new BehaviorSubject<Client[]>([]);
 url=Constant.API_ENDPOINT
   constructor(private http:HttpClient) { }
 
@@ -20,21 +20,19 @@ url=Constant.API_ENDPOINT
   }
   
   public index(){
-    this.client=this.http.get<Client[]>(`${this.url}/${Constant.CLIENTS}`).subscribe({
-      next:(data:any) => this.dataSubject.next(data),
+    this.client=this.http.get<Client[]>(`${this.url}/${Constant.CLIENTS}`).pipe(shareReplay(1)).subscribe({
+       next: (data:any) => this.dataSubject.next(data),
      error:( error) => console.error('Error fetching data', error),
-    complete:()=>console.log('complet')
-    });
- 
-  
-  }
+     complete:()=>console.log('complet')})
+   .add(()=>{console.log('subject')})
+   
+    }
 
   public store(data:any) {
     this.client=this.http.post(`${this.url}/${Constant.CLIENTS}`,data)
    return this.client
   }
-  getData(): Observable<Client[]> {
-  
+  get getData(): Observable<Client[]> {
     return this.dataSubject.asObservable(); 
   }
 
@@ -43,10 +41,9 @@ url=Constant.API_ENDPOINT
    return this.client
   }
  
-  public delete(id:any):Observable<Client>{
-    this.client=this.http.delete(`${this.url}/${Constant.CLIENTS}`,id);
+  public deleted(id:any):Observable<Client>{
+    this.client=this.http.delete(`${this.url}/${Constant.CLIENTS}/${id}`);
     return this.client
-
   }
 
 }
