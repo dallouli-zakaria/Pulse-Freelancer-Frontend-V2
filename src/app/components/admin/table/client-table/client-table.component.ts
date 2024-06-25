@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ClientService } from '../../../../core/services/client.service';
 import { Client } from '../../../../core/models/Client';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-client-table',
@@ -9,19 +10,23 @@ import { Client } from '../../../../core/models/Client';
 })
 export class ClientTableComponent {
 
-  client:any
+  client: Client[] = [];
 
-  constructor(private clientSe:ClientService){}
+ 
 
+  private clientSe : ClientService = inject(ClientService);
+  
+ 
 
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class. 
    this.index();
+   
   }
     selecteID!:number;
-    selecteName:any
+    selecteName!:Client
     selecteProfession:any
 
     
@@ -35,18 +40,20 @@ export class ClientTableComponent {
 
 
    index(){
-    this.clientSe.index().subscribe({
-      next:(data:Client)=>{
-        this.client=data;
-        console.log(this.client);
-        
+    this.clientSe.index()
+    this.clientSe.getData().subscribe({
+      next:(data)=>{
+        this.client=data; 
       },
       error:(error:any)=>{
         console.log(error);  
       }
     })
-  
+
    }
-  
+   public afterUpdate($event : any){
+   this.client = this.client.map(c => {if($event.id == c.id) c = $event; c.user = $event; return c});
+   }
+
 
 }
