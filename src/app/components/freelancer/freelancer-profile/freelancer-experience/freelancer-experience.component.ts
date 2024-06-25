@@ -6,5 +6,23 @@ import { Component } from '@angular/core';
   styleUrl: './freelancer-experience.component.css'
 })
 export class FreelancerExperienceComponent {
+  displayAdd = "none";
 
+  openModalAdd() {
+      this.displayAdd = "block";
+    }
+  onCloseHandledAdd() {
+    this.displayAdd = "none";
+  }
+
+
+
+  displayEdit = "none";
+
+  openModalEdit() {
+      this.displayEdit = "block";
+    }
+  onCloseHandledEdit() {
+    this.displayEdit = "none";
+  }
 }
