@@ -29,7 +29,7 @@ export class FreelancerService {
    
    }
 
-   get data():Observable<Freelancer[]>{
+   get getdata():Observable<Freelancer[]>{
    return this.subjectBe.asObservable();
    }
     public store(data:any):Observable<Freelancer>{
