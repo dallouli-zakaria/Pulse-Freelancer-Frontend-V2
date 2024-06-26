@@ -62,7 +62,6 @@ const routes: Routes = [
   {path:'offer',component:OfferComponent},
   {path:'mailing',component:MailingComponent},
   {path:'users',component:UsersComponent}
-
 ];
 
 @NgModule({

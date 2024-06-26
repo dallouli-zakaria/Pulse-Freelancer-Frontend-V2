@@ -1,6 +1,9 @@
 export interface Freelancer{
-  name: string;
-  email: string;
+  id:number
+  user:{ 
+      name: string;
+      email: string;
+  };
   password?: string;
   title: string;
   dateOfBirth: string; 

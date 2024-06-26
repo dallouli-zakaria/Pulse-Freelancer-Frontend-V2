@@ -10,10 +10,10 @@ import { ClientService } from '../../../../../core/services/client.service';
 export class ClientDeleteComponent {
   @Input() clientName: any;
   @Input() clientId!:number
-  @Output() 
-  public eventEmitter:EventEmitter<any> =new EventEmitter
  
- updatedData:any
+
+ 
+
   constructor(private clients:ClientService){}
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -27,8 +27,7 @@ export class ClientDeleteComponent {
         console.log(this.clientId);
         
       this.clients.deleted(this.clientId).subscribe({
-      next:(data)=>{ this.clients.index()
-      
+      next:()=>{ this.clients.index()
       },
       error:(error:any)=>console.log(error),
       complete:()=>console.log("end operation deleted") 

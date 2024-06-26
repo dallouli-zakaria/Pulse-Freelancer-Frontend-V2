@@ -37,13 +37,13 @@ export class FreelancerService {
       return this.freelancer
    }
 
-   public update(id:any):Observable<Freelancer>{
-    this.freelancer=this.http.put(`${this.url}/${Constant.FREELANCERS}`,id);
+   public update(id:any,data:Partial<Freelancer>):Observable<Freelancer[]>{
+    this.freelancer=this.http.put<Freelancer>(`${this.url}/${Constant.FREELANCERS}/${id}`,data);
     return this.freelancer;
    }
    
    public delete(id:any):Observable<Freelancer>{
-    this.freelancer=this.http.delete(`${this.url}/${Constant.FREELANCERS}`);
+    this.freelancer=this.http.delete(`${this.url}/${Constant.FREELANCERS}/${id}`);
     return this.freelancer
    }
 
