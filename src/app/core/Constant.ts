@@ -7,4 +7,5 @@ export class Constant{
     public static readonly OFFERS:string="offers";
     public static readonly CLIENTCOUNT:string="clientCount";
     public static readonly PERMISSION:string="permission";
+    public static readonly USER:string="users"
 }

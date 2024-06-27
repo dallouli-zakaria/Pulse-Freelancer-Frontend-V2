@@ -13,10 +13,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
+      <tr *ngFor="let users of user">
+        <th scope="row">{{users.id}}</th>
+        <td>{{users.name}}/td>
+        <td>{{users.email}}</td>
       
         <td>
            
