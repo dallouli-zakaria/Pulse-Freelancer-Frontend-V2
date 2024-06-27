@@ -20,6 +20,13 @@
                 <span>RH</span>
                 <span><strong>Email :</strong></span>
                 <span>khalil.alami&#64;gmail.com</span>
+                <tr *ngFor="let client of clients">
+                    <th scope="row">{{client.id}}</th>
+                    <td>{{client.user.name}}</td>
+                    <td>{{client.profession}}</td>
+                    <td>{{client.user.email}}</td>
+                  
+                    <td > 
             </div>
         </div>
     </div>
