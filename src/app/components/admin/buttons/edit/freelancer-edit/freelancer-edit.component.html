@@ -3,74 +3,103 @@
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
     <form >
-     <div class="modal-body">
-
-      <!-- Username -->
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label"> Name</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-      </div>
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Title</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-      </div>
+      <form [formGroup]="form" (ngSubmit)="updated()">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input id="name" formControlName="name" class="form-control" />
+          <!-- <div *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched" class="text-danger">
+            Name is required
+          </div> -->
+        </div>
       
-       <!-- email -->
-      <div class="mb-3 ">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-      </div>
-       <!-- email -->
-       <div class="mb-3 ">
-        <label for="exampleInputEmail1" class="form-label">TJM</label>
-        <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-      </div>
-      <!-- email -->
-      <div class="mb-3 ">
-        <label for="exampleInputEmail1" class="form-label">Address</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-      </div>
-
-      <div class="mb-3 ">
-        <label for="exampleInputEmail1" class="form-label">Summary</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-      </div>
-
-      <!-- email -->
-      <div class="mb-3 ">
-        <label for="exampleInputEmail1" class="form-label">Availability</label>
-        <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-      </div>
-       
-       <!-- email -->
-       <div class="mb-3 ">
-        <label for="exampleInputEmail1" class="form-label">portfolio_Url</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-      </div>
-
-      <!-- rolse -->
-      <div class="mb-3 ">
-      <select class="form-select form-select-sm" aria-label="Small select example">
-        <option selected>role</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-      </div>
-       
-      <!-- permission -->
-      <div class="mb-3 ">
-      <select class="form-select form-select-sm" aria-label="Small select example">
-        <option selected>permission</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-       </div>
-      </div>
-      <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      <button type="submit" class="btn btn-primary">Save changes</button>
-     </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input id="email" formControlName="email" class="form-control" type="email" />
+          <!-- <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched" class="text-danger">
+            Valid email is required
+          </div> -->
+        </div>
+      
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input id="password" formControlName="password" class="form-control" type="password" />
+        </div>
+      
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input id="title" formControlName="title" class="form-control" />
+          <!-- <div *ngIf="userForm.get('title')?.invalid && userForm.get('title')?.touched" class="text-danger">
+            Title is required
+          </div> -->
+        </div>
+      
+        <div class="form-group">
+          <label for="dateOfBirth">Date of Birth</label>
+          <input id="dateOfBirth" formControlName="dateOfBirth" class="form-control" type="date" />
+          <!-- <div *ngIf="userForm.get('dateOfBirth')?.invalid && userForm.get('dateOfBirth')?.touched" class="text-danger">
+            Date of Birth is required
+          </div> -->
+        </div>
+      
+        <div class="form-group">
+          <label for="city">City</label>
+          <input id="city" formControlName="city" class="form-control" />
+          <!-- <div *ngIf="userForm.get('city')?.invalid && userForm.get('city')?.touched" class="text-danger">
+            City is required
+          </div> -->
+        </div>
+      
+        <div class="form-group">
+          <label for="TJM">TJM</label>
+          <input id="TJM" formControlName="TJM" class="form-control" type="number" />
+          <!-- <div *ngIf="userForm.get('TJM')?.invalid && userForm.get('TJM')?.touched" class="text-danger">
+            TJM must be a positive number
+          </div> -->
+        </div>
+      
+        <div class="form-group">
+          <label for="summary">Summary</label>
+          <textarea id="summary" formControlName="summary" class="form-control"></textarea>
+        </div>
+      
+        <div class="form-group">
+          <label for="availability">Availability</label>
+          <input id="availability" formControlName="availability" class="form-control" />
+          <!-- <div *ngIf="userForm.get('availability')?.invalid && userForm.get('availability')?.touched" class="text-danger">
+            Availability is required
+          </div> -->
+        </div>
+      
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input id="address" formControlName="adress" class="form-control" />
+          <!-- <div *ngIf="userForm.get('address')?.invalid && userForm.get('address')?.touched" class="text-danger">
+            Address is required
+          </div> -->
+        </div>
+      
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input id="phone" formControlName="phone" class="form-control" />
+          <!-- <div *ngIf="userForm.get('phone')?.invalid && userForm.get('phone')?.touched" class="text-danger">
+            Phone is required
+          </div> -->
+        </div>
+      
+        <div class="form-group">
+          <label for="portfolio_Url">Portfolio URL</label>
+          <input id="portfolio_Url" formControlName="portfolio_Url" class="form-control" />
+        </div>
+      
+        <div class="form-group">
+          <label for="CV">CV</label>
+          <input id="CV" formControlName="CV" class="form-control" />
+        </div>
+      
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success" data-bs-dismiss="model" >Save changes</button>
+         </div>
+      </form>
+      
     </form>
