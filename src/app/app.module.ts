@@ -97,7 +97,7 @@ import { FreelancerUpdateExperienceComponent } from './components/freelancer/fre
 import { UpdateFreelancerPersonalInfosComponent } from './components/freelancer/freelancer-profile/freelancer-sideprofile/update-freelancer-personal-infos/update-freelancer-personal-infos.component';
 import { FreelancerAddSkillsComponent } from './components/freelancer/freelancer-profile/freelancer-skills/freelancer-add-skills/freelancer-add-skills.component';
 import { FreelancerUpdateSkillsComponent } from './components/freelancer/freelancer-profile/freelancer-skills/freelancer-update-skills/freelancer-update-skills.component';
-
+import { ChartComponent } from './components/user/chart/chart.component';
 
 @NgModule({
   declarations: [
@@ -203,6 +203,7 @@ import { FreelancerUpdateSkillsComponent } from './components/freelancer/freelan
           UpdateFreelancerPersonalInfosComponent,
           FreelancerAddSkillsComponent,
           FreelancerUpdateSkillsComponent,
+          ChartComponent,
           
   ],
   imports: [
