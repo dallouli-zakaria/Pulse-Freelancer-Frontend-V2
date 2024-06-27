@@ -14,6 +14,7 @@ export class FreelancerEditComponent implements OnInit,OnChanges {
     @Input() freelancerData?:Freelancer;
   freelancer:Freelancer[]=[]
   form!:FormGroup
+  erorr:boolean=true
   private fb:FormBuilder=inject(FormBuilder)
   private frelancerservices:FreelancerService=inject(FreelancerService)
   ngOnInit(): void {
@@ -42,7 +43,9 @@ export class FreelancerEditComponent implements OnInit,OnChanges {
       next:(data:any)=>{
         console.log(data);
          this.frelancerservices.index()},
-         error:(error:any)=>console.log(error)
+         error:(error:any)=>{
+           this.erorr=false
+          console.log(error)}, 
          
     })}else{
       console.log('null id of freelancer');
