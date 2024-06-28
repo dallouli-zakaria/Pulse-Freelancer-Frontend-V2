@@ -1,8 +1,6 @@
 export interface Offer{
-    title: string;
-    location: string;
-    type: string;
-    description: string;
-    paiement_method: string;
-    period?: string; 
+
+    selected:string;
+    freelancer_id:number,
+    post_id:number,
 }
