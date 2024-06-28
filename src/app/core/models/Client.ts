@@ -7,4 +7,7 @@ export interface Client{
     password?: string;
 }
     profession: string;
+    company_name: string;
+    company_activity: string;
+    company_email: string;
 }

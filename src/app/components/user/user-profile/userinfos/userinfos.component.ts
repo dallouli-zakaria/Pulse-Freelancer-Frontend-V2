@@ -1,16 +1,28 @@
-import { Component, inject } from '@angular/core';
-import { Client } from '../../../../core/models/Client';
+import { Client } from './../../../../core/models/Client';
+import { Component, OnInit, inject } from '@angular/core';
 import { ClientService } from '../../../../core/services/client.service';
 import { Observable } from 'rxjs';
+import { UserService } from '../../../../core/services/user.service';
+import { User } from '../../../../core/models/User';
 
 @Component({
   selector: 'app-userinfos',
   templateUrl: './userinfos.component.html',
   styleUrl: './userinfos.component.css'
 })
-export class UserinfosComponent {
+export class UserinfosComponent implements OnInit{
+
+
+  selectedata:any;
+
   isModalOpen = false;
   isModalOpen2 = false;
+
+
+  user!:User;
+  client!:Client;
+  clientid:number=6;
+  userid:number=6;
 
   openModal() {
     this.isModalOpen = true;
@@ -27,44 +39,31 @@ export class UserinfosComponent {
   }
 
 
-
   
-  clients: Client[] = [];
-
- 
-
-  private clientSe : ClientService = inject(ClientService);
-  
- 
- listClient!:Observable<Client[]>
-
+  constructor(private userservice:UserService, private clientservice:ClientService){}
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class. 
-   this.index();
-   this.listClient=this.clientSe.getData;
-   
+    this.getuser();
+    this.getclient();
   }
-    selecteID!:number;
-    selecteName!:Client
-    selecteProfession:any
 
-    trackClient(user:any,id:number){ 
-       this.selecteName=user
-       this.selecteID=id
-    }
 
-    index(){
-      this.clientSe.index()
-      this.clientSe.getData.subscribe({
-      next:(data)=>{
-        this.clients=data; 
-      },
-      error:(error:any)=>{
-        console.log(error);  
-      }
-      })
 
-    }
 
+  getuser(){
+    this.userservice.show(this.userid).subscribe({
+      next:(data:any)=>{this.user=data},
+      error:(error:any)=>console.log(error),
+      complete:()=>console.log("get user done")})
+  }
+
+
+
+  getclient(){
+    this.clientservice.show(this.userid).subscribe({
+      next:(data:any)=>{this.client=data},
+      error:(error:any)=>console.log(error),
+      complete:()=>console.log("get client done")})
+  }
+
+ 
 }

@@ -12,21 +12,14 @@
             <img src="assets/img/gallery/user-profile-client-1.png" alt=""  class="rounded-circle avatar-xl img-thumbnail" />
         </div>
         <div class="col-lg-7 col-sm-6 ">
-            <div class="row">
+            <div class="row" *ngIf="user" >
                 
                 <span><strong> Nom :</strong></span>
-                <span>Alami khalil</span>
-                <span><strong>Profession :</strong></span>
-                <span>RH</span>
+                <span>{{user.name}}</span>
+                <span><strong *ngIf="client">Profession :</strong></span>
+                <span >{{client.profession}}</span>
                 <span><strong>Email :</strong></span>
-                <span>khalil.alami&#64;gmail.com</span>
-                <tr *ngFor="let client of clients">
-                    <th scope="row">{{client.id}}</th>
-                    <td>{{client.user.name}}</td>
-                    <td>{{client.profession}}</td>
-                    <td>{{client.user.email}}</td>
-                  
-                    <td > 
+                <span>{{user.email}}</span> 
             </div>
         </div>
     </div>
@@ -43,14 +36,14 @@
         <div class="col-lg-3 col-sm-6 ">
             <img src="assets/img/gallery/company-image.jpg" alt=""  class="rounded-circle avatar-xl img-thumbnail" />
         </div>
-        <div class="col-lg-7 col-sm-6 ">
+        <div class="col-lg-7 col-sm-6 "*ngIf="client" >
             <div class="row">
                 <span><strong> Nom :</strong></span>
-                <span>Maroc telecom</span>
+                <span>{{client.company_name}}</span>
                 <span><strong>Domaine d'activité :</strong></span>
-                <span>Réseaux et télecom</span>
+                <span>{{client.company_activity}}</span>
                 <span><strong>Email de l'entreprise :</strong></span>
-                <span>maroc&#64;telecom.ma  </span> 
+                <span>{{client.company_email}}</span> 
             </div>
         </div>
         
@@ -62,7 +55,7 @@
                       <span class="close col-2" (click)="closeModal()" >&times;</span>
                      </div>
                       
-                      <app-user-update-profile></app-user-update-profile>
+                      <app-user-update-profile ></app-user-update-profile>
                     </div>
                   </div>
 
