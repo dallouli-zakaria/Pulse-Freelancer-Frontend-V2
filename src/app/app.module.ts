@@ -74,7 +74,6 @@ import { UserViewFreelancersComponent } from './components/user/user-view-freela
 import { ViewClientOfferComponent } from './components/user/view-client-offer/view-client-offer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserContractDownloadComponent } from './components/user/user-contract-download/user-contract-download.component';
-import { CheckmarkComponent } from './components/user/checkmark/checkmark.component';
 import { UserSideprofileComponent } from './components/user/user-profile/user-sideprofile/user-sideprofile.component';
 import { UserOffersComponent } from './components/user/user-profile/user-offers/user-offers.component';
 import { UsercontractsComponent } from './components/user/user-profile/usercontracts/usercontracts.component';
@@ -186,7 +185,7 @@ import { TimeAgoPipe } from './core/pipes/time-ago.pipe';
           UserUpdateOfferComponent,
           
           UserContractDownloadComponent,
-          CheckmarkComponent,
+          
           UserSideprofileComponent,
           UserOffersComponent,
           UsercontractsComponent,
