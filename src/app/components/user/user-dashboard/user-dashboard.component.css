@@ -70,3 +70,39 @@ body {
 a{
     text-decoration: none;
 }
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 30px; /* Adjust size as needed */
+  height: 30px; /* Adjust size as needed */
+  background-color: #333; /* Arrow color */
+  border-radius: 50%; /* Makes the arrows circular */
+}
+
+.carousel-control-prev-icon::before,
+.carousel-control-next-icon::before {
+  content: ''; /* Required for pseudo-elements */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.carousel-control-prev-icon {
+  margin-right: 155px; /* Spacing between icon and text */
+}
+
+.carousel-control-next-icon {
+  margin-left: 10px; /* Spacing between icon and text */
+}
+
+.visually-hidden {
+  /* Visually hide the text */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}

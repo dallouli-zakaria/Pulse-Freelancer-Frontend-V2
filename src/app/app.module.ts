@@ -99,6 +99,11 @@ import { FreelancerAddSkillsComponent } from './components/freelancer/freelancer
 import { FreelancerUpdateSkillsComponent } from './components/freelancer/freelancer-profile/freelancer-skills/freelancer-update-skills/freelancer-update-skills.component';
 
 
+
+import { DashboardLayoutModule } from '@syncfusion/ej2-angular-layouts';
+import { ChartModule, AccumulationChartModule } from '@syncfusion/ej2-angular-charts';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -204,12 +209,16 @@ import { FreelancerUpdateSkillsComponent } from './components/freelancer/freelan
           FreelancerAddSkillsComponent,
           FreelancerUpdateSkillsComponent,
           
+        
   ],
   imports: [
       BrowserModule,
       AppRoutingModule,
       NgbModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      DashboardLayoutModule,
+      ChartModule,
+      AccumulationChartModule
 
   ],
   providers: [provideHttpClient()],

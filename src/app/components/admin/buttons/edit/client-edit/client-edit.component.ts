@@ -11,7 +11,7 @@ import { Client } from './../../../../../core/models/Client';
   styleUrls: ['./client-edit.component.css']
 })
 export class ClientEditComponent implements OnInit, OnChanges{
-@Input() clientName?: Client  ;
+@Input() clientObject?: Client  ;
 @Input() clientId!: number;
 
 
@@ -25,12 +25,12 @@ ngOnInit(): void {
   //Add 'implements OnInit' to the class.
 
   
- console.log(this.clientName?.user.email);
+ console.log(this.clientObject?.user.email);
  
    this.form=this.fb.group({
-     name: this.fb.control(this.clientName?.user.name, [Validators.required]),
-    email: this.fb.control(this.clientName?.user.email),
-    profession:this.fb.control( this.clientName?.profession, [Validators.required])
+     name: this.fb.control(this.clientObject?.user.name, [Validators.required]),
+    email: this.fb.control(this.clientObject?.user.email),
+    profession:this.fb.control( this.clientObject?.profession, [Validators.required])
    
   
   })
@@ -60,7 +60,7 @@ updated(){
 
     
  }else{
-  console.log('error complet fill in inpute');
+  console.log('error ');
   
  }
 
@@ -74,9 +74,9 @@ updated(){
 
  public ngOnChanges(): void {
   this.form=this.fb.group({
-    name:  this.fb.control(`${this.clientName?.user.name}` ,[Validators.required]),
-    email: this.fb.control(`${this.clientName?.user.email}`, [Validators.required]),
-    profession:this.fb.control( `${this.clientName?.profession}`, [Validators.required])
+    name:  this.fb.control(`${this.clientObject?.user.name}` ,[Validators.required]),
+    email: this.fb.control(`${this.clientObject?.user.email}`, [Validators.required]),
+    profession:this.fb.control( `${this.clientObject?.profession}`, [Validators.required])
     
   
   })
