@@ -1,0 +1,44 @@
+.skeleton {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .skeleton-item {
+    background: #e0e0e0;
+    border-radius: 4px;
+    height: 20px;
+    margin: 5px 0;
+    width: 100%;
+  }
+  
+  .skeleton-avatar {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+  }
+  
+  .skeleton-text {
+    height: 20px;
+    width: 80%;
+  }
+
+  .skeleton-item {
+  background: linear-gradient(
+    -90deg,
+    #e0e0e0 0%,
+    #f0f0f0 50%,
+    #e0e0e0 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

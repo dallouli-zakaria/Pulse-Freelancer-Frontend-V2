@@ -97,6 +97,9 @@ import { FreelancerUpdateExperienceComponent } from './components/freelancer/fre
 import { UpdateFreelancerPersonalInfosComponent } from './components/freelancer/freelancer-profile/freelancer-sideprofile/update-freelancer-personal-infos/update-freelancer-personal-infos.component';
 import { FreelancerAddSkillsComponent } from './components/freelancer/freelancer-profile/freelancer-skills/freelancer-add-skills/freelancer-add-skills.component';
 import { FreelancerUpdateSkillsComponent } from './components/freelancer/freelancer-profile/freelancer-skills/freelancer-update-skills/freelancer-update-skills.component';
+import { SkeletonComponent } from './components/user/skeleton/skeleton.component';
+import { TimeAgoPipe } from './core/pipes/time-ago.pipe';
+
 
 
 
@@ -207,7 +210,8 @@ import { FreelancerUpdateSkillsComponent } from './components/freelancer/freelan
           UpdateFreelancerPersonalInfosComponent,
           FreelancerAddSkillsComponent,
           FreelancerUpdateSkillsComponent,
-          
+          SkeletonComponent,
+          TimeAgoPipe
         
   ],
   imports: [
@@ -215,8 +219,6 @@ import { FreelancerUpdateSkillsComponent } from './components/freelancer/freelan
       AppRoutingModule,
       NgbModule,
       ReactiveFormsModule,
-
-
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]

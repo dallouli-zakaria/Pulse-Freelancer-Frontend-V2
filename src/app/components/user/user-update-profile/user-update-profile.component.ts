@@ -13,7 +13,7 @@ export class UserUpdateProfileComponent  {
 
 @Input() clientdata:any;
   
-clientId:number=6;
+clientId:number=1;
 form!:FormGroup;
 
   constructor(private clients:ClientService ){}
