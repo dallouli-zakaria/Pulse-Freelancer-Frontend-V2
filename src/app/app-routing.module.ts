@@ -25,7 +25,6 @@ import { UserProfileComponent } from './components/user/user-profile/user-profil
 import { ViewOffersComponent } from './components/freelancer/view-offers/view-offers.component';
 import { ViewClientOfferComponent } from './components/user/view-client-offer/view-client-offer.component';
 import { ContactUsComponent } from './components/user/contact-us/contact-us.component';
-import { UserTestComponent } from './components/user/user-test/user-test.component';
 import { UserOffersComponent } from './components/user/user-profile/user-offers/user-offers.component';
 import { UsercontractsComponent } from './components/user/user-profile/usercontracts/usercontracts.component';
 import { UserinfosComponent } from './components/user/user-profile/userinfos/userinfos.component';
@@ -80,7 +79,6 @@ const routes: Routes = [
         ]
        },
       { path: 'client-offer', component: ViewClientOfferComponent },
-      { path: 'test', component: UserTestComponent },
       { path: 'offers', component: ViewOffersComponent },
       { path: 'freelancer-profile', component: FreelancerProfileComponent },
       { path: 'contact', component: ContactUsComponent },
