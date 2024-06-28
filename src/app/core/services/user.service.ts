@@ -40,4 +40,9 @@ url=Constant.API_ENDPOINT
     this.user=this.http.delete<User>(`${this.url}/${Constant.USER}/${id}`)
     return this.user
   }
+
+  show(id:number):Observable<User>{
+    this.user=this.http.get<User>(`${this.url}/${Constant.USER}/${id}`)
+    return this.user
+  }
 }

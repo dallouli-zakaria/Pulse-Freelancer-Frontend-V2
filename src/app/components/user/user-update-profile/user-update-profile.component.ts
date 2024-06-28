@@ -9,29 +9,25 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrl: './user-update-profile.component.css'
 })
 export class UserUpdateProfileComponent  {
+
+
+@Input() clientdata:any;
+  
 clientId:number=6;
+form!:FormGroup;
+
   constructor(private clients:ClientService ){}
   private fb : FormBuilder = inject(FormBuilder);
 
 ngOnInit(): void {
-  //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-  //Add 'implements OnInit' to the class.
-
-  
-
- 
    this.form=this.fb.group({
      name: this.fb.control('', [Validators.required]),
     email: this.fb.control(''),
     profession:this.fb.control( '', [Validators.required])
-   
-  
   })
- 
-
 }
 
-form!:FormGroup;
+
 
   updated(){  
 

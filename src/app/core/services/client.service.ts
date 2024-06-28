@@ -46,4 +46,10 @@ url=Constant.API_ENDPOINT
     return this.client
   }
 
+
+  show(id:number):Observable<Client>{
+    this.client=this.http.get<Client>(`${this.url}/${Constant.CLIENTS}/${id}`)
+    return this.client
+  }
+
 }
