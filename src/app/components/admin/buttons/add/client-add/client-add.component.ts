@@ -19,7 +19,10 @@ ngOnInit(): void {
     name:new FormControl(''),
     email:new FormControl(''),
     profession:new FormControl(''),
-    password:new FormControl('')
+    password:new FormControl(''),
+    company_name:new FormControl(''),
+    company_activity:new FormControl(''),
+    company_email:new FormControl(''),
 
   })
 }

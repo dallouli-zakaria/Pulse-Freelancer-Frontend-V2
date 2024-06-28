@@ -30,7 +30,10 @@ ngOnInit(): void {
    this.form=this.fb.group({
      name: this.fb.control(this.clientObject?.user.name, [Validators.required]),
     email: this.fb.control(this.clientObject?.user.email),
-    profession:this.fb.control( this.clientObject?.profession, [Validators.required])
+    profession:this.fb.control( this.clientObject?.profession, [Validators.required]),
+    company_name:this.fb.control( `${this.clientObject?.company_name}`, [Validators.required]),
+    company_activity:this.fb.control( `${this.clientObject?.company_activity}`, [Validators.required]),
+    company_email:this.fb.control( `${this.clientObject?.company_email}`, [Validators.required]),
    
   
   })
@@ -76,7 +79,10 @@ updated(){
   this.form=this.fb.group({
     name:  this.fb.control(`${this.clientObject?.user.name}` ,[Validators.required]),
     email: this.fb.control(`${this.clientObject?.user.email}`, [Validators.required]),
-    profession:this.fb.control( `${this.clientObject?.profession}`, [Validators.required])
+    profession:this.fb.control( `${this.clientObject?.profession}`, [Validators.required]),
+    company_name:this.fb.control( `${this.clientObject?.company_name}`, [Validators.required]),
+    company_activity:this.fb.control( `${this.clientObject?.company_activity}`, [Validators.required]),
+    company_email:this.fb.control( `${this.clientObject?.company_email}`, [Validators.required]),
     
   
   })

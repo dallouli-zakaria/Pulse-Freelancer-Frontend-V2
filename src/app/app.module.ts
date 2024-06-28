@@ -100,8 +100,7 @@ import { FreelancerUpdateSkillsComponent } from './components/freelancer/freelan
 
 
 
-import { DashboardLayoutModule } from '@syncfusion/ej2-angular-layouts';
-import { ChartModule, AccumulationChartModule } from '@syncfusion/ej2-angular-charts';
+
 
 
 @NgModule({
@@ -216,9 +215,7 @@ import { ChartModule, AccumulationChartModule } from '@syncfusion/ej2-angular-ch
       AppRoutingModule,
       NgbModule,
       ReactiveFormsModule,
-      DashboardLayoutModule,
-      ChartModule,
-      AccumulationChartModule
+
 
   ],
   providers: [provideHttpClient()],

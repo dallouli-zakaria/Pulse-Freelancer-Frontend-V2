@@ -15,12 +15,12 @@
     <tbody>
       <tr *ngFor="let users of user">
         <th scope="row">{{users.id}}</th>
-        <td>{{users.name}}/td>
+        <td>{{users.name}}</td>
         <td>{{users.email}}</td>
       
         <td>
            
-          <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-right: 5px;">
+          <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-right: 5px;" (click)="trackAdmin(users.id,users)">
             <i class="fas fa-pen"></i> 
           </button> 
           
@@ -32,18 +32,12 @@
       
     </tbody>
 </table> 
-  <!-- add -->
-  <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-m"><div class="modal-content">
-      <app-admin-add></app-admin-add>
-    </div>
-   </div>
-  </div>
+v>
 
      <!-- edit -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-m"><div class="modal-content">
-        <app-admin-edit></app-admin-edit>
+        <app-admin-edit [UserId]="selectedID" [UserData]="selectedUser"  ></app-admin-edit>
       </div>
     </div>
   </div>
@@ -52,7 +46,7 @@
      
     <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-sm"><div class="modal-content">
-        <app-admin-delete></app-admin-delete>
+        <app-admin-delete [userId]="selectedID" [userData]="selectedUser" ></app-admin-delete>
       </div>
     </div>  
     

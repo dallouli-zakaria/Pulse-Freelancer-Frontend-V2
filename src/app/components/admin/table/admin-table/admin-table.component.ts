@@ -10,9 +10,13 @@ import { Observable } from 'rxjs';
 })
 export class AdminTableComponent implements OnInit {
 
-  user:User[]=[]
+  user:User[]=[];
+  selectedID!:number;
+  selectedUser:any
 constructor(private userService:UserService ){}
   subject!:Observable<User[]>
+
+
 ngOnInit(): void {
   //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
   //Add 'implements OnInit' to the class.
@@ -20,13 +24,20 @@ ngOnInit(): void {
   this.subject=this.userService.getData
 }
 
+trackAdmin(id:number,user:User){
+  this.selectedID=id;
+  this.selectedUser=user
+}
 index(){
+  
   this.userService.index();
 this.userService.getData.subscribe({
   next:(data:any)=>{
-    this.user=data
+    this.user=data;
+    console.log(data);
+    
   },
-  error:(error)=>console.log(error),
+  error:(error)=>console.log("----"+error),
   
   complete:()=>console.log('end Operation')
   

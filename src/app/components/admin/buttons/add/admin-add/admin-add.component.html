@@ -2,44 +2,44 @@
     <h1 class="modal-title fs-5" id="exampleModalLabel">Add Admin</h1>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
-    <form >
-     <div class="modal-body">
+<form >
+  <div class="modal-body">
 
-      <!-- Username -->
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Username</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-      </div>
+   <!-- Username -->
+   <div class="mb-3">
+     <label for="exampleInputEmail1" class="form-label">Username</label>
+     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="name">
+   </div>
 
-       <!-- email -->
-      <div class="mb-3 ">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-      </div>
+    <!-- email -->
+   <div class="mb-3 ">
+     <label for="exampleInputEmail1" class="form-label">Email address</label>
+     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="email">
+     <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+   </div>
 
-      <!-- rolse -->
-      <div class="mb-3 ">
-      <select class="form-select form-select-sm" aria-label="Small select example">
-        <option selected>role</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-      </div>
-       
-      <!-- permission -->
-      <div class="mb-3 ">
-      <select class="form-select form-select-sm" aria-label="Small select example">
-        <option selected>permission</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-       </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Save changes</button>
-       </div>>
-    </form>
+   <!-- rolse -->
+   <div class="mb-3 ">
+   <select class="form-select form-select-m" aria-label="Small select example" formControlName="role">
+     <option selected>role</option>
+     <option value="1">One</option>
+     <option value="2">Two</option>
+     <option value="3">Three</option>
+   </select>
+   </div>
+    
+   <!-- permission -->
+   <div class="mb-3 ">
+   <select class="form-select form-select-m" aria-label="Small select example">
+     <option selected>permission</option>
+     <option value="1">One</option>
+     <option value="2">Two</option>
+     <option value="3">Three</option>
+   </select>
+    </div>
+   </div>
+   <div class="modal-footer">
+     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+     <button type="submit" class="btn btn-success" data-bs-dismiss="modal" (click)="add()">Save changes</button>
+    </div>
+ </form>

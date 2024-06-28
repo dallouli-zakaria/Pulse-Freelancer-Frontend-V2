@@ -9,7 +9,7 @@ import { ClientService } from '../../../../../core/services/client.service';
 })
 export class ClientDeleteComponent {
   @Input() clientName: any;
-  @Input() clientId!:number
+  @Input() clientId!:number;
  
 
  
