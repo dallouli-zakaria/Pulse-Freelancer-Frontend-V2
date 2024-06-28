@@ -68,14 +68,12 @@ import { UserIndexComponent } from './components/user/user-index/user-index.comp
 import { UserFooterComponent } from './components/user/user-layout/user-footer/user-footer.component';
 import { UserHeaderComponent } from './components/user/user-layout/user-header/user-header.component';
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
-import { UserTestComponent } from './components/user/user-test/user-test.component';
 import { UserUpdateOfferComponent } from './components/user/user-update-offer/user-update-offer.component';
 import { UserUpdateProfileComponent } from './components/user/user-update-profile/user-update-profile.component';
 import { UserViewFreelancersComponent } from './components/user/user-view-freelancers/user-view-freelancers.component';
 import { ViewClientOfferComponent } from './components/user/view-client-offer/view-client-offer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserContractDownloadComponent } from './components/user/user-contract-download/user-contract-download.component';
-import { CheckmarkComponent } from './components/user/checkmark/checkmark.component';
 import { UserSideprofileComponent } from './components/user/user-profile/user-sideprofile/user-sideprofile.component';
 import { UserOffersComponent } from './components/user/user-profile/user-offers/user-offers.component';
 import { UsercontractsComponent } from './components/user/user-profile/usercontracts/usercontracts.component';
@@ -99,6 +97,7 @@ import { FreelancerAddSkillsComponent } from './components/freelancer/freelancer
 import { FreelancerUpdateSkillsComponent } from './components/freelancer/freelancer-profile/freelancer-skills/freelancer-update-skills/freelancer-update-skills.component';
 import { SkeletonComponent } from './components/user/skeleton/skeleton.component';
 import { TimeAgoPipe } from './core/pipes/time-ago.pipe';
+
 
 
 
@@ -184,9 +183,9 @@ import { TimeAgoPipe } from './core/pipes/time-ago.pipe';
           ContactUsComponent,
           ViewOffersDetailsComponent,
           UserUpdateOfferComponent,
-          UserTestComponent,
+          
           UserContractDownloadComponent,
-          CheckmarkComponent,
+          
           UserSideprofileComponent,
           UserOffersComponent,
           UsercontractsComponent,
