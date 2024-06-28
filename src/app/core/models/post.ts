@@ -7,5 +7,6 @@ export interface Post {
     Periodvalue:number,
     budget:string,
     Budgetvalue:number,
-    client_id:number
+    client_id:number,
+    created_at: string;
 }

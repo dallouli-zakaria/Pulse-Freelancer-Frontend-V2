@@ -9,6 +9,10 @@
                     <a routerLink="../client-contracts" class="text-danger">Mes contracts</a></span
                   >
                 </h5>
+                <div *ngIf="isLoading; else dataLoaded">
+                  <app-skeleton></app-skeleton>
+                </div>
+                <ng-template #dataLoaded>
                 <!-- begin -->
                 <div class="container mb-3 ">
                   <div class="card pb-0 px-3 ">
@@ -88,7 +92,7 @@
                   </div>
   
 
-
+                </ng-template>
               </div>
             </div>
           </div>

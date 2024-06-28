@@ -36,4 +36,8 @@ export class OffersService {
     this.offer=this.http.delete(`${this.url}/${Constant.OFFERS}`);
     return this.offer
   }
+  public show(id:any):Observable<Offer>{
+    this.offer=this.http.get(`${this.url}/${Constant.OFFERS}/${id}`);
+    return this.offer
+  }
 }

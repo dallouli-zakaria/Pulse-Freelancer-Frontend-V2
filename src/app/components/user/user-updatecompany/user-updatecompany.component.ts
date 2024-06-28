@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrl: './user-updatecompany.component.css'
 })
 export class UserUpdatecompanyComponent {
-  clientId:number=6;
+  clientId:number=1;
   constructor(private clients:ClientService ){}
   private fb : FormBuilder = inject(FormBuilder);
 
