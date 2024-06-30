@@ -4,6 +4,7 @@ import { Constant } from '../Constant';
 import { Observable } from 'rxjs';
 import { Contract } from '../models/Contract';
 import { controllers } from 'chart.js';
+import { Freelancer } from '../models/Freelancer';
 
 
 @Injectable({

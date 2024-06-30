@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Permission } from './../models/Permission';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, shareReplay } from 'rxjs';
 import { Constant } from '../Constant';
 
 @Injectable({
@@ -10,11 +10,19 @@ import { Constant } from '../Constant';
 export class PermissionService {
   permission:any
   url=Constant.API_ENDPOINT
+  public subject:BehaviorSubject<Permission[]>=new BehaviorSubject<Permission[]>([])
   constructor(private http:HttpClient) { }
   
-  public index():Observable<Permission>{
-   this.permission=this.http.get(`${this.url}/${Constant.PERMISSION}`);
-   return this.permission
+  public index(){
+   this.http.get(`${this.url}/${Constant.PERMISSION}`).pipe(shareReplay(1)).subscribe({
+     next:(data:any)=>this.subject.next(data),
+     error:(error)=>console.log(error),
+     complete:()=>console.log('end operation') 
+   }).add(console.log('suject permession'))
+
+  }
+  get permessionData():Observable<Permission[]>{
+      return this.subject.asObservable()
   }
 
   public store(data:any):Observable<Permission>{
@@ -29,6 +37,25 @@ export class PermissionService {
   public delete(id:any):Observable<Permission>{
     this.permission=this.http.delete(`${this.url}/${Constant.PERMISSION}`);
     return this.permission
+  }
+
+ public grantRolesAndPermissions(roleName: string, permissions: string[], users: number[]): Observable<any> {
+    const requestBody = {
+      name: roleName,
+      permission: permissions,
+      users: users
+    };
+
+    return this.http.post<any>(`${this.url}/grantRolesAndPermissions`, requestBody);
+  }
+
+  public grantRoleToUser(roleName: string, users: number[]): Observable<any> {
+    const requestBody = {
+      name: roleName,
+      users: users
+    };
+
+    return this.http.post<any>(`${this.url}/grantRoleToUser`, requestBody);
   }
   
 }

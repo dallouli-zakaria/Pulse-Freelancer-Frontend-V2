@@ -39,11 +39,11 @@ export class UserOffersComponent {
 
 
     getposts(){
-      this.postservice.index().subscribe({
+      this.postservice.index()
+      this.postservice.postData.subscribe({
       next:(data:any)=>{
         this.post=data; 
-        console.log(data);
-        
+        console.log(data);   
       },
       error:(error:any)=>{
         console.log(error);  

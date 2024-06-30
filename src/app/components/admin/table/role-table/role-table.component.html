@@ -9,60 +9,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>super admin</td>
+      <tr *ngFor="let item of role">
+        <th scope="row">{{item.id}}</th>
+        <td>{{item.name}}</td>
        
-        <td>
-            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#edit" style="margin-right: 5px;"><i class="fas fa-pen"></i> </button> 
-            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete" style="margin-right: 5px;"><i class="fas fa-trash"></i></button>
-            <button class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#details" style="margin-right: 5px;"> <i class="bi bi-file-plus"></i></button>
-          </td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>modirator</td>
-      
-        <td>
-            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#edit" style="margin-right: 5px;"><i class="fas fa-pen"></i> </button> 
-            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete" style="margin-right: 5px;"><i class="fas fa-trash"></i></button>
-            <button class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#details" style="margin-right: 5px;"> <i class="bi bi-file-plus"></i></button>
-          </td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>admin</td>
-     
-        <td>
-            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#edit" style="margin-right: 5px;"><i class="fas fa-pen"></i> </button> 
-            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete" style="margin-right: 5px;"><i class="fas fa-trash"></i></button>
-            <button class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#details" style="margin-right: 5px;"> <i class="bi bi-file-plus"></i></button>
-          </td>
-      </tr>
-      <tr>
-        <th scope="row">4</th>
-        <td>client</td>
-      
-        <td>
-            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#edit" style="margin-right: 5px;"><i class="fas fa-pen"></i> </button> 
-            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete" style="margin-right: 5px;"><i class="fas fa-trash"></i></button>
-            <button class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#details" style="margin-right: 5px;"> <i class="bi bi-file-plus"></i></button>
-          </td>
-      </tr>
-      <tr>
-        <th scope="row">5</th>
-        <td>freelancer</td>
-        
-        <td>
-            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#edit" style="margin-right: 5px;"><i class="fas fa-pen"></i> </button> 
-            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete" style="margin-right: 5px;"><i class="fas fa-trash"></i></button>
-            <button class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#details" style="margin-right: 5px;"> <i class="bi bi-file-plus"></i></button>
-          </td>
-      </tr>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        
         <td>
             <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#edit" style="margin-right: 5px;"><i class="fas fa-pen"></i> </button> 
             <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete" style="margin-right: 5px;"><i class="fas fa-trash"></i></button>
