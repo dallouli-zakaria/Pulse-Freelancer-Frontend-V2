@@ -11,6 +11,13 @@ import { Observable } from 'rxjs';
 export class RoleTableComponent implements OnInit {
   role:Role[]=[]
 constructor(private roleservice:RoleService){}
+selectedID!:number;
+selectedRole:any
+trackRole(id:number,role:any){
+this.selectedID=id;
+this.selectedRole=role
+}
+
 getdata!:Observable<Role[]>
   ngOnInit(): void {
     this.index()
