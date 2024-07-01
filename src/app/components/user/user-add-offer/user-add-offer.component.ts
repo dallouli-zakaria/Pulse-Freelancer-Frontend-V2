@@ -15,6 +15,8 @@ export class UserAddOfferComponent {
   selectedPeriod!:string;
   clientId!:number;
   form!:FormGroup;
+  isSubmitting: boolean = false;
+
   cities: string[] = ['Casablanca', 'Rabat', 'Fes', 'Marrakech', 'Tangier', 'Agadir', 'Meknes', 'Oujda', 'Kenitra', 'Tetouan','Autre'];
 
 
@@ -44,6 +46,7 @@ export class UserAddOfferComponent {
 
   addoffer() {
     if (this.form.valid) {
+      this.isSubmitting = true;
       this.postsservice.store(this.form.value).subscribe(
         (res) => {
           console.log(res);

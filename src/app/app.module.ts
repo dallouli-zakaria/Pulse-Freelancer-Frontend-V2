@@ -210,7 +210,8 @@ import { TimeAgoPipe } from './core/pipes/time-ago.pipe';
           FreelancerAddSkillsComponent,
           FreelancerUpdateSkillsComponent,
           SkeletonComponent,
-          TimeAgoPipe
+          TimeAgoPipe,
+          
         
   ],
   imports: [
