@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-user-header',
@@ -8,6 +9,10 @@ import { Component } from '@angular/core';
 export class UserHeaderComponent {
   dropdownOpen = false;
   selectedOption: string | null = null;
+  
+
+  constructor(public authService: AuthService) {}
+
 
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
