@@ -22,7 +22,7 @@ url=Constant.API_ENDPOINT
   public index(){
     this.client=this.http.get<Client[]>(`${this.url}/${Constant.CLIENTS}`).pipe(shareReplay(1)).subscribe({
        next: (data:any) =>  this.dataSubject.next(data),
-       error:( error) => console.error('Error fetching data', error),
+       error:( error) => console.error(error),
        complete:()=>console.log('complet')})
    .add(()=>{console.log('subject')})
    
