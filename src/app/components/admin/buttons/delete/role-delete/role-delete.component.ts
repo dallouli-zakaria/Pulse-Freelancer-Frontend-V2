@@ -1,4 +1,4 @@
-import { Component, Input, input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Role } from '../../../../../core/models/Role';
 import { RoleService } from '../../../../../core/services/role.service';
 
@@ -13,7 +13,8 @@ export class RoleDeleteComponent {
 role:Role[]=[];
 constructor(private roleservice:RoleService){}
 
-deleted(){
+deleted(){console.log(this.roleData?.name);
+
 this.roleservice.deleted(this.roleID).subscribe({
   next:()=>this.roleservice.index(),
   error:(erorre)=>console.log(erorre),
