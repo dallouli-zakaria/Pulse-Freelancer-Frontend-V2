@@ -49,5 +49,12 @@ a {
 .dropdown-menu.show {
   display: block;
 }
+.dropdown-menu {
+  display: none;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
 
 
