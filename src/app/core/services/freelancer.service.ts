@@ -47,5 +47,21 @@ export class FreelancerService {
     return this.freelancer
    }
 
+   register(
+    name: string,
+    email: string,
+    password: string,
+    password_confirmation: string
+  ): Observable<any> {
+
+    // return this.http.post(this.API_URL + 'signup', {
+    return this.http.post(`${this.url}/${Constant.FREELANCERS}`, {
+      name,
+      email,
+      password,
+      password_confirmation,
+    });
+  }
+
 
 }
