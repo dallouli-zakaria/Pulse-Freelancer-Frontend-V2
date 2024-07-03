@@ -29,8 +29,8 @@ export class PermissionService {
     this.permission=this.http.post(`${this.url}/${Constant.PERMISSION}`,data);
     return this.permission
   }
-  public update(id:any):Observable<Permission>{
-    this.permission=this.http.put(`${this.url}/${Constant.PERMISSION}`,id);
+  public update(id:any,data:any):Observable<Permission[]>{
+    this.permission=this.http.put<Permission[]>(`${this.url}/${Constant.PERMISSION}/${id}`,data);
     return this.permission
   }
 

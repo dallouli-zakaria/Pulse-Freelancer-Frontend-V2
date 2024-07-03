@@ -98,6 +98,12 @@ import { FreelancerUpdateSkillsComponent } from './components/freelancer/freelan
 import { SkeletonComponent } from './components/user/skeleton/skeleton.component';
 import { TimeAgoPipe } from './core/pipes/time-ago.pipe';
 import { AuthService } from './core/services/auth.service';
+import { PostCartComponent } from './components/admin/carts/post-cart/post-cart.component';
+import { PostTableComponent } from './components/admin/table/post-table/post-table.component';
+import { PostComponent } from './components/admin/pages/post/post.component';
+import { PostAddComponent } from './components/admin/buttons/add/post-add/post-add.component';
+import { PostEditComponent } from './components/admin/buttons/edit/post-edit/post-edit.component';
+import { PostDeleteComponent } from './components/admin/buttons/delete/post-delete/post-delete.component';
 
 
 
@@ -212,11 +218,18 @@ import { AuthService } from './core/services/auth.service';
           FreelancerUpdateSkillsComponent,
           SkeletonComponent,
           TimeAgoPipe,
+           PostComponent,
+          PostCartComponent,
+                    PostTableComponent,
+                    PostAddComponent,
+                    PostEditComponent,
+                    PostDeleteComponent,
           
         
   ],
   imports: [
-      BrowserModule,
+  
+    BrowserModule,
       AppRoutingModule,
       NgbModule,
       ReactiveFormsModule,

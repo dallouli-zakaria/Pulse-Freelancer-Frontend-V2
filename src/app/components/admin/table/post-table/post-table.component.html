@@ -1,0 +1,59 @@
+<table class="table caption-top">
+    <caption><h1>Post List</h1></caption>
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Location</th>
+            <th scope="col">Type</th>
+            <th scope="col">Description</th>
+            <th scope="col">Period</th>
+            <th scope="col">Period Value</th>
+            <th scope="col">Budget</th>
+            <th scope="col">Budget Value</th>
+            <th scope="col">Client ID</th>
+            <th scope="col">Created At</th>
+            <th scope="col">Actions</th>
+            <th scope="col"></th>
+          </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of post">
+        <th scope="row">{{item.id}}</th>
+        <td>{{item.title}}</td>
+        <td>{{item.location}}</td>
+        <td>{{item.type}}</td>
+        <td>{{item.description}}</td>
+        <td>{{item.period}}</td>
+        <td>{{item.Periodvalue}}</td>
+        <td>{{item.budget}}</td>
+        <td>{{item.Budgetvalue}}</td>
+        <td>{{item.client_id}}</td>
+        <td>{{item.created_at}}</td>
+        <td>
+            <button class="btn btn-primary btn-sm" style="margin-right: 5px;" (click)="trackPost(item.id,item)"><i class="fas fa-pen"></i> </button> 
+            <button class="btn btn-danger btn-sm" style="margin: 2px;"><i class="fas fa-trash" (click)="trackPost(item.id,item)"></i></button>
+            <button class="btn btn-secondary btn-sm"> details</button>
+          </td>
+      </tr>
+      
+    </tbody>
+</table> 
+
+
+
+
+
+  <!-- edit -->
+  <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-m"><div class="modal-content">
+<app-post-edit [postId]="selectedId" [posetObject]="selectedObject"></app-post-edit>
+  </div>
+  </div>
+  <!-- delete -->
+  <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-m"><div class="modal-content">
+     <app-post-delete></app-post-delete>
+    </div>
+  </div>  
+  
+  

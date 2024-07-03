@@ -8,68 +8,12 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>add users</td>
+      <tr *ngFor="let item of permession">
+        <th scope="row">{{item.id}}</th>
+        <td>{{item.name}}</td>
         <td>
-          <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#edit" style="margin-right: 5px;"><i class="fas fa-pen"></i> </button> 
-          <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete" style="margin-right: 5px;"><i class="fas fa-trash"></i></button>
-          </td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>edit users</td>
-        <td>
-          <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#edit" style="margin-right: 5px;"><i class="fas fa-pen"></i> </button> 
-          <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete" style="margin-right: 5px;"><i class="fas fa-trash"></i></button>
-          </td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>delete users</td>
-        <td>
-          <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#edit" style="margin-right: 5px;"><i class="fas fa-pen"></i> </button> 
-          <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete" style="margin-right: 5px;"><i class="fas fa-trash"></i></button>
-          </td>
-      </tr>
-      <tr>
-        <th scope="row">4</th>
-        <td>show users</td>
-        <td>
-          <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#edit" style="margin-right: 5px;"><i class="fas fa-pen"></i> </button> 
-          <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete" style="margin-right: 5px;"><i class="fas fa-trash"></i></button>
-          </td>
-      </tr>
-      <tr>
-        <th scope="row">5</th>
-        <td>add permission</td>
-        <td>
-          <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#edit" style="margin-right: 5px;"><i class="fas fa-pen"></i> </button> 
-          <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete" style="margin-right: 5px;"><i class="fas fa-trash"></i></button>
-          </td>
-      </tr>
-      <tr>
-        <th scope="row">6</th>
-        <td>assign permission to role</td>
-        <td>
-          <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#edit" style="margin-right: 5px;"><i class="fas fa-pen"></i> </button> 
-          <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete" style="margin-right: 5px;"><i class="fas fa-trash"></i></button>
-          </td>
-      </tr>
-      <tr>
-        <th scope="row">7</th>
-        <td>Mark</td>
-        <td>
-          <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#edit" style="margin-right: 5px;"><i class="fas fa-pen"></i> </button> 
-          <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete" style="margin-right: 5px;"><i class="fas fa-trash"></i></button>
-          </td>
-      </tr>
-      <tr>
-        <th scope="row"></th>
-        <td>assign permission to user</td>
-        <td>
-          <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#edit" style="margin-right: 5px;"><i class="fas fa-pen"></i> </button> 
-          <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete" style="margin-right: 5px;"><i class="fas fa-trash"></i></button>
+          <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#edit" style="margin-right: 5px;" (click)="trackPemission(item.id,item)"><i class="fas fa-pen"></i> </button> 
+          <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete" style="margin-right: 5px;" (click)="trackPemission(item.id,item)"><i class="fas fa-trash"></i></button>
           </td>
       </tr>
       
@@ -80,7 +24,7 @@
 <!-- edit-->
 <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-m"><div class="modal-content">
-    <app-permission-edit></app-permission-edit>
+    <app-permission-edit [permissionId]="selectedID" [permissionData]="selectedData"></app-permission-edit>
   </div>
  </div>
 </div>
@@ -88,7 +32,7 @@
    <!-- delete-->
   <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-m"><div class="modal-content">
-      <app-permission-delete></app-permission-delete>
+    <app-permission-delete [permissionId]="selectedID" [permissionData]="selectedData"></app-permission-delete>
     </div>
   </div>
 </div>

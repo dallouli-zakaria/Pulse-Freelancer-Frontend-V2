@@ -1,10 +1,10 @@
 <div class="modal-header">
     <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Freelancer</h1>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-</div>
-    <form >
+</div> 
       <form [formGroup]="form" (ngSubmit)="updated()">
-        <div class="form-group">
+        <div class="form-group"><div class="conatainre">
+    
           <label for="name">Name</label>
           <input id="name" formControlName="name" class="form-control" />
           <!-- <div *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched" class="text-danger">
@@ -94,7 +94,7 @@
         <div class="form-group">
           <label for="CV">CV</label>
           <input id="CV" formControlName="CV" class="form-control" />
-        </div>
+        </div></div>
       
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -102,4 +102,4 @@
          </div>
       </form>
       
-    </form>
+    
