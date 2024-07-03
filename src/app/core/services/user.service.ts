@@ -18,7 +18,7 @@ url=Constant.API_ENDPOINT
    this.user =this.http.get(`${this.url}/${Constant.USER}`).pipe(shareReplay(1)).subscribe({
       next:(data:any)=>this.subjectBe.next(data),
       error:(error)=>{console.log(error) },
-      complete:()=>console.log('end operation of subject')
+      complete:()=>console.log('end operation of subject show')
     }).add(()=>console.log("user subject"))
   }
 
