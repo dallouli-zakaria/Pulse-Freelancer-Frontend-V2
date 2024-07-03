@@ -80,7 +80,7 @@ export class AuthService {
     // return this.http.post(API_URL + 'signout', {});
     localStorage.removeItem(this.JWT_TOKEN);
     this.isAuthenticatedSubject.next(false);
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
     
 
 

@@ -22,4 +22,6 @@ export class UserHeaderComponent {
     this.selectedOption = option;
     this.dropdownOpen = false; // Close the dropdown after selecting an option
   }
+
+
 }
