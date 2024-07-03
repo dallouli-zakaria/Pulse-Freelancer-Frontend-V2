@@ -37,6 +37,8 @@ export class PostsService {
   return this.post
   }
 
+
+
   public update(id:any):Observable<Post>{
     this.post=this.http.put(`${this.url}/${Constant.POSTS}`,id);
     return this.post

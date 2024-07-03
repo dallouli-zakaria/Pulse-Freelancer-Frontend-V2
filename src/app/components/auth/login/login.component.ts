@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
 
@@ -9,16 +9,20 @@ import { AuthService } from '../../../core/services/auth.service';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-
+  errorMessage: string | null = null;
   authservice = inject(AuthService);
   router = inject(Router);
   applyForm: FormGroup;
   formBuilder = inject(FormBuilder);
   isSubmitting:boolean=false;
-  constructor() {
+  successMessage: string | null = null;
+  constructor(private route: ActivatedRoute) {
     this.applyForm = this.formBuilder.group({
       email: [''],
       password: [''],
+    });
+    this.route.queryParams.subscribe(params => {
+      this.successMessage = params['message'] || null;
     });
   }
 
@@ -31,21 +35,29 @@ export class LoginComponent {
   }
 
   submitApplication(event: Event) {
-    this.isSubmitting=true;
-    event.preventDefault();
-    console.log(`Login : ${this.email} / ${this.password}`);
-    this.authservice.login({
-      email: this.email,
-      password: this.password,
-    }).subscribe(
-      (res) => {
-        console.log(res);
-        this.router.navigate(['/']);  // Navigate within the success callback
-      },
-      (error) => {
-        console.error(error);
+        event.preventDefault();
+        if (this.applyForm.valid) {
+          this.isSubmitting = true;
+          this.errorMessage = null;
+          const loginData = this.applyForm.value;
+          
+          this.authservice.login(loginData).subscribe({
+            next: (response) => {
+              console.log(response);
+              this.router.navigate(['/']);
+              this.isSubmitting = false;
+              // Redirect or perform other actions
+            },
+            error: (err) => {
+              this.isSubmitting = false;
+              this.errorMessage = 'Échec de la connexion. Veuillez vérifier vos identifiants.';
+            }
+          });
+        }
       }
-    );
   }
 
-}
+
+  
+
+

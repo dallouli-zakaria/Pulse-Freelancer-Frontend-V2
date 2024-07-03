@@ -17,17 +17,13 @@ export class UserAddOfferComponent {
   clientId!:number;
   form!:FormGroup;
   isSubmitting: boolean = false;
-
-
-
   tokenn!: any;
-  userid: any;
-  username!: string;
-
+  userid!:any;
   cities: string[] = ['Casablanca', 'Rabat', 'Fes', 'Marrakech', 'Tangier', 'Agadir', 'Meknes', 'Oujda', 'Kenitra', 'Tetouan','Autre'];
 
 
   constructor(  private fb:FormBuilder,private postsservice:PostsService,private router: Router,private authservice:AuthService){
+    this.get();
     this.form = this.fb.group({
       title: ['', Validators.required],
       location: ['', Validators.required],
@@ -37,7 +33,7 @@ export class UserAddOfferComponent {
       periodvalue:[''],
       budget: ['', Validators.required],
       budgetvalue: [''],
-      userid:['']
+      client_id:[this.userid]
     });
   }
 
@@ -68,8 +64,6 @@ export class UserAddOfferComponent {
     }
   }
 
-
-
   get(): void {
     const token = localStorage.getItem('JWT_TOKEN');
     if (token) {
@@ -79,20 +73,10 @@ export class UserAddOfferComponent {
       this.userid = deco.sub;
 
       this.authservice.getuserdetails(this.userid).subscribe((res) => {
-        this.username = res.name;
-        this.form = this.fb.group({
-          title: ['', Validators.required],
-          location: ['', Validators.required],
-          type: ['', Validators.required],
-          description: ['', Validators.required],
-          period: ['', Validators.required],
-          periodvalue:[''],
-          budget: ['', Validators.required],
-          budgetvalue: [''],
-          userid:['']
-        });
+        this.userid = res.id;
       });
     }
-  }
+
+    }
 
 }
