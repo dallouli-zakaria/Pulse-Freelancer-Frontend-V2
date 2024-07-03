@@ -10,7 +10,7 @@ import { User } from '../../../../core/models/User';
   styleUrl: './user-sideprofile.component.css'
 })
 export class UserSideprofileComponent implements OnInit{
-  userid: number=1;
+  userid: number=5;
   client!:Client;
   user!:User;
 
