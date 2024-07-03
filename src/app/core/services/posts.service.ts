@@ -17,7 +17,7 @@ export class PostsService {
   constructor(private http:HttpClient) { }
   
   public count(){
-    this.post=this.http.get(`${this.url}/offerCount`);
+    this.post=this.http.get(`${this.url}/postCount`);
     return this.post
   }
   public index(){
@@ -37,13 +37,20 @@ export class PostsService {
   return this.post
   }
 
-  public update(id:any):Observable<Post>{
-    this.post=this.http.put(`${this.url}/${Constant.POSTS}`,id);
+  public update(id:any,data:any):Observable<Post>{
+    this.post=this.http.put(`${this.url}/${Constant.POSTS}/${id}`,data);
     return this.post
   }
    
-  public delete():Observable<Post>{
-    this.post=this.http.delete(`${this.url}/${Constant.POSTS}`);
+  public delete(id:number):Observable<Post>{
+    this.post=this.http.delete(`${this.url}/${Constant.POSTS}/${id}`);
     return this.post
+  }
+  public addpost(data:any,id:number){
+
+    this.post=this.http.post(`${this.url}/${Constant.POSTS}/${id}/posts`,data);
+
+    return this.post
+
   }
 }

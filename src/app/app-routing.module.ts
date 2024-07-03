@@ -33,6 +33,7 @@ import { UserViewfreelancersProfileComponent } from './components/user/user-view
 import { FreelancerDashboardComponent } from './components/freelancer/freelancer-profile/freelancer-dashboard/freelancer-dashboard.component';
 import { FreelancerOffersComponent } from './components/freelancer/freelancer-profile/freelancer-dashboard/freelancer-offers/freelancer-offers.component';
 import { FreelancerContractsComponent } from './components/freelancer/freelancer-profile/freelancer-dashboard/freelancer-contracts/freelancer-contracts.component';
+import { PostComponent } from './components/admin/pages/post/post.component';
 
 const routes: Routes = [
 
@@ -51,6 +52,7 @@ const routes: Routes = [
       { path: 'client', component: ClientComponent },
       { path: 'users', component: UsersComponent },
       { path: 'contract', component: ContractComponent },
+      { path: 'post',component:PostComponent},
       { path: '**', redirectTo: 'dashboard', pathMatch: 'full' } 
     ]
   },

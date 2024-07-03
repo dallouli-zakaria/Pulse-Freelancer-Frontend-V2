@@ -15,7 +15,7 @@ private subjectBe:BehaviorSubject<User[]>= new BehaviorSubject<User[]>([])
 url=Constant.API_ENDPOINT
 
   index(){
-   this.user =this.http.get<User>(`${this.url}/${Constant.USER}`).pipe(shareReplay(1)).subscribe({
+   this.user =this.http.get(`${this.url}/${Constant.USER}`).pipe(shareReplay(1)).subscribe({
       next:(data:any)=>this.subjectBe.next(data),
       error:(error)=>{console.log(error) },
       complete:()=>console.log('end operation of subject')
