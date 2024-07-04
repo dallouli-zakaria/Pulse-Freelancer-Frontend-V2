@@ -10,7 +10,11 @@ import { ClientService } from '../../../../../core/services/client.service';
 export class ClientDeleteComponent {
   @Input() clientName: any;
   @Input() clientId!:number;
- 
+
+  @Output() closeModal = new EventEmitter<void>();
+  close(): void {
+    this.closeModal.emit();
+  }
 
  
 
@@ -27,7 +31,8 @@ export class ClientDeleteComponent {
         console.log(this.clientId);
         
       this.clients.deleted(this.clientId).subscribe({
-      next:()=>{ this.clients.index()
+      next:()=>{ this.clients.index();
+        this.close();
       },
       error:(error:any)=>console.log(error),
       complete:()=>console.log("end operation deleted") 

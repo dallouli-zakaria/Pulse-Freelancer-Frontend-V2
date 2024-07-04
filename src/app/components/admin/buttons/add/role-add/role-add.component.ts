@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Role } from '../../../../../core/models/Role';
 import { RoleService } from '../../../../../core/services/role.service';
 import { HttpClient } from '@angular/common/http';
@@ -13,6 +13,11 @@ export class RoleAddComponent implements OnInit{
   role:Role[]=[]
   form!:FormGroup
 constructor(private roleServece:RoleService,private fb:FormBuilder){}
+@Output() closeModal = new EventEmitter<void>();
+close(): void {
+  this.closeModal.emit();
+}
+
   ngOnInit(): void {
     this.form=this.fb.group({
       name:new FormControl('')

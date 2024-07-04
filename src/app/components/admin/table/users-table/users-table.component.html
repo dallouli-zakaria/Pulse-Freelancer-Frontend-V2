@@ -14,18 +14,16 @@
         <th scope="row">{{item.id}}</th>
         <td> {{item.name }} </td>
         <td>{{item.email}}</td>
+        <td> </td>
       
         <td>
-            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#edit" style="margin-right: 5px;">
-                <i class="fas fa-pen"></i> 
-            </button> 
-            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete">
-                <i class="fas fa-trash"></i> 
-            </button>
-            <button type="button" class="btn  btn-sm" data-bs-toggle="modal" data-bs-target="#details">
-              <i class="fas fa-toggle-on"></i> 
-          </button>
-          </td>
+          <button class="btn btn-primary btn-sm" style="margin-right: 5px;" (click)="onEdited(item)">
+            <i class="fas fa-pen"></i> </button> 
+         <button class="btn btn-danger btn-sm" style="margin-right: 5px;" (click)="ondeleted(item)">
+            <i class="fas fa-trash"></i></button>
+         <button class="btn btn-secondary btn-sm" style="margin-right: 5px;" (click)="ondetails( item)">
+           <i class="bi bi-file-plus"></i></button>
+        </td>
       </tr>
       <!-- <nav aria-label="Page navigation example">
         <ul class="pagination">
@@ -39,25 +37,25 @@
     </tbody>
 </table>    
 
-
+<div *ngIf="show" class="modal-backdrop fade show"></div>
   <!-- edit -->
-  <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div *ngIf="showedit" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
     <div class="modal-dialog modal-m"><div class="modal-content">
-      <app-users-edit></app-users-edit>
+      <app-users-edit (closeModal)="onCloseModal()"></app-users-edit>
     </div>
   </div>
   </div>
   <!-- delete -->
-  <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div *ngIf="showedelete" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
     <div class="modal-dialog modal-m"><div class="modal-content">
-      <app-users-delete></app-users-delete>
+      <app-users-delete  (closeModal)="onCloseModal()"></app-users-delete>
     </div>
     </div>
   </div>
 <!-- daitals -->
-  <div class="modal fade" id="details" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div *ngIf="showdetails" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
     <div class="modal-dialog modal-m"><div class="modal-content">
-      <app-user-details></app-user-details>
+      <app-user-details [user]="selectUser"  (closeModal)="onCloseModal()"></app-user-details>
     </div>
   </div> 
   </div>

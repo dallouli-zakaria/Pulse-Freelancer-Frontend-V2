@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PostsService } from '../../../../../core/services/posts.service';
 
@@ -10,6 +10,10 @@ import { PostsService } from '../../../../../core/services/posts.service';
 export class PostAddComponent {
 form!:FormGroup
 constructor(private postService:PostsService,private fb:FormBuilder){}
+@Output() closeModal = new EventEmitter<void>();
+close(): void {
+  this.closeModal.emit();
+}
 ngOnInit(): void {
   //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
   //Add 'implements OnInit' to the class.

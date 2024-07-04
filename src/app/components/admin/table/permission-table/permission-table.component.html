@@ -12,27 +12,30 @@
         <th scope="row">{{item.id}}</th>
         <td>{{item.name}}</td>
         <td>
-          <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#edit" style="margin-right: 5px;" (click)="trackPemission(item.id,item)"><i class="fas fa-pen"></i> </button> 
-          <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete" style="margin-right: 5px;" (click)="trackPemission(item.id,item)"><i class="fas fa-trash"></i></button>
-          </td>
+          <button class="btn btn-primary btn-sm" style="margin-right: 5px;" (click)="onEdited(item.id,item)">
+            <i class="fas fa-pen"></i> </button> 
+         <button class="btn btn-danger btn-sm" style="margin-right: 5px;" (click)="ondeleted(item.id, item)">
+            <i class="fas fa-trash"></i></button>
+      
+        </td>
       </tr>
       
     </tbody>
 </table>
 
-
+<div *ngIf="show" class="modal-backdrop fade show"></div>
 <!-- edit-->
-<div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div *ngIf="showedit" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
   <div class="modal-dialog modal-m"><div class="modal-content">
-    <app-permission-edit [permissionId]="selectedID" [permissionData]="selectedData"></app-permission-edit>
+    <app-permission-edit [permissionId]="selectedID" [permissionData]="selectedData" (closeModal)="onCloseModal()"></app-permission-edit>
   </div>
  </div>
 </div>
 
    <!-- delete-->
-  <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div *ngIf="showedelete" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
     <div class="modal-dialog modal-m"><div class="modal-content">
-    <app-permission-delete [permissionId]="selectedID" [permissionData]="selectedData"></app-permission-delete>
+    <app-permission-delete [permissionId]="selectedID" [permissionData]="selectedData" (closeModal)="onCloseModal()"></app-permission-delete>
     </div>
   </div>
 </div>

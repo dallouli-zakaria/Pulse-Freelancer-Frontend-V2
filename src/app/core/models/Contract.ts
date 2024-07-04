@@ -1,4 +1,5 @@
 export interface Contract{
+    id:number;
     title: string;
     period?: string;
     budget?: number;

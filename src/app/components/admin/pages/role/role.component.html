@@ -1,15 +1,16 @@
 
 <div  class="container">
-   <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#add">
+   <button type="button" class="btn btn-primary btn-sm" (click)="onAdd()" >
       <i class="fas fa-download fa-sm text-white-50"></i> Add Role
     </button>
    <app-role-table></app-role-table>
   </div>
-  
+  <!-- Backdrop -->
+<div *ngIf="show" class="modal-backdrop fade show"></div>
   <!-- add -->
-  <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div  *ngIf="showadd" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
    <div class="modal-dialog modal-m"><div class="modal-content">
-     <app-role-add></app-role-add>
+     <app-role-add (closeModal)="onCloseModal()" ></app-role-add>
    </div>
   </div>
  </div>

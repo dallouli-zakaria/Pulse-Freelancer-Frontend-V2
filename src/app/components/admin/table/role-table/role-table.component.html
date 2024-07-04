@@ -14,35 +14,39 @@
         <td>{{item.name}}</td>
        
         <td>
-            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#edit" style="margin-right: 5px;" (click)="trackRole(item.id,item)"><i class="fas fa-pen"></i> </button> 
-            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete" style="margin-right: 5px;" (click)="trackRole(item.id,item)"><i class="fas fa-trash"></i></button>
-            <button class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#details" style="margin-right: 5px;"> <i class="bi bi-file-plus"></i></button>
+            <button class="btn btn-primary btn-sm" style="margin-right: 5px;" (click)="onEdited(item.id,item)">
+              <i class="fas fa-pen"></i> </button> 
+           <button class="btn btn-danger btn-sm" style="margin-right: 5px;" (click)="ondeleted(item.id, item)">
+              <i class="fas fa-trash"></i></button>
+           <button class="btn btn-secondary btn-sm" style="margin-right: 5px;" (click)="ondetails(item.id, item)">
+             <i class="bi bi-file-plus"></i></button>
           </td>
       </tr>
       
     </tbody>
 </table>    
-
+<!-- Backdrop -->
+<div *ngIf="show" class="modal-backdrop fade show"></div>
 <!-- add -->
-<div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div *ngIf="showedit" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
   <div class="modal-dialog modal-m"><div class="modal-content">
-    <app-role-edit [roleID]="selectedID" [roleData]="selectedRole" ></app-role-edit>
+    <app-role-edit [roleID]="selectedID" [roleData]="selectedRole" (closeModal)="onCloseModal()" ></app-role-edit>
   </div>
  </div>
 </div>
 
-<!-- delete-->
-<div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-m"><div class="modal-content">
-    <app-role-delete [roleID]="selectedID" [roleData]="selectedRole" ></app-role-delete>
+<!-- Delete Modal -->
+<div *ngIf="showedelete" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-m">
+    <div class="modal-content">
+      <app-role-delete [roleID]="selectedID" [roleData]="selectedRole" (closeModal)="onCloseModal()"></app-role-delete>
+    </div>
   </div>
- </div>
 </div>
-
    <!-- details -->
    
-  <div class="modal fade" id="details" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div *ngIf="showdetails" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
     <div class="modal-dialog modal-sm"><div class="modal-content">
-     <app-role-details></app-role-details>
+     <app-role-details (closeModal)="onCloseModal()"></app-role-details>
     </div>
   </div>  

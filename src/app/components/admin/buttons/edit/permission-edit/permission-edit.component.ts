@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PermissionService } from '../../../../../core/services/permission.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -11,6 +11,11 @@ export class PermissionEditComponent {
 @Input() permissionId!:number
 @Input() permissionData:any
 form!:FormGroup
+
+@Output() closeModal = new EventEmitter<void>();
+close(): void {
+  this.closeModal.emit();
+}
 constructor(private permissionService:PermissionService,private fb:FormBuilder){}
 ngOnInit(): void {
   this.form=this.fb.group({
@@ -22,7 +27,8 @@ ngOnInit(): void {
     if(this.permissionId !==null){ 
       this.permissionService.update(this.permissionId,this.form.value).subscribe({
       next:(data)=>{console.log(data);
-       this.permissionService.index()},
+       this.permissionService.index();
+      this.close()},
       error:(error)=>console.log(error),
       complete:()=>console.log('end operation edite')      
     })}

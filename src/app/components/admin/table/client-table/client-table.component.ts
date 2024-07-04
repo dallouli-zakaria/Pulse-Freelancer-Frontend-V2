@@ -50,4 +50,36 @@ export class ClientTableComponent implements OnInit {
     }
  
 
+    
+  //manage page edite delete and details for assingnig 
+show = false;
+showedit = false;
+showedelete = false;
+
+
+onEdited(id: number, role: any): void {
+this.selecteID = id;
+this.selecteName= role;
+this.show = true;
+this.showedit = true;
+this.showedelete = false;
+}
+
+ondeleted(id: number, role: any): void {
+  this.selecteID = id;
+  this.selecteName= role;
+this.show = true;
+this.showedelete = true;
+this.showedit = false;
+
+}
+          
+onCloseModal(): void {
+this.show = false;
+this.showedit = false;
+this.showedelete = false;
+}
+//end manage pages
+
+
 }

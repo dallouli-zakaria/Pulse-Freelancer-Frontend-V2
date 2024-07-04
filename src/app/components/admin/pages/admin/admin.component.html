@@ -1,16 +1,17 @@
 <div  class="container">
 
-  <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#add">
+  <button type="button" class="btn btn-primary btn-sm"  (click)="onAdd()">
     <i class="fas fa-download fa-sm text-white-50"></i> Add admin
   </button>
   <app-admin-table ></app-admin-table>
      
 </div>
 
-  <!-- add -->
-  <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div *ngIf="show" class="modal-backdrop fade show"></div>
+<!-- add -->
+<div  *ngIf="showadd" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
     <div class="modal-dialog modal-m"><div class="modal-content">
-      <app-admin-add></app-admin-add>
+      <app-admin-add (closeModal)="onCloseModal()"></app-admin-add>
     </div>
    </div>
   </div>

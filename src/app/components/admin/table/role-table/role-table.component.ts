@@ -9,14 +9,52 @@ import { Observable } from 'rxjs';
   styleUrl: './role-table.component.css'
 })
 export class RoleTableComponent implements OnInit {
-  role:Role[]=[]
+  role:Role[]=[];
+  
+
 constructor(private roleservice:RoleService){}
 selectedID!:number;
 selectedRole:any
-trackRole(id:number,role:any){
-this.selectedID=id;
-this.selectedRole=role
+
+//manage page edite delete and details for assingnig 
+show = false;
+  showedit = false;
+  showedelete = false;
+  showdetails= false
+
+onEdited(id: number, role: any): void {
+  this.selectedID = id;
+  this.selectedRole = role;
+  this.show = true;
+  this.showedit = true;
+  this.showedelete = false;
 }
+
+ondeleted(id: number, role: any): void {
+  this.selectedID = id;
+  this.selectedRole = role;
+  this.show = true;
+  this.showedelete = true;
+  this.showedit = false;
+  this.showdetails = false;
+}
+ondetails(id: number, role: any): void {
+  this.selectedID = id;
+  this.selectedRole = role;
+  this.show = true;
+  this.showedelete = false;
+  this.showedit = false;
+  this.showdetails= true;
+}
+            
+onCloseModal(): void {
+  this.show = false;
+  this.showedit = false;
+  this.showedelete = false;
+  this.showdetails= false;
+}
+//end manage pages
+
 
 getdata!:Observable<Role[]>
   ngOnInit(): void {

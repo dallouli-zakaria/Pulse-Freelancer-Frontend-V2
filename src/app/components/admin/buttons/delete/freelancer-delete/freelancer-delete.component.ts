@@ -1,4 +1,4 @@
-import { Component, Input, input } from '@angular/core';
+import { Component, EventEmitter, Input, Output, input } from '@angular/core';
 import { FreelancerService } from '../../../../../core/services/freelancer.service';
 
 @Component({
@@ -11,6 +11,10 @@ export class FreelancerDeleteComponent {
   @Input() freelancerData:any
 constructor(private freelnacerServices:FreelancerService){}
 
+@Output() closeModal = new EventEmitter<void>();
+close(): void {
+  this.closeModal.emit();
+}
 ngOnInit(): void {
   //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
   //Add 'implements OnInit' to the class.

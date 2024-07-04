@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from '../../../../../core/services/user.service';
 
@@ -8,7 +8,10 @@ import { UserService } from '../../../../../core/services/user.service';
   styleUrl: './admin-add.component.css'
 })
 export class AdminAddComponent {
-
+  @Output() closeModal = new EventEmitter<void>();
+  close(): void {
+    this.closeModal.emit();
+  }
   form!:FormGroup
   constructor(private userService:UserService,private fb:FormBuilder){}
   ngOnInit(): void {

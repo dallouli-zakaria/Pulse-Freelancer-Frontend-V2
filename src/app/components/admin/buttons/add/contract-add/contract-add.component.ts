@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-contract-add',
@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrl: './contract-add.component.css'
 })
 export class ContractAddComponent {
-
+  @Output() closeModal = new EventEmitter<void>();
+  close(): void {
+    this.closeModal.emit();
+  }
 }

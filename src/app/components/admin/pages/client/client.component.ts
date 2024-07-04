@@ -7,5 +7,17 @@ import { Component } from '@angular/core';
 })
 export class ClientComponent {
 
+  showadd=false
+  show=false
+  
+  onAdd(): void {
+    this.show = true;
+      this.showadd = true;
+  }
+    onCloseModal(): void {
+      this.show = false;
+      this.showadd = false;
+     
+    }
   
 }

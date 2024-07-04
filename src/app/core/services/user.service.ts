@@ -45,4 +45,9 @@ url=Constant.API_ENDPOINT
     this.user=this.http.get<User>(`${this.url}/${Constant.USER}/${id}`)
     return this.user
   }
+
+  // public verify(id:number){
+  //   this.user=this.http.get(`${this.url}/verfy/${id}`)
+  //   return this.user
+  // }
 }

@@ -13,7 +13,10 @@ import { Client } from './../../../../../core/models/Client';
 export class ClientEditComponent implements OnInit, OnChanges{
 @Input() clientObject?: Client  ;
 @Input() clientId!: number;
-
+@Output() closeModal = new EventEmitter<void>();
+close(): void {
+  this.closeModal.emit();
+}
 
 
 
@@ -43,7 +46,7 @@ ngOnInit(): void {
 
 form!:FormGroup
 updatedValue!: boolean;
-close:boolean=false;
+
 updated(){  
 
  if(this.clientId!==null  && this.form.valid){
@@ -52,7 +55,8 @@ updated(){
   updatedData.id = this.clientId;
   this.clients.update(this.clientId,this.form.value).subscribe({
     next:(data:any)=>{this.updatedValue=true ;console.log(data);
-      this.clients.index()
+      this.clients.index();
+      this.close()
  
     },
     error:(error:any)=>{console.log(error)
