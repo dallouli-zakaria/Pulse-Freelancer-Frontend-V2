@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 @Injectable({
   providedIn: 'root'
@@ -14,10 +14,12 @@ export class AuthService {
   private loggedUser?: string;
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private isAuthenticated: boolean = false;
+  
 
 
   API_URL2: any = 'http://127.0.0.1:8000/api/auth';
-  tokenn: any;
+  tokenn!: any;
+  userid!:any;
   constructor() {}
 
   login(user: { email: string; password: string }): Observable<any> {
@@ -40,7 +42,10 @@ export class AuthService {
   }
   decodeToken(token: any): any {
     try {
+      console.log( jwtDecode(token));
       return jwtDecode(token);
+      
+      
     } catch (Error) {
       return null;
     }
@@ -73,20 +78,26 @@ export class AuthService {
     let deco = this.decodeToken(atoken);
     let sub = deco.sub;
     //const userId= atoken.id;
-    console.log(sub);
+    return sub;
   }
 
   logout() {
     // return this.http.post(API_URL + 'signout', {});
     localStorage.removeItem(this.JWT_TOKEN);
     this.isAuthenticatedSubject.next(false);
-    this.router.navigate(['/']);
-    
-
-
+    this.router.navigate(['/login']);
   }
-  getUser():Observable<any>{
-    return this.http.get(`${this.API_URL2}/user`);
+
+
+  
+
+  getUser():Observable<any> {
+    return this.http.get<any>(`${this.API_URL2}/user`);
+  }
+
+
+  getuserdetails(userid:any):Observable<any>{
+    return this.http.get<any>(`${this.API_URL2}/user/${userid}`);
   }
 
 

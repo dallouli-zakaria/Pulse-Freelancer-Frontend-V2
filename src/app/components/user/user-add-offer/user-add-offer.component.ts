@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OffersService } from '../../../core/services/offers.service';
 import { PostsService } from '../../../core/services/posts.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../core/services/auth.service';
 
 
 @Component({
@@ -16,11 +17,13 @@ export class UserAddOfferComponent {
   clientId!:number;
   form!:FormGroup;
   isSubmitting: boolean = false;
-
+  tokenn!: any;
+  userid!:any;
   cities: string[] = ['Casablanca', 'Rabat', 'Fes', 'Marrakech', 'Tangier', 'Agadir', 'Meknes', 'Oujda', 'Kenitra', 'Tetouan','Autre'];
 
 
-  constructor(  private fb:FormBuilder,private postsservice:PostsService,private router: Router){
+  constructor(  private fb:FormBuilder,private postsservice:PostsService,private router: Router,private authservice:AuthService){
+    this.get();
     this.form = this.fb.group({
       title: ['', Validators.required],
       location: ['', Validators.required],
@@ -30,7 +33,7 @@ export class UserAddOfferComponent {
       periodvalue:[''],
       budget: ['', Validators.required],
       budgetvalue: [''],
-      client_id:[1]
+      client_id:[this.userid]
     });
   }
 
@@ -60,5 +63,20 @@ export class UserAddOfferComponent {
       console.log('Form is invalid');
     }
   }
+
+  get(): void {
+    const token = localStorage.getItem('JWT_TOKEN');
+    if (token) {
+      this.tokenn = JSON.parse(token);
+      const atoken = this.tokenn.access_token;
+      const deco = this.authservice.decodeToken(atoken);
+      this.userid = deco.sub;
+
+      this.authservice.getuserdetails(this.userid).subscribe((res) => {
+        this.userid = res.id;
+      });
+    }
+
+    }
 
 }

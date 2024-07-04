@@ -11,6 +11,8 @@ import { Constant } from '../Constant';
 })
 export class RoleService {
 
+  private userRoles: string[] = []; 
+
   constructor(private http:HttpClient) { }
   
   public subject :BehaviorSubject<Role[]>=new BehaviorSubject<Role[]>([]);
@@ -41,6 +43,20 @@ export class RoleService {
 
   public  deleted(id:number):Observable<Role[]>{
     return this.http.delete<Role[]>(`${this.url}/${Constant.ROLE}/${id}`)
+  }
+
+
+  
+  getUserRoles(id:number): Observable<any> {
+    return this.http.get<any>(`${this.url}/user/${id}/roles`);
+  }
+
+  setUserRoles(roles: string[]) {
+    this.userRoles = roles;
+  }
+
+  getUserRolesFromCache(): string[] {
+    return this.userRoles;
   }
 
 }
