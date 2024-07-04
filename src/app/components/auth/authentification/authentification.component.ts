@@ -31,6 +31,11 @@ export class AuthentificationComponent {
   }
 
   submitApplication() {
+    if (this.applyForm.invalid) {
+      this.applyForm.markAllAsTouched(); // Mark all fields as touched to show validation errors
+      return;
+    }
+
     this.isSubmitting = true;
     const { name, email, password, password_confirmation, option } = this.applyForm.getRawValue();
 
