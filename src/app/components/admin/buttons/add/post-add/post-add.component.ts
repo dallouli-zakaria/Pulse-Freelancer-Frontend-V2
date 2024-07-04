@@ -35,7 +35,7 @@ ngOnInit(): void {
 add(){
  if(this.form.valid){
   const clientId = this.form.get('client_id')?.value;
-  this.postService.addpost(this.form.value,clientId).subscribe({
+  this.postService.store(this.form.value).subscribe({
     next:(data:any)=>{console.log(data);
      this.postService.index()},
     error:(error:any)=>console.log(error),
