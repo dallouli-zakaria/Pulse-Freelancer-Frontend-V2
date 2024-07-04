@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FreelancerService } from '../../../../../core/services/freelancer.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Freelancer } from '../../../../../core/models/Freelancer';
@@ -12,6 +12,10 @@ export class FreelancerAddComponent implements OnInit {
  freelancer:Freelancer[]=[]
   form!:FormGroup
   constructor(private freelancerService:FreelancerService,private fb:FormBuilder){}
+  @Output() closeModal = new EventEmitter<void>();
+close(): void {
+  this.closeModal.emit();
+}
   ngOnInit(): void {
    this.form=this.fb.group({
     name: ['', Validators.required],

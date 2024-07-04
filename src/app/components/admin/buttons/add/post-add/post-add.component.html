@@ -1,6 +1,6 @@
 <div class="modal-header">
     <h1 class="modal-title fs-5" id="exampleModalLabel">EDIT POST</h1>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="close()"></button>
 </div>
 <form [formGroup]="form" (ngSubmit)="add()">
   <div class="form-group">
@@ -89,8 +89,8 @@
   </div>
 </div></div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-    <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Save changes</button>
+    <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+    <button type="submit" class="btn btn-success" >Save changes</button>
    </div>
 </form>
 

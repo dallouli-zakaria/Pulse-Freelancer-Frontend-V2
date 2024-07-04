@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Constant } from '../Constant';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Contract } from '../models/Contract';
 import { controllers } from 'chart.js';
 import { Freelancer } from '../models/Freelancer';
@@ -13,6 +13,7 @@ import { Freelancer } from '../models/Freelancer';
 export class ContractService {
  contract:any
  url=Constant.API_ENDPOINT
+ public subject:BehaviorSubject<Contract[]>=new BehaviorSubject<Contract[]>([]);
   constructor(private http:HttpClient) { }
 
 
@@ -21,11 +22,17 @@ export class ContractService {
   return this.contract;
   }
    
-  public index():Observable<Contract>{
-    this.contract=this.http.get(`${this.url}/${Constant.CONTARCTS}`);
-    return this.contract
+  public index(){
+    this.contract=this.http.get<Contract[]>(`${this.url}/${Constant.CONTARCTS}`).subscribe({
+      next:(data: any)=>{this.subject.next(data)},
+      error:(error)=>console.log(error),
+      complete:()=>console.log('end operation')
+    }).add(console.log('subjetc contract'));
   }
    
+  get contractData():Observable<Contract[]>{
+    return this.subject.asObservable();
+  }
   public store(data:any):Observable<Contract>{
   this.contract=this.http.post(`${this.url}/${Constant.CONTARCTS}`,data);
   return this.contract

@@ -30,29 +30,30 @@
         <td>{{item.client_id}}</td>
         <td>{{item.created_at}}</td>
         <td>
-            <button class="btn btn-primary btn-sm" style="margin-right: 5px;" (click)="trackPost(item.id,item)"><i class="fas fa-pen"></i> </button> 
-            <button class="btn btn-danger btn-sm" style="margin: 2px;"><i class="fas fa-trash" (click)="trackPost(item.id,item)"></i></button>
-            <button class="btn btn-secondary btn-sm"> details</button>
-          </td>
+          <button class="btn btn-primary btn-sm" style="margin-right: 5px;" (click)="onEdited(item.id,item)">
+            <i class="fas fa-pen"></i> </button> 
+         <button class="btn btn-danger btn-sm" style="margin-right: 5px;" (click)="ondeleted(item.id, item)">
+            <i class="fas fa-trash"></i></button>
+      
+        </td>
       </tr>
       
     </tbody>
 </table> 
 
 
-
-
-
-  <!-- edit -->
-  <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Backdrop -->
+<div *ngIf="show" class="modal-backdrop fade show"></div>
+<!-- add -->
+<div *ngIf="showedit" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
     <div class="modal-dialog modal-m"><div class="modal-content">
-<app-post-edit [postId]="selectedId" [posetObject]="selectedObject"></app-post-edit>
+<app-post-edit [postId]="selectedId" [posetObject]="selectedObject" (closeModal)="onCloseModal()"></app-post-edit>
   </div>
   </div>
   <!-- delete -->
-  <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div *ngIf="showedelete" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
     <div class="modal-dialog modal-m"><div class="modal-content">
-     <app-post-delete></app-post-delete>
+     <app-post-delete (closeModal)="onCloseModal()"></app-post-delete>
     </div>
   </div>  
   

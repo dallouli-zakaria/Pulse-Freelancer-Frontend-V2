@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Role } from '../../../../../core/models/Role';
-import { FormBuilder, FormControl, FormGroup, FormGroupName } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormGroupName, Validators } from '@angular/forms';
 import { RoleService } from '../../../../../core/services/role.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -14,18 +14,25 @@ export class RoleEditComponent implements OnInit {
   @Input() roleData:any
   role:Role[]=[];
   form!:FormGroup
+  erorrshowe:any
 constructor(private roleService:RoleService,private fb:FormBuilder,private modalService: NgbModal){}
   ngOnInit(): void {
   this.form=this.fb.group({
-    name:new FormControl('')
+    name:new FormControl('', Validators.email)
   })
+  }
+
+  @Output() closeModal = new EventEmitter<void>();
+
+  close(): void {
+    this.closeModal.emit();
   }
   updated(){
   this.roleService.updated(this.roleID,this.form.value).subscribe({
     next:()=>{this.roleService.index();
-      this.modalService.dismissAll()
+      this.close()
     },
-    error:(eror)=>console.log(eror),
+    error:(eror)=>{console.log(eror); this.erorrshowe=eror},
     complete:()=>console.log('end operation') 
   })
   }

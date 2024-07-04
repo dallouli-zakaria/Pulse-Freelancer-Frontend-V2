@@ -8,7 +8,6 @@
         <th scope="col">ID</th>
         <th scope="col">name</th>
         <th scope="col">email</th>
-        
         <th scope="col"></th>
       </tr>
     </thead>
@@ -19,34 +18,31 @@
         <td>{{users.email}}</td>
       
         <td>
-           
-          <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-right: 5px;" (click)="trackAdmin(users.id,users)">
-            <i class="fas fa-pen"></i> 
-          </button> 
-          
-          <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete">
-            <i class="fas fa-trash"></i>
-          </button>
-        </td>
+          <td>
+            <button class="btn btn-primary btn-sm" style="margin-right: 5px;" (click)="onEdited(users.id,users)">
+              <i class="fas fa-pen"></i> </button> 
+           <button class="btn btn-danger btn-sm" style="margin-right: 5px;" (click)="ondeleted(users.id, users)">
+              <i class="fas fa-trash"></i></button>
+        
+          </td>
       </tr>
       
     </tbody>
 </table> 
-v>
 
+<div *ngIf="show" class="modal-backdrop fade show"></div>
      <!-- edit -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div *ngIf="showedit" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
       <div class="modal-dialog modal-m"><div class="modal-content">
-        <app-admin-edit [UserId]="selectedID" [UserData]="selectedUser"  ></app-admin-edit>
+        <app-admin-edit [UserId]="selectedID" [UserData]="selectedUser"  (closeModal)="onCloseModal()"></app-admin-edit>
       </div>
     </div>
   </div>
 
      <!-- delete -->
      
-    <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-sm"><div class="modal-content">
-        <app-admin-delete [userId]="selectedID" [userData]="selectedUser" ></app-admin-delete>
+     <div *ngIf="showedelete" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">      <div class="modal-dialog modal-sm"><div class="modal-content">
+        <app-admin-delete [userId]="selectedID" [userData]="selectedUser" (closeModal)="onCloseModal()"></app-admin-delete>
       </div>
     </div>  
     

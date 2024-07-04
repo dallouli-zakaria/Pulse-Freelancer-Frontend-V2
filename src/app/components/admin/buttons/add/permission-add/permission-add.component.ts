@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PermissionService } from '../../../../../core/services/permission.service';
 import { Permission } from '../../../../../core/models/Permission';
@@ -12,6 +12,10 @@ export class PermissionAddComponent {
   permission!:Permission
   form!:FormGroup
 constructor(private permisionService:PermissionService,private fb:FormBuilder){}
+@Output() closeModal = new EventEmitter<void>();
+close(): void {
+  this.closeModal.emit();
+}
  ngOnInit(): void {
 
   this.form=this.fb.group({

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PostsService } from '../../../../../core/services/posts.service';
 
@@ -11,6 +11,11 @@ export class PostEditComponent {
   @Input() postId!:number
   @Input() posetObject:any
   form!:FormGroup
+
+  @Output() closeModal = new EventEmitter<void>();
+  close(): void {
+    this.closeModal.emit();
+  }
   constructor(private postService:PostsService,private fb:FormBuilder){}
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -35,7 +40,8 @@ export class PostEditComponent {
    if(this.form.valid){
     this.postService.update(this.form.value,this.postId).subscribe({
       next:(data)=>{console.log(data);
-       this.postService.index()},
+       this.postService.index();
+      this.close()},
       error:(error)=>console.log(error),
       complete:()=>console.log('end operation add')
       

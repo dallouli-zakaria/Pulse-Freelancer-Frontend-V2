@@ -1,15 +1,11 @@
 <div class="modal-header">
     <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Admin</h1>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="close()"></button>
 </div>
-   
-     <div class="modal-body">
-
+      <div class="modal-body">
       <h3>Are you shore you want to delete Admin {{userData?.name}} </h3>
-       
-    
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
         <button type="submit" class="btn btn-success" data-bs-dismiss="modal" (click)="deleted()">valide</button>
-       </div>
+      </div>

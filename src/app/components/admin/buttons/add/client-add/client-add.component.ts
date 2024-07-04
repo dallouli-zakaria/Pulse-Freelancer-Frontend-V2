@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { ClientService } from '../../../../../core/services/client.service';
 import { FormControl, FormGroup } from '@angular/forms';
 
@@ -9,6 +9,10 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class ClientAddComponent {
 private  clients:ClientService =inject(ClientService);
+@Output() closeModal = new EventEmitter<void>();
+close(): void {
+  this.closeModal.emit();
+}
 
 form!:FormGroup
 

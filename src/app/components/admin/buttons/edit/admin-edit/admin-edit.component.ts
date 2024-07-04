@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { User } from '../../../../../core/models/User';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from './../../../../../core/services/user.service';
@@ -11,6 +11,10 @@ import { UserService } from './../../../../../core/services/user.service';
 export class AdminEditComponent implements OnInit,OnChanges {
   @Input() UserId!:number;
   @Input() UserData!:User;
+  @Output() closeModal = new EventEmitter<void>();
+  close(): void {
+    this.closeModal.emit();
+  }
   form!:FormGroup
   constructor(private userService:UserService,private fb:FormBuilder){}
   ngOnInit(): void {
@@ -26,7 +30,8 @@ export class AdminEditComponent implements OnInit,OnChanges {
   updated(){
     if(this.UserId !==null && this.form.valid)
     this.userService.update(this.UserId,this.form.value).subscribe({
-    next:(data:any)=>{console.log(data);this.userService.index()
+    next:(data:any)=>{console.log(data);this.userService.index();
+      this.close()
     },
     error:(error:any)=>{console.log(error);
     },

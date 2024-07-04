@@ -21,32 +21,30 @@
         <td>{{client.company_name}}</td>
         <td>{{client.company_activity}}</td>
         <td>{{client.company_email}}</td>
-        <td > 
-             <button type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal"  data-bs-target="#edit" style="margin-right: 5px;"  (click)="trackClient(client,client.id)">
-              <i class="fas fa-pen"></i> 
-             </button>  
-             <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete" (click)="trackClient(client,client.id)">
-              <i class="fas fa-trash"></i> 
-             </button>
+        <td>
+          <button class="btn btn-primary btn-sm" style="margin-right: 5px;" (click)="onEdited(client.id,client)">
+            <i class="fas fa-pen"></i> </button> 
+         <button class="btn btn-danger btn-sm" style="margin-right: 5px;" (click)="ondeleted(client.id, client)">
+            <i class="fas fa-trash"></i></button>
+      
         </td>
       </tr>
      
     </tbody>
 </table>  
 
-
+<div *ngIf="show" class="modal-backdrop fade show"></div>
 
   <!-- edit -->
-<div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div *ngIf="showedit" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
   <div class="modal-dialog modal-m"><div class="modal-content">
-    <app-client-edit  [clientId]="selecteID"  [clientObject]="selecteName" ></app-client-edit>
+    <app-client-edit  [clientId]="selecteID"  [clientObject]="selecteName" (closeModal)="onCloseModal()" ></app-client-edit>
   </div>
 </div>
 </div>
 <!-- delete -->
-<div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-m"><div class="modal-content">
-    <app-client-delete   [clientId]="selecteID"  [clientName]="selecteName" ></app-client-delete>
+<div *ngIf="showedelete" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">  <div class="modal-dialog modal-m"><div class="modal-content">
+    <app-client-delete   [clientId]="selecteID"  [clientName]="selecteName" (closeModal)="onCloseModal()"></app-client-delete>
   </div>
 </div>  
 
