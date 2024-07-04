@@ -17,7 +17,7 @@
           <button class="btn btn-outline-danger rounded-pill order-0" type="submit" routerLink="../register">Sign Up</button>
         </span>
         <div class="dropdown "  *ngIf="authService.isLoggedIn();">
-          <span>{{username}}</span>
+          <!-- <span class="text-uppercase ">{{username}}</span> -->
           <img src="assets/img/gallery/user-profile-3.png" alt="Dropdown Toggle" (click)="toggleDropdown()" class="dropdown-toggle-img rounded-circle">
           <div class="dropdown-menu" [class.show]="dropdownOpen" aria-labelledby="dropdownMenuButton" style="cursor:default;">
             <span class="dropdown-item text-muted">{{username}}</span>
@@ -26,8 +26,11 @@
             <a class="dropdown-item" href="" (click)="selectOption('dashboard')">dashboard</a>
             <a class="dropdown-item"  (click)="authService.logout()">deconnecter</a>
           </div>
+
+
          
         </div>
+        
       </div>
 
 

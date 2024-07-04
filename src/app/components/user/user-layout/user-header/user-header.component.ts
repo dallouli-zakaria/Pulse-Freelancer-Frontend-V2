@@ -15,11 +15,18 @@ export class UserHeaderComponent implements OnInit {
   tokenn!: any;
   userid: any;
   username!: string;
-
+  isAuthenticated: boolean = false;
   constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
-    this.get();
+    this.isAuthenticated = this.authService.isLoggedIn();
+    if (this.isAuthenticated) {
+    let sub = this.authService.parseID();
+    this.authService.getuserdetails(sub).subscribe((res) => {
+      this.username = res.name;
+    });
+  }
+  
   }
 
   toggleDropdown(): void {
@@ -31,41 +38,5 @@ export class UserHeaderComponent implements OnInit {
     this.dropdownOpen = false;
   }
 
-  get(): void {
-    const token = localStorage.getItem('JWT_TOKEN');
-    if (token) {
-      this.tokenn = JSON.parse(token);
-      const atoken = this.tokenn.access_token;
-      const deco = this.authService.decodeToken(atoken);
-      this.userid = deco.sub;
-
-      this.authService.getuserdetails(this.userid).subscribe((res) => {
-        this.username = res.name;
-      });
-    }
-  }
-
-  // const token = localStorage.getItem('JWT_TOKEN');
-  // if (token) {
-  //   this.tokenn = JSON.parse(token);
-  //   const atoken = this.tokenn.access_token;
-  //   const deco = this.authservice.decodeToken(atoken);
-  //   this.userid = deco.sub;
-
-  //   this.authservice.getuserdetails(this.userid).subscribe((res) => {
-  //     this.username = res.name;
-  //     // Initialize form with userid
-  //     this.form = this.fb.group({
-  //       title: ['', Validators.required],
-  //       location: ['', Validators.required],
-  //       type: ['', Validators.required],
-  //       description: ['', Validators.required],
-  //       period: ['', Validators.required],
-  //       periodvalue: [''],
-  //       budget: ['', Validators.required],
-  //       budgetvalue: [''],
-  //       userid: [this.userid] // Initialize userid field with decoded userid
-  //     });
-  //   });
-  // }
+  
 }
