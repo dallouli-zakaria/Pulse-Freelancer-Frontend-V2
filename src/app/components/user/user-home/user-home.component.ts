@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RolesService } from '../../../core/services/roles.service';
 import { AuthService } from '../../../core/services/auth.service';
+import { RoleService } from '../../../core/services/role.service';
 
 
 
@@ -13,7 +13,7 @@ export class UserHomeComponent implements OnInit{
   userId!:number;
   roles!:string[];
   isAuthenticated: boolean = false;
-  constructor(private rolesService: RolesService,private authService:AuthService) {}
+  constructor(private rolesService: RoleService,private authService:AuthService) {}
 
   ngOnInit(): void {
     //this.authService.parseID();

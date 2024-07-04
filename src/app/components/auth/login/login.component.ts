@@ -44,7 +44,7 @@ export class LoginComponent {
           this.authservice.login(loginData).subscribe({
             next: (response) => {
               console.log(response);
-              this.router.navigate(['/']);
+              this.router.navigate(['/pulse/home']);
               this.isSubmitting = false;
               // Redirect or perform other actions
             },

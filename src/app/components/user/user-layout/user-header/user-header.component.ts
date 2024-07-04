@@ -23,6 +23,7 @@ export class UserHeaderComponent implements OnInit {
     if (this.isAuthenticated) {
     let sub = this.authService.parseID();
     this.authService.getuserdetails(sub).subscribe((res) => {
+      //console.log(res);
       this.username = res.name;
     });
   }

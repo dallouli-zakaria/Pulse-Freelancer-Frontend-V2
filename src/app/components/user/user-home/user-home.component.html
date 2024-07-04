@@ -19,8 +19,8 @@
 
             
             <div *ngIf="isAuthenticated; else notAuthenticated">
-              <button *ngIf="roles && roles.includes('client_role')" class="btn btn-lg btn-danger hover-top btn-glow " routerLink="../client-dashboard">Découvrir !  </button>
-            <button *ngIf="roles && roles.includes('freelancer_role')" class="btn btn-lg btn-danger hover-top btn-glow " routerLink="../offers">Découvrir ! </button>
+              <button *ngIf="roles && roles.includes('client_role')" class="btn btn-lg btn-danger hover-top btn-glow " routerLink="/pulse/client-dashboard">Découvrir !  </button>
+            <button *ngIf="roles && roles.includes('freelancer_role')" class="btn btn-lg btn-danger hover-top btn-glow " routerLink="/pulse/offers">Découvrir ! </button>
             </div>
 
             <ng-template #notAuthenticated>

@@ -34,6 +34,7 @@ import { FreelancerDashboardComponent } from './components/freelancer/freelancer
 import { FreelancerOffersComponent } from './components/freelancer/freelancer-profile/freelancer-dashboard/freelancer-offers/freelancer-offers.component';
 import { FreelancerContractsComponent } from './components/freelancer/freelancer-profile/freelancer-dashboard/freelancer-contracts/freelancer-contracts.component';
 import { PostComponent } from './components/admin/pages/post/post.component';
+import { authGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
 
@@ -63,6 +64,7 @@ const routes: Routes = [
   {
     path: 'pulse',
     component: UserIndexComponent,
+    canActivate:[authGuard],
     children: [
       { path: 'view-freelancers', component: UserViewFreelancersComponent },
       { path: 'add-offer', component: UserAddOfferComponent },
@@ -101,14 +103,24 @@ const routes: Routes = [
     ]
   },
 
+  
 
+  //TO REVISITE
+  {
+    path: 'home',
+    component: UserIndexComponent,
+    children: [
+      { path: 'pulse', component: UserHomeComponent },
+      { path: 'contact', component: ContactUsComponent },
+    ]
+  },
 
 
   { path: 'register', component: AuthentificationComponent },
   { path: 'login', component: LoginComponent },
   { path: 'page-notfound', component: Error404Component },
   { path: 'server-error', component: Error500Component },
-  { path: '', redirectTo: 'pulse/home', pathMatch: 'full' },
+  { path: '', redirectTo: 'home/pulse', pathMatch: 'full' },
   { path: '**', redirectTo: 'page-notfound', pathMatch: 'full' },
 
   

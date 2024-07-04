@@ -78,14 +78,14 @@ export class AuthService {
     let deco = this.decodeToken(atoken);
     let sub = deco.sub;
     //const userId= atoken.id;
-    console.log(sub);
+    return sub;
   }
 
   logout() {
     // return this.http.post(API_URL + 'signout', {});
     localStorage.removeItem(this.JWT_TOKEN);
     this.isAuthenticatedSubject.next(false);
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
   }
 
 

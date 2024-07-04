@@ -1,6 +1,6 @@
+import { RoleService } from '../../../core/services/role.service';
 import { AuthService } from './../../../core/services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { RolesService } from '../../../core/services/roles.service';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -11,7 +11,7 @@ export class UserDashboardComponent implements OnInit{
   userId!:number;
   roles!:string[];
 
-  constructor(private rolesService: RolesService,private authService:AuthService) {}
+  constructor(private rolesService: RoleService,private authService:AuthService) {}
 
   ngOnInit(): void {
     //this.authService.parseID();
