@@ -31,7 +31,6 @@ export class UserHomeComponent implements OnInit{
 
   //get connected user roles from decoded token
   getRoles(): void {
-    
     if (this.userId) {
       this.rolesService.getUserRoles(this.userId).subscribe(
         (res) => {

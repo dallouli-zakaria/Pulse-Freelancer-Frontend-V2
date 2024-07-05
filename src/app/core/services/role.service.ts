@@ -59,4 +59,10 @@ export class RoleService {
     return this.userRoles;
   }
 
+
+  grantRoleToUser(){
+    return this.http.get<any>(`${this.url}/grantRoleToUser`);
+  }
+
+
 }
