@@ -23,11 +23,11 @@
             <div class="row" *ngIf="client" >
                 
                 <span><strong> Nom :</strong></span>
-                <span>{{client.user.name}}</span>
+                <span>{{client.user!.name}}</span>
                 <span><strong *ngIf="client">Profession :</strong></span>
                 <span >{{client.profession}}</span>
                 <span><strong>Email :</strong></span>
-                <span>{{client.user.email}}</span> 
+                <span>{{client.user!.email}}</span> 
             </div>
    
         </div>

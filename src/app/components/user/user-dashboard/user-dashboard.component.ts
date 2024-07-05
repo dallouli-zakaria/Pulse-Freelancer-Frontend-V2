@@ -9,37 +9,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserDashboardComponent implements OnInit{
   userId!:number;
-  roles!:string[];
+  role!:string[];
+  isAuthenticated: boolean = false;
 
   constructor(private rolesService: RoleService,private authService:AuthService) {}
 
   ngOnInit(): void {
     //this.authService.parseID();
+    this.isAuthenticated = this.authService.isLoggedIn();
+    if (this.isAuthenticated) {
     const sub = this.authService.parseID(); 
     this.authService.getuserdetails(sub).subscribe((res) => {
-      this.userId = res.id;
-      console.log(this.userId); 
-      this.getRoles(); 
-    });
+      this.userId = res.user.id;
+      this.role=res.roles;
 
-  }
+      console.log(this.userId,this.role); 
 
-  //get connected user roles from decoded token
-  getRoles(): void {
-    
-    if (this.userId) {
-      this.rolesService.getUserRoles(this.userId).subscribe(
-        (res) => {
-          this.roles = res;
-          console.log(this.roles);
-        },
-        (error) => {
-          console.error('Error fetching roles', error);
-        }
-      );
-    } else {
-      console.warn('User ID is undefined.');
+    }); 
     }
+
+
   }
+
+ 
 
 }
