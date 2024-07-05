@@ -14,7 +14,7 @@ import { id } from 'date-fns/locale';
 })
 export class UsersTableComponent implements OnInit{
   user:User[]=[];
-  roleUSer!:string
+ 
   constructor(private userService:UserService){}
     subject!:Observable<User[]>
    selectUser:any
@@ -24,7 +24,7 @@ export class UsersTableComponent implements OnInit{
     //Add 'implements OnInit' to the class.
     this.index()
     this.subject=this.userService.getData 
-   
+
   }
   
  

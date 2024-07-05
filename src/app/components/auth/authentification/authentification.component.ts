@@ -37,10 +37,10 @@ export class AuthentificationComponent {
     }
 
     this.isSubmitting = true;
-    const { name, email, password, password_confirmation, option } = this.applyForm.getRawValue();
+    const option = this.applyForm.getRawValue();
 
     if (option === 'freelancer') {
-      this.freelancerService.register(name, email, password, password_confirmation)
+      this.freelancerService.register(this.applyForm.value)
         .subscribe(
           (res) => {
             console.log(res);
@@ -51,7 +51,7 @@ export class AuthentificationComponent {
           }
         );
     } else {
-      this.clientService.register(name, email, password, password_confirmation)
+      this.clientService.register(this.applyForm.value)
         .subscribe(
           (res) => {
             console.log(res);

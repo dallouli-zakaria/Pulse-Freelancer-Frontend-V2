@@ -18,7 +18,7 @@ export class RoleEditComponent implements OnInit {
 constructor(private roleService:RoleService,private fb:FormBuilder,private modalService: NgbModal){}
   ngOnInit(): void {
   this.form=this.fb.group({
-    name:new FormControl('', Validators.email)
+    name:[this.roleData?.name]
   })
   }
 
@@ -38,7 +38,7 @@ constructor(private roleService:RoleService,private fb:FormBuilder,private modal
   }
   ngOnChanges(): void {
   this.form=this.fb.group({
-   name:new FormControl(`${this.roleData?.name}`)
+   name:[this.roleData?.name]
   })
  }
 }

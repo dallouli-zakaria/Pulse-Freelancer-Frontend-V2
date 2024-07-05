@@ -104,6 +104,8 @@ import { PostComponent } from './components/admin/pages/post/post.component';
 import { PostAddComponent } from './components/admin/buttons/add/post-add/post-add.component';
 import { PostEditComponent } from './components/admin/buttons/edit/post-edit/post-edit.component';
 import { PostDeleteComponent } from './components/admin/buttons/delete/post-delete/post-delete.component';
+import { RoleUserComponent } from './components/admin/table/users-table/role-user/role-user.component';
+import { RolechipsAutocompleteComponent } from './components/admin/buttons/edit/role-edit/rolechips-autocomplete/rolechips-autocomplete.component';
 
 
 
@@ -224,6 +226,8 @@ import { PostDeleteComponent } from './components/admin/buttons/delete/post-dele
                     PostAddComponent,
                     PostEditComponent,
                     PostDeleteComponent,
+                    RoleUserComponent,
+                    RolechipsAutocompleteComponent,
           
         
   ],
