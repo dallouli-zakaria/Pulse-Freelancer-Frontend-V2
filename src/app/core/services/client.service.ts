@@ -53,18 +53,10 @@ url=Constant.API_ENDPOINT
   }
 
   register(
-    name: string,
-    email: string,
-    password: string,
-    password_confirmation: string
+    data:any
   ): Observable<any> {
 
-    return this.http.post(`${this.url}/${Constant.CLIENTS}`, {
-      name,
-      email,
-      password,
-      password_confirmation,
-    });
+    return this.http.post(`${this.url}/${Constant.CLIENTS}`, data);
   }
 
 }

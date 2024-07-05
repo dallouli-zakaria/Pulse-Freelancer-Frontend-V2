@@ -14,7 +14,7 @@
         <th scope="row">{{item.id}}</th>
         <td> {{item.name }} </td>
         <td>{{item.email}}</td>
-        <td> </td>
+        <td><app-role-user [userID]="item.id"></app-role-user></td>
       
         <td>
           <button class="btn btn-primary btn-sm" style="margin-right: 5px;" (click)="onEdited(item)">
