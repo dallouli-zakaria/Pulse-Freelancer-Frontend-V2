@@ -29,7 +29,7 @@ export class UsersTableComponent implements OnInit{
   
   }
   
- vlaue:any
+
   index(){
     this.userService.index();
   this.userService.getData.subscribe({
