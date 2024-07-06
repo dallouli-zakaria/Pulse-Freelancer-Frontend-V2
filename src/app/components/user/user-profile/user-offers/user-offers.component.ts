@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { PostsService } from '../../../../core/services/posts.service';
 import { Post } from '../../../../core/models/post';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-offers',
@@ -9,10 +10,10 @@ import { Post } from '../../../../core/models/post';
 })
 export class UserOffersComponent {
 
-  postid:number=1;
+
   post: Post[] = [];
 
-  constructor(private  postservice:PostsService){
+  constructor(private  postservice:PostsService,private router:Router){
     this.fetchData();
     this.getposts();
  
@@ -35,6 +36,7 @@ export class UserOffersComponent {
         this.isLoading = false;
       }, 1000);
     }
+
 
 
 

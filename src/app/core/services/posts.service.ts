@@ -29,7 +29,7 @@ export class PostsService {
  
   }
   get postData():Observable<Post[]>{
-    return this.subject.asObservable()
+    return this.subject.asObservable();
   }
 
   public store(data:any):Observable<Post>{
@@ -52,5 +52,11 @@ export class PostsService {
 
     return this.post
 
+  }
+
+
+  public show(id:any):Observable<Post>{
+    this.post=this.http.get(`${this.url}/${Constant.POSTS}/${id}`);
+    return this.post
   }
 }

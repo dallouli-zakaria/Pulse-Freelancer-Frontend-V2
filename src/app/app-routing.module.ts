@@ -84,7 +84,7 @@ const routes: Routes = [
           
         ]
        },
-      { path: 'client-offer', component: ViewClientOfferComponent },
+      { path: 'client-offer/:postId', component: ViewClientOfferComponent },
       { path: 'offers', component: ViewOffersComponent },
       { path: 'freelancer-profile', component: FreelancerProfileComponent },
       { path: 'contact', component: ContactUsComponent },
@@ -120,7 +120,7 @@ const routes: Routes = [
 
   { path: 'register', component: AuthentificationComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'page-notfound', component: Error404Component },
+  //{ path: 'page-notfound', component: Error404Component },
   { path: 'server-error', component: Error500Component },
   { path: '', redirectTo: 'home/pulse', pathMatch: 'full' },
   { path: '**', redirectTo: 'page-notfound', pathMatch: 'full' },

@@ -3,48 +3,52 @@
 <div class="container card-box mt-4">
     <div class="row">
         <h4 class="col-lg-10">
-            <span><a routerLink="../client-profile"> <i class="fas fa-arrow-left"></i>  </a>
+            <span><a routerLink="../../client-profile"> <i class="fas fa-arrow-left"></i>  </a>
             </span> Details de l'offre
             
         </h4>
         <button class="btn btn-danger col-lg-2 " data-bs-toggle="modal" data-bs-target="#exampleModal">Modifier l'offre</button>
     </div>
+    
 
+    <div *ngIf="post">
     <div class="container mt-5 mb-3 ">
         
         <div class="row ">
             <h5 class="col-lg-4 ">Titre de l'offre :</h5>
-            <h5 class="col-lg-8 text-muted">Application mobile Innovante</h5>
+            <h5 class="col-lg-8 text-muted">{{post.title}}</h5>
             
         </div><hr>
         <div class="row ">
             <h5 class="col-lg-4 ">Type de l'offre :</h5>
-            <h5 class="col-lg-8 text-muted">Type A</h5>
+            <h5 class="col-lg-8 text-muted">{{post.type}}</h5>
         </div><hr>
         <div class="row ">
             <h5 class="col-lg-4 ">Description de l'offre :</h5>
-            <h5 class="col-lg-8 text-muted">Nous recherchons un développeur mobile talentueux pour un projet freelance. 
-              Votre mission sera de créer une application mobile intuitive et performante, 
-              avec une attention particulière à l'expérience utilisateur et à l'intégration de fonctionnalités avancées.
+            <h5 class="col-lg-8 text-muted">
+              {{post.description}}
             </h5>
         </div><hr>
         <div class="row ">
             <h5 class="col-lg-4 ">Budget :</h5>
-            <h5 class="col-lg-8 text-muted">50000 DH</h5>
+            <h5 class="col-lg-8 text-muted">
+              {{ post.budget === 'month' ? post.budgetvalue + ' par mois' : 
+              (post.period === 'day' ? post.budgetvalue + ' par jour' : 'pas encore défini'
+              ) }}
+              </h5>
         </div><hr>
         <div class="row ">
             <h5 class="col-lg-4 ">Période :</h5>
-            <h5 class="col-lg-8 text-muted">6 mois</h5>
+            <h5 class="col-lg-8 text-muted">
+              {{ post.period === 'undefined' ? 'pas encore défini' : 
+              (post.period === 'month' ? post.periodvalue + ' mois' : 
+              (post.period === 'day' ? post.periodvalue + ' jour' : post.periodvalue)) }}
+           </h5>
         </div><hr>
+
         <div class="row ">
-            <h5 class="col-lg-2 ">Paiement :</h5>
-            <h5 class="col-lg-4 text-muted">Mentuel</h5>
-            <h5 class="col-lg-2 ">Montant :</h5>
-            <h5 class="col-lg-4 text-muted">8000DH / M</h5>
-        </div><hr>
-        <div class="row ">
-            <h5 class="col-lg-4 ">Crée le :</h5>
-            <h5 class="col-lg-8 text-muted">27/01/2023</h5>
+            <h5 class="col-lg-4 ">Crée :</h5>
+            <h5 class="col-lg-8 text-muted">{{ post.created_at | timeAgo }} le {{post.created_at| date: 'dd-MM-yyyy' }}</h5>
         </div><hr>
         <h5 class="mb-3 mt-4 ">
             <i class="mdi mdi-cards-variant mr-1"></i> Freelancers
@@ -104,6 +108,7 @@
                   </tr>
               </tbody>
             </table>
+          </div>
           </div>
     </div>
 

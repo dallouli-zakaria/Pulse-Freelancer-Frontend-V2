@@ -20,7 +20,7 @@
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="firstName">Titre</label>
-            <input type="text" class="form-control" id="firstName" placeholder="" value="" required formControlName="title">
+            <input type="text" class="form-control" id="firstName" placeholder="" formControlName="title" required >
 
             <div class="invalid-feedback">
               Saisissez le titre !
@@ -76,7 +76,7 @@
                <!-- Hidden div periode -->
                <div *ngIf="selectedPeriod === 'day' || selectedPeriod === 'month'" class="mb-3 col-6">
                 <label for="definedBudget">Durée de votre periode</label>
-                <input type="number" class="form-control" id="definedperiode" placeholder="Entrer votre durée" formControlName="budgetvalue">
+                <input type="number" class="form-control" id="definedperiode" placeholder="Entrer votre durée" formControlName="periodvalue" min="0">
               </div>
         </div>
 
@@ -97,7 +97,7 @@
           <!-- Hidden div budget -->
           <div *ngIf="selectedBudget === 'day' || selectedBudget === 'month'" class="mb-3 col-6">
             <label for="definedBudget">La montant de votre budget</label>
-            <input type="number" class="form-control" id="definedBudget" placeholder="Entrer la montant en MAD" formControlName="periodvalue">
+            <input type="number" class="form-control" id="definedBudget" placeholder="Entrer la montant en MAD" formControlName="budgetvalue" min="0">
           </div>
 
 
