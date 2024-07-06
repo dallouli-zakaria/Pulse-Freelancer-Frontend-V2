@@ -11,17 +11,17 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of user">
-        <th scope="row">{{item.id}}</th>
+        <th scope="row" [(ngModel)]="vlaue">{{item.id}}</th>
         <td> {{item.name }} </td>
         <td>{{item.email}}</td>
-        <td><app-role-user [userID]="item.id"></app-role-user></td>
+        <td style="color: black;"><app-role-user  [userID]="item.id"></app-role-user></td>
       
         <td>
-          <button class="btn btn-primary btn-sm" style="margin-right: 5px;" (click)="onEdited(item)">
+          <button class="btn btn-primary btn-sm" style="margin-right: 5px;" (click)="onEdited(item.id,item)">
             <i class="fas fa-pen"></i> </button> 
          <button class="btn btn-danger btn-sm" style="margin-right: 5px;" (click)="ondeleted(item)">
             <i class="fas fa-trash"></i></button>
-         <button class="btn btn-secondary btn-sm" style="margin-right: 5px;" (click)="ondetails( item)">
+         <button class="btn btn-secondary btn-sm" style="margin-right: 5px;" (click)="ondetails(item)">
            <i class="bi bi-file-plus"></i></button>
         </td>
       </tr>
@@ -41,7 +41,7 @@
   <!-- edit -->
   <div *ngIf="showedit" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
     <div class="modal-dialog modal-m"><div class="modal-content">
-      <app-users-edit (closeModal)="onCloseModal()"></app-users-edit>
+      <app-users-edit (closeModal)="onCloseModal()" [userId]="selectedId" [userdata]="selectUser"></app-users-edit>
     </div>
   </div>
   </div>

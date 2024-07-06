@@ -25,7 +25,9 @@ close(): void {
 
  add(){
   this.permisionService.store(this.form.value).subscribe({
-    next:(data)=>this.permisionService.index(),
+    next:(data)=>{this.permisionService.index();
+      this.close()
+    },
     error:(error)=>console.log(error),
     complete:()=>console.log('end operation add') 
   })

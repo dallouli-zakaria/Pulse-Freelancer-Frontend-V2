@@ -33,7 +33,6 @@ close(): void {
         role:['']
       }
     )
-
   }
  
 @Input() user?:User;

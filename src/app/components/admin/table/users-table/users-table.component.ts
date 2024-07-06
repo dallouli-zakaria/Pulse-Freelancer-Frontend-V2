@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../../../core/models/User';
 import { UserService } from '../../../../core/services/user.service';
 import { Observable } from 'rxjs';
-import { ClientService } from '../../../../core/services/client.service';
-import { FreelancerService } from '../../../../core/services/freelancer.service';
 
 import { id } from 'date-fns/locale';
 
@@ -18,21 +16,24 @@ export class UsersTableComponent implements OnInit{
   constructor(private userService:UserService){}
     subject!:Observable<User[]>
    selectUser:any
+   selectedId!:number
    
   ngOnInit(): void {
+
+  
+    
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.index()
     this.subject=this.userService.getData 
-
+  
   }
   
- 
+ vlaue:any
   index(){
     this.userService.index();
   this.userService.getData.subscribe({
     next:(data:any)=>{
-     this.user=data;
       // this.userService.verify(this.selectedID).subscribe({
       //   next:(data:any)=>{
       //     console.log(data); 
@@ -55,8 +56,9 @@ showedit = false;
 showedelete = false;
 showdetails= false
 
-onEdited(user: any): void {
-  this.selectUser=user
+onEdited(id:number ,user: any): void {
+  this.selectUser=user;
+  this.selectedId=id
 this.show = true;
 this.showedit = true;
 this.showedelete = false;
@@ -70,7 +72,8 @@ this.showedit = false;
 this.showdetails = false;
 }
 ondetails( user: any): void {
-  this.selectUser=user
+  this.selectUser=user;
+  
 this.show = true;
 this.showedelete = false;
 this.showedit = false;

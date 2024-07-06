@@ -232,7 +232,7 @@ import { RolechipsAutocompleteComponent } from './components/admin/buttons/edit/
         
   ],
   imports: [
-  
+     FormsModule,
     BrowserModule,
       AppRoutingModule,
       NgbModule,
