@@ -59,4 +59,10 @@ export class PostsService {
     this.post=this.http.get(`${this.url}/${Constant.POSTS}/${id}`);
     return this.post
   }
+
+  public showbclient(id:any){
+    this.post=this.http.get(`${this.url}/${Constant.POSTS}/client/${id}`);
+    return this.post
+
+  }
 }

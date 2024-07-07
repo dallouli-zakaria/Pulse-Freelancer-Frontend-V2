@@ -14,6 +14,7 @@ export class UserUpdateOfferComponent implements OnChanges{
 
   @Input() parentdata!:Post;
 
+  
   selectedBudget!:string;
   selectedPeriod!:string;
   clientId!:number;
@@ -66,7 +67,7 @@ export class UserUpdateOfferComponent implements OnChanges{
   updateoffer() {
     if (this.form.valid) {
       this.isSubmitting = true;
-      this.postsservice.store(this.form.value).subscribe(
+      this.postsservice.update(this.parentdata.id,this.form.value).subscribe(
         (res) => {
           console.log(res);
           

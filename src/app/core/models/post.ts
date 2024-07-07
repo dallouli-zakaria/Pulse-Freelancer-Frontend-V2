@@ -5,9 +5,9 @@ export interface Post {
     type:string,
     description:string,
     period:string,
-    periodvalue:number,
+    periodvalue:number | null,
     budget:string,
-    budgetvalue:number,
+    budgetvalue:number | null,
     client_id:number,
     created_at: string;
 }

@@ -7,12 +7,14 @@
         </h4>
         <button class="btn btn-danger col-lg-4" >Postuler</button>
     </div>
-  
 
+
+      
+     
     <div class="container mt-5 mb-3">
       <div class="row text-center">
         <div >
-          <h5 class=" text-muted">&#64;Maroc Telecom</h5>
+          <h5 class=" text-muted text-uppercase">&#64;{{company_name}}</h5>
         </div>
         <img src="assets/img/gallery/company-image.jpg" alt="" class="img-fluid mx-auto small-image " >
 
@@ -21,35 +23,37 @@
     </div><hr>
         <div class="row ">
             <h5 class="col-lg-4 ">Titre de l'offre :</h5>
-            <h5 class="col-lg-8 text-muted">Refonte de Site Web Corporatif</h5>
+            <h5 class="col-lg-8 text-muted">{{postdata?.title}}</h5>
             
         </div><hr>
         <div class="row ">
             <h5 class="col-lg-4 ">Type de l'offre :</h5>
-            <h5 class="col-lg-8 text-muted">Type A</h5>
+            <h5 class="col-lg-8 text-muted">{{postdata?.title}}</h5>
         </div><hr>
         <div class="row ">
             <h5 class="col-lg-4 ">Description de l'offre :</h5>
-            <h5 class="col-lg-8 text-muted">Nous avons besoin d'un développeur web créatif pour refondre notre site web corporatif en freelance. Le projet implique une refonte complète du design, l'intégration de nouvelles fonctionnalités et l'optimisation pour la vitesse et la sécurité.
+            <h5 class="col-lg-8 text-muted">{{postdata?.type}}
             </h5>
         </div><hr>
         <div class="row ">
             <h5 class="col-lg-4 ">Budget</h5>
-            <h5 class="col-lg-8 text-muted">50000 DH</h5>
+            <h5 class="col-lg-8 text-muted">
+                <span *ngIf="postdata?.budget === 'month'">{{postdata?.budgetvalue}} Dh par Mois</span>
+                <span *ngIf="postdata?.budget === 'day'">{{postdata?.budgetvalue}} Dh par jours</span>
+                <span *ngIf="postdata?.budgetvalue == 0"> Pas encore défini</span>
+              </h5>
         </div><hr>
         <div class="row ">
             <h5 class="col-lg-4 ">Periode</h5>
-            <h5 class="col-lg-8 text-muted">6 mois</h5>
-        </div><hr>
-        <div class="row ">
-            <h5 class="col-lg-2 ">Paiement:</h5>
-            <h5 class="col-lg-4 text-muted">Mentuel</h5>
-            <h5 class="col-lg-2 ">Montant:</h5>
-            <h5 class="col-lg-4 text-muted">8000DH / M</h5>
+            <h5 class="col-lg-8 text-muted">
+                <span *ngIf="postdata?.period === 'month'">{{postdata?.periodvalue}} Mois</span>
+                <span *ngIf="postdata?.period === 'day'">{{postdata?.periodvalue}} jours</span>
+                <span *ngIf="postdata?.periodvalue == 0"> Pas encore défini</span>
+            </h5>
         </div><hr>
         <div class="row ">
             <h5 class="col-lg-4 ">Crée le </h5>
-            <h5 class="col-lg-8 text-muted">27/01/2023</h5>
+            <h5 class="col-lg-8 text-muted" >{{ postdata?.created_at| date: 'dd-MM-yyyy' }}</h5>
         </div><hr>
         
           </div>
