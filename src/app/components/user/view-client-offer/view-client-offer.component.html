@@ -1,132 +1,129 @@
-
-
 <div class="container card-box mt-4">
-    <div class="row">
-        <h4 class="col-lg-10">
-            <span><a routerLink="../../client-profile"> <i class="fas fa-arrow-left"></i>  </a>
-            </span> Details de l'offre
-            
-        </h4>
-        <button class="btn btn-danger col-lg-2 " data-bs-toggle="modal" data-bs-target="#exampleModal">Modifier l'offre</button>
-    </div>
-    
+  <div class="row">
+    <h4 class="col-lg-10">
+      <span><a routerLink="../../client-profile/client-offers"> <i class="fas fa-arrow-left"></i> </a></span> Details de l'offre
+    </h4>
+    <button class="btn btn-danger col-lg-2" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="trackdata(post)">Modifier l'offre</button>
+  </div>
 
-    <div *ngIf="post">
-    <div class="container mt-5 mb-3 ">
-        
-        <div class="row ">
-            <h5 class="col-lg-4 ">Titre de l'offre :</h5>
-            <h5 class="col-lg-8 text-muted">{{post.title}}</h5>
-            
-        </div><hr>
-        <div class="row ">
-            <h5 class="col-lg-4 ">Type de l'offre :</h5>
-            <h5 class="col-lg-8 text-muted">{{post.type}}</h5>
-        </div><hr>
-        <div class="row ">
-            <h5 class="col-lg-4 ">Description de l'offre :</h5>
-            <h5 class="col-lg-8 text-muted">
-              {{post.description}}
-            </h5>
-        </div><hr>
-        <div class="row ">
-            <h5 class="col-lg-4 ">Budget :</h5>
-            <h5 class="col-lg-8 text-muted">
-              {{ post.budget === 'month' ? post.budgetvalue + ' par mois' : 
-              (post.period === 'day' ? post.budgetvalue + ' par jour' : 'pas encore défini'
-              ) }}
-              </h5>
-        </div><hr>
-        <div class="row ">
-            <h5 class="col-lg-4 ">Période :</h5>
-            <h5 class="col-lg-8 text-muted">
-              {{ post.period === 'undefined' ? 'pas encore défini' : 
-              (post.period === 'month' ? post.periodvalue + ' mois' : 
-              (post.period === 'day' ? post.periodvalue + ' jour' : post.periodvalue)) }}
-           </h5>
-        </div><hr>
+  <div *ngIf="isLoading" class="loading-skeleton">
+    <div class="skeleton-header"></div>
+    <div class="skeleton-row"></div>
+    <div class="skeleton-row"></div>
+    <div class="skeleton-row"></div>
+    <div class="skeleton-row"></div>
+    <div class="skeleton-row"></div>
+  </div>
 
-        <div class="row ">
-            <h5 class="col-lg-4 ">Crée :</h5>
-            <h5 class="col-lg-8 text-muted">{{ post.created_at | timeAgo }} le {{post.created_at| date: 'dd-MM-yyyy' }}</h5>
-        </div><hr>
-        <h5 class="mb-3 mt-4 ">
-            <i class="mdi mdi-cards-variant mr-1"></i> Freelancers
-          </h5>
-          <div class="table-responsive">
-            <table class="table table-borderless mb-0">
-              <thead class="thead-light">
-                <tr>
-                  <th>#</th>
-                  <th>nom </th>
-                  <th>Profession</th>
-                  <th>Date de candidature</th>
-                  <th>Status</th>
-                  <th>Skills</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Amine B.</td>
-                  <td>Développeur web</td>
-                  <td>24/10/2024</td>
-                  <td>confirmé</td>
-                  <td>Angular, Springboot, PHP</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Sarah K.</td>
-                    <td>Développeuse front-end</td>
-                    <td>15/11/2024</td>
-                    <td>en attente</td>
-                    <td>React, Vue.js, HTML/CSS</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Mehdi T.</td>
-                    <td>Ingénieur logiciel</td>
-                    <td>01/12/2024</td>
-                    <td>confirmé</td>
-                    <td>Java, Python, Docker</td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>Laura M.</td>
-                    <td>Développeuse full-stack</td>
-                    <td>20/12/2024</td>
-                    <td>rejeté</td>
-                    <td>Node.js, Express, MongoDB</td>
-                  </tr>
-                  <tr>
-                    <td>5</td>
-                    <td>Yassine R.</td>
-                    <td>Architecte logiciel</td>
-                    <td>05/01/2025</td>
-                    <td>confirmé</td>
-                    <td>Microservices, Kubernetes, AWS</td>
-                  </tr>
-              </tbody>
-            </table>
-          </div>
-          </div>
-    </div>
-
-    <!-- Button trigger modal -->
-
-
-<!-- Modal -->
-<div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">modifier</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <div *ngIf="!isLoading && post">
+    <div class="container mt-5 mb-3">
+      <div class="row">
+        <h5 class="col-lg-4">Titre de l'offre :</h5>
+        <h5 class="col-lg-8 text-muted">{{ post.title }}</h5>
       </div>
-      <div class="modal-body">
-        <app-user-update-offer></app-user-update-offer>
+      <hr>
+      <div class="row">
+        <h5 class="col-lg-4">Type de l'offre :</h5>
+        <h5 class="col-lg-8 text-muted">{{ post.type }}</h5>
       </div>
+      <hr>
+      <div class="row">
+        <h5 class="col-lg-4">Description de l'offre :</h5>
+        <h5 class="col-lg-8 text-muted">{{ post.description }}</h5>
+      </div>
+      <hr>
+      <div class="row">
+        <h5 class="col-lg-4">Budget :</h5>
+        <h5 class="col-lg-8 text-muted">
+          {{ post.budget === 'month' ? post.budgetvalue + ' DH par mois' : (post.budget === 'day' ? post.budgetvalue + ' DH par jour' : 'pas encore défini') }}
+        </h5>
+      </div>
+      <hr>
+      <div class="row">
+        <h5 class="col-lg-4">Période :</h5>
+        <h5 class="col-lg-8 text-muted">
+          {{ post.period === 'undefined' ? 'pas encore défini' : (post.period === 'month' ? post.periodvalue + ' mois' : (post.period === 'day' ? post.periodvalue + ' jour' : post.periodvalue)) }}
+        </h5>
+      </div>
+      <hr>
+      <div class="row">
+        <h5 class="col-lg-4">Crée :</h5>
+        <h5 class="col-lg-8 text-muted">{{ post.created_at | timeAgo }} le {{ post.created_at | date: 'dd-MM-yyyy' }}</h5>
+      </div>
+      <hr>
+      <h5 class="mb-3 mt-4">
+        <i class="mdi mdi-cards-variant mr-1"></i> Freelancers
+      </h5>
+      <div class="table-responsive">
+        <table class="table table-borderless mb-0">
+          <thead class="thead-light">
+            <tr>
+              <th>#</th>
+              <th>nom</th>
+              <th>Profession</th>
+              <th>Date de candidature</th>
+              <th>Status</th>
+              <th>Skills</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Amine B.</td>
+              <td>Développeur web</td>
+              <td>24/10/2024</td>
+              <td>confirmé</td>
+              <td>Angular, Springboot, PHP</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Sarah K.</td>
+              <td>Développeuse front-end</td>
+              <td>15/11/2024</td>
+              <td>en attente</td>
+              <td>React, Vue.js, HTML/CSS</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Mehdi T.</td>
+              <td>Ingénieur logiciel</td>
+              <td>01/12/2024</td>
+              <td>confirmé</td>
+              <td>Java, Python, Docker</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Laura M.</td>
+              <td>Développeuse full-stack</td>
+              <td>20/12/2024</td>
+              <td>rejeté</td>
+              <td>Node.js, Express, MongoDB</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Yassine R.</td>
+              <td>Architecte logiciel</td>
+              <td>05/01/2025</td>
+              <td>confirmé</td>
+              <td>Microservices, Kubernetes, AWS</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">modifier</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <app-user-update-offer [parentdata]="postdetails"></app-user-update-offer>
+        </div>
+      </div>
     </div>
   </div>
 </div>

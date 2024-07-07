@@ -3,12 +3,18 @@
   </div>
   <ng-template #dataLoaded>
 <div class="card-box">
+    <span *ngIf="client.company_name==null || client.profession==null">
+        <div class="alert alert-warning" role="alert">
+            Veuillez completer votre profile pour poster des offres ! 
+          </div>
+    </span>
+
 
     <div class="row mt-4 mb-4" >
         
         <span class="col-lg-11 col-sm-6 col-md-6"><h5>Informations personnelles</h5></span>
         <span class="col-lg-1 col-sm-6 col-md-6">
-            <h5><a (click)="openModal()" class="text-danger" style="cursor: pointer;"><i class="bi bi-pencil-square"></i></a></h5>
+            <h5><a (click)="openModal(client)" class="text-danger" style="cursor: pointer;"><i class="bi bi-pencil-square"></i></a></h5>
           </span>
           
     </div>
@@ -26,6 +32,9 @@
                 <span>{{client.user!.name}}</span>
                 <span><strong *ngIf="client">Profession :</strong></span>
                 <span >{{client.profession}}</span>
+                <span *ngIf="client.profession==null">
+                    Inconnu
+                </span>
                 <span><strong>Email :</strong></span>
                 <span>{{client.user!.email}}</span> 
             </div>
@@ -41,7 +50,7 @@
     <div class="row mt-4 mb-4" >
         
         <span class="col-lg-11 col-sm-6 col-md-6"><h5>Informations de l'entreprise</h5></span>
-        <span class="col-lg-1 col-sm-6 col-md-6"><h5><a (click)="openModal2()"class="text-danger" style="cursor: pointer;"><i class="bi bi-pencil-square"></i></a></h5>    
+        <span class="col-lg-1 col-sm-6 col-md-6" ><h5 > <a (click)="openModal2(client)"class="text-danger" style="cursor: pointer;"><i class="bi bi-pencil-square"></i></a></h5>    
         </span>
         
     </div>
@@ -53,10 +62,19 @@
             <div class="row">
                 <span><strong> Nom de l'entreprise :</strong></span>
                 <span>{{client.company_name}}</span>
+                <span *ngIf="client.company_name==null">
+                    Inconnu
+                </span>
                 <span><strong>Domaine d'activité de l'entreprise :</strong></span>
                 <span>{{client.company_activity}}</span>
+                <span *ngIf="client.company_activity==null">
+                    Inconnu
+                </span>
                 <span><strong>Email de l'entreprise :</strong></span>
                 <span>{{client.company_email}}</span> 
+                <span *ngIf="client.company_email==null">
+                    Inconnu
+                </span>
             </div>
         </div>
         
@@ -68,7 +86,7 @@
                       <span class="close col-2" (click)="closeModal()" >&times;</span>
                      </div>
                       
-                      <app-user-update-profile ></app-user-update-profile>
+                      <app-user-update-profile [clientData]="clientdetails" ></app-user-update-profile>
                     </div>
                   </div>
 
@@ -81,7 +99,7 @@
                             <span class="close col-2" (click)="closeModal2()" >&times;</span>
                             </div>
                             
-                            <app-user-updatecompany></app-user-updatecompany>
+                            <app-user-updatecompany [clientData]="clientdetails"></app-user-updatecompany>
                         </div>
                         </div>
 

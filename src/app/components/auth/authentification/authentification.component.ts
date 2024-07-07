@@ -14,7 +14,6 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthentificationComponent {
   applyForm: FormGroup;
-  value = 'Clear me';
   http = inject(HttpClient);
   router = inject(Router);
   isSubmitting: boolean = false;
@@ -26,36 +25,36 @@ export class AuthentificationComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6), passwordStrengthValidator()]],
       password_confirmation: ['', Validators.required],
-      option: ['client']
+      option: ['', Validators.required]
     }, { validators: passwordMatchValidator() });
   }
 
   submitApplication() {
     if (this.applyForm.invalid) {
-      this.applyForm.markAllAsTouched(); // Mark all fields as touched to show validation errors
+      this.applyForm.markAllAsTouched();
       return;
     }
 
     this.isSubmitting = true;
-    const option = this.applyForm.getRawValue();
+    const formValue = this.applyForm.getRawValue();
 
-    if (option === 'freelancer') {
-      this.freelancerService.register(this.applyForm.value)
+    if (formValue.option === 'client') {
+      this.clientService.register(formValue)
         .subscribe(
           (res) => {
             console.log(res);
-            this.navigateToLoginWithSuccessMessage('Freelancer account created successfully!');
+            this.navigateToLoginWithSuccessMessage('Votre compte client a été créer avec succès!');
           },
           (error) => {
             this.handleErrorResponse(error);
           }
         );
     } else {
-      this.clientService.register(this.applyForm.value)
+      this.freelancerService.register(formValue)
         .subscribe(
           (res) => {
             console.log(res);
-            this.navigateToLoginWithSuccessMessage('Client account created successfully!');
+            this.navigateToLoginWithSuccessMessage('Votre compte freelancer a été créer avec succès!');
           },
           (error) => {
             this.handleErrorResponse(error);
@@ -78,7 +77,7 @@ export class AuthentificationComponent {
     if (error.status === 400 && error.error.message) {
       this.errorMessage = error.error.message;
     } else {
-      this.errorMessage = 'Email déjà éxistant';
+      this.errorMessage = 'Email déjà existant';
     }
   }
 }

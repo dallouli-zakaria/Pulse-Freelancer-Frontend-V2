@@ -13,6 +13,8 @@ import { AuthService } from '../../../../core/services/auth.service';
 })
 export class UserinfosComponent implements OnInit{
 
+  clientdetails!:Client;
+  clientdetails2!:Client;
 
   selectedata:any;
 
@@ -22,14 +24,19 @@ export class UserinfosComponent implements OnInit{
   client!:Client;
   clientid!:number;
 
-  openModal() {
+  constructor(private clientservice:ClientService,private authservice:AuthService){}
+
+  openModal(client:any) {
+    this.clientdetails=client
     this.isModalOpen = true;
   }
 
   closeModal() {
     this.isModalOpen = false;
   }
-  openModal2() {
+  
+  openModal2(client:any) {
+    this.clientdetails=client
     this.isModalOpen2 = true;
   }
   closeModal2() {
@@ -38,10 +45,12 @@ export class UserinfosComponent implements OnInit{
 
 
   
-  constructor(private clientservice:ClientService,private authservice:AuthService){}
+
   ngOnInit(): void {
+ 
     this.getclient();
     this.fetchData();
+    
   }
 
 

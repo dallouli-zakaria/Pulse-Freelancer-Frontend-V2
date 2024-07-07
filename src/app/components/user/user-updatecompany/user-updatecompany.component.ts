@@ -1,51 +1,68 @@
-import { Component, inject } from '@angular/core';
-import { ClientService } from '../../../core/services/client.service';
+import { ClientService } from './../../../core/services/client.service';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, inject, input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../../core/services/auth.service';
+import { Client } from '../../../core/models/Client';
 
 @Component({
   selector: 'app-user-updatecompany',
   templateUrl: './user-updatecompany.component.html',
-  styleUrl: './user-updatecompany.component.css'
+  styleUrls: ['./user-updatecompany.component.css']
 })
-export class UserUpdatecompanyComponent {
-  clientId:number=1;
-  constructor(private clients:ClientService ){}
-  private fb : FormBuilder = inject(FormBuilder);
+export class UserUpdatecompanyComponent implements OnInit,OnChanges {
 
-ngOnInit(): void {
-  //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-  //Add 'implements OnInit' to the class.
 
+  @Input() clientData!:Client
+
+  clientId = this.authservice.parseID();
+  form!: FormGroup;
+  clientdetails!:Client;
+
+
+  constructor(private clients: ClientService, private authservice: AuthService) {}
+  ngOnChanges(): void {
   
-
- 
-   this.form=this.fb.group({
-    company_name: this.fb.control('', [Validators.required]),
-    company_activity: this.fb.control(''),
-    company_email:this.fb.control( '', [Validators.required])
-   
-  
-  })
- 
-
-}
-
-form!:FormGroup;
-
-  updated(){  
-
-     this.clients.update(this.clientId,this.form.value).subscribe({
-       next:(data:any)=>{ 
-         this.clients.index()
     
-       },
-       error:(error:any)=>{console.log(error)
-       },
-       complete:()=>{console.log('end operation');
-       } 
-     })
-   
-       
+    this.form = this.fb.group({
+      company_name: this.fb.control(this.clientdetails?.company_name, [Validators.required, Validators.minLength(3)]),
+      company_activity: this.fb.control(this.clientdetails?.company_activity, [Validators.required]),
+      company_email: this.fb.control(this.clientdetails?.company_email, [Validators.required, Validators.email])
+    });
+  }
+  private fb: FormBuilder = inject(FormBuilder);
 
- }
+  ngOnInit(): void {
+
+    this.getdata();
+    this.form = this.fb.group({
+      company_name: this.fb.control('', [Validators.required, Validators.minLength(3)]),
+      company_activity: this.fb.control('', [Validators.required]),
+      company_email: this.fb.control('', [Validators.required, Validators.email])
+    });
+  }
+
+  updated() {
+    if (this.form.invalid) {
+      return; // Prevent submission if the form is invalid
+    }
+
+    this.clients.update(this.clientId, this.form.value).subscribe({
+      next: (data: any) => {
+        this.clients.index();
+      },
+      error: (error: any) => {
+        console.log(error);
+      },
+      complete: () => {
+        console.log('end operation');
+      }
+    });
+  }
+  getdata(){
+    this.clients.show(this.clientId).subscribe(
+      (res:any)=>{this.clientdetails=res;
+
+        
+      })
+  }
 }

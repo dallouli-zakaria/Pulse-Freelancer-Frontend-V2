@@ -1,3 +1,5 @@
+import { Client } from '../../../core/models/Client';
+import { ClientService } from '../../../core/services/client.service';
 import { RoleService } from '../../../core/services/role.service';
 import { AuthService } from './../../../core/services/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -8,28 +10,36 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './user-dashboard.component.css'
 })
 export class UserDashboardComponent implements OnInit{
-  userId!:number;
+  userId:number=this.authService.parseID();
   role!:string[];
+  userdetails!:any;
   isAuthenticated: boolean = false;
 
-  constructor(private rolesService: RoleService,private authService:AuthService) {}
+
+
+  test:any;
+
+  constructor(private rolesService: RoleService,private authService:AuthService,private clientservice:ClientService) {}
 
   ngOnInit(): void {
     //this.authService.parseID();
     this.isAuthenticated = this.authService.isLoggedIn();
     if (this.isAuthenticated) {
-    const sub = this.authService.parseID(); 
-    this.authService.getuserdetails(sub).subscribe((res) => {
-      this.userId = res.user.id;
-      this.role=res.roles;
 
-      console.log(this.userId,this.role); 
+      this.clientservice.show(this.userId).subscribe((res)=>
+        {
+          this.userdetails=res;
+        
+          
+        }
+    )
 
-    }); 
+    }; 
     }
 
 
-  }
+  
+
 
  
 

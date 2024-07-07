@@ -1,47 +1,46 @@
-<section >
-    <div class="container-fluid h-custom">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-       
-        
-          <form [formGroup]="form" (ngSubmit)="updated()">
+<section>
+  <div class="container-fluid h-custom">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <form [formGroup]="form" (ngSubmit)="updated()">
 
-
-            <!-- First Name input -->
-            <div class="form-outline mb-4">
-              <label for="exampleInputEmail1">Nom de l'entreprise</label>
-              <input type="text" id="form3Example1" class="form-control form-control-lg"
-                placeholder="Entrer le nom de votre entreprise"  formControlName="company_name"/>
-         
-            </div>
-
-            <!-- Last Name input -->
-            <div class="form-outline mb-4">
-              <label for="exampleInputEmail1">Domaine d'activité</label>
-              <input type="text" id="form3Example2" class="form-control form-control-lg"
-                placeholder="Entrer le domaine de votre entreprise"  formControlName="company_activity"/>
-       
-            </div>
-
-            <!-- Email input -->
-            <div class="form-outline mb-4">
-              <label for="exampleInputEmail1">Email de l'entreprise</label>
-              <input type="email" id="form3Example3" class="form-control form-control-lg"
-                placeholder="Entrer l'adresse mail de votre entreprise" formControlName="company_email"/>
-     
-            </div>
-
-
-
-              
-
-            <div class="text-center text-lg-start mt-4 pt-2">
-              <button type="submit" class="btn btn-danger btn-lg"
-                style="padding-left: 2.5rem; padding-right: 2.5rem;">Modifier</button>
-            
-            </div>
-          </form>
+        <!-- Company Name input -->
+        <div class="form-outline mb-4">
+          <label for="form3Example1">Nom de l'entreprise</label>
+          <input type="text" id="form3Example1" class="form-control form-control-lg"
+            placeholder="Entrer le nom de votre entreprise" formControlName="company_name"/>
+          <div *ngIf="form.get('company_name')?.invalid && form.get('company_name')?.touched" class="text-danger">
+            <div *ngIf="form.get('company_name')?.errors?.['required']">Nom de l'entreprise est requis.</div>
+            <div *ngIf="form.get('company_name')?.errors?.['minlength']">Nom de l'entreprise doit contenir au moins 3 caractères.</div>
+          </div>
         </div>
-    
+
+        <!-- Company Activity input -->
+        <div class="form-outline mb-4">
+          <label for="form3Example2">Domaine d'activité</label>
+          <input type="text" id="form3Example2" class="form-control form-control-lg"
+            placeholder="Entrer le domaine de votre entreprise" formControlName="company_activity"/>
+          <div *ngIf="form.get('company_activity')?.invalid && form.get('company_activity')?.touched" class="text-danger">
+            <div *ngIf="form.get('company_activity')?.errors?.['required']">Domaine d'activité est requis.</div>
+          </div>
+        </div>
+
+        <!-- Company Email input -->
+        <div class="form-outline mb-4">
+          <label for="form3Example3">Email de l'entreprise</label>
+          <input type="email" id="form3Example3" class="form-control form-control-lg"
+            placeholder="Entrer l'adresse mail de votre entreprise" formControlName="company_email"/>
+          <div *ngIf="form.get('company_email')?.invalid && form.get('company_email')?.touched" class="text-danger">
+            <div *ngIf="form.get('company_email')?.errors?.['required']">Email de l'entreprise est requis.</div>
+            <div *ngIf="form.get('company_email')?.errors?.['email']">Email de l'entreprise n'est pas valide.</div>
+          </div>
+        </div>
+
+        <!-- Submit button -->
+        <div class="text-center text-lg-start mt-4 pt-2">
+          <button type="submit" class="btn btn-danger btn-lg"
+            style="padding-left: 2.5rem; padding-right: 2.5rem;">Modifier</button>
+        </div>
+      </form>
     </div>
-   
-  </section>
+  </div>
+</section>

@@ -12,9 +12,7 @@ import { AuthService } from '../../../../core/services/auth.service';
 })
 export class UserSideprofileComponent implements OnInit{
   clientid!:number;
-  id!: number;
-  client!:Client;
-  user!:User;
+  client?:Client;
 
   constructor(private clientservice:ClientService,private authservice:AuthService){
     this.getclient();
