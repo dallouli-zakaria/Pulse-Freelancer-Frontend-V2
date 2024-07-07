@@ -28,7 +28,7 @@ export class DashboardComponent {
       }, {
         type: 'line',
         label: 'Line Dataset',
-        data: [50, 50, 50, 50], // Données statiques
+        data: [10, 10, 10, 10], // Données statiques
       }],
       labels: ['Clients', 'freelancers', 'Contarcts', 'Posts']
     },

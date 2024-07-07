@@ -20,8 +20,8 @@ constructor(private userService:UserService ){}
 ngOnInit(): void {
   //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
   //Add 'implements OnInit' to the class.
-  
-  this.adminrole()
+  this.adminrole(true);
+ 
   // this.role()
   // this.index()
   // this.subject=this.userService.getData
@@ -42,11 +42,12 @@ trackAdmin(id:number,user:User){
   //     error:(erro)=>console.log(erro)  
   //  })
   
-
+    
+  
    
-   adminrole(){
-       
-      this.userService.getUserWithRole('superadmin_role').subscribe({
+   adminrole(isSuperAdmin: boolean){
+    const roleadd = isSuperAdmin ? 'superadmin_role' : 'admin_role';
+      this.userService.getUserWithRole(roleadd).subscribe({
       next:(data:any)=>{ this.user=data},
       error:(erro)=>console.log(erro)  
    })

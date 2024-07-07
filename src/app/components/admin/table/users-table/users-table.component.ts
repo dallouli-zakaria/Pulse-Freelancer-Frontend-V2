@@ -40,6 +40,7 @@ export class UsersTableComponent implements OnInit{
       //     this.user[3].role=data},
       //   error:(error:any)=>console.log(error)
       // })
+      this.user=data
     },
     error:(error)=>console.log(error),
     

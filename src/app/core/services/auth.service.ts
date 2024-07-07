@@ -56,18 +56,12 @@ export class AuthService {
   }
 
   register(
-    name: string,
-    email: string,
-    password: string,
-    password_confirmation: string
+   data:any
   ): Observable<any> {
 
     // return this.http.post(this.API_URL + 'signup', {
     return this.http.post(this.API_URL2 + '/register', {
-      name,
-      email,
-      password,
-      password_confirmation,
+     data
     });
   }
 

@@ -29,8 +29,9 @@ close(): void {
     this.getdata=this.roleService.RoleData;
     this.form=this.fb.group(
       {
-        user:[this.user?.id],
-        role:['']
+       
+        role:[this.role] ,
+        ser:[this.user?.id]
       }
     )
   }

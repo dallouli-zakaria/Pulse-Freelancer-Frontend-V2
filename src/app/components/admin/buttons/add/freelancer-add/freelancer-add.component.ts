@@ -30,7 +30,8 @@ close(): void {
     adress: ['', Validators.required],
     phone: ['', Validators.required],
     portfolio_Url: [''],
-    CV: ['']
+    CV: [''],
+    status:['not verified']
    })
   }
 

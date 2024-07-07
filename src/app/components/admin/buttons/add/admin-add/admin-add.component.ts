@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from '../../../../../core/services/user.service';
+import { AuthService } from '../../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-admin-add',
@@ -13,18 +14,18 @@ export class AdminAddComponent {
     this.closeModal.emit();
   }
   form!:FormGroup
-  constructor(private userService:UserService,private fb:FormBuilder){}
+  constructor(private auth:AuthService,private userService:UserService,private fb:FormBuilder){}
   ngOnInit(): void {
   this.form=this.fb.group({
-    name: this.fb.control(''),
-    email:this.fb.control(''),
-    role:this.fb.control('')
+    name: [''],
+    email:[''],
+    password:['']
   });
   }
 
 
   add(){
-    this.userService.store(this.form.value).subscribe({
+    this.auth.register(this.form.value).subscribe({
       next:(data:any)=>{console.log(data);this.userService.index()
       },
       error:(error:any)=>{console.log(error);

@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, shareReplay } from 'rxjs';
 import { Role } from '../models/Role';
-import { Client } from './../models/Client';
 import { Constant } from '../Constant';
 
 
