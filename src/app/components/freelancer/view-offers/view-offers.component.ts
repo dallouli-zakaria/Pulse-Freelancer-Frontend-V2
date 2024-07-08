@@ -15,6 +15,8 @@ export class ViewOffersComponent {
   freelancerid:number=this.authservice.parseID();
   company_name!: string;
   clientId!:number;
+
+
   constructor(private postsService:PostsService,private authservice:AuthService,private clientservice:ClientService){
     this.getposts();
   }
@@ -33,7 +35,6 @@ export class ViewOffersComponent {
     this.postsService.postData.subscribe((res)=>{
       this.posts=res;
       
-      
     })
   }
 
@@ -43,6 +44,8 @@ export class ViewOffersComponent {
       console.log(res);
     });
   }
+
+
 
   
 
