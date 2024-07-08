@@ -18,7 +18,7 @@ export class FreelancerEditComponent implements OnInit,OnChanges {
     }
      freelancer:Freelancer[]=[]
      form!:FormGroup
-     erorr:boolean=true
+     errorhandling!:string
      private fb:FormBuilder=inject(FormBuilder)
      private frelancerservices:FreelancerService=inject(FreelancerService)
 
@@ -34,15 +34,15 @@ export class FreelancerEditComponent implements OnInit,OnChanges {
       TJM: [this.freelancerData?.TJM, [Validators.required, Validators.min(0)]],
       summary: [this.freelancerData?.summary],
       availability: [this.freelancerData?.availability, Validators.required],
-      adress: [this.freelancerData?.address, Validators.required],
+      adress: [this.freelancerData?.adress, Validators.required],
       phone: [this.freelancerData?.phone, Validators.required],
       portfolio_Url: [this.freelancerData?.portfolio_Url],
-      CV: [this.freelancerData?.CV]
+      status:['']
     })
   }
 
   updated(){
-    if(this.freelancerID!==null  && this.form.valid){
+    if(this.freelancerID!==null){
       console.log(this.freelancerID);
       
        this.frelancerservices.update(this.freelancerID,this.form.value).subscribe({
@@ -50,9 +50,9 @@ export class FreelancerEditComponent implements OnInit,OnChanges {
         console.log(data);
         this.close();
          this.frelancerservices.index()},
-         error:(error:any)=>{
-           this.erorr=false
-          console.log(error)}, 
+         error:(error:string)=>{
+           this.errorhandling='please fill in all fields'
+          console.log(this.errorhandling)}, 
          
     })}else{
       console.log('null id of freelancer');
@@ -71,10 +71,10 @@ export class FreelancerEditComponent implements OnInit,OnChanges {
       TJM: [this.freelancerData?.TJM, [Validators.required, Validators.min(0)]],
       summary: [this.freelancerData?.summary],
       availability: [this.freelancerData?.availability, Validators.required],
-      adress: [this.freelancerData?.address, Validators.required],
+      adress: [this.freelancerData?.adress, Validators.required],
       phone: [this.freelancerData?.phone, Validators.required],
       portfolio_Url: [this.freelancerData?.portfolio_Url],
-      CV: [this.freelancerData?.CV]
+      status:[this.freelancerData?.status]
     })
   }
 }

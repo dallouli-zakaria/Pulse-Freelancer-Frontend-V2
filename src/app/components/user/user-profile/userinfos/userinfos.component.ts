@@ -56,6 +56,7 @@ export class UserinfosComponent implements OnInit{
 
 
   getclient(){
+    this.clientservice.index()
     this.clientid=this.authservice.parseID();
     this.clientservice.show(this.clientid).subscribe({
       next:(data:any)=>{this.client=data},

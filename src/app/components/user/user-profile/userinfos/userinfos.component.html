@@ -29,10 +29,10 @@
             <div class="row" *ngIf="client" >
                 
                 <span><strong> Nom :</strong></span>
-                <span>{{client.user!.name}}</span>
+                <span>{{client.user.name}}</span>
                 <span><strong *ngIf="client">Profession :</strong></span>
                 <span >{{client.profession}}</span>
-                <span *ngIf="client.profession==null">
+                <span *ngIf="client?.profession==null">
                     Inconnu
                 </span>
                 <span><strong>Email :</strong></span>
@@ -90,7 +90,7 @@
                       <span class="close col-2" (click)="closeModal()" >&times;</span>
                      </div>
                       
-                      <app-user-update-profile [clientData]="clientdetails" ></app-user-update-profile>
+                      <app-user-update-profile [clientData]="clientdetails" (closeModel)="closeModal()"></app-user-update-profile>
                     </div>
                   </div>
 
@@ -103,7 +103,7 @@
                             <span class="close col-2" (click)="closeModal2()" >&times;</span>
                             </div>
                             
-                            <app-user-updatecompany [clientData]="clientdetails"></app-user-updatecompany>
+                            <app-user-updatecompany [clientData]="clientdetails" ></app-user-updatecompany>
                         </div>
                         </div>
 

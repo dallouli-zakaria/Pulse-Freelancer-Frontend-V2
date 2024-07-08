@@ -12,6 +12,7 @@ export class AdminDeleteComponent {
 @Input() userData:any
 
 @Output() closeModal = new EventEmitter<void>();
+  errorhandling: any;
 close(): void {
   this.closeModal.emit();
 }
@@ -25,7 +26,13 @@ deleted(){
       next:(data:any)=>{this.userservice.index();
         this.close();
       },
-      error:(error:any)=>console.log(error),
+      error:(error:any)=>{;
+        if ( error.error.errors) {
+          this.errorhandling = Object.values(error.error.errors).flat();
+        } else {
+          this.errorhandling = [error.message || 'An error occurred'];
+        }
+      },
       complete:()=>console.log()
       
       

@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 })
 export class UserDetailsComponent implements OnInit{
 getdata!:Observable<Role[]>
+  errorhandling: any;
 constructor(private fb:FormBuilder,private roleService:RoleService ){}
 @Output() closeModal = new EventEmitter<void>();
   
@@ -29,11 +30,11 @@ close(): void {
     this.getdata=this.roleService.RoleData;
     this.form=this.fb.group(
       {
-        user:[this.user?.id],
-        role:['']
+       
+        role:[this.role] ,
+        ser:[this.user?.id]
       }
     )
-
   }
  
 @Input() user?:User;
@@ -53,7 +54,13 @@ this.roleService.RoleData.subscribe({
    this.role=data;
    console.log(this.role);
   },
-  error:(error)=>console.log(error),
+  error:(error)=>{console.log(error);
+    if ( error.error.errors) {
+      this.errorhandling = Object.values(error.error.errors).flat();
+    } else {
+      this.errorhandling = [error.message || 'An error occurred'];
+    }
+  },
   
   complete:()=>console.log('end Operation')
   

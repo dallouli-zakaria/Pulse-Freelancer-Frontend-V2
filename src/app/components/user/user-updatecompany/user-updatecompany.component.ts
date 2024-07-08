@@ -1,5 +1,5 @@
 import { ClientService } from './../../../core/services/client.service';
-import { Component, Input, OnChanges, OnInit, SimpleChanges, inject, input } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, inject, input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
 import { Client } from '../../../core/models/Client';
@@ -17,12 +17,14 @@ export class UserUpdatecompanyComponent implements OnInit,OnChanges {
   clientId = this.authservice.parseID();
   form!: FormGroup;
   clientdetails!:Client;
-
-
+  @Output() closeModal = new EventEmitter<void>();
+  close(): void {
+    this.closeModal.emit();
+  }
   constructor(private clients: ClientService, private authservice: AuthService) {}
   ngOnChanges(): void {
   
-    
+     
     this.form = this.fb.group({
       company_name: this.fb.control(this.clientdetails?.company_name, [Validators.required, Validators.minLength(3)]),
       company_activity: this.fb.control(this.clientdetails?.company_activity, [Validators.required]),

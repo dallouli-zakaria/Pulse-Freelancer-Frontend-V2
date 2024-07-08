@@ -11,9 +11,9 @@ export interface Freelancer{
   TJM: string;
   summary: string;
   availability: string;
-  address: string;
+  adress: string;
   phone: string;
-  portfolio_Url: string;
-  CV: string;
-
+  portfolio_Url?: string;
+  CV?: string;
+  status:string
 }

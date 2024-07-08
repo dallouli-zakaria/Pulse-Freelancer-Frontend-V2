@@ -234,7 +234,7 @@ import { LoadingComponent } from './components/user/loading/loading.component';
         
   ],
   imports: [
-  
+     FormsModule,
     BrowserModule,
       AppRoutingModule,
       NgbModule,

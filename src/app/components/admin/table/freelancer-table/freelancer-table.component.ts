@@ -23,10 +23,19 @@ private freelancerService:FreelancerService= inject(FreelancerService)
   ngOnInit(): void {
 this.index();
 this.freelancerList=this.freelancerService.getdata
+console.log(this.selectedData?.status);
+
 
   }
+valueStatuse:any
+ status(){
+  if(this.selectedData?.status==null){
+  this.valueStatuse='Completed'
+  }else{
+    this.valueStatuse='Not Completed' 
+  }
 
-
+ }
 
 
 index(){

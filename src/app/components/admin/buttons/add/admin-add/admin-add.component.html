@@ -2,7 +2,7 @@
     <h1 class="modal-title fs-5" id="exampleModalLabel">Add Admin</h1>
     <button type="button" class="btn-close"  (click)="close()"></button>
 </div>
-<form >
+<form [formGroup]="form" (ngSubmit)="add()" >
   <div class="modal-body">
 
    <!-- Username -->
@@ -17,9 +17,20 @@
      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="email">
      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
    </div>
+    <!-- password -->
+    <div class="mb-3 ">
+      <label for="exampleInputEmail1" class="form-label">password</label>
+      <input type="Password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="password">
+      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+     <!-- email -->
+   <!-- <div class="mb-3 ">
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="co">
+    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+  </div> -->
 
-   <!-- rolse -->
-   <div class="mb-3 ">
+   <!-- <div class="mb-3 ">
    <select class="form-select form-select-m" aria-label="Small select example" formControlName="role">
      <option selected>role</option>
      <option value="1">One</option>
@@ -28,7 +39,7 @@
    </select>
    </div>
     
-   <!-- permission -->
+
    <div class="mb-3 ">
    <select class="form-select form-select-m" aria-label="Small select example">
      <option selected>permission</option>
@@ -36,10 +47,11 @@
      <option value="2">Two</option>
      <option value="3">Three</option>
    </select>
-    </div>
+    </div> -->
    </div>
+   <h5 style="color: red; margin-left: 10px;">{{errorhandling}} </h5> 
    <div class="modal-footer">
      <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
-     <button type="submit" class="btn btn-success"  (click)="add()">Save changes</button>
+     <button type="submit" class="btn btn-success" >Save changes</button>
     </div>
  </form>

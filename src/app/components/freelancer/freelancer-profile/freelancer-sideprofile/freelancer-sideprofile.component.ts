@@ -15,7 +15,7 @@ export class FreelancerSideprofileComponent implements OnInit {
   freelancername!:string;
 
   freelancerId!: number;
-  freelancerdata?: Freelancer;
+  freelancerdata?:Freelancer;
   displayEdit = "none";
 
   constructor(
@@ -28,7 +28,7 @@ export class FreelancerSideprofileComponent implements OnInit {
   getFreelancer() {
     this.freelancerId = this.authService.parseID();
     this.freelancerService.show(this.freelancerId).subscribe({
-      next: (data: any) => {
+      next: (data) => {
         this.freelancerdata = data;
         
         console.log(this.freelancerdata);
@@ -43,8 +43,11 @@ export class FreelancerSideprofileComponent implements OnInit {
   ngOnInit(): void {
     this.fetchData();
   }
-
-  openModalEdit() {
+selectedData:any
+selectedID!:any
+  openModalEdit(freelancer:any,id:any) {
+    this.selectedData=freelancer;
+    this.selectedID=id
     this.displayEdit = "block";
   }
 
@@ -68,6 +71,35 @@ export class FreelancerSideprofileComponent implements OnInit {
         ];
         this.isLoading = false;
       }, 1000);
+    }
+
+
+    getStatus(): string {
+      if (this.isAllFieldsFilled() && this.freelancerdata?.status === 'verified') {
+        return 'verified';
+      } else if (this.isAllFieldsFilled() && this.freelancerdata?.status === 'not verified') {
+        return 'not verified';
+      } else {
+        return 'not filled';
+      }
+    }
+
+    private isAllFieldsFilled(): boolean {
+      // Check all required fields are not null or undefined
+      return (
+        this.freelancerdata?.title !== null &&
+        this.freelancerdata?.dateOfBirth !== null &&
+        this.freelancerdata?.city !== null &&
+        this.freelancerdata?.TJM !== null &&
+        this.freelancerdata?.summary !== null &&
+        this.freelancerdata?.availability !== null &&
+        this.freelancerdata?.adress !== null &&
+        this.freelancerdata?.phone !== null &&
+        this.freelancerdata?.portfolio_Url !== null &&
+        this.freelancerdata?.CV !== null &&
+        this.freelancerdata?.phone !== null &&
+        this.freelancerdata?.phone !== null
+      );
     }
   
 }

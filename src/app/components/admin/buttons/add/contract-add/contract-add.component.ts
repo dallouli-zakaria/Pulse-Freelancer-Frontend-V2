@@ -20,6 +20,7 @@ export class ContractAddComponent implements OnInit {
  freelancer:Freelancer[]=[];
   clientsubject!:Observable<Client[]>;
   freelnacerSubject!:Observable<Freelancer[]>
+  errorhandling:any;
  constructor(private contractService:ContractService,
              private fb:FormBuilder
              ,private clientservices:ClientService
@@ -59,7 +60,11 @@ export class ContractAddComponent implements OnInit {
         this.close()
       },
       error:(error)=>{console.log(error);
-        this.errorhandeling=error
+        if ( error.error.errors) {
+          this.errorhandling = Object.values(error.error.errors).flat();
+        } else {
+          this.errorhandling = [error.message || 'An error occurred'];
+        }
       }
      }) 
     }else{

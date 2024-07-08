@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { PostsService } from '../../../../core/services/posts.service';
 
 @Component({
@@ -7,6 +7,7 @@ import { PostsService } from '../../../../core/services/posts.service';
   styleUrl: './post-cart.component.css'
 })
 export class PostCartComponent {
+  @Output() datapost:any=new EventEmitter<number>()
   post:any
   constructor(private postservice:PostsService){
   }
@@ -20,7 +21,7 @@ export class PostCartComponent {
     this.postservice.count().subscribe({
     next:(data:any)=>{
       this.post=data;
-      console.log(data);  
+      this.datapost.emit(this.post)
     },
     error:(error:any)=>{
   console.log(error);

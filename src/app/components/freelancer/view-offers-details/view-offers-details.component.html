@@ -6,20 +6,12 @@
         <h4 class="col-lg-8">
               Details de l'offre
         </h4>
-        
         <button class="btn btn-danger col-lg-4"
         (click)="postuler()"
-        [disabled]="offerExists">
-        {{ offerExists ? 'Déjà postulé' : 'Postuler' }}
-        </button>
-
-
-        
+        [disabled]="offerExists || freelancerstatus === 'not verified'">
+        {{ offerExists ? 'Déjà postulé' : (freelancerstatus === 'not verified' ? 'Pas encore vérifié!' : 'Postuler') }}
+      </button>   
     </div>
-
-
-      
-     
     <div class="container mt-5 mb-3">
       <div class="row text-center">
         <div>

@@ -9,6 +9,7 @@ import { FreelancerService } from '../../../../../core/services/freelancer.servi
 export class FreelancerDeleteComponent {
   @Input() freelancerID!:number
   @Input() freelancerData:any
+  errorhandling: any;
 constructor(private freelnacerServices:FreelancerService){}
 
 @Output() closeModal = new EventEmitter<void>();
@@ -27,7 +28,11 @@ deleted(){
     this.freelnacerServices.delete(this.freelancerID).subscribe({
     next:()=>{
      this.freelnacerServices.index()},
-     error:(error)=>{console.log(error)
+     error:(error)=>{console.log(error); if ( error.error.errors) {
+      this.errorhandling = Object.values(error.error.errors).flat();
+    } else {
+      this.errorhandling = [error.message || 'An error occurred'];
+    }
      }
      
   })}

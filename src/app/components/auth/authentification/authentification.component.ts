@@ -25,7 +25,8 @@ export class AuthentificationComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6), passwordStrengthValidator()]],
       password_confirmation: ['', Validators.required],
-      option: ['', Validators.required]
+      option: ['', Validators.required],
+      status:['not verified', Validators.required],
     }, { validators: passwordMatchValidator() });
   }
 
