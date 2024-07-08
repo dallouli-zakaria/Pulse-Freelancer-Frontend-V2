@@ -107,6 +107,8 @@ import { PostDeleteComponent } from './components/admin/buttons/delete/post-dele
 import { RoleUserComponent } from './components/admin/table/users-table/role-user/role-user.component';
 import { RolechipsAutocompleteComponent } from './components/admin/buttons/edit/role-edit/rolechips-autocomplete/rolechips-autocomplete.component';
 import { LoadingComponent } from './components/user/loading/loading.component';
+import { FreelancerEditinfoComponent } from './components/freelancer/freelancer-profile/freelancer-information/freelancer-editinfo/freelancer-editinfo.component';
+import { FreelancerInformationComponent } from './components/freelancer/freelancer-profile/freelancer-information/freelancer-information.component';
 
 
 
@@ -230,7 +232,8 @@ import { LoadingComponent } from './components/user/loading/loading.component';
                     RoleUserComponent,
                     RolechipsAutocompleteComponent,
                     LoadingComponent,
-          
+          FreelancerEditinfoComponent,
+          FreelancerInformationComponent
         
   ],
   imports: [
