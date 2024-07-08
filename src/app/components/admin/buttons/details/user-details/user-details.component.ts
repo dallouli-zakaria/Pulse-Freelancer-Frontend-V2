@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Role } from '../../../../../core/models/Role';
 import { User } from '../../../../../core/models/User';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { RoleService } from '../../../../../core/services/role.service';
 import { UserService } from '../../../../../core/services/user.service';
 import { Observable } from 'rxjs';
@@ -30,9 +30,8 @@ close(): void {
     this.getdata=this.roleService.RoleData;
     this.form=this.fb.group(
       {
-       
-        role:[this.role] ,
-        ser:[this.user?.id]
+        role:new FormControl(this.role) ,
+        user:new FormControl([this.user?.id])
       }
     )
   }
@@ -69,7 +68,18 @@ this.roleService.RoleData.subscribe({
 
 
 gratroleToUser(){
-  console.log(this.form.value);
+ this.roleService.grantRoleToUser(this.form.value).subscribe({
+  next:(data)=>{console.log(data);
+    this.close()
+  },
+  error:(error)=>{
+    if ( error.error.errors) {
+      this.errorhandling = Object.values(error.error.errors).flat();
+    } else {
+      this.errorhandling = [error.message || 'An error occurred'];
+    }
+  }
+ })
   
 }
 }

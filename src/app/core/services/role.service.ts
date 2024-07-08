@@ -59,8 +59,8 @@ export class RoleService {
   }
 
 
-  grantRoleToUser(){
-    return this.http.get<any>(`${this.url}/grantRoleToUser`);
+  grantRoleToUser(data:any){
+    return this.http.get<any>(`${this.url}/grantRoleToUser`,data);
   }
 
   getRoles(rolename:string){

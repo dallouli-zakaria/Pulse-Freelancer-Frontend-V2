@@ -4,7 +4,7 @@
     <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="close()"></button>
 </div>
 
-<form [formGroup]="form" (ngSubmit)="gratroleToUser()"></form>
+<form [formGroup]="form"></form>
      <div class="modal-body">
       
        <h3>Roles</h3>
@@ -26,6 +26,6 @@
       <h5 style="color: red; margin-left: 10px;">{{errorhandling}} </h5> 
       <div class="modal-footer">
       <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
-      <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Save changes</button>
+      <button type="submit" class="btn btn-success" (click)="gratroleToUser()">Save changes</button>
      </div>
     </form>
