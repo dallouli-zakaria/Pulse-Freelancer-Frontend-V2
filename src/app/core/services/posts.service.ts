@@ -65,4 +65,15 @@ export class PostsService {
     return this.post
 
   }
+
+  public showbpost(id:any){
+    this.post=this.http.get(`${this.url}/${Constant.POSTS}/post_id/${id}`);
+    return this.post
+
+  }
+
+  checkFreelancerOffer(postId: number, freelancerId: number): Observable<{ offer_exists: boolean }> {
+    const url = `${this.url}/posts/${postId}/freelancers/${freelancerId}/offer`;
+    return this.http.get<{ offer_exists: boolean }>(url);
+  }
 }

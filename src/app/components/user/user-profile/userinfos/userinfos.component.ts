@@ -21,7 +21,7 @@ export class UserinfosComponent implements OnInit{
   isModalOpen = false;
   isModalOpen2 = false;
 
-  client!:Client;
+  client?:Client;
   clientid!:number;
 
   constructor(private clientservice:ClientService,private authservice:AuthService){}

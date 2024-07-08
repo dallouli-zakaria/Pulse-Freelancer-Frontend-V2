@@ -40,4 +40,12 @@ export class OffersService {
     this.offer=this.http.get(`${this.url}/${Constant.OFFERS}/${id}`);
     return this.offer
   }
+
+
+  public showbyfreelancerid(id:any):Observable<Offer>{
+    this.offer=this.http.get(`${this.url}/${Constant.OFFERS}/freelancer/${id}`);
+    return this.offer;
+  }
+
+  
 }

@@ -3,7 +3,7 @@
   </div>
   <ng-template #dataLoaded>
 <div class="card-box">
-    <span *ngIf="client.company_name==null || client.profession==null">
+    <span *ngIf=" client?.profession==null">
         <div class="alert alert-warning" role="alert">
             Veuillez completer votre profile pour poster des offres ! 
           </div>
@@ -48,7 +48,11 @@
 
 <div class="card-box">
     <div class="row mt-4 mb-4" >
-        
+        <span *ngIf="client?.company_name==null ">
+            <div class="alert alert-warning" role="alert">
+                Veuillez remplir les informations de votre entreprise! 
+              </div>
+        </span>
         <span class="col-lg-11 col-sm-6 col-md-6"><h5>Informations de l'entreprise</h5></span>
         <span class="col-lg-1 col-sm-6 col-md-6" ><h5 > <a (click)="openModal2(client)"class="text-danger" style="cursor: pointer;"><i class="bi bi-pencil-square"></i></a></h5>    
         </span>
