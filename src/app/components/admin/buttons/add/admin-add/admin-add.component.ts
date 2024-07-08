@@ -10,6 +10,7 @@ import { AuthService } from '../../../../../core/services/auth.service';
 })
 export class AdminAddComponent {
   @Output() closeModal = new EventEmitter<void>();
+  errorhandling: any;
   close(): void {
     this.closeModal.emit();
   }
@@ -29,6 +30,11 @@ export class AdminAddComponent {
       next:(data:any)=>{console.log(data);this.userService.index()
       },
       error:(error:any)=>{console.log(error);
+        if ( error.error.errors) {
+          this.errorhandling = Object.values(error.error.errors).flat();
+        } else {
+          this.errorhandling = [error.message || 'An error occurred'];
+        }
       },
       complete:()=>console.log('end operation users') 
       })

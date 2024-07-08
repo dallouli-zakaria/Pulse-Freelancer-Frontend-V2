@@ -11,6 +11,7 @@ import { Freelancer } from '../../../../../core/models/Freelancer';
 export class FreelancerAddComponent implements OnInit {
  freelancer:Freelancer[]=[]
   form!:FormGroup
+  errorhandling:any
   constructor(private freelancerService:FreelancerService,private fb:FormBuilder){}
   @Output() closeModal = new EventEmitter<void>();
 close(): void {
@@ -30,7 +31,6 @@ close(): void {
     adress: ['', Validators.required],
     phone: ['', Validators.required],
     portfolio_Url: [''],
-    CV: [''],
     status:['not verified']
    })
   }
@@ -42,6 +42,11 @@ add(){
       this.freelancerService.index()
     },
     error:(error)=>{console.log(error);
+      if ( error.error.errors) {
+        this.errorhandling = Object.values(error.error.errors).flat();
+      } else {
+        this.errorhandling = [error.message || 'An error occurred'];
+      }
     },
     complete:()=>console.log('add opperation ended')
     

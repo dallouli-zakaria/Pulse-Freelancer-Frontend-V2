@@ -3,6 +3,7 @@ import { ClientService } from '../../../../core/services/client.service';
 import { Client } from '../../../../core/models/Client';
 import { UserService } from '../../../../core/services/user.service';
 import { User } from '../../../../core/models/User';
+import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-user-sideprofile',
@@ -10,16 +11,18 @@ import { User } from '../../../../core/models/User';
   styleUrl: './user-sideprofile.component.css'
 })
 export class UserSideprofileComponent implements OnInit{
-  userid: number=1;
-  client!:Client;
-  user!:User;
+  clientid!:number;
+  client?:Client;
 
-  constructor(private clientservice:ClientService,private userservice:UserService){
+  constructor(private clientservice:ClientService,private authservice:AuthService){
     this.getclient();
   }
 
   getclient(){
-    this.clientservice.show(this.userid).subscribe({
+    this.clientid=this.authservice.parseID();
+    console.log(this.clientid);
+    
+    this.clientservice.show(this.clientid).subscribe({
       next:(data:any)=>{this.client=data},
       error:(error:any)=>console.log(error),
       complete:()=>console.log("get client done")})

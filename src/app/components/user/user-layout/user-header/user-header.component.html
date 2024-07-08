@@ -16,20 +16,33 @@
           <button class="btn btn-link text-1000 fw-medium order-1 order-lg-0" type="button" routerLink="../login">Sign in</button>
           <button class="btn btn-outline-danger rounded-pill order-0" type="submit" routerLink="../register">Sign Up</button>
         </span>
-        <div class="dropdown "  *ngIf="authService.isLoggedIn();">
-          <!-- <span class="text-uppercase ">{{username}}</span> -->
-          <img src="assets/img/gallery/user-profile-3.png" alt="Dropdown Toggle" (click)="toggleDropdown()" class="dropdown-toggle-img rounded-circle">
-          <div class="dropdown-menu" [class.show]="dropdownOpen" aria-labelledby="dropdownMenuButton" style="cursor:default;">
-            <span class="dropdown-item text-muted">{{username}}</span>
-            <a class="dropdown-item" href="pulse/client-profile" (click)="selectOption('profile')">client</a>
-            <a class="dropdown-item" href="pulse/freelancer-dashboard" (click)="selectOption('profile')">freelancer</a>
-            <a class="dropdown-item" href="" (click)="selectOption('dashboard')">dashboard</a>
-            <a class="dropdown-item"  (click)="authService.logout()">deconnecter</a>
+        <div class="text-uppercase fw-medium"><strong> {{username}}</strong></div>
+        <span *ngIf="roles=='client_role'">
+          <div class="dropdown "  *ngIf="authService.isLoggedIn();">&nbsp;&nbsp;
+            <img src="assets/img/gallery/user-profile-client-1.png" alt="Dropdown Toggle" (click)="toggleDropdown()" class="dropdown-toggle-img rounded-circle">
+            <div class="dropdown-menu" [class.show]="dropdownOpen" aria-labelledby="dropdownMenuButton" style="cursor:default;">
+              <span class="dropdown-item text-muted">{{role}}</span>
+  
+              <a class="dropdown-item" href="pulse/client-profile" (click)="selectOption('profile')">Profile</a>
+              <a class="dropdown-item" href="" (click)="selectOption('dashboard')">Dashboard</a>
+              <a class="dropdown-item"  (click)="authService.logout()">Deconnecter</a>
+            </div>
           </div>
+        </span>             
 
+        <span *ngIf="roles=='freelancer_role'">
+          <div class="dropdown "  *ngIf="authService.isLoggedIn();">&nbsp;&nbsp;
+            <img src="assets/img/gallery/user-profile-3.png" alt="Dropdown Toggle" (click)="toggleDropdown()" class="dropdown-toggle-img rounded-circle">
+            <div class="dropdown-menu" [class.show]="dropdownOpen" aria-labelledby="dropdownMenuButton" style="cursor:default;">
+              <span class="dropdown-item text-muted">{{role}}</span>
+  
+              <a class="dropdown-item" href="pulse/freelancer-profile" (click)="selectOption('profile')">Profile</a>
+              <a class="dropdown-item" href="" (click)="selectOption('dashboard')">Dashboard</a>
+              <a class="dropdown-item"  (click)="authService.logout()">Deconnecter</a>
+            </div>
+          </div>
+        </span>
 
-         
-        </div>
         
       </div>
 

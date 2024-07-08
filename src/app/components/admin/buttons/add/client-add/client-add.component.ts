@@ -10,10 +10,11 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class ClientAddComponent {
 private  clients:ClientService =inject(ClientService);
 @Output() closeModal = new EventEmitter<void>();
+ 
 close(): void {
   this.closeModal.emit();
 }
-
+ errorhandling:any;
 form!:FormGroup
 
 ngOnInit(): void {
@@ -38,7 +39,12 @@ ngOnInit(): void {
         next:(data:any)=>{console.log(data)
           this.clients.index();
         },
-        erorr:(error:any)=>{console.log(error);
+        erorr:(error:any)=>{
+          if ( error.error.errors) {
+            this.errorhandling = Object.values(error.error.errors).flat();
+          } else {
+            this.errorhandling = [error.message || 'An error occurred'];
+          }
         },
         complet:()=>{console.log('completed');
         }

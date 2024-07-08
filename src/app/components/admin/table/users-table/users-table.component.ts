@@ -65,8 +65,9 @@ this.showedit = true;
 this.showedelete = false;
 }
 
-ondeleted( user: any): void {
+ondeleted(id:number, user: any): void {
   this.selectUser=user
+  this.selectedId=id
 this.show = true;
 this.showedelete = true;
 this.showedit = false;

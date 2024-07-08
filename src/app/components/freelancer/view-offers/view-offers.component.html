@@ -127,6 +127,52 @@
             </div>
             
             <div class="candidate-list">
+              <div *ngFor="let post of posts" class="candidate-list-box card mt-4">
+                <div class="p-4 card-body">
+                  <div class="align-items-center row">
+                    <div class="col-auto">
+                      <div class="candidate-list-images">
+                        <a href="#">
+                          <img src="assets/img/gallery/company-image.jpg" alt class="avatar-md img-thumbnail rounded-circle" />
+                        </a>
+                      </div>
+                    </div>
+                    <div class="col-lg-5">
+                      <div class="candidate-list-content mt-3 mt-lg-0">
+                        <h5 class="fs-19 mb-0">
+                          <a class="primary-link" [routerLink]="['/freelancer-profile', post.id]">{{ post.title }}</a>
+                        </h5>
+                        <p class="text-muted mb-2">{{ post.description }}</p>
+                        <ul class="list-inline mb-0 text-muted">
+                          <li class="list-inline-item">
+                            <i class="mdi mdi-home-modern"></i> {{ post.client_id }}
+                          </li>
+                          <li class="list-inline-item">
+                            <i class="mdi mdi-map-marker"></i> {{ post.location }}
+                          </li>
+                          <li class="list-inline-item">
+                            <i class="mdi mdi-wallet"></i> 
+                            <span *ngIf="post?.budget === 'month'">{{post?.budgetvalue}} Dh par Mois</span>
+                            <span *ngIf="post?.budget === 'day'">{{post?.budgetvalue}} Dh par jours</span>
+                            <span *ngIf="post?.budgetvalue == 0"> Pas encore défini</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="mt-2 mt-lg-0 d-flex flex-wrap align-items-start gap-1">
+                        <span class="badge bg-soft-secondary fs-14 mt-1">Angular</span>
+                        <span class="badge bg-soft-secondary fs-14 mt-1">Springboot</span>
+                        <span class="badge bg-soft-secondary fs-14 mt-1">Wordpress</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="postuler">
+                    <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="selectPostId(post.id)" >voir l'offre</button>
+                  </div>
+                </div>
+              </div>
+              
                 <!-- post -->
               <div class="candidate-list-box card mt-4">
                 <div class="p-4 card-body">
@@ -335,7 +381,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <app-view-offers-details></app-view-offers-details>
+        <app-view-offers-details [postId]="selectedPostId"></app-view-offers-details>
       </div>
 
     </div>

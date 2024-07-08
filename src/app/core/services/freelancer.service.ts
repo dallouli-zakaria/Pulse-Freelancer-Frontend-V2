@@ -56,4 +56,10 @@ export class FreelancerService {
   }
 
 
+  show(id:any):Observable<Freelancer>{
+    this.freelancer=this.http.get(`${this.url}/${Constant.FREELANCERS}/${id}`);
+    return this.freelancer;
+  }
+
+
 }

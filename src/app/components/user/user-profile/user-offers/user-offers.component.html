@@ -18,7 +18,7 @@
             <div class="card-body ">
               <div class="row ">
                 <div class="col-12">
-                  <h4 class="card-title"><a routerLink="../../client-offer">{{posts.title}}</a> </h4>
+                  <h4 class="card-title"><a  [routerLink]="['../../client-offer', posts.id]">{{posts.title}}</a> </h4>
                 </div>
                 <div class="col">
                   <h6 class="card-subtitle mb-2">

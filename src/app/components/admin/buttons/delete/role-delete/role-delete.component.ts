@@ -12,6 +12,7 @@ export class RoleDeleteComponent {
   @Input() roleData:any
  
 role:Role[]=[];
+  errorhandling: any;
 constructor(private roleservice:RoleService){}
 
  @Output() closeModal = new EventEmitter<void>();
@@ -23,7 +24,13 @@ deleted(){console.log(this.roleData?.name);
 this.roleservice.deleted(this.roleID).subscribe({
   next:()=>{this.roleservice.index();
     this.close();},
-  error:(erorre)=>console.log(erorre),
+  error:(error)=>{console.log(error);
+    if ( error.error.errors) {
+      this.errorhandling = Object.values(error.error.errors).flat();
+    } else {
+      this.errorhandling = [error.message || 'An error occurred'];
+    }
+  },
   complete:()=>console.log('end operation delete')
 })
 }

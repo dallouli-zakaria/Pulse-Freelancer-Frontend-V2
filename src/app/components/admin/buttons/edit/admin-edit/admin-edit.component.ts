@@ -12,6 +12,7 @@ export class AdminEditComponent implements OnInit,OnChanges {
   @Input() UserId!:number;
   @Input() UserData!:User;
   @Output() closeModal = new EventEmitter<void>();
+  errorhandling: any;
   close(): void {
     this.closeModal.emit();
   }
@@ -34,6 +35,11 @@ export class AdminEditComponent implements OnInit,OnChanges {
       this.close()
     },
     error:(error:any)=>{console.log(error);
+      if ( error.error.errors) {
+        this.errorhandling = Object.values(error.error.errors).flat();
+      } else {
+        this.errorhandling = [error.message || 'An error occurred'];
+      }
     },
     complete:()=>console.log('end operation users') 
     })

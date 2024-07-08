@@ -20,8 +20,6 @@
               </button>
             </div>
 
-           
-
             <div class="divider d-flex align-items-center my-4">
               <p class="text-center fw-bold mx-3 mb-0">Ou</p>
             </div>
@@ -34,17 +32,17 @@
             </div>
 
             <div class="form-outline mb-4">
-              <input type="email" id="form3Example3" class="form-control form-control-lg" placeholder="Enter addresse email" formControlName="email" />
+              <input type="email" id="form3Example3" class="form-control form-control-lg" placeholder="Entrer adresse email" formControlName="email" />
               <div *ngIf="applyForm.get('email')?.hasError('required') && applyForm.get('email')?.touched" class="text-danger">
                 Email est obligatoire.
               </div>
               <div *ngIf="applyForm.get('email')?.hasError('email') && applyForm.get('email')?.touched" class="text-danger">
-                Format Email invalide .
+                Format Email invalide.
               </div>
             </div>
 
             <div class="form-outline mb-4">
-              <input type="password" id="form3Example4" class="form-control form-control-lg" placeholder="Entrer password" formControlName="password" />
+              <input type="password" id="form3Example4" class="form-control form-control-lg" placeholder="Entrer mot de passe" formControlName="password" />
               <div *ngIf="applyForm.get('password')?.hasError('required') && applyForm.get('password')?.touched" class="text-danger">
                 Mot de passe obligatoire.
               </div>
@@ -52,14 +50,14 @@
                 Le mot de passe doit être au moins 6 caractères.
               </div>
               <div *ngIf="applyForm.get('password')?.hasError('passwordStrength') && applyForm.get('password')?.touched" class="text-danger">
-                Le mot de passe doit contenir au mois une majscule, un caractère et un numero.
+                Le mot de passe doit contenir au moins une majuscule, un caractère spécial et un chiffre.
               </div>
             </div>
 
             <div class="form-outline mb-4">
-              <input type="password" id="form3Example5" class="form-control form-control-lg" placeholder="Confirmer password" formControlName="password_confirmation" />
+              <input type="password" id="form3Example5" class="form-control form-control-lg" placeholder="Confirmer mot de passe" formControlName="password_confirmation" />
               <div *ngIf="applyForm.errors?.['passwordMismatch'] && applyForm.get('password_confirmation')?.touched" class="text-danger">
-                Mot de passes non identique.
+                Les mots de passe ne correspondent pas.
               </div>
             </div>
 
@@ -87,8 +85,8 @@
               <button class="btn btn-danger btn-lg btn-block mb-4" type="submit" [disabled]="isSubmitting || applyForm.invalid">
                 {{ isSubmitting ? 'Création...' : 'Créer un compte !' }}
               </button>
-              <p class="small fw-bold mt-2 pt-1 mb-0">Avez vous déjà un compte? <a routerLink="../login" class="link-danger">Se connecter</a></p>
-              <p class="small fw-bold mt-2 pt-1 mb-0"><a routerLink="../" class="link-danger">retour à la page d'acceuil</a></p>
+              <p class="small fw-bold mt-2 pt-1 mb-0">Avez-vous déjà un compte? <a routerLink="../login" class="link-danger">Se connecter</a></p>
+              <p class="small fw-bold mt-2 pt-1 mb-0"><a routerLink="../" class="link-danger">Retour à la page d'accueil</a></p>
             </div>
           </form>
         </div>

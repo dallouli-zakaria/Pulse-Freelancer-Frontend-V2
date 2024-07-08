@@ -11,15 +11,20 @@
     <div class="container card-box mt-4">
      <div class="container mt-5 mb-3 ">
          <div class="row ">
-             <p class="col-lg-6 display-6">Commençons par votre premier offre d'emploi.</p>
-             <p class="col-lg-6 "><button class="btn btn-danger" routerLink="../add-offer">Poster un offre !</button></p>
+             <p class="col-lg-6 display-6">Poster un offre d'emploi.</p>
+             <p *ngIf="userdetails?.company_name !== null" class="col-lg-6">
+                <button class="btn btn-danger" routerLink="../add-offer">Poster un offre !</button>
+              </p>
+              <p *ngIf="userdetails?.company_name === null" class="col-lg-6">
+                <button class="btn btn-danger" routerLink="../client-profile">Poster un offre !</button>
+              </p>
          </div>
      </div>
  </div>
  <div class="container card-box mt-4">
      <div class="container mt-5 mb-3">
          <div class="row">   
-             <p class="col-lg-6 display-6" >Choisir l'un de nos freelanceurs les plus compétents</p>
+             <p class="col-lg-6 display-6" >Choisir l'un de nos freelanceurs les plus compétents.</p>
              <p class="col-lg-6"><button class="btn btn-outline-danger" routerLink="../view-freelancers">Chercher un talent !</button></p>
          </div>
          <div id="carouselExampleControls" class="carousel slide mt-5 mb-3 " data-bs-ride="carousel"data-bs-interval="2500" >

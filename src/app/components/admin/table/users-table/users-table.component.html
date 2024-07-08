@@ -20,7 +20,7 @@
         <td>
           <button class="btn btn-primary btn-sm" style="margin-right: 5px;" (click)="onEdited(item.id,item)">
             <i class="fas fa-pen"></i> </button> 
-         <button class="btn btn-danger btn-sm" style="margin-right: 5px;" (click)="ondeleted(item)">
+         <button class="btn btn-danger btn-sm" style="margin-right: 5px;" (click)="ondeleted(item.id,item)">
             <i class="fas fa-trash"></i></button>
          <button class="btn btn-secondary btn-sm" style="margin-right: 5px;" (click)="ondetails(item)">
            <i class="bi bi-file-plus"></i></button>
@@ -49,7 +49,7 @@
   <!-- delete -->
   <div *ngIf="showedelete" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
     <div class="modal-dialog modal-m"><div class="modal-content">
-      <app-users-delete  (closeModal)="onCloseModal()"></app-users-delete>
+      <app-users-delete [userID]="selectedId" [userdata]="selectUser" (closeModal)="onCloseModal()"></app-users-delete>
     </div>
     </div>
   </div>

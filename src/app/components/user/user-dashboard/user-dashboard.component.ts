@@ -1,3 +1,5 @@
+import { Client } from '../../../core/models/Client';
+import { ClientService } from '../../../core/services/client.service';
 import { RoleService } from '../../../core/services/role.service';
 import { AuthService } from './../../../core/services/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -8,38 +10,37 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './user-dashboard.component.css'
 })
 export class UserDashboardComponent implements OnInit{
-  userId!:number;
-  roles!:string[];
+  userId:number=this.authService.parseID();
+  role!:string[];
+  userdetails!:any;
+  isAuthenticated: boolean = false;
 
-  constructor(private rolesService: RoleService,private authService:AuthService) {}
+
+
+  test:any;
+
+  constructor(private rolesService: RoleService,private authService:AuthService,private clientservice:ClientService) {}
 
   ngOnInit(): void {
     //this.authService.parseID();
-    const sub = this.authService.parseID(); 
-    this.authService.getuserdetails(sub).subscribe((res) => {
-      this.userId = res.id;
-      console.log(this.userId); 
-      this.getRoles(); 
-    });
+    this.isAuthenticated = this.authService.isLoggedIn();
+    if (this.isAuthenticated) {
 
-  }
-
-  //get connected user roles from decoded token
-  getRoles(): void {
-    
-    if (this.userId) {
-      this.rolesService.getUserRoles(this.userId).subscribe(
-        (res) => {
-          this.roles = res;
-          console.log(this.roles);
-        },
-        (error) => {
-          console.error('Error fetching roles', error);
+      this.clientservice.show(this.userId).subscribe((res)=>
+        {
+          this.userdetails=res;
+        
+          
         }
-      );
-    } else {
-      console.warn('User ID is undefined.');
+    )
+
+    }; 
     }
-  }
+
+
+  
+
+
+ 
 
 }

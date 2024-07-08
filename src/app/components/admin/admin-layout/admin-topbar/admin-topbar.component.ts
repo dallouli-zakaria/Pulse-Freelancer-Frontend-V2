@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-admin-topbar',
@@ -7,4 +8,6 @@ import { Component } from '@angular/core';
 })
 export class AdminTopbarComponent {
 
+
+  constructor(public authService:AuthService){}
 }
