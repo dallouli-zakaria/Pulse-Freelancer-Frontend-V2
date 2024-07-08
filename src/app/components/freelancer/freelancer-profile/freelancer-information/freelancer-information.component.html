@@ -1,0 +1,85 @@
+<div class="card-box">
+ <div></div>
+    <div class="row mt-4 mb-4" >
+        
+        <span class="col-lg-11 col-sm-6 col-md-6"><h5 class="text-uppercase">My Information</h5></span>
+        <span class="col-lg-1 col-sm-6 col-md-6">
+      
+                
+                <h4 class="col-6"><a (click)="onEdited(freelancerdata?.id,freelancerdata)" class="text-danger" style="cursor: pointer;"><i class="bi bi-pencil-square"></i></a></h4>
+      
+          </span>
+          
+    </div>
+   
+       
+        <p class="text-muted font-13 mb-3">  
+            <!-- <div *ngIf="showEdit" class="modal-backdrop fade show"></div> -->
+
+            <!-- User Info Display -->
+            <div class="user-info">
+                <div class="form-group">
+                  <label>Name:</label>
+                  <span class="sp">{{ freelancerdata?.user?.name }}</span>
+                </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <span>{{ freelancerdata?.user?.email }}</span>
+                  </div>
+                <div class="form-group">
+                  <label>Title:</label>
+                  <span class="sp">{{ freelancerdata?.title }}</span>
+                </div>
+                <div class="form-group">
+                  <label>Date of Birth:</label>
+                  <span class="sp">{{ freelancerdata?.dateOfBirth | date }}</span>
+                </div>
+                <div class="form-group">
+                  <label>City:</label>
+                  <span  class="sp">{{ freelancerdata?.city }}</span>
+                </div>
+                <div class="form-group">
+                  <label>TJM:</label>
+                  <span class="sp">{{ freelancerdata?.TJM }}</span>
+                </div>
+                <div class="form-group">
+                  <label>Availability:</label>
+                  <span class="sp">{{ freelancerdata?.availability }}</span>
+                </div>
+                <div class="form-group">
+                  <label>Address:</label>
+                  <span class="sp">{{ freelancerdata?.address }}</span>
+                </div>
+                <div class="form-group">
+                  <label>Phone:</label>
+                  <span class="sp">{{ freelancerdata?.phone }}</span>
+                </div>
+                <div class="form-group">
+                  <label>Portfolio URL:</label>
+                  <span class="sp"><a [href]="freelancerdata?.portfolio_Url" target="_blank">{{ freelancerdata?.portfolio_Url }}</a></span>
+                </div>
+            </div>
+         
+      
+    </div>
+
+
+
+    <div *ngIf="show" class="modal-backdrop fade show"></div>
+
+
+      <!-- modal edit -->
+      <!-- <div class="modal" tabindex="-1" role="dialog" aria-modal="true" *ngIf="showedit"> -->
+        <div *ngIf="showedit" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
+        <div class="modal-dialog" role="document">
+              <div class="modal-content"><app-freelancer-editinfo [freelancerData]="selectedData" [freelancerID]="selectedID" (closeModal)="onCloseModal()"></app-freelancer-editinfo>
+                    
+          </div>
+            </div>
+        </div>
+
+          <!-- end modal edit -->
+
+
+
+
