@@ -27,13 +27,13 @@ export class OffersService {
   return this.offer
   }
 
-  public update(id:any):Observable<Offer>{
+  public update(id: any, value: any):Observable<Offer>{
     this.offer=this.http.put(`${this.url}/${Constant.OFFERS}`,id);
     return this.offer
   }
    
-  public delete():Observable<Offer>{
-    this.offer=this.http.delete(`${this.url}/${Constant.OFFERS}`);
+  public delete(id:number):Observable<Offer>{
+    this.offer=this.http.delete(`${this.url}/${Constant.OFFERS}/${id}`);
     return this.offer
   }
   public show(id:any):Observable<Offer>{

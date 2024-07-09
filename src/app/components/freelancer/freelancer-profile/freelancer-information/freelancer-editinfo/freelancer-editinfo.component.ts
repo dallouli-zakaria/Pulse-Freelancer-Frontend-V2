@@ -34,6 +34,7 @@ export class FreelancerEditinfoComponent {
     adress: [this.freelancerData?.address, Validators.required],
     phone: [this.freelancerData?.phone, Validators.required],
     portfolio_Url: [this.freelancerData?.portfolio_Url],
+    // status:['completed']
 
   })
 }
@@ -47,7 +48,9 @@ updated(){
       console.log(data);
       this.close();
        this.frelancerservices.index()},
-       error:(error)=>{ if ( error.error.errors) {
+       error:(error)=>{console.log(error);
+       
+         if ( error.error.errors) {
         this.errorhandling = Object.values(error.error.errors).flat();
       } else {
         this.errorhandling = [error.message || 'An error occurred'];

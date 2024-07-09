@@ -109,6 +109,9 @@ import { RolechipsAutocompleteComponent } from './components/admin/buttons/edit/
 import { LoadingComponent } from './components/user/loading/loading.component';
 import { FreelancerInformationComponent } from './components/freelancer/freelancer-profile/freelancer-information/freelancer-information.component';
 import { FreelancerEditinfoComponent } from './components/freelancer/freelancer-profile/freelancer-information/freelancer-editinfo/freelancer-editinfo.component';
+import { OfferAddComponent } from './components/admin/buttons/add/offer-add/offer-add.component';
+import { OfferDeleteComponent } from './components/admin/buttons/delete/offer-delete/offer-delete.component';
+import { OfferEditComponent } from './components/admin/buttons/edit/offer-edit/offer-edit.component';
 
 
 
@@ -234,6 +237,9 @@ import { FreelancerEditinfoComponent } from './components/freelancer/freelancer-
                     LoadingComponent,
                     FreelancerInformationComponent,
                     FreelancerEditinfoComponent,
+                    OfferAddComponent,
+                    OfferDeleteComponent,
+                    OfferEditComponent,
           
         
   ],

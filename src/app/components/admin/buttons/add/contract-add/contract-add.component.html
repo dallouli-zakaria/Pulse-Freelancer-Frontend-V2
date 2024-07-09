@@ -2,7 +2,7 @@
     <h1 class="modal-title fs-5" id="exampleModalLabel">Add Contract</h1>
     <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="close()"></button>
 </div>
-    <form [formGroup]="form">
+    <form [formGroup]="form" >
      <div class="modal-body">
           <!-- title -->
       <div class="mb-3">
@@ -26,7 +26,7 @@
        <!-- description -->
        <div class="mb-3 ">
         <label for="exampleInputEmail1" class="form-label">Porject description</label>
-        <input type="number" class="form-control" id="exampleInputEmail1" formControlName="project_description" aria-describedby="emailHelp">
+        <textarea class="form-control" id="exampleInputEmail1" formControlName="project_description" aria-describedby="emailHelp"></textarea>
       </div>
      
        <!-- client -->
@@ -47,6 +47,6 @@
       <h5 style="color: red; margin-left: 10px;">{{errorhandling}} </h5> 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
-        <button type="submit" class="btn btn-success" >Save changes</button>
+        <button type="submit" class="btn btn-success" (click)="add()">Save changes</button>
        </div>
     </form>

@@ -25,7 +25,6 @@ this.index();
 this.freelancerList=this.freelancerService.getdata
 console.log(this.selectedData?.status);
 
-
   }
 valueStatuse:any
  status(){

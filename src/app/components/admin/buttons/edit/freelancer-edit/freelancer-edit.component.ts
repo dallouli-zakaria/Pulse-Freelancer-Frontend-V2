@@ -26,7 +26,7 @@ export class FreelancerEditComponent implements OnInit,OnChanges {
    ngOnInit(): void {
     this.form=this.fb.group({
       name: [this.freelancerData?.user.name, Validators.required],
-      
+      email: [this.freelancerData?.user?.email, [Validators.required, Validators.email]],
       password: [this.freelancerData?.user.password],
       title: [this.freelancerData?.title, Validators.required],
       dateOfBirth: [this.freelancerData?.dateOfBirth, Validators.required],
@@ -51,8 +51,8 @@ export class FreelancerEditComponent implements OnInit,OnChanges {
         this.close();
          this.frelancerservices.index()},
          error:(error:string)=>{
-           this.errorhandling='please fill in all fields'
-          console.log(this.errorhandling)}, 
+           console.log(error);
+           }, 
          
     })}else{
       console.log('null id of freelancer');

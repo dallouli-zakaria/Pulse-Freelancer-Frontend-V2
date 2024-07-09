@@ -20,6 +20,7 @@ constructor(private userServices:UserService){}
 
 deleted(){
   console.log(this.userID,'-----------');
+  this.userServices.index()
   this.userServices.delete(this.userID).subscribe({
     next:()=>{this.close()},
     error:(error)=>{console.log(error);
