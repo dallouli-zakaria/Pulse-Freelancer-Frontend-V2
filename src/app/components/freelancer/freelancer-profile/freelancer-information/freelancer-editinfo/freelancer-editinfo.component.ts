@@ -29,7 +29,6 @@ export class FreelancerEditinfoComponent {
     dateOfBirth: [this.freelancerData?.dateOfBirth, Validators.required],
     city: [this.freelancerData?.city, Validators.required],
     TJM: [this.freelancerData?.TJM, [Validators.required, Validators.min(0)]],
-
     availability: [this.freelancerData?.availability, Validators.required],
     adress: [this.freelancerData?.adress, Validators.required],
     phone: [this.freelancerData?.phone, Validators.required],

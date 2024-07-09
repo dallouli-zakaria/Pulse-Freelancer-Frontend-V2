@@ -150,16 +150,18 @@
                             <i class="bi bi-cash-stack"></i>
                             <span *ngIf="post?.budget === 'month'">{{post?.budgetvalue}} Dh par Mois</span>
                             <span *ngIf="post?.budget === 'day'">{{post?.budgetvalue}} Dh par jours</span>
-                            <span *ngIf="post?.budgetvalue == 0"> Pas encore défini</span>
+                            <span *ngIf="post?.budgetvalue == 0"> Pas encore défini </span>
+                           
                           </li>
                         </ul>
                       </div>
+                      <i class="bi bi-clock"></i><span> Crée il y a {{ post.created_at | timeAgo }}</span>
                     </div>
                     <div class="col-lg-4">
                       <div class="mt-2 mt-lg-0 d-flex flex-wrap align-items-start gap-1">
-                        <span class="badge bg-soft-secondary fs-14 mt-1">Angular</span>
+                        <!-- <span class="badge bg-soft-secondary fs-14 mt-1">Angular</span>
                         <span class="badge bg-soft-secondary fs-14 mt-1">Springboot</span>
-                        <span class="badge bg-soft-secondary fs-14 mt-1">Wordpress</span>
+                        <span class="badge bg-soft-secondary fs-14 mt-1">Wordpress</span> -->
                       </div>
                     </div>
                   </div>
@@ -170,6 +172,174 @@
               </div>
              
              
+  <!-- post -->
+  <div class="candidate-list-box card mt-4">
+    <div class="p-4 card-body">
+      <div class="align-items-center row">
+        <div class="col-auto">
+          <div class="candidate-list-images">
+            <a href="#"
+              ><img
+                src="assets/img/gallery/company-image.jpg"
+                alt
+                class="avatar-md img-thumbnail rounded-circle"
+            /></a>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="candidate-list-content mt-3 mt-lg-0">
+            <h5 class="fs-19 mb-0">
+              <a class="primary-link" routerLink="../freelancer-profile">Refonte de Site Web Corporatif</a>
+            </h5>
+            <p class="text-muted mb-2">Nous avons besoin d'un développeur web créatif pour refondre notre site web corporatif en freelance. Le projet implique une refonte complète du design, l'intégration de nouvelles fonctionnalités et l'optimisation pour la vitesse et la sécurité.</p>
+            <ul class="list-inline mb-0 text-muted">
+                <li class="list-inline-item">
+                    <i class="mdi mdi-home-modern"></i> Maroc Telecom
+                  </li>
+              <li class="list-inline-item">
+                <i class="mdi mdi-map-marker"></i> Casablanca
+              </li>
+              <li class="list-inline-item">
+                <i class="mdi mdi-wallet"></i> 60 Dh /h
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4">
+         
+          <div
+            class="mt-2 mt-lg-0 d-flex flex-wrap align-items-start gap-1"
+          >
+            
+            <span class="badge bg-soft-secondary fs-14 mt-1"
+              >Angular</span
+            ><span class="badge bg-soft-secondary fs-14 mt-1"
+              >Springboot</span
+            ><span class="badge bg-soft-secondary fs-14 mt-1"
+              >Wordpress</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="postuler">
+       <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">voir l'offre</button>
+       
+      </div>
+    </div>
+  </div>
+  <!-- end post -->
+                   <!-- post -->
+  <div class="candidate-list-box card mt-4">
+    <div class="p-4 card-body">
+      <div class="align-items-center row">
+        <div class="col-auto">
+          <div class="candidate-list-images">
+            <a href="#"
+              ><img
+                src="assets/img/gallery/company-image.jpg"
+                alt
+                class="avatar-md img-thumbnail rounded-circle"
+            /></a>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="candidate-list-content mt-3 mt-lg-0">
+            <h5 class="fs-19 mb-0">
+              <a class="primary-link" routerLink="../freelancer-profile">Application Mobile Innovante</a>
+            </h5>
+            <p class="text-muted mb-2">Nous recherchons un développeur mobile talentueux pour un projet freelance. Votre mission sera de créer une application mobile intuitive et performante, avec une attention particulière à l'expérience utilisateur et à l'intégration de fonctionnalités avancées.</p>
+            <ul class="list-inline mb-0 text-muted">
+                <li class="list-inline-item">
+                    <i class="mdi mdi-home-modern"></i> Narsa
+                  </li>
+              <li class="list-inline-item">
+                <i class="mdi mdi-map-marker"></i> Tanger
+              </li>
+              <li class="list-inline-item">
+                <i class="mdi mdi-wallet"></i> 8000 Dh /Mois
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4">
+           
+          <div
+            class="mt-2 mt-lg-0 d-flex flex-wrap align-items-start gap-1"
+          >
+            
+            <span class="badge bg-soft-secondary fs-14 mt-1"
+              >Flutter</span
+            ><span class="badge bg-soft-secondary fs-14 mt-1"
+              >Java</span
+            ><span class="badge bg-soft-secondary fs-14 mt-1"
+              >Figma</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="postuler">
+       <button class="btn btn-outline-danger">voir l'offre</button>
+      </div>
+    </div>
+  </div>
+  <!-- end post -->
+                   <!-- post -->
+  <div class="candidate-list-box card mt-4">
+    <div class="p-4 card-body">
+      <div class="align-items-center row">
+        <div class="col-auto">
+          <div class="candidate-list-images">
+            <a href="#"
+              ><img
+                src="assets/img/gallery/company-image.jpg"
+                alt
+                class="avatar-md img-thumbnail rounded-circle"
+            /></a>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="candidate-list-content mt-3 mt-lg-0">
+            <h5 class="fs-19 mb-0">
+              <a class="primary-link" routerLink="../freelancer-profile">site web e commerce</a>
+            </h5>
+            <p class="text-muted mb-2">Nous cherchons un developpeur web passionné pour une mission freelancer, le project consiste a réaliser un site web ecommerce avec l'implementation du SEO </p>
+            <ul class="list-inline mb-0 text-muted">
+                <li class="list-inline-item">
+                    <i class="mdi mdi-home-modern"></i> Majorelle
+                  </li>
+              <li class="list-inline-item">
+                <i class="mdi mdi-map-marker"></i> Marrakech
+              </li>
+              <li class="list-inline-item">
+                <i class="mdi mdi-wallet"></i> Indeterminé
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4">
+           
+          <div
+            class="mt-2 mt-lg-0 d-flex flex-wrap align-items-start gap-1"
+          >
+            
+            <span class="badge bg-soft-secondary fs-14 mt-1"
+              >Wordpress</span
+            ><span class="badge bg-soft-secondary fs-14 mt-1"
+              >Php</span
+            ><span class="badge bg-soft-secondary fs-14 mt-1"
+              >Python</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="postuler">
+       <button class="btn btn-outline-danger">voir l'offre</button>
+      </div>
+    </div>
+  </div>
+  <!-- end post -->
+ 
+
         </div>
     </div>
 </div>

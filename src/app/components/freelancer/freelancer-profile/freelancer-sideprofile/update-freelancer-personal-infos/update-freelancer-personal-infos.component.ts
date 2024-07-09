@@ -32,7 +32,7 @@ this.form=this.fb.group({
   adress: [this.freelancerObject?.address, Validators.required],
   phone: [this.freelancerObject?.phone, Validators.required],
   portfolio_Url: [this.freelancerObject?.portfolio_Url],
-  CV: [this.freelancerObject?.CV]
+
 })
 }
 
@@ -70,7 +70,7 @@ this.form=this.fb.group({
   adress: [this.freelancerObject?.address, Validators.required],
   phone: [this.freelancerObject?.phone, Validators.required],
   portfolio_Url: [this.freelancerObject?.portfolio_Url],
-  CV: [this.freelancerObject?.CV]
+
 })
 }
 }

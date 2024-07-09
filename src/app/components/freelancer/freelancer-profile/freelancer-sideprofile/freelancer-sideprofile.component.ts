@@ -76,11 +76,11 @@ selectedID!:any
 
     getStatus(): string {
       if (this.isAllFieldsFilled() && this.freelancerdata?.status === 'verified') {
-        return 'verified';
+        return 'Vérifié' ;
       } else if (this.isAllFieldsFilled() && this.freelancerdata?.status === 'not verified') {
-        return 'not verified';
+        return 'pas encore vérifié';
       } else {
-        return 'not filled';
+        return 'Veuilez remplir toutes vos informations ';
       }
     }
 
@@ -95,10 +95,9 @@ selectedID!:any
         this.freelancerdata?.availability !== null &&
         this.freelancerdata?.adress !== null &&
         this.freelancerdata?.phone !== null &&
-        this.freelancerdata?.portfolio_Url !== null &&
-        this.freelancerdata?.CV !== null &&
-        this.freelancerdata?.phone !== null &&
-        this.freelancerdata?.phone !== null
+        this.freelancerdata?.portfolio_Url !== null 
+  
+
       );
     }
   

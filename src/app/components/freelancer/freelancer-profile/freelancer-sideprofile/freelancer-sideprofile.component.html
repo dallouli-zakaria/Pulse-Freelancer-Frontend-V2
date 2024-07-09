@@ -4,12 +4,12 @@
   </div>
   <ng-template #dataLoaded>
 
-    <div>
-      Status: {{ getStatus() }}
+    <div  class="alert alert-warning" role="alert">
+       {{ getStatus() }}
     </div>
-    <div class="text-end " >
+    <!-- <div class="text-end " >
         <span class="col-6"><h4><a (click)="openModalEdit(freelancerdata,freelancerdata?.id)" class="text-danger" style="cursor: pointer;"><i class="bi bi-pencil-square"></i></a></h4></span>
-    </div>
+    </div> -->
     <img
       src="assets/img/gallery/user-profile-3.png"
       class="rounded-circle avatar-xl img-thumbnail"
