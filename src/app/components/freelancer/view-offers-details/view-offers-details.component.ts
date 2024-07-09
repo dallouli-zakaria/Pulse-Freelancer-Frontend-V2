@@ -22,7 +22,7 @@ export class ViewOffersDetailsComponent implements OnInit, OnChanges {
   postdata?: Post;
   clientid!: number;
   company_name!: string;
-
+  freelancerstatus!:string;
   offerExists: boolean | null = null;
 
   successMessage: string = '';
@@ -40,8 +40,10 @@ export class ViewOffersDetailsComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['postId'] && this.postId !== null) {
+      this.getfreelancer();
       this.getposts();
       this.truefalse(this.postId);
+    
     }
     
   }
@@ -93,11 +95,15 @@ export class ViewOffersDetailsComponent implements OnInit, OnChanges {
     this.postservice.checkFreelancerOffer(postId, this.freelancerId).subscribe(response => {
       this.offerExists = response.offer_exists;
       
-      
-      
     }, error => {
       console.error('Error checking freelancer offer', error);
     });
+  }
+
+  getfreelancer(){
+    this.freelancerservice.show(this.freelancerId).subscribe((res)=>{
+      this.freelancerstatus=res.status;
+    })
   }
   
 

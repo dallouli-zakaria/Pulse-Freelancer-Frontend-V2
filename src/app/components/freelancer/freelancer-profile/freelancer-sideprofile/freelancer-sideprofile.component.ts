@@ -72,5 +72,33 @@ selectedID!:any
         this.isLoading = false;
       }, 1000);
     }
+
+
+    getStatus(): string {
+      if (this.isAllFieldsFilled() && this.freelancerdata?.status === 'verified') {
+        return 'Vérifié' ;
+      } else if (this.isAllFieldsFilled() && this.freelancerdata?.status === 'not verified') {
+        return 'pas encore vérifié';
+      } else {
+        return 'Veuilez remplir toutes vos informations ';
+      }
+    }
+
+    private isAllFieldsFilled(): boolean {
+      // Check all required fields are not null or undefined
+      return (
+        this.freelancerdata?.title !== null &&
+        this.freelancerdata?.dateOfBirth !== null &&
+        this.freelancerdata?.city !== null &&
+        this.freelancerdata?.TJM !== null &&
+        this.freelancerdata?.summary !== null &&
+        this.freelancerdata?.availability !== null &&
+        this.freelancerdata?.adress !== null &&
+        this.freelancerdata?.phone !== null &&
+        this.freelancerdata?.portfolio_Url !== null 
+  
+
+      );
+    }
   
 }

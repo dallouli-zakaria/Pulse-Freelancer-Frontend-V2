@@ -38,7 +38,9 @@ valueStatuse:any
 
 
 index(){
+  
   this.freelancerService.index();
+
   this.freelancerService.getdata.subscribe({
     next:(data:any)=>{this.freelancers=data;console.log(data);
     },
@@ -79,5 +81,31 @@ index(){
   this.showedelete = false;
   }
   //end manage pages
+
+
+  getStatus(): string {
+    if (this.isAllFieldsFilled() && this.selectedData?.status === 'verified') {
+      return 'Complet' ;
+    } else if (this.isAllFieldsFilled() && this.selectedData?.status === 'not verified') {
+      return 'pas encore vérifié';
+    } else {
+      return 'Veuilez remplir toutes vos informations ';
+    }
+  }
+
+  private isAllFieldsFilled(): boolean {
+    // Check all required fields are not null or undefined
+    return (
+      this.selectedData?.title?.trim() !== '' &&
+      this.selectedData?.dateOfBirth?.trim() !== '' &&
+      this.selectedData?.city?.trim() !== '' &&
+      this.selectedData?.TJM?.trim() !== '' &&
+      this.selectedData?.summary?.trim() !== '' &&
+      this.selectedData?.availability?.trim() !== '' &&
+      this.selectedData?.adress?.trim() !== '' &&
+      this.selectedData?.phone?.trim() !== '' &&
+      this.selectedData?.portfolio_Url?.trim() !== ''
+    );
+  }
   
 }

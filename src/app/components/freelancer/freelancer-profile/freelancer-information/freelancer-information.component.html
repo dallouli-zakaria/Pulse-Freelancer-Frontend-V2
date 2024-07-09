@@ -2,7 +2,7 @@
  <div></div>
     <div class="row mt-4 mb-4" >
         
-        <span class="col-lg-11 col-sm-6 col-md-6"><h5 class="text-uppercase">My Information</h5></span>
+        <span class="col-lg-11 col-sm-6 col-md-6"><h5 class="text-uppercase">Mes Informations</h5></span>
         <span class="col-lg-1 col-sm-6 col-md-6">
       
                 
@@ -32,7 +32,7 @@
                 </div>
                 <div class="form-group">
                   <label>Date of Birth:</label>
-                  <span class="sp">{{ freelancerdata?.dateOfBirth | date }}</span>
+                  <span class="sp">{{ freelancerdata?.dateOfBirth  }}</span>
                 </div>
                 <div class="form-group">
                   <label>City:</label>
@@ -48,7 +48,7 @@
                 </div>
                 <div class="form-group">
                   <label>Address:</label>
-                  <span class="sp">{{ freelancerdata?.address }}</span>
+                  <span class="sp">{{ freelancerdata?.adress }}</span>
                 </div>
                 <div class="form-group">
                   <label>Phone:</label>
@@ -56,7 +56,7 @@
                 </div>
                 <div class="form-group">
                   <label>Portfolio URL:</label>
-                  <span class="sp"><a [href]="freelancerdata?.portfolio_Url" target="_blank">{{ freelancerdata?.portfolio_Url }}</a></span>
+                  <span class="sp">{{ freelancerdata?.portfolio_Url }}</span>
                 </div>
             </div>
          
@@ -72,8 +72,9 @@
       <!-- <div class="modal" tabindex="-1" role="dialog" aria-modal="true" *ngIf="showedit"> -->
         <div *ngIf="showedit" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
         <div class="modal-dialog" role="document">
-              <div class="modal-content"><app-freelancer-editinfo [freelancerData]="selectedData" [freelancerID]="selectedID" (closeModal)="onCloseModal()"></app-freelancer-editinfo>
-                    
+              <div class="modal-content">
+                <app-freelancer-editinfo [freelancerData]="selectedData" [freelancerID]="selectedID" (closeModal)="onCloseModal()"></app-freelancer-editinfo>
+             
           </div>
             </div>
         </div>

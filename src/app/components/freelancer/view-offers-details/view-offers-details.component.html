@@ -1,25 +1,17 @@
 
 
 <div class="container card-box mt-4" id="offerModal">
-    <div *ngIf="successMessage"  class="alert alert-success" role="alert">{{ successMessage }} <a routerLink="../pulse/freelancer-dashboard/freelancer-offers">Voir mes offres</a></div>
+    <div *ngIf="successMessage"  class="alert alert-success" role="alert">{{ successMessage }}</div>
     <div class="row">
         <h4 class="col-lg-8">
               Details de l'offre
         </h4>
-        
         <button class="btn btn-danger col-lg-4"
         (click)="postuler()"
-        [disabled]="offerExists">
-        {{ offerExists ? 'Déjà postulé' : 'Postuler' }}
-        </button>
-
-
-        
+        [disabled]="offerExists || freelancerstatus === 'not verified'">
+        {{ offerExists ? 'Déjà postulé' : (freelancerstatus === 'not verified' ? 'Pas encore vérifié!' : 'Postuler') }}
+      </button>   
     </div>
-
-
-      
-     
     <div class="container mt-5 mb-3">
       <div class="row text-center">
         <div>
