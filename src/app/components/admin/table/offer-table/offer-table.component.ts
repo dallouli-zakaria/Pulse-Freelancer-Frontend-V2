@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Offer } from '../../../../core/models/Offer';
+import { Observable } from 'rxjs';
+import { OffersService } from '../../../../core/services/offers.service';
 
 @Component({
   selector: 'app-offer-table',
@@ -6,7 +9,35 @@ import { Component } from '@angular/core';
   styleUrl: './offer-table.component.css'
 })
 export class OfferTableComponent {
+ 
+  slecteID!:number;
+  selectedData?:Offer
+  
+  trackFreelancer(user:any,id:number){
+   this.slecteID=id;
+   this.selectedData=user; 
+  }
+  offers:Offer[]=[]
 
+  private offerService:OffersService= inject(OffersService)
+    ngOnInit(): void {
+  
+  this.index()
+  
+    }
+
+  
+   
+  
+  index(){
+    this.offerService.index().subscribe({
+      next:(data:any)=>{this.offers=data;console.log(data);
+      },
+      error:(error:any)=>{console.log(error);
+      },
+      complete:()=>console.log('end operation get data')
+      
+    });}
   //manage page edite delete and details for assingnig 
   show = false;
   showedit = false;

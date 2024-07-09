@@ -9,6 +9,7 @@ import { PostsService } from '../../../../../core/services/posts.service';
 export class PostDeleteComponent {
   @Input() postId!:number
   @Input() posetObject:any
+  errorhandling: any;
   constructor(private postServices:PostsService){
 }
 
@@ -23,7 +24,13 @@ deleted(){
         this.postServices.index();
         this.close();
       },
-      error:(error:any)=>console.log(error),
+      error:(error:any)=>{console.log(error);
+        if ( error.error.errors) {
+          this.errorhandling = Object.values(error.error.errors).flat();
+        } else {
+          this.errorhandling = [error.message || 'An error occurred'];
+        }
+      },
       complete:()=>console.log("end operation delete")
       
     }

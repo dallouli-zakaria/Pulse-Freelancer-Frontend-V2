@@ -11,41 +11,30 @@ import { RoleService } from '../../../core/services/role.service';
 })
 export class UserHomeComponent implements OnInit{
   userId!:number;
-  roles!:string[];
+  role!:string[];
   isAuthenticated: boolean = false;
-  constructor(private rolesService: RoleService,private authService:AuthService) {}
+  constructor(private authService:AuthService) {}
 
   ngOnInit(): void {
-    //this.authService.parseID();
+    // console.log(this.authService.verifyrole());
+   
+    
+    //geting user details with roles 
     this.isAuthenticated = this.authService.isLoggedIn();
     if (this.isAuthenticated) {
     const sub = this.authService.parseID(); 
     this.authService.getuserdetails(sub).subscribe((res) => {
-      this.userId = res.id;
-      console.log(this.userId); 
-      this.getRoles(); 
-    });
-  }
+      this.userId = res.user.id;
+      this.role=res.roles;
 
-  }
+      console.log(this.userId,this.role); 
 
-  //get connected user roles from decoded token
-  getRoles(): void {
-    
-    if (this.userId) {
-      this.rolesService.getUserRoles(this.userId).subscribe(
-        (res) => {
-          this.roles = res;
-          console.log(this.roles);
-        },
-        (error) => {
-          console.error('Error fetching roles', error);
-        }
-      );
-    } else {
-      console.warn('User ID is undefined.');
+    }); 
     }
+
   }
+
+  
 
 
 }

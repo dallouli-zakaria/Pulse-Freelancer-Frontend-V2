@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { PostsService } from '../../../../core/services/posts.service';
 import { Post } from '../../../../core/models/post';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-user-offers',
@@ -9,10 +11,10 @@ import { Post } from '../../../../core/models/post';
 })
 export class UserOffersComponent {
 
-  postid:number=1;
+  clientid:number=this.authservice.parseID();
   post: Post[] = [];
 
-  constructor(private  postservice:PostsService){
+  constructor(private  postservice:PostsService,private router:Router,private authservice:AuthService){
     this.fetchData();
     this.getposts();
  
@@ -38,9 +40,10 @@ export class UserOffersComponent {
 
 
 
+
     getposts(){
-      this.postservice.index()
-      this.postservice.postData.subscribe({
+      
+      this.postservice.showbclient(this.clientid).subscribe({
       next:(data:any)=>{
         this.post=data; 
         console.log(data);   

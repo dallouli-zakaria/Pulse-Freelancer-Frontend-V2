@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, shareReplay } from 'rxjs';
 import { Role } from '../models/Role';
-import { Client } from './../models/Client';
 import { Constant } from '../Constant';
 
 
@@ -58,5 +57,15 @@ export class RoleService {
   getUserRolesFromCache(): string[] {
     return this.userRoles;
   }
+
+
+  grantRoleToUser(data:any){
+    return this.http.get<any>(`${this.url}/grantRoleToUser`,data);
+  }
+
+  getRoles(rolename:string){
+    return this.http.get<any>(`${this.url}/users/role/${rolename}`);
+  }
+
 
 }

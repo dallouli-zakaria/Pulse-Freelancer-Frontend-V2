@@ -1,18 +1,19 @@
 export interface Freelancer{
-  id:number
-  user:{ 
-      name: string;
-      email: string;
+  id: number;
+  user: {
+    name: string;
+    email: string;
+    password?: string;
   };
-  password?: string;
   title: string;
-  dateOfBirth: string; 
+  dateOfBirth: string;
   city: string;
-  TJM: number;
+  TJM: string;
   summary: string;
   availability: string;
-  adress: string;
+  address: string;
   phone: string;
   portfolio_Url?: string;
-  CV?: string; 
+  CV?: string;
+  status:string
 }

@@ -12,6 +12,7 @@ export class ClientDeleteComponent {
   @Input() clientId!:number;
 
   @Output() closeModal = new EventEmitter<void>();
+  errorhandling: any;
   close(): void {
     this.closeModal.emit();
   }
@@ -34,7 +35,13 @@ export class ClientDeleteComponent {
       next:()=>{ this.clients.index();
         this.close();
       },
-      error:(error:any)=>console.log(error),
+      error:(error:any)=>{console.log(error);
+        if ( error.error.errors) {
+          this.errorhandling = Object.values(error.error.errors).flat();
+        } else {
+          this.errorhandling = [error.message || 'An error occurred'];
+        }
+      },
       complete:()=>console.log("end operation deleted") 
      })
    }

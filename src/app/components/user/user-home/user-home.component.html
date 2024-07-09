@@ -1,3 +1,5 @@
+
+
 <body>
 
 
@@ -14,13 +16,12 @@
             <p class="mt-3 mb-4">
               Pulse Freelancer est un marché bidirectionnel où les clients peuvent trouver divers services proposés par des freelanceurs,
                et les freelanceurs peuvent se connecter avec des clients potentiels à la recherche de leur expertise.
-               
             </p>
 
             
             <div *ngIf="isAuthenticated; else notAuthenticated">
-              <button *ngIf="roles && roles.includes('client_role')" class="btn btn-lg btn-danger hover-top btn-glow " routerLink="/pulse/client-dashboard">Découvrir !  </button>
-            <button *ngIf="roles && roles.includes('freelancer_role')" class="btn btn-lg btn-danger hover-top btn-glow " routerLink="/pulse/offers">Découvrir ! </button>
+              <button *ngIf="role && role.includes('client_role')" class="btn btn-lg btn-danger hover-top btn-glow " routerLink="/pulse/client-dashboard">Découvrir !  </button>
+            <button *ngIf="role && role.includes('freelancer_role')" class="btn btn-lg btn-danger hover-top btn-glow " routerLink="/pulse/offers">Découvrir ! </button>
             </div>
 
             <ng-template #notAuthenticated>

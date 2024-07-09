@@ -18,21 +18,21 @@ export class UserAddOfferComponent {
   form!:FormGroup;
   isSubmitting: boolean = false;
   tokenn!: any;
-  userid!:any;
+  userid:any=this.authservice.parseID();
   cities: string[] = ['Casablanca', 'Rabat', 'Fes', 'Marrakech', 'Tangier', 'Agadir', 'Meknes', 'Oujda', 'Kenitra', 'Tetouan','Autre'];
 
 
   constructor(  private fb:FormBuilder,private postsservice:PostsService,private router: Router,private authservice:AuthService){
-    this.get();
+
     this.form = this.fb.group({
       title: ['', Validators.required],
       location: ['', Validators.required],
       type: ['', Validators.required],
       description: ['', Validators.required],
       period: ['', Validators.required],
-      periodvalue:[''],
+      periodvalue:[0,Validators.required],
       budget: ['', Validators.required],
-      budgetvalue: [''],
+      budgetvalue: [0,Validators.required],
       client_id:[this.userid]
     });
   }
@@ -64,19 +64,7 @@ export class UserAddOfferComponent {
     }
   }
 
-  get(): void {
-    const token = localStorage.getItem('JWT_TOKEN');
-    if (token) {
-      this.tokenn = JSON.parse(token);
-      const atoken = this.tokenn.access_token;
-      const deco = this.authservice.decodeToken(atoken);
-      this.userid = deco.sub;
+ 
 
-      this.authservice.getuserdetails(this.userid).subscribe((res) => {
-        this.userid = res.id;
-      });
-    }
-
-    }
 
 }

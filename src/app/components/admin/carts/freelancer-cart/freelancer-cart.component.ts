@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FreelancerService } from '../../../../core/services/freelancer.service';
 
 @Component({
@@ -7,6 +7,7 @@ import { FreelancerService } from '../../../../core/services/freelancer.service'
   styleUrl: './freelancer-cart.component.css'
 })
 export class FreelancerCartComponent {
+  @Output() datafreelancert:any=new EventEmitter<number>()
   freelancer:any
   constructor(private freelancers:FreelancerService){}
   ngOnInit(): void {
@@ -19,7 +20,7 @@ export class FreelancerCartComponent {
     this.freelancers.count().subscribe({
       next: (data:any)=>{
         this.freelancer=data;
-        console.log(data);
+        this.datafreelancert.emit(this.freelancer)
       },
       error: (error:any)=>{
         console.log(error);

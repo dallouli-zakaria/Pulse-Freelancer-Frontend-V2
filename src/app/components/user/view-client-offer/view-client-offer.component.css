@@ -22,3 +22,25 @@ a{
 a:hover{
     color: #da3746;
 }
+
+
+.loading-skeleton {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .skeleton-header {
+    height: 24px;
+    width: 80%;
+    background: #ddd;
+    border-radius: 4px;
+  }
+  
+  .skeleton-row {
+    height: 16px;
+    width: 100%;
+    background: #eee;
+    border-radius: 4px;
+  }
+  

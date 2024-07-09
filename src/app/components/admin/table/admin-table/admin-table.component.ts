@@ -14,35 +14,65 @@ export class AdminTableComponent implements OnInit {
   selectedID!:number;
   selectedUser:any
 constructor(private userService:UserService ){}
-  subject!:Observable<User[]>
-
+  // subject!:Observable<User[]>
+//  sowadmin!:boolean
 
 ngOnInit(): void {
   //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
   //Add 'implements OnInit' to the class.
-  this.index()
-  this.subject=this.userService.getData
+  this.adminrole(true);
+ 
+  // this.role()
+  // this.index()
+  // this.subject=this.userService.getData
 }
-
+roleadmin='admin_role'
+superadmin='superadmin_role'
+rolename!:string
 trackAdmin(id:number,user:User){
   this.selectedID=id;
   this.selectedUser=user
 }
-index(){
-  
-  this.userService.index();
-this.userService.getData.subscribe({
-  next:(data:any)=>{
-    this.user=data;
-    console.log(data);
+
+  // role(){
     
-  },
-  error:(error)=>console.log("----"+error),
+  //     this.userService.getUserWithRole(this.superadmin).subscribe({
+  //     next:(data:any)=>{console.log(data);
+  //      this.user=data},
+  //     error:(erro)=>console.log(erro)  
+  //  })
   
-  complete:()=>console.log('end Operation')
+    
   
-})
-}
+   
+   adminrole(isSuperAdmin: boolean){
+    const roleadd = isSuperAdmin ? 'superadmin_role' : 'admin_role';
+      this.userService.getUserWithRole(roleadd).subscribe({
+      next:(data:any)=>{ this.user=data},
+      error:(erro)=>console.log(erro)  
+   })
+   }
+  
+    
+  
+
+// index(){
+//   if(this.sowadmin==true){
+//   this.userService.index();
+//   this.userService.getData.subscribe({
+//   next:(data:any)=>{if(this.sowadmin=true){
+//     this.user=data
+//   }
+
+    
+//   },
+//   error:(error)=>console.log("----"+error),
+  
+//   complete:()=>console.log('end Operation')
+  
+// })
+// }
+// }
 
 
 
@@ -66,7 +96,6 @@ this.userService.getData.subscribe({
   this.show = true;
   this.showedelete = true;
   this.showedit = false;
-  
   }
             
   onCloseModal(): void {

@@ -3,18 +3,18 @@
     <thead>
       <tr>
         <th scope="col">ID</th>
-        <th scope="col">name</th>
-        <th scope="col">email</th>
-        <th scope="col">role</th>
+        <th scope="col">title</th>
+        <th scope="col">post ID</th>
+        <th scope="col">Freelancer ID</th>
         <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>Otto</td>
+      <tr *ngFor="let offer of offers">
+        <th scope="row" >{{offer.id}}</th>
+        <td>{{offer.selected}}</td>
+        <td>{{offer.post_id}} </td>
+        <td>{{[offer.freelancer_id]}}</td>
         <td>
           <button class="btn btn-primary btn-sm" style="margin-right: 5px;" (click)="onEdited()">
             <i class="fas fa-pen"></i> </button> 
@@ -26,3 +26,20 @@
       
     </tbody>
 </table> 
+
+<div *ngIf="show" class="modal-backdrop fade show"><button (click)="onCloseModal()"></button></div>
+
+
+  <!-- edit -->
+  <div *ngIf="showedit" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-m"><div class="modal-content">
+    <app-offer-edit [offerId]="slecteID" [offerObject]="selectedData" (closeModal)="onCloseModal()"></app-offer-edit>
+  </div>
+</div>
+</div>
+<!-- delete -->
+<div *ngIf="showedelete" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-m"><div class="modal-content">
+    <app-offer-delete [offerID]="slecteID" [offerData]="selectedData" (closeModal)="onCloseModal()"></app-offer-delete>
+  </div>
+</div>  

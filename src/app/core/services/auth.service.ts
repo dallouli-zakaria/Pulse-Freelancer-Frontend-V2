@@ -15,6 +15,7 @@ export class AuthService {
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private isAuthenticated: boolean = false;
   
+  public verifrole!:any;
 
 
   API_URL2: any = 'http://127.0.0.1:8000/api/auth';
@@ -56,18 +57,12 @@ export class AuthService {
   }
 
   register(
-    name: string,
-    email: string,
-    password: string,
-    password_confirmation: string
+   data:any
   ): Observable<any> {
 
     // return this.http.post(this.API_URL + 'signup', {
     return this.http.post(this.API_URL2 + '/register', {
-      name,
-      email,
-      password,
-      password_confirmation,
+     data
     });
   }
 
@@ -99,6 +94,20 @@ export class AuthService {
   getuserdetails(userid:any):Observable<any>{
     return this.http.get<any>(`${this.API_URL2}/user/${userid}`);
   }
+
+
+  hasClientRole(): boolean {
+    const token = this.JWT_TOKEN;
+    if (token) {
+      const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+      // Assuming roles are stored in 'roles' claim
+      return tokenPayload && tokenPayload.roles && tokenPayload.roles.includes('clientx_role');
+    }
+    return false;
+  }
+
+  
+
 
 
 

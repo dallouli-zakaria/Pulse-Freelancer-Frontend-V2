@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ContractService } from '../../../../core/services/contract.service';
 
 @Component({
@@ -7,6 +7,7 @@ import { ContractService } from '../../../../core/services/contract.service';
   styleUrl: './contract-cart.component.css'
 })
 export class ContractCartComponent {
+  @Output() datacontract:any=new EventEmitter<number>()
   contract:any
   constructor(private contracts:ContractService){}
 
@@ -20,7 +21,8 @@ export class ContractCartComponent {
     this.contracts.count().subscribe({
       next: (data:any)=>{
         this.contract=data;
-        console.log(data);
+        this.datacontract.emit(this.contract) ;
+        
         
       },
       error:(error:any)=>{

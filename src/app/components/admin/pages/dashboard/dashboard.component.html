@@ -13,22 +13,22 @@
 
         <!-- Client cart -->
         <div class="col-xl-3 col-md-6 mb-4">
-           <app-client-cart></app-client-cart>
+           <app-client-cart (dataclient)="trackdata($event)"></app-client-cart>
         </div>
 
         <!-- freelancer cart-->
         <div class="col-xl-3 col-md-6 mb-4">
-           <app-freelancer-cart></app-freelancer-cart>
+           <app-freelancer-cart (datafreelancert)="trackdatafreelancer($event)"></app-freelancer-cart>
         </div>
 
         <!--Post cart-->
         <div class="col-xl-3 col-md-6 mb-4">
-           <app-post-cart></app-post-cart>
+           <app-post-cart (datapost)="trackdatapost($event)"></app-post-cart>
         </div>
 
         <!-- contract cart -->
         <div class="col-xl-3 col-md-6 mb-4">
-         <app-contract-cart></app-contract-cart>
+         <app-contract-cart (datacontract)="trackdatacontract($event)"></app-contract-cart>
         </div>
     </div>
 
@@ -37,27 +37,27 @@
     <div class="row">
 
         <!-- Area Chart -->
-        <div class="col-xl-8 col-lg-7">
-       <img src="/assets/img/Infographics_Update_.width-1000.jpg" alt="QSDQDS">
+        <div class="col-xl-30 col-lg-10 " style="margin-left: 70px; ">
+            <canvas id="mychart">{{chart}} </canvas>
+       <!-- <img src="/assets/img/Infographics_Update_.width-1000.jpg" alt="QSDQDS"> -->
         </div>
 
-        <div class="col-xl-4 col-lg-5">
+        <!-- <div class="col-xl-4 col-lg-5">
            
-        </div>
+        </div> -->
     </div>
 
-    <!-- Content Row -->
+<!-- 
     <div class="row">
 
-        <!-- Content Column -->
         <div class="col-lg-6 mb-4">
 
         </div>
 
         <div class="col-lg-6 mb-4">
-        <!-- Illustrations -->
+      
             
         </div>
-    </div>
+    </div> -->
 
 </div>

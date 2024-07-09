@@ -15,10 +15,11 @@ export class RoleEditComponent implements OnInit {
   role:Role[]=[];
   form!:FormGroup
   erorrshowe:any
+  errorhandling: any;
 constructor(private roleService:RoleService,private fb:FormBuilder,private modalService: NgbModal){}
   ngOnInit(): void {
   this.form=this.fb.group({
-    name:new FormControl('', Validators.email)
+    name:[this.roleData?.name]
   })
   }
 
@@ -32,13 +33,19 @@ constructor(private roleService:RoleService,private fb:FormBuilder,private modal
     next:()=>{this.roleService.index();
       this.close()
     },
-    error:(eror)=>{console.log(eror); this.erorrshowe=eror},
+    error:(error)=>{console.log(error); this.erorrshowe=error;
+      if ( error.error.errors) {
+        this.errorhandling = Object.values(error.error.errors).flat();
+      } else {
+        this.errorhandling = [error.message || 'An error occurred'];
+      }
+    },
     complete:()=>console.log('end operation') 
   })
   }
   ngOnChanges(): void {
   this.form=this.fb.group({
-   name:new FormControl(`${this.roleData?.name}`)
+   name:[this.roleData?.name]
   })
  }
 }

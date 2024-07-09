@@ -12,6 +12,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class RoleAddComponent implements OnInit{
   role:Role[]=[]
   form!:FormGroup
+  errorhandling: any;
 constructor(private roleServece:RoleService,private fb:FormBuilder){}
 @Output() closeModal = new EventEmitter<void>();
 close(): void {
@@ -28,8 +29,15 @@ addRole(){
   this.roleServece.store(this.form.value).subscribe({
     next:(data)=>{console.log(data)
     
-      this.roleServece.index()}
+      this.roleServece.index()},
+    error:(error)=>{ if ( error.error.errors) {
+      this.errorhandling = Object.values(error.error.errors).flat();
+    } else {
+      this.errorhandling = [error.message || 'An error occurred'];
+    }}  
+
   })
+
 }
 
 }

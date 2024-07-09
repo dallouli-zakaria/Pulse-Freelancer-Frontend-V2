@@ -104,6 +104,14 @@ import { PostComponent } from './components/admin/pages/post/post.component';
 import { PostAddComponent } from './components/admin/buttons/add/post-add/post-add.component';
 import { PostEditComponent } from './components/admin/buttons/edit/post-edit/post-edit.component';
 import { PostDeleteComponent } from './components/admin/buttons/delete/post-delete/post-delete.component';
+import { RoleUserComponent } from './components/admin/table/users-table/role-user/role-user.component';
+import { RolechipsAutocompleteComponent } from './components/admin/buttons/edit/role-edit/rolechips-autocomplete/rolechips-autocomplete.component';
+import { LoadingComponent } from './components/user/loading/loading.component';
+import { FreelancerInformationComponent } from './components/freelancer/freelancer-profile/freelancer-information/freelancer-information.component';
+import { FreelancerEditinfoComponent } from './components/freelancer/freelancer-profile/freelancer-information/freelancer-editinfo/freelancer-editinfo.component';
+import { OfferAddComponent } from './components/admin/buttons/add/offer-add/offer-add.component';
+import { OfferDeleteComponent } from './components/admin/buttons/delete/offer-delete/offer-delete.component';
+import { OfferEditComponent } from './components/admin/buttons/edit/offer-edit/offer-edit.component';
 
 
 
@@ -224,11 +232,19 @@ import { PostDeleteComponent } from './components/admin/buttons/delete/post-dele
                     PostAddComponent,
                     PostEditComponent,
                     PostDeleteComponent,
+                    RoleUserComponent,
+                    RolechipsAutocompleteComponent,
+                    LoadingComponent,
+                    FreelancerInformationComponent,
+                    FreelancerEditinfoComponent,
+                    OfferAddComponent,
+                    OfferDeleteComponent,
+                    OfferEditComponent,
           
         
   ],
   imports: [
-  
+     FormsModule,
     BrowserModule,
       AppRoutingModule,
       NgbModule,

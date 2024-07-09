@@ -4,6 +4,7 @@ import { ClientService } from '../../../../core/services/client.service';
 import { Observable } from 'rxjs';
 import { UserService } from '../../../../core/services/user.service';
 import { User } from '../../../../core/models/User';
+import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-userinfos',
@@ -12,23 +13,30 @@ import { User } from '../../../../core/models/User';
 })
 export class UserinfosComponent implements OnInit{
 
+  clientdetails!:Client;
+  clientdetails2!:Client;
 
   selectedata:any;
 
   isModalOpen = false;
   isModalOpen2 = false;
 
-  client!:Client;
-  clientid:number=1;
+  client?:Client;
+  clientid!:number;
 
-  openModal() {
+  constructor(private clientservice:ClientService,private authservice:AuthService){}
+
+  openModal(client:any) {
+    this.clientdetails=client
     this.isModalOpen = true;
   }
 
   closeModal() {
     this.isModalOpen = false;
   }
-  openModal2() {
+  
+  openModal2(client:any) {
+    this.clientdetails=client
     this.isModalOpen2 = true;
   }
   closeModal2() {
@@ -37,15 +45,19 @@ export class UserinfosComponent implements OnInit{
 
 
   
-  constructor(private userservice:UserService, private clientservice:ClientService){}
+
   ngOnInit(): void {
+ 
     this.getclient();
     this.fetchData();
+    
   }
 
 
 
   getclient(){
+    this.clientservice.index()
+    this.clientid=this.authservice.parseID();
     this.clientservice.show(this.clientid).subscribe({
       next:(data:any)=>{this.client=data},
       error:(error:any)=>console.log(error),

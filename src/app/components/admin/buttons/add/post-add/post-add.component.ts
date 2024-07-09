@@ -9,6 +9,7 @@ import { PostsService } from '../../../../../core/services/posts.service';
 })
 export class PostAddComponent {
 form!:FormGroup
+  errorhandling: any;
 constructor(private postService:PostsService,private fb:FormBuilder){}
 @Output() closeModal = new EventEmitter<void>();
 close(): void {
@@ -38,7 +39,13 @@ add(){
   this.postService.store(this.form.value).subscribe({
     next:(data:any)=>{console.log(data);
      this.postService.index()},
-    error:(error:any)=>console.log(error),
+    error:(error:any)=>{console.log(error);
+      if ( error.error.errors) {
+        this.errorhandling = Object.values(error.error.errors).flat();
+      } else {
+        this.errorhandling = [error.message || 'An error occurred'];
+      }
+    },
     complete:()=>console.log('end operation add')
     
     

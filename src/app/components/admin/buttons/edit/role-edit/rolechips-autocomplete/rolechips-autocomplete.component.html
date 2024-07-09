@@ -1,0 +1,17 @@
+<div class="form-group">
+    <label for="autocomplete">Select options</label>
+    <input type="text" class="form-control" id="autocomplete" [formControl]="myControl">
+    <ul class="list-group mt-2" *ngIf="(filteredOptions | async)">
+      <li class="list-group-item" *ngFor="let option of filteredOptions | async" (click)="addOption(option)">
+        {{option.name}}
+      </li>
+    </ul>
+  </div>
+  
+  <div class="mt-3">
+    <div *ngFor="let option of selectedOptions" class="badge badge-pill badge-primary m-1" style="color: black;">
+      {{option.name}}
+      <span class="ml-1" (click)="removeOption(option)" style="cursor:pointer; color: black;">&times;</span>
+    </div>
+  </div>
+  
