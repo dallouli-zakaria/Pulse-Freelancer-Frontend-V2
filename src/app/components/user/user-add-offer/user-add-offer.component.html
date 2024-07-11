@@ -1,10 +1,12 @@
 <!-- offer-form.component.html -->
 <div class="container mt-4">
-  <span>
-    <a routerLink="../client-dashboard" class="text-danger">
-      <i class="fas fa-arrow-left"></i> Retour
-    </a>
-  </span>
+  <nav aria-label="breadcrumb " >
+    <ol class="breadcrumb ">
+      <li class="breadcrumb-item text-danger "><a routerLink="../home">Acceuil</a></li>
+      <li class="breadcrumb-item text-danger "><a routerLink="../client-dashboard">Client</a></li>
+      <li class="breadcrumb-item active " aria-current="page">Création offre </li>
+    </ol>
+  </nav>
 </div>
 
 <div class="container card mt-4">

@@ -9,3 +9,7 @@ a{
     text-decoration: none;
 }
 
+.breadcrumb-item a{
+    color: #da3746;
+}
+

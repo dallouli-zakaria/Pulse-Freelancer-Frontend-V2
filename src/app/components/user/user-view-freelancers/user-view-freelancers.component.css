@@ -24,6 +24,11 @@ a {
   text-decoration: none;
 }
 
+
+.breadcrumb-item a{
+  color: #da3746;
+} 
+
 .bookmark-post .favorite-icon a,
 .job-box.bookmark-post .favorite-icon a {
   background-color: #da3746;

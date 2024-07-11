@@ -3,16 +3,16 @@
     <ul class="list-group">
       <li *ngFor="let skill of submittedSkills" class="list-group-item">
         <div class="d-flex justify-content-between align-items-center">
-          <span>{{ skill.name }}</span>
+          <span>{{ skill.title }}</span>
           <div>
             <button class="btn btn-sm btn-outline-danger me-2" (click)="decreaseProgress(skill)">-</button>
             <button class="btn btn-sm btn-outline-primary" (click)="increaseProgress(skill)">+</button>
           </div>
         </div>
         <div class="progress mt-2">
-          <div class="progress-bar" role="progressbar" [style.width]="skill.progress + '%'" 
-               [attr.aria-valuenow]="skill.progress" aria-valuemin="0" aria-valuemax="100">
-            {{ skill.progress }}%
+          <div class="progress-bar" role="progressbar" [style.width]="skill.level + '%'" 
+               [attr.aria-valuenow]="skill.level" aria-valuemin="0" aria-valuemax="100">
+            {{ skill.level }}%
           </div>
         </div>
       </li>

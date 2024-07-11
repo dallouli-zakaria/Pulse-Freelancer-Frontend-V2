@@ -2,10 +2,6 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { SkillService } from '../../../../../core/services/skill.service';
 
-interface SkillWithProgress {
-  name: string;
-  progress: number;
-}
 
 @Component({
   selector: 'app-skillchips',
@@ -21,7 +17,7 @@ export class SkillchipsComponent implements OnInit {
   selectedSkills: string[] = [];
   showSuggestions: boolean = false;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private skillservice:SkillService) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -61,11 +57,16 @@ export class SkillchipsComponent implements OnInit {
   addSkill(event: Event): void {
     event.preventDefault();
     const value = this.form.get('skillInput')?.value.trim();
-    if (value && !this.selectedSkills.includes(value)) {
+    
+    // Check if the entered skill exists in the predefined skills array
+    if (value && this.skills.includes(value) && !this.selectedSkills.includes(value)) {
       this.selectedSkills.push(value);
       this.form.get('skillInput')?.reset();
       this.filteredSkills = [];
       this.showSuggestions = false;
+    } else {
+      // Optionally, you can show a message or handle invalid skill entries here
+      console.log('Please select a skill from the suggestions.');
     }
   }
 
@@ -91,5 +92,7 @@ export class SkillchipsComponent implements OnInit {
       this.selectedSkills = [];
     }
   }
+  
+
   
 }

@@ -13,8 +13,11 @@ export class FreelancerSkillsComponent {
 
   onSkillsSubmitted(skills: string[]): void {
     const newSkills = skills.map(skill => ({
-      name: skill,
-      progress: 0
+      id: 0, 
+      freelancer_id: 0,
+      skill_id: 0,
+      title: skill,
+      level: 20
     }));
     this.submittedSkills = [...this.submittedSkills, ...newSkills];
   }
