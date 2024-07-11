@@ -74,13 +74,23 @@ selectedID!:any
     }
 
 
-    getStatus(): string {
+    getStatusMessage(): string {
       if (this.isAllFieldsFilled() && this.freelancerdata?.status === 'verified') {
-        return 'Vérifié' ;
+        return  'verified';
       } else if (this.isAllFieldsFilled() && this.freelancerdata?.status === 'not verified') {
         return 'pas encore vérifié';
       } else {
         return 'Veuilez remplir toutes vos informations ';
+      }
+    }
+
+    getStatus(): { cssClass: string } {
+      if (this.isAllFieldsFilled() && this.freelancerdata?.status === 'verified') {
+        return { cssClass: 'status-connected' };
+      } else if (this.isAllFieldsFilled() && this.freelancerdata?.status === 'not verified') {
+        return { cssClass: 'status-away' };
+      } else {
+        return {cssClass: 'status-disconnected' };
       }
     }
 
@@ -96,8 +106,6 @@ selectedID!:any
         this.freelancerdata?.adress !== null &&
         this.freelancerdata?.phone !== null &&
         this.freelancerdata?.portfolio_Url !== null 
-  
-
       );
     }
   

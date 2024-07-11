@@ -108,3 +108,39 @@ a{
 a:hover{
     color: #da3746;
 }
+
+
+.profile-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .status-indicator {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    border: 2px solid white; /* Optional: adds a border to make the circle more distinct */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px; /* Adjust the font size to make the icon bigger or smaller */
+  }
+  
+  .status-connected {
+    background-color: green;
+  }
+  
+  .status-disconnected {
+    background-color: #da3746;
+
+  }
+  
+  .status-away {
+    background-color: rgb(237, 178, 0);
+    color: black; 
+
+  }
