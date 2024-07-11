@@ -16,7 +16,7 @@ export class SkillService {
      this.Skill=this.http.get(`${this.url}/SkillCount`);
      return this.Skill
    }
-   public index(value: string):Observable<Skill>{
+   public index():Observable<Skill[]>{
      this.Skill=this.http.get(`${this.url}/${Constant.SkillS}`);
      return this.Skill
    }
@@ -45,4 +45,7 @@ export class SkillService {
      this.Skill=this.http.get(`${this.url}/${Constant.SkillS}/freelancer/${id}`);
      return this.Skill;
    }
+
+
+   
 }
