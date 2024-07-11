@@ -9,8 +9,8 @@ export class MailService {
 email:any
   constructor(private http:HttpClient) { }
 url=Constant.API_ENDPOINT
-sendMail(data:any){
-this.email=this.http.post(`${this.url}/email`,data)
+sendMail(message:any){
+this.email=this.http.post(`${this.url}/email`,message)
 return this.email
 }
 }

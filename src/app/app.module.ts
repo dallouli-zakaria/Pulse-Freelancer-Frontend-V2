@@ -113,13 +113,6 @@ import { OfferAddComponent } from './components/admin/buttons/add/offer-add/offe
 import { OfferDeleteComponent } from './components/admin/buttons/delete/offer-delete/offer-delete.component';
 import { OfferEditComponent } from './components/admin/buttons/edit/offer-edit/offer-edit.component';
 
-
-
-
-
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -130,7 +123,6 @@ import { OfferEditComponent } from './components/admin/buttons/edit/offer-edit/o
     FreelancerCartComponent,
     ClientCartComponent,
     DashboardComponent,
-  
     ContractCartComponent,
           OfferCartComponent,
           AdminComponent,
@@ -239,7 +231,7 @@ import { OfferEditComponent } from './components/admin/buttons/edit/offer-edit/o
                     FreelancerEditinfoComponent,
                     OfferAddComponent,
                     OfferDeleteComponent,
-                    OfferEditComponent,
+                    OfferEditComponent
           
         
   ],
