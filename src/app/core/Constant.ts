@@ -9,4 +9,5 @@ export class Constant{
     public static readonly PERMISSION:string="permissions";
     public static readonly USER:string="users";
     public static readonly ROLE:string="roles";
+    public static readonly SkillS:string="skills";
 }

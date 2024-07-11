@@ -112,6 +112,9 @@ import { FreelancerEditinfoComponent } from './components/freelancer/freelancer-
 import { OfferAddComponent } from './components/admin/buttons/add/offer-add/offer-add.component';
 import { OfferDeleteComponent } from './components/admin/buttons/delete/offer-delete/offer-delete.component';
 import { OfferEditComponent } from './components/admin/buttons/edit/offer-edit/offer-edit.component';
+import { ToastComponent } from './components/user/toast/toast.component';
+import { SkillchipsComponent } from './components/freelancer/freelancer-profile/freelancer-skills/skillchips/skillchips.component';
+import { SkillprogressComponent } from './components/freelancer/freelancer-profile/freelancer-skills/skillprogress/skillprogress.component';
 
 
 
@@ -240,6 +243,9 @@ import { OfferEditComponent } from './components/admin/buttons/edit/offer-edit/o
                     OfferAddComponent,
                     OfferDeleteComponent,
                     OfferEditComponent,
+                    ToastComponent,
+                    SkillchipsComponent,
+                    SkillprogressComponent,
           
         
   ],
