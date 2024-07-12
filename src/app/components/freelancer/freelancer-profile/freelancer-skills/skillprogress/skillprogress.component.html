@@ -1,3 +1,5 @@
+<form [formGroup]="form" (ngSubmit)="addSkills()">
+
 <div *ngIf="submittedSkills.length > 0" class="mt-4">
     <h5>Submitted Skills:</h5>
     <ul class="list-group">
@@ -18,3 +20,5 @@
       </li>
     </ul>
   </div>
+  <button type="submit" name="submit" class="btn btn-outline-danger">Ajouter Skill</button>
+</form>

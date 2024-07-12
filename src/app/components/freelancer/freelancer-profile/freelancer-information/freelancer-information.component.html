@@ -1,23 +1,41 @@
 <div class="card-box">
- <div></div>
+
     <div class="row mt-4 mb-4" >
         
         <span class="col-lg-11 col-sm-6 col-md-6"><h5 class="text-uppercase">Mes Informations</h5></span>
         <span class="col-lg-1 col-sm-6 col-md-6">
       
-                
+
                 <h4 class="col-6"><a (click)="onEdited(freelancerdata?.id,freelancerdata)" class="text-danger" style="cursor: pointer;"><i class="bi bi-pencil-square"></i></a></h4>
       
           </span>
           
+      
+      
+    <!-- Skeleton loader -->
+      <div *ngIf="isLoading" class="container mb-3">
+        <div class="pb-0 px-3 skeleton-card" *ngFor="let i of [1]">
+          <div class="card-body">
+            <div class="skeleton-title"></div>
+            <div class="skeleton-description"></div>
+            <div class="skeleton-budget"></div>
+            <div class="skeleton-description"></div>
+            <div class="skeleton-budget"></div>
+          </div>
+        </div>
+      </div>
+
+      
     </div>
+
+
    
        
-        <p class="text-muted font-13 mb-3">  
+        <p class="text-muted font-13 mb-3 " >  
             <!-- <div *ngIf="showEdit" class="modal-backdrop fade show"></div> -->
 
             <!-- User Info Display -->
-            <div class="user-info">
+            <div class="user-info"*ngIf="!isLoading" >
                 <div class="form-group">
                   <label>Name:</label>
                   <span class="sp">{{ freelancerdata?.user?.name }}</span>

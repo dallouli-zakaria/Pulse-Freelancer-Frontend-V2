@@ -18,3 +18,39 @@
     color: #333; /* Text color */
     outline: none; /* Removes default outline */
   }
+  .skeleton-card {
+    margin-bottom: 20px;
+  }
+  
+  .skeleton-title, .skeleton-description, .skeleton-budget {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+  }
+  
+  .skeleton-title {
+    height: 24px;
+    margin-bottom: 10px;
+    width: 70%;
+  }
+  
+  .skeleton-description {
+    height: 16px;
+    margin-bottom: 8px;
+    width: 100%;
+  }
+  
+  .skeleton-budget {
+    height: 16px;
+    width: 40%;
+  }
+  
+  @keyframes loading {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+  

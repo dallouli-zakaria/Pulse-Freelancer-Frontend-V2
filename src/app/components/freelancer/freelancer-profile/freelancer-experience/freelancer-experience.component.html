@@ -11,7 +11,20 @@
               </span>
               
         </div>
-        <ul class="list-unstyled timeline-sm">
+
+            <!-- Skeleton loader -->
+      <div *ngIf="isLoading" class="container mb-3">
+        <div class="pb-0 px-3 skeleton-card" *ngFor="let i of [1,2,3,4,5]">
+          <div class="card-body">
+            <div class="skeleton-title"></div>
+            <div class="skeleton-description"></div>
+            <div class="skeleton-budget"></div>
+          </div>
+        </div>
+      </div>
+        
+        <ul class="list-unstyled timeline-sm"*ngIf="!isLoading" >
+          
           <li class="timeline-sm-item" *ngFor="let item of experienceData">
             <span class="timeline-sm-date">{{ getYear(item.startDate) }} - {{ getYear(item.endDate) }}</span> 
             <h5 class="mt-0 mb-1">
@@ -65,8 +78,8 @@
                 
               </div>
             <div class="modal-body">
-              <app-freelancer-update-experience (experienceUpdated)="onExperienceUpdated()"></app-freelancer-update-experience>                      </div>
-
+              <app-freelancer-update-experience (experienceUpdated)="onExperienceUpdated()"></app-freelancer-update-experience>
+            </div>
         </div>
           </div>
       </div>
@@ -86,7 +99,9 @@
               </div>
               <div class="modal-footer">
                 
-                <button type="button" class="btn btn-danger" (click)="confirmDeleteExperience()">Delete</button>
+                <button type="button" class="btn btn-danger" (click)="confirmDeleteExperience()" [disabled]="isSubmitting">
+                  {{ isSubmitting ? 'Supression...' : 'Supprimer' }}
+                </button>
               </div>
             </div>
           </div>

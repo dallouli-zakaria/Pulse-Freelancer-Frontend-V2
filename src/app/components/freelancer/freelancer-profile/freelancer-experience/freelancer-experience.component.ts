@@ -15,7 +15,8 @@ import { FreelancerUpdateExperienceComponent } from './freelancer-update-experie
 export class FreelancerExperienceComponent implements OnInit{
   displayAdd = "none";
   displayEdit = "none";
-  displayDelete="none"
+  displayDelete="none";
+  isLoading = false;
   experienceData?:Experience[]
   experienceToDeleteId!: number;
   isSubmitting = false; 
@@ -47,10 +48,15 @@ export class FreelancerExperienceComponent implements OnInit{
     this.displayEdit = "none";
   }
   getdata(){
+    this.isLoading = true;
     this.experienceservice.showByFreelancer(this.freelancerId).subscribe({next:(res)=>{
       this.experienceData=res;
-      console.log(res)},
+      console.log(res);
+      this.isLoading = false;
+    
+    },
       error: (error) => console.error('Error fetching experiences:', error)
+      
       
     })
   }
@@ -81,15 +87,19 @@ export class FreelancerExperienceComponent implements OnInit{
   }
 
   confirmDeleteExperience() {
+    this.isSubmitting = true; 
     if (this.experienceToDeleteId) {
       this.experienceservice.delete(this.experienceToDeleteId).subscribe({
+        
         next: () => {
           this.getdata(); 
           this.onCloseHandledDelete();
+          this.isSubmitting = false; 
         },
         error: (error) => {
           console.error('Error deleting experience:', error);
           this.onCloseHandledDelete();
+          this.isSubmitting = false; 
         }
       });
     }

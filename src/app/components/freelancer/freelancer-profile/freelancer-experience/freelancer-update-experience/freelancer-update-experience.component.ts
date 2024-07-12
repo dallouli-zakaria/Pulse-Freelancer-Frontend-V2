@@ -13,6 +13,8 @@ export class FreelancerUpdateExperienceComponent implements OnInit{
 
   @Output() experienceUpdated = new EventEmitter<void>();
   
+  
+  isSubmitting = false;
   updateForm!: FormGroup;
   freelancerId: number = this.authService.parseID();
   experienceToUpdate?: Experience;
@@ -62,12 +64,14 @@ export class FreelancerUpdateExperienceComponent implements OnInit{
 
   onSubmit() {
     if (this.updateForm.valid && this.experienceToUpdate && this.experienceToUpdate.id) {
+      this.isSubmitting = true;
       const updatedExperience: Experience = {
         ...this.updateForm.value
       };
 
       this.experienceService.update(this.experienceToUpdate.id, updatedExperience).subscribe({
         next: () => {
+          this.isSubmitting=false;
           this.experienceUpdated.emit();
         },
         error: (error) => console.error('Error updating experience:', error)

@@ -10,7 +10,7 @@ export class FreelancerSkillsComponent {
 
 
   submittedSkills: SkillWithProgress[] = [];
-
+  
   onSkillsSubmitted(skills: string[]): void {
     const newSkills = skills.map(skill => ({
       id: 0, 

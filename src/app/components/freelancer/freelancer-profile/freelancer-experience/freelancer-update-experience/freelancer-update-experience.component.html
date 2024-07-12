@@ -32,5 +32,7 @@
         <textarea class="form-control" formControlName="description" id="description" rows="4"></textarea>
     </div>
     <br>
-    <button type="submit" class="btn btn-outline-danger" [disabled]="!updateForm.valid">Modifier</button>
+    <button type="submit" class="btn btn-outline-danger" [disabled]="!updateForm.valid || isSubmitting">
+        {{ isSubmitting ? 'Envoi...' : 'Modifier' }}
+    </button>
 </form>
