@@ -17,6 +17,14 @@
          <button class="btn btn-danger btn-sm" style="margin-right: 5px;" (click)="ondeleted(item.id, item)">
             <i class="fas fa-trash"></i></button>
       
+              <button class="btn btn-secondary btn-sm" type="button" data-bs-toggle="dropdown" >
+                <i class="bi bi-three-dots"></i> 
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" (click)="onAssignPermessionTorole(item)" ></a></li>
+                <li><a class="dropdown-item" >assign permession to role</a></li>  
+              </ul>
+            
         </td>
       </tr>
       
@@ -36,6 +44,14 @@
    <div *ngIf="showedelete" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
     <div class="modal-dialog modal-m"><div class="modal-content">
     <app-permission-delete [permissionId]="selectedID" [permissionData]="selectedData" (closeModal)="onCloseModal()"></app-permission-delete>
+    </div>
+  </div>
+
+
+   <!-- delete-->
+   <div *ngIf="showedelete" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-m"><div class="modal-content">
+    <app-assign-role-to-user [permissionData]="selectedData" (closeModal)="onCloseModal()"></app-assign-role-to-user>
     </div>
   </div>
 </div>

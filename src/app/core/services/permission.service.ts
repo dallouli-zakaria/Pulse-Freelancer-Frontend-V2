@@ -35,7 +35,7 @@ export class PermissionService {
   }
 
   public delete(id:any):Observable<Permission>{
-    this.permission=this.http.delete(`${this.url}/${Constant.PERMISSION}`);
+    this.permission=this.http.delete(`${this.url}/${Constant.PERMISSION}/${id}`);
     return this.permission
   }
 

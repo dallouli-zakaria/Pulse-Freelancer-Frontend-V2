@@ -112,6 +112,10 @@ import { FreelancerEditinfoComponent } from './components/freelancer/freelancer-
 import { OfferAddComponent } from './components/admin/buttons/add/offer-add/offer-add.component';
 import { OfferDeleteComponent } from './components/admin/buttons/delete/offer-delete/offer-delete.component';
 import { OfferEditComponent } from './components/admin/buttons/edit/offer-edit/offer-edit.component';
+import { AssignRoleToPermessionComponent } from './components/admin/buttons/assignement/assign-role-to-permession/assign-role-to-permession.component';
+import { AssignRoleToUserComponent } from './components/admin/buttons/assignement/assign-role-to-user/assign-role-to-user.component';
+import { AssignPermessionToRoleComponent } from './components/admin/buttons/assignement/assign-permession-to-role/assign-permession-to-role.component';
+import { AssignPermessionToUserComponent } from './components/admin/buttons/assignement/assign-permession-to-user/assign-permession-to-user.component';
 
 @NgModule({
   declarations: [
@@ -231,7 +235,11 @@ import { OfferEditComponent } from './components/admin/buttons/edit/offer-edit/o
                     FreelancerEditinfoComponent,
                     OfferAddComponent,
                     OfferDeleteComponent,
-                    OfferEditComponent
+                    OfferEditComponent,
+                    AssignRoleToPermessionComponent,
+                    AssignRoleToUserComponent,
+                    AssignPermessionToRoleComponent,
+                    AssignPermessionToUserComponent
           
         
   ],

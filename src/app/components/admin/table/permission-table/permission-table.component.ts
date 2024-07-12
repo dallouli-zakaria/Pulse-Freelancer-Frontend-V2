@@ -62,6 +62,11 @@ this.show = false;
 this.showedit = false;
 this.showedelete = false;
 }
-//end manage pages
 
+onAssignPermessionTorole(data:any){
+  this.show = false;
+  this.showedit = false;
+}
+
+//end manage pages
 }
