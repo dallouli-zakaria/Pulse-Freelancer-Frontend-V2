@@ -34,7 +34,7 @@ export class ExperienceService {
   }
 
   public store(data:any):Observable<Experience[]>{
-  this.experience=this.http.put(`${this.url}/${Constant.EXPERIENCE}`,data);
+  this.experience=this.http.post(`${this.url}/${Constant.EXPERIENCE}`,data);
   return this.experience
   }
 
