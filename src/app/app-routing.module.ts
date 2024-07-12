@@ -86,7 +86,6 @@ const routes: Routes = [
        },
       { path: 'client-offer/:postId', component: ViewClientOfferComponent },
       { path: 'offers', component: ViewOffersComponent },
-      { path: 'freelancer-profile', component: FreelancerProfileComponent },
       { path: 'contact', component: ContactUsComponent },
       { path: 'home', component: UserHomeComponent },
       {path:'view-freelancerprofile',component:UserViewfreelancersProfileComponent},
@@ -96,6 +95,8 @@ const routes: Routes = [
 
           {path:'freelancer-offers',component:FreelancerOffersComponent},
           {path:'freelancer-contracts',component:FreelancerContractsComponent},
+          { path: 'freelancer-profile', component: FreelancerProfileComponent },
+
           { path: '', redirectTo: 'freelancer-offers', pathMatch: 'full' },
           
         ]

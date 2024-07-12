@@ -2,7 +2,19 @@
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid #e7eaed;
-    padding: 1.5rem;
+    padding: 1.5rem; 
     margin-bottom: 24px;
-    border-radius: .25rem;
-}
+    border-radius: 0.25rem;
+  }
+
+  textarea.form-control {
+    border: none;
+    background-color: transparent; /* Ensures no background color */
+    resize: none; /* Prevents resizing */
+    font-size: 1rem; /* Adjust font size as needed */
+    padding: 10px; /* Adjust padding as needed */
+    width: 100%; /* Ensures it takes full width */
+    min-height: 150px; /* Adjust minimum height as needed */
+    color: #333; /* Text color */
+    outline: none; /* Removes default outline */
+  }

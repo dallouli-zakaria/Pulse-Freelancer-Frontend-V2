@@ -1,37 +1,31 @@
 <div class="card-box">
-
-
-    <div>
-        <div class="row mt-4 mb-4" >
-        
-            <span class="col-lg-11 col-sm-6 col-md-6"><h5 class="text-uppercase">Concernant</h5></span>
-            <span class="col-lg-1 col-sm-6 col-md-6">
-          
-                    
-                    <h4 class="col-6"><a (click)="onEdited(freelancerdata?.id,freelancerdata)" class="text-danger" style="cursor: pointer;"><i class="bi bi-pencil-square"></i></a></h4>
-          
-              </span>
-              
-        </div>
-        <p class="text-muted font-13 mb-3">
-          {{freelancerdata?.summary}}
-        </p>
+  <div>
+    <div class="row mt-4 mb-4">
+      <div class="col-lg-11 col-sm-6 col-md-6">
+        <h5 class="text-uppercase">Concernant</h5>
+      </div>
+      <div class="col-lg-1 col-sm-6 col-md-6">
+        <h4><a (click)="onEdited(freelancerdata?.id, freelancerdata)" class="text-danger" style="cursor: pointer;"><i class="bi bi-pencil-square"></i></a></h4>
+      </div>
     </div>
 
 
-
-
-      <!-- modal edit -->
-      <div *ngIf="showedit" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
-        <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <app-freelancer-update-about  [freelancerData]="selectedData" [freelancerID]="selectedID" (closeModal)="onCloseModal()"></app-freelancer-update-about>
-          </div>
-            </div>
-        </div>
-
-          <!-- end modal edit -->
-
-
+    <div class="form-group">
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" readonly>
+        {{freelancerdata?.summary}}
+      </textarea>
+    </div>
+    
+  <!-- modal edit -->
+  <div *ngIf="showedit" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        
+        <app-freelancer-update-about [freelancerData]="selectedData" [freelancerID]="selectedID" (closeModal)="onCloseModal()"></app-freelancer-update-about>
+      </div>
+    </div>
+  </div>
+  <!-- end modal edit -->
 </div>
+
 

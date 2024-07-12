@@ -36,7 +36,7 @@
             <div class="dropdown-menu" [class.show]="dropdownOpen" aria-labelledby="dropdownMenuButton" style="cursor:default;">
               <span class="dropdown-item text-muted">{{role}}</span>
   
-              <a class="dropdown-item" href="pulse/freelancer-profile" (click)="selectOption('profile')">Profile</a>
+              <a class="dropdown-item" href="pulse/freelancer-dashboard/freelancer-profile" (click)="selectOption('profile')">Profile</a>
               <a class="dropdown-item" href="" (click)="selectOption('dashboard')">Dashboard</a>
               <a class="dropdown-item"  (click)="authService.logout()">Deconnecter</a>
             </div>

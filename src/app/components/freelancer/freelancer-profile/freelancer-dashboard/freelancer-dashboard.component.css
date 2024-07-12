@@ -115,3 +115,6 @@ a{
 a:hover{
     color: #da3746;
 }
+.breadcrumb-item a{
+    color: #da3746;
+}

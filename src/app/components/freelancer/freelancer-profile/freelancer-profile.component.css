@@ -1,7 +1,7 @@
 body{
    
     background-color: #fff;
-    margin-top:20px;
+    
     font-family: "Rubik", "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
 }
@@ -246,3 +246,14 @@ a{
     color: #da3746;
     text-decoration: none;
 }
+
+
+.skeleton-box {
+    background-color: #f0f0f0;
+    height: 20px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+  }
+  
+
+  

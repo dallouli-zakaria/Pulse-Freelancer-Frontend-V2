@@ -1,71 +1,42 @@
 <body>
-
-  <div class="container p-4">
-    
-    <span>
-      <nav aria-label="breadcrumb " >
-        <ol class="breadcrumb ">
-          <li class="breadcrumb-item text-danger "><a routerLink="../home">Acceuil</a></li>
-          <li class="breadcrumb-item text-danger "><a routerLink="../offers">Voir offres</a></li>
-          <li class="breadcrumb-item active " aria-current="page">Mon profile</li>
-        </ol>
-      </nav>
-      <h3 class="mt-3 mb-3">Profile Freelanceur</h3>
-    </span>
+  <div class="container">
     <div class="row">
-      <div class="col-lg-4 col-xl-4">
 
-
-
-       
-
-       <!-- sideprofile start -->
-       <div class="col-lg-4 col-xl-4"></div>
-        
-        <app-freelancer-sideprofile></app-freelancer-sideprofile>
-       
-       <!-- sideprofile end -->
-
-
-
-        <!-- skills start -->
-
-        <app-freelancer-skills></app-freelancer-skills>
-
-         <!-- skills end -->
-
+      <!-- Freelancer Information -->
+      <div class="row" *ngIf="!isLoadingFreelancerData; else skeletonLoader">
+        <span class="col-lg-6">
+          <app-freelancer-information></app-freelancer-information>
+        </span>
+        <span class="col-lg-6">
+          <app-freelancer-about></app-freelancer-about>
+        </span>
       </div>
-      
-      <div class="col-lg-8 col-xl-8">
 
+      <!-- Skeleton Loader Template -->
+      <ng-template #skeletonLoader>
+        <div class="col-lg-6">
+          <div class="skeleton-box"></div>
+        </div>
+        <div class="col-lg-6">
+          <div class="skeleton-box"></div>
+        </div>
+      </ng-template>
 
-
-
-        <!-- my information -->
-         <app-freelancer-information></app-freelancer-information>
-        <!-- about start -->
- 
-        <app-freelancer-about></app-freelancer-about>
-
-        <!-- about end -->
-
-
-        <!-- experience start -->
-
+      <!-- Freelancer Experience -->
+      <div  class="row">
         <app-freelancer-experience></app-freelancer-experience>
-
-        <!-- experience end -->
-       
-        
-
-        <!-- projects table -->
-        
-        <app-freelancer-projects></app-freelancer-projects>
-
-        <!-- end projects table -->
-        
-
       </div>
+
+      <!-- Freelancer Skills -->
+      <div  class="row">
+        <app-freelancer-skills></app-freelancer-skills>
+      </div>
+
+      <!-- Freelancer Projects -->
+      <div  class="row">
+        <app-freelancer-projects></app-freelancer-projects>
+      </div>
+
     </div>
   </div>
 </body>

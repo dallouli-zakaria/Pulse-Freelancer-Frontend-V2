@@ -15,37 +15,34 @@ import { Router } from '@angular/router';
 })
 export class ViewOffersDetailsComponent implements OnInit, OnChanges {
   @Input() postId: number | null = null;
-
-  
+  isLoading: boolean = true;
   freelancerId: number = this.authservice.parseID();
   freelancerdata!: Freelancer;
   postdata?: Post;
   clientid!: number;
   company_name!: string;
-  freelancerstatus!:string;
+  freelancerstatus!: string;
   offerExists: boolean | null = null;
 
   successMessage: string = '';
   isButtonDisabled: boolean = false;
-
 
   constructor(
     private authservice: AuthService,
     public freelancerservice: FreelancerService,
     private postservice: PostsService,
     private clientservice: ClientService,
-    private offerservice:OffersService,
-    private router:Router
+    private offerservice: OffersService,
+    private router: Router
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['postId'] && this.postId !== null) {
+      this.isLoading = true;
       this.getfreelancer();
       this.getposts();
       this.truefalse(this.postId);
-    
     }
-    
   }
 
   ngOnInit(): void {}
@@ -64,49 +61,38 @@ export class ViewOffersDetailsComponent implements OnInit, OnChanges {
   getclient(clientId: number) {
     this.clientservice.show(clientId).subscribe((res) => {
       this.company_name = res.company_name;
+      this.isLoading = false;
       console.log(res);
     });
   }
-  
 
-
-  postuler(){
-    let data={
-      "selected":this.company_name,
-      "freelancer_id":this.freelancerId,
-      "post_id":this.postId
-  }
-    // this.offerservice.store(data).subscribe((res)=>{
-
-    //   //this.router.navigate(['../pulse/freelancer-dashboard/freelancer-offers'])
-      
-    // })
-
+  postuler() {
+    this.isButtonDisabled = true; // Show "Envoi..." on button
+    let data = {
+      selected: this.company_name,
+      freelancer_id: this.freelancerId,
+      post_id: this.postId
+    };
 
     this.offerservice.store(data).subscribe((res) => {
-      this.successMessage = 'Vous avez postuler avec sucess!';
-      this.isButtonDisabled = true;
-     
-      //this.router.navigate(['../pulse/freelancer-dashboard/freelancer-offers'])
+      this.successMessage = 'Vous avez postulé avec succès!';
+      this.offerExists = true; // Mark offer as existing
+      this.isButtonDisabled = false; // Reset button state if needed
+      // this.router.navigate(['../pulse/freelancer-dashboard/freelancer-offers']);
     });
   }
 
-  truefalse(postId:any){
+  truefalse(postId: any) {
     this.postservice.checkFreelancerOffer(postId, this.freelancerId).subscribe(response => {
       this.offerExists = response.offer_exists;
-      
     }, error => {
       console.error('Error checking freelancer offer', error);
     });
   }
 
-  getfreelancer(){
-    this.freelancerservice.show(this.freelancerId).subscribe((res)=>{
-      this.freelancerstatus=res.status;
-    })
+  getfreelancer() {
+    this.freelancerservice.show(this.freelancerId).subscribe((res) => {
+      this.freelancerstatus = res.status;
+    });
   }
-  
-
-
-  
 }
