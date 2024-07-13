@@ -21,8 +21,8 @@
                 <i class="bi bi-three-dots"></i> 
               </button>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" (click)="onAssignPermessionTorole(item)" ></a></li>
-                <li><a class="dropdown-item" >assign permession to role</a></li>  
+                <li><a class="dropdown-item" ></a></li>
+                <li><a class="dropdown-item" (click)="showAssingRoleToUSers(item.id,item)" >assign permession to role</a></li>  
               </ul>
             
         </td>
@@ -49,7 +49,7 @@
 
 
    <!-- delete-->
-   <div *ngIf="showedelete" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
+   <div  *ngIf="showAssingRoleToUSer" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
     <div class="modal-dialog modal-m"><div class="modal-content">
     <app-assign-role-to-user [permissionData]="selectedData" (closeModal)="onCloseModal()"></app-assign-role-to-user>
     </div>

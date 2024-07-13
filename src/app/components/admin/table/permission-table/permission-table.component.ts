@@ -38,6 +38,7 @@ this.selectedData=data
 show = false;
 showedit = false;
 showedelete = false;
+showAssingRoleToUSer=false;
 
 
 onEdited(id: number, role: any): void {
@@ -54,6 +55,17 @@ ondeleted(id: number, role: any): void {
 this.show = true;
 this.showedelete = true;
 this.showedit = false;
+
+}
+showAssingRoleToUSers(id: number, role: any): void {
+  this.selectedID= id;
+  this.selectedData= role;
+this.show = true;
+this.showedelete = false;
+this.showedit = false;
+this.showAssingRoleToUSer=true;
+
+
 
 }
           

@@ -3,7 +3,7 @@ import { User } from './../../../../core/models/User';
 import { UserService } from '../../../../core/services/user.service';
 import { MailService } from '../../../../core/services/mail.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Observable, Subject } from 'rxjs';
+import { Observable, pipe, startWith, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-mailing',
@@ -70,7 +70,10 @@ send(){
   console.log(messagedata);
   
   this.mailservice.sendMail(messagedata).subscribe({
-    next:(data:any)=>console.log(data),
+    next:(data:any)=>{console.log(data);
+      alert('message sended successfly');
+      this.from.get('message')?.reset();
+    },
     error:(error:any)=>console.log(error)
 
     
