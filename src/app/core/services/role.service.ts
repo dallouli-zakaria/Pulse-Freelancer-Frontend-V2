@@ -67,5 +67,9 @@ export class RoleService {
     return this.http.get<any>(`${this.url}/users/role/${rolename}`);
   }
 
+  public grantPermessionToRole(permessionName:any){
+    return this.http.post(`${this.url}/grantPermissionsToRole`,permessionName)
+
+  }
 
 }

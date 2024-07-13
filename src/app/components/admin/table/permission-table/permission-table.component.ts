@@ -73,6 +73,7 @@ onCloseModal(): void {
 this.show = false;
 this.showedit = false;
 this.showedelete = false;
+this.showAssingRoleToUSer=false;
 }
 
 onAssignPermessionTorole(data:any){

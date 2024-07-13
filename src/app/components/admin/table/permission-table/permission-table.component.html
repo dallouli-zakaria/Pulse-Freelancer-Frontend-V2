@@ -47,11 +47,20 @@
     </div>
   </div>
 
-
-   <!-- delete-->
+ </div>
+   <!-- Assing permession to role-->
    <div  *ngIf="showAssingRoleToUSer" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
     <div class="modal-dialog modal-m"><div class="modal-content">
-    <app-assign-role-to-user [permissionData]="selectedData" (closeModal)="onCloseModal()"></app-assign-role-to-user>
+    <app-assign-permession-to-role [permissionData]="selectedData" (closeModal)="onCloseModal()"></app-assign-permession-to-role>
     </div>
-  </div>
-</div>
+    </div>
+   </div>
+
+
+   <!-- Assing permession to user-->
+   <div  *ngIf="" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-m"><div class="modal-content">
+    <!-- <app-assign-permession-to-user [permissionData]="selectedData" (closeModal)="onCloseModal()"></app-assign-permession-to-user> -->
+    </div>
+    </div>
+   </div>
