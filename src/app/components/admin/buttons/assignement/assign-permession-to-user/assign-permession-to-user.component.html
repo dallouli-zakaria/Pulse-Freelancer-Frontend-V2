@@ -1,1 +1,29 @@
-<p>assign-permession-to-user works!</p>
+
+<div class="modal-header">
+    <h1 class="modal-title fs-5" id="exampleModalLabel">grant permession to user </h1>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="close()"></button>
+</div>
+
+<form  (ngSubmit)="gratPermessionToUser()">
+    <div class="modal-body">
+      <h3>Roles</h3>
+      <div class="form-group">
+        <label for="roleSelect">Select user</label>
+        <select class="form-control" id="userSelect" (change)="eventlist($event)">
+          <option *ngFor="let item of user" [value]="item.id">{{item.name}}</option>
+        </select>
+      </div>
+      <hr>
+      <h3>Permission</h3>
+      <div class="form-group">
+        <label for="permissionInput">Permission</label>
+        <input type="text" id="permissionInput" class="form-control" placeholder="Enter permission" [value]="permissionData?.name">
+      </div>
+      <h5 style="color: red; margin-left: 10px;">{{errorhandling}}</h5>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+      <button type="submit" class="btn btn-success">Save changes</button>
+    </div>
+  </form>
+  

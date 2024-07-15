@@ -22,7 +22,8 @@
               </button>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" ></a></li>
-                <li><a class="dropdown-item" (click)="showAssingRoleToUSers(item.id,item)" >assign permession to role</a></li>  
+                <li><a class="dropdown-item" (click)="showAssingPermessionToRole(item.id,item)" >assign permession to role</a></li> 
+                <li><a class="dropdown-item" (click)="showAssingPermessionToUSers(item.id,item)" >assign permession to user</a></li>   
               </ul>
             
         </td>
@@ -49,7 +50,7 @@
 
  </div>
    <!-- Assing permession to role-->
-   <div  *ngIf="showAssingRoleToUSer" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
+   <div  *ngIf="showAssingPemissionToRole" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
     <div class="modal-dialog modal-m"><div class="modal-content">
     <app-assign-permession-to-role [permissionData]="selectedData" (closeModal)="onCloseModal()"></app-assign-permession-to-role>
     </div>
@@ -58,9 +59,9 @@
 
 
    <!-- Assing permession to user-->
-   <div  *ngIf="" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
+   <div  *ngIf="showAssingPemissionToUser" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
     <div class="modal-dialog modal-m"><div class="modal-content">
-    <!-- <app-assign-permession-to-user [permissionData]="selectedData" (closeModal)="onCloseModal()"></app-assign-permession-to-user> -->
+    <app-assign-permession-to-user [permissionData]="selectedData" (closeModal)="onCloseModal()"></app-assign-permession-to-user>
     </div>
     </div>
    </div>

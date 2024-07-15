@@ -36,6 +36,7 @@ import { FreelancerContractsComponent } from './components/freelancer/freelancer
 import { PostComponent } from './components/admin/pages/post/post.component';
 import { authGuard } from './core/guards/auth.guard';
 import { roleGuard } from './core/guards/role.guard';
+import { PostViewComponent } from './components/admin/pages/post-view/post-view.component';
 
 const routes: Routes = [
 
@@ -56,6 +57,7 @@ const routes: Routes = [
       { path: 'users', component: UsersComponent },
       { path: 'contract', component: ContractComponent },
       { path: 'post',component:PostComponent},
+      { path: 'viewPost',component:PostViewComponent},
       { path: '**', redirectTo: 'dashboard', pathMatch: 'full' } 
     ]
   },

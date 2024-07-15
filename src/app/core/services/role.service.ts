@@ -60,7 +60,7 @@ export class RoleService {
 
 
   grantRoleToUser(data:any){
-    return this.http.get<any>(`${this.url}/grantRoleToUser`,data);
+    return this.http.post<any>(`${this.url}/grantRoleToUser`,data);
   }
 
   getRoles(rolename:string){
@@ -68,7 +68,7 @@ export class RoleService {
   }
 
   public grantPermessionToRole(permessionName:any){
-    return this.http.post(`${this.url}/grantPermissionsToRole`,permessionName)
+    return this.http.post<any>(`${this.url}/grantPermissionsToRole`,permessionName)
 
   }
 

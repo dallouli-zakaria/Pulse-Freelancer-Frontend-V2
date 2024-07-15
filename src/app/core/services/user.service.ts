@@ -53,8 +53,8 @@ url=Constant.API_ENDPOINT
 
 
 
-  public grantPermessionToUSer(permessionName:any,idUser:number){
-    return this.http.post(`${this.url}/'user'/{idUser}/'grant-permission'`,permessionName)
+  public grantPermessionToUSer(permessionName:any){
+    return this.http.post<any>(`${this.url}/grantPermissionsToUser`,permessionName)
 
   }
 

@@ -67,8 +67,8 @@ this.roleName=$event.target.value
       console.log(this.roleName);
       if(this.roleName !==undefined){
         const object:any={
-          name:this.roleName,
-          permession:[this.permissionData?.name]
+                name:this.roleName,
+                permession:[this.permissionData?.name]
          }
          console.log(object);
          

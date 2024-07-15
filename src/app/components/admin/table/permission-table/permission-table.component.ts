@@ -38,7 +38,8 @@ this.selectedData=data
 show = false;
 showedit = false;
 showedelete = false;
-showAssingRoleToUSer=false;
+showAssingPemissionToRole=false;
+showAssingPemissionToUser=false
 
 
 onEdited(id: number, role: any): void {
@@ -57,15 +58,22 @@ this.showedelete = true;
 this.showedit = false;
 
 }
-showAssingRoleToUSers(id: number, role: any): void {
+showAssingPermessionToRole(id: number, role: any): void {
   this.selectedID= id;
   this.selectedData= role;
 this.show = true;
 this.showedelete = false;
 this.showedit = false;
-this.showAssingRoleToUSer=true;
-
-
+this.showAssingPemissionToRole=true;
+}
+showAssingPermessionToUSers(id: number, role: any): void {
+  this.selectedID= id;
+  this.selectedData= role;
+this.show = true;
+this.showedelete = false;
+this.showedit = false;
+this.showAssingPemissionToRole=false;
+this.showAssingPemissionToUser=true
 
 }
           
@@ -73,7 +81,8 @@ onCloseModal(): void {
 this.show = false;
 this.showedit = false;
 this.showedelete = false;
-this.showAssingRoleToUSer=false;
+this.showAssingPemissionToRole=false;
+this.showAssingPemissionToUser=false
 }
 
 onAssignPermessionTorole(data:any){

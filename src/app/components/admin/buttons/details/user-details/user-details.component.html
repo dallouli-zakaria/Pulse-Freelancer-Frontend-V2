@@ -4,22 +4,22 @@
     <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="close()"></button>
 </div>
 
-<form [formGroup]="form"></form>
      <div class="modal-body">
       
        <h3>Roles</h3>
-       <form >
+ 
        <div class="form-group">
-        <label for="exampleFormControlSelect1">select role</label>
-        <select class="form-control" id="exampleFormControlSelect1" formControlName="role">
-          <option *ngFor="let item of role">{{item.name}} </option>
+        <label for="roleSelect">Select Role</label>
+        <select class="form-control" id="roleSelect" (change)="eventlist($event)">
+          <option *ngFor="let item of role" >{{item.name}}</option>
         </select>
+      </div>
        <hr>
       
        <h3>user</h3>
   
        <div class="form-group">
-       <input type="text"  [value]="user?.name" formControlName="user">
+       <input type="text"  [value]="user?.name">
      
       </div>
       </div>
@@ -28,4 +28,4 @@
       <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
       <button type="submit" class="btn btn-success" (click)="gratroleToUser()">Save changes</button>
      </div>
-    </form>
+  

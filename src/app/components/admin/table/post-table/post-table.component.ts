@@ -33,7 +33,12 @@ export class PostTableComponent {
       complete:()=>console.log('end operation post Data')    
     })
   }
+ 
 
+  sendid(id:any){
+  const postId=id
+
+  }
 
   //manage page edite delete and details for assingnig 
 show = false;
