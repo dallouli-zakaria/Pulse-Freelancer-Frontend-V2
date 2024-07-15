@@ -92,7 +92,6 @@ import { FreelancerContractsComponent } from './components/freelancer/freelancer
 import { FreelancerUpdateAboutComponent } from './components/freelancer/freelancer-profile/freelancer-about/freelancer-update-about/freelancer-update-about.component';
 import { FreelancerAddExperienceComponent } from './components/freelancer/freelancer-profile/freelancer-experience/freelancer-add-experience/freelancer-add-experience.component';
 import { FreelancerUpdateExperienceComponent } from './components/freelancer/freelancer-profile/freelancer-experience/freelancer-update-experience/freelancer-update-experience.component';
-import { UpdateFreelancerPersonalInfosComponent } from './components/freelancer/freelancer-profile/freelancer-sideprofile/update-freelancer-personal-infos/update-freelancer-personal-infos.component';
 import { FreelancerAddSkillsComponent } from './components/freelancer/freelancer-profile/freelancer-skills/freelancer-add-skills/freelancer-add-skills.component';
 import { FreelancerUpdateSkillsComponent } from './components/freelancer/freelancer-profile/freelancer-skills/freelancer-update-skills/freelancer-update-skills.component';
 import { SkeletonComponent } from './components/user/skeleton/skeleton.component';
@@ -112,6 +111,9 @@ import { FreelancerEditinfoComponent } from './components/freelancer/freelancer-
 import { OfferAddComponent } from './components/admin/buttons/add/offer-add/offer-add.component';
 import { OfferDeleteComponent } from './components/admin/buttons/delete/offer-delete/offer-delete.component';
 import { OfferEditComponent } from './components/admin/buttons/edit/offer-edit/offer-edit.component';
+import { ToastComponent } from './components/user/toast/toast.component';
+import { SkillchipsComponent } from './components/freelancer/freelancer-profile/freelancer-skills/skillchips/skillchips.component';
+import { SkillprogressComponent } from './components/freelancer/freelancer-profile/freelancer-skills/skillprogress/skillprogress.component';
 import { AssignRoleToPermessionComponent } from './components/admin/buttons/assignement/assign-role-to-permession/assign-role-to-permession.component';
 import { AssignRoleToUserComponent } from './components/admin/buttons/assignement/assign-role-to-user/assign-role-to-user.component';
 import { AssignPermessionToRoleComponent } from './components/admin/buttons/assignement/assign-permession-to-role/assign-permession-to-role.component';
@@ -194,9 +196,7 @@ import { AssignPermessionToUserComponent } from './components/admin/buttons/assi
           ContactUsComponent,
           ViewOffersDetailsComponent,
           UserUpdateOfferComponent,
-          
           UserContractDownloadComponent,
-          
           UserSideprofileComponent,
           UserOffersComponent,
           UsercontractsComponent,
@@ -212,30 +212,30 @@ import { AssignPermessionToUserComponent } from './components/admin/buttons/assi
           FreelancerDashboardComponent,
           FreelancerOffersComponent,
           FreelancerContractsComponent,
-
           FreelancerUpdateAboutComponent,
           FreelancerAddExperienceComponent,
           FreelancerUpdateExperienceComponent,
-
-          UpdateFreelancerPersonalInfosComponent,
           FreelancerAddSkillsComponent,
           FreelancerUpdateSkillsComponent,
           SkeletonComponent,
           TimeAgoPipe,
-           PostComponent,
+          PostComponent,
           PostCartComponent,
-                    PostTableComponent,
-                    PostAddComponent,
-                    PostEditComponent,
-                    PostDeleteComponent,
-                    RoleUserComponent,
-                    RolechipsAutocompleteComponent,
-                    LoadingComponent,
-                    FreelancerInformationComponent,
-                    FreelancerEditinfoComponent,
-                    OfferAddComponent,
-                    OfferDeleteComponent,
-                    OfferEditComponent,
+          PostTableComponent,
+          PostAddComponent,
+          PostEditComponent,
+          PostDeleteComponent,
+          RoleUserComponent,
+          RolechipsAutocompleteComponent,
+          LoadingComponent,
+          FreelancerInformationComponent,
+          FreelancerEditinfoComponent,
+          OfferAddComponent,
+          OfferDeleteComponent,
+          OfferEditComponent,
+          ToastComponent, 
+          SkillchipsComponent,
+          SkillprogressComponent,
                     AssignRoleToPermessionComponent,
                     AssignRoleToUserComponent,
                     AssignPermessionToRoleComponent,

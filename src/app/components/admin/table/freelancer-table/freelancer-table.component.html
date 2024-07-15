@@ -9,7 +9,9 @@
         <th scope="col">TJM</th>
         <th scope="col">Availability</th>
         <th scope="col">Phone</th>
+        <th scope="col">account</th>
         <th scope="col">status</th>
+
         <th scope="col"></th>
       </tr>
     </thead>
@@ -22,6 +24,7 @@
         <td>{{ freelnacer.TJM }}</td>
         <td>{{ freelnacer.availability }}</td>
         <td>{{ freelnacer.phone }}</td>
+        <td  [ngClass]="{'text-success': (freelnacer?.phone && freelnacer?.summary), 'text-danger': !(freelnacer?.phone && freelnacer?.summary)}">{{ (freelnacer?.phone && freelnacer?.summary) ? 'Complet' : 'Incomplet' }}</td>
         <td>{{freelnacer.status}}</td>
         <td>
           <button class="btn btn-primary btn-sm" style="margin-right: 5px;" (click)="onEdited(freelnacer.id,freelnacer)">

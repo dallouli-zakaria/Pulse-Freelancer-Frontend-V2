@@ -45,7 +45,7 @@ export class AuthentificationComponent {
           (res) => {
             console.log(res);
             this.navigateToLoginWithSuccessMessage('Votre compte client a été créer avec succès!');
-          },
+          },  
           (error) => {
             this.handleErrorResponse(error);
           }

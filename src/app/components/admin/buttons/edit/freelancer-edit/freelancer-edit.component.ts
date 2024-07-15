@@ -34,7 +34,7 @@ export class FreelancerEditComponent implements OnInit,OnChanges {
       TJM: [this.freelancerData?.TJM, [Validators.required, Validators.min(0)]],
       summary: [this.freelancerData?.summary],
       availability: [this.freelancerData?.availability, Validators.required],
-      adress: [this.freelancerData?.address, Validators.required],
+      adress: [this.freelancerData?.adress, Validators.required],
       phone: [this.freelancerData?.phone, Validators.required],
       portfolio_Url: [this.freelancerData?.portfolio_Url],
       status:['']
@@ -71,7 +71,7 @@ export class FreelancerEditComponent implements OnInit,OnChanges {
       TJM: [this.freelancerData?.TJM, [Validators.required, Validators.min(0)]],
       summary: [this.freelancerData?.summary],
       availability: [this.freelancerData?.availability, Validators.required],
-      adress: [this.freelancerData?.address, Validators.required],
+      adress: [this.freelancerData?.adress, Validators.required],
       phone: [this.freelancerData?.phone, Validators.required],
       portfolio_Url: [this.freelancerData?.portfolio_Url],
       status:[this.freelancerData?.status]

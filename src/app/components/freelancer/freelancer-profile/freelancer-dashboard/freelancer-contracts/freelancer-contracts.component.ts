@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrl: './freelancer-contracts.component.css'
 })
 export class FreelancerContractsComponent {
+  isModalOpen = false;
 
+  openModal() {
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+  }
 }

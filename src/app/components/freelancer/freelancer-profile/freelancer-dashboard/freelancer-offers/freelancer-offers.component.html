@@ -7,7 +7,19 @@
         </span>
       </h5>
 
-      <div class="container mb-3">
+      <!-- Skeleton loader -->
+      <div *ngIf="isLoading" class="container mb-3">
+        <div class=" pb-0 px-3 skeleton-card" *ngFor="let i of [1,2,3]">
+          <div class="card-body">
+            <div class="skeleton-title"></div>
+            <div class="skeleton-description"></div>
+            <div class="skeleton-budget"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actual content -->
+      <div *ngIf="!isLoading" class="container mb-3">
         <div class="card pb-0 px-3" *ngFor="let post of posts">
           <div class="card-body">
             <div class="row">

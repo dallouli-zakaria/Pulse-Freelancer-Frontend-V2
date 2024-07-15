@@ -1,0 +1,22 @@
+.selected-skills {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .badge {
+    font-size: 0.9em;
+    padding: 0.5em 0.7em;
+  }
+  
+  .badge span {
+    font-size: 1.2em;
+    vertical-align: middle;
+  }
+  
+  .progress {
+    height: 20px;
+  }
+  
+  .progress-bar {
+    transition: width 0.3s ease-in-out;
+  }

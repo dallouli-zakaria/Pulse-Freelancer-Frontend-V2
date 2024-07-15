@@ -1,7 +1,35 @@
-<form action="">
-<div class="form-group">
-    <label for="exampleFormControlTextarea1">Modifier votre concernant !</label><br>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea><br>
-  </div>
-  <button class="btn btn-outline-danger" type="submit">Modifier !</button>
-</form>
+
+
+
+<div class="modal-header">
+  <h4 class="modal-title">Mes informations</h4>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="close()"></button>
+  
+</div>
+<div class="modal-body">
+ 
+
+  <form [formGroup]="form" (ngSubmit)="updated()">
+      <div class="form-group">
+        <label for="summary">Concernant</label>
+        <textarea id="summary" formControlName="summary" class="form-control" ></textarea>
+        <!-- <div *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched" class="text-danger">
+          Name is required-->
+        </div> 
+       
+
+    <h5 style="color: red; margin-left: 10px;">{{errorhandling}} </h5> 
+    
+      <div class="modal-footer">
+
+        <button type="submit" class="btn btn-outline-danger" data-bs-dismiss="modal">Modifier</button>
+       </div>
+      
+    </form>
+</div>
+
+
+
+
+
+

@@ -1,0 +1,26 @@
+<div class="container mt-4">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="skillInput">Add Skills</label>
+        <input id="skillInput" type="text" class="form-control" formControlName="skillInput" 
+               (input)="onInput($event)" (keydown.enter)="addSkill($event)">
+      </div>
+      <ul *ngIf="showSuggestions && filteredSkills.length" class="list-group mt-2">
+        <li *ngFor="let skill of filteredSkills" class="list-group-item list-group-item-action" 
+            (click)="addSkillFromList(skill)">
+          {{ skill }}
+        </li>
+      </ul>
+      <button type="submit" class="btn btn-primary mt-3">Submit</button>
+    </form>
+  
+    <div *ngIf="selectedSkills.length > 0" class="mt-4">
+      <h5>Selected Skills:</h5>
+      <div class="selected-skills">
+        <span *ngFor="let skill of selectedSkills" class="badge bg-primary me-2 mb-2">
+          {{ skill }} 
+          <span (click)="removeSkill(skill)" class="ms-2" style="cursor: pointer;">&times;</span>
+        </span>
+      </div>
+    </div>
+  </div>

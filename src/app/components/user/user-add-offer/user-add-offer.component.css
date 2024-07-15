@@ -2,3 +2,7 @@ a{
     text-decoration: none;
     color: #000000;
 }
+
+.breadcrumb-item a{
+    color: #da3746;
+}

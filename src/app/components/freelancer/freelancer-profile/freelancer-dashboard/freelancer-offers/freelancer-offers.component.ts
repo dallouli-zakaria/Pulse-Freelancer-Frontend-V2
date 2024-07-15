@@ -15,8 +15,8 @@ export class FreelancerOffersComponent implements OnDestroy {
   freelancerid: number = this.authservice.parseID();
   offers: Offer[] = [];
   posts: Post[] = [];
-  offerSubscriptions: Subscription[] = []; // To store subscriptions
-
+  offerSubscriptions: Subscription[] = []; 
+  isLoading: boolean = true;
   constructor(
     private offerservice: OffersService,
     private authservice: AuthService,
@@ -26,6 +26,7 @@ export class FreelancerOffersComponent implements OnDestroy {
   }
 
   getoffers() {
+    this.isLoading = true;
     this.offerservice.showbyfreelancerid(this.freelancerid).subscribe({
       next: (offers:any) => {
         this.offers = offers;
@@ -43,9 +44,11 @@ export class FreelancerOffersComponent implements OnDestroy {
     return this.postservice.show(postId).subscribe({
       next: (post: Post) => {
         this.posts.push(post);
+        this.isLoading = false;
       },
       error: (err: any) => {
         console.error('Failed to fetch post with ID ' + postId + ':', err);
+        this.isLoading = false;
       }
     });
   }

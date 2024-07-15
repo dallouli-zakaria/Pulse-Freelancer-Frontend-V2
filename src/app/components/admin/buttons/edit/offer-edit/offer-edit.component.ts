@@ -31,7 +31,7 @@ export class OfferEditComponent {
        name: this.fb.control(this.offerObject?.selected, [Validators.required]),
       email: this.fb.control(this.offerObject?.post_id, [Validators.required]),
       profession:this.fb.control( this.offerObject?.freelancer_id, [Validators.required])
-
+  
     })
    
   

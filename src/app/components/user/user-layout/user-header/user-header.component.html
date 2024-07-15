@@ -13,8 +13,8 @@
         </ul>
 
         <span class="d-flex py-3 py-lg-0" *ngIf="!authService.isLoggedIn();">
-          <button class="btn btn-link text-1000 fw-medium order-1 order-lg-0" type="button" routerLink="../login">Sign in</button>
-          <button class="btn btn-outline-danger rounded-pill order-0" type="submit" routerLink="../register">Sign Up</button>
+          <button class="btn btn-link text-1000 fw-medium order-1 order-lg-0" type="button" routerLink="../login">Se connecter</button>
+          <button class="btn btn-outline-danger rounded-pill order-0" type="submit" routerLink="../register">Créer un compte</button>
         </span>
         <div class="text-uppercase fw-medium"><strong> {{username}}</strong></div>
         <span *ngIf="roles=='client_role'">
@@ -36,7 +36,7 @@
             <div class="dropdown-menu" [class.show]="dropdownOpen" aria-labelledby="dropdownMenuButton" style="cursor:default;">
               <span class="dropdown-item text-muted">{{role}}</span>
   
-              <a class="dropdown-item" href="pulse/freelancer-profile" (click)="selectOption('profile')">Profile</a>
+              <a class="dropdown-item" href="pulse/freelancer-dashboard/freelancer-profile" (click)="selectOption('profile')">Profile</a>
               <a class="dropdown-item" href="" (click)="selectOption('dashboard')">Dashboard</a>
               <a class="dropdown-item"  (click)="authService.logout()">Deconnecter</a>
             </div>

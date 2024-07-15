@@ -72,5 +72,41 @@ selectedID!:any
         this.isLoading = false;
       }, 1000);
     }
+
+
+    getStatusMessage(): string {
+      if (this.isAllFieldsFilled() && this.freelancerdata?.status === 'verified') {
+        return  'verified';
+      } else if (this.isAllFieldsFilled() && this.freelancerdata?.status === 'not verified') {
+        return 'pas encore vérifié';
+      } else {
+        return 'Veuilez remplir toutes vos informations ';
+      }
+    }
+
+    getStatus(): { cssClass: string } {
+      if (this.isAllFieldsFilled() && this.freelancerdata?.status === 'verified') {
+        return { cssClass: 'status-connected' };
+      } else if (this.isAllFieldsFilled() && this.freelancerdata?.status === 'not verified') {
+        return { cssClass: 'status-away' };
+      } else {
+        return {cssClass: 'status-disconnected' };
+      }
+    }
+
+    private isAllFieldsFilled(): boolean {
+      // Check all required fields are not null or undefined
+      return (
+        this.freelancerdata?.title !== null &&
+        this.freelancerdata?.dateOfBirth !== null &&
+        this.freelancerdata?.city !== null &&
+        this.freelancerdata?.TJM !== null &&
+        this.freelancerdata?.summary !== null &&
+        this.freelancerdata?.availability !== null &&
+        this.freelancerdata?.adress !== null &&
+        this.freelancerdata?.phone !== null &&
+        this.freelancerdata?.portfolio_Url !== null 
+      );
+    }
   
 }

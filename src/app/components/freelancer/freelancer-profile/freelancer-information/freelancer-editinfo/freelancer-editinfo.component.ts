@@ -29,9 +29,8 @@ export class FreelancerEditinfoComponent {
     dateOfBirth: [this.freelancerData?.dateOfBirth, Validators.required],
     city: [this.freelancerData?.city, Validators.required],
     TJM: [this.freelancerData?.TJM, [Validators.required, Validators.min(0)]],
-
     availability: [this.freelancerData?.availability, Validators.required],
-    adress: [this.freelancerData?.address, Validators.required],
+    adress: [this.freelancerData?.adress, Validators.required],
     phone: [this.freelancerData?.phone, Validators.required],
     portfolio_Url: [this.freelancerData?.portfolio_Url],
     // status:['completed']
@@ -74,7 +73,7 @@ ngOnChanges(): void {
     city: [this.freelancerData?.city, Validators.required],
     TJM: [this.freelancerData?.TJM, [Validators.required, Validators.min(0)]],
     availability: [this.freelancerData?.availability, Validators.required],
-    adress: [this.freelancerData?.address, Validators.required],
+    adress: [this.freelancerData?.adress, Validators.required],
     phone: [this.freelancerData?.phone, Validators.required],
     portfolio_Url: [this.freelancerData?.portfolio_Url],
   })

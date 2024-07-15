@@ -66,6 +66,10 @@ body {
     top: 22px; 
   }
 
+  .breadcrumb-item a{
+    color: #da3746;
+  }
+
 
 
   

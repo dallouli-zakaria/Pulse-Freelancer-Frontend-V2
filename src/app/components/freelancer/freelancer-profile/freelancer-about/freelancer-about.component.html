@@ -1,49 +1,47 @@
 <div class="card-box">
-
-
-    <div>
-        <div class="row mt-4 mb-4" >
-        
-            <span class="col-lg-11 col-sm-6 col-md-6"><h5 class="text-uppercase">Concernant</h5></span>
-            <span class="col-lg-1 col-sm-6 col-md-6">
-          
-                    
-                    <h4 class="col-6"><a (click)="openModalEdit()" class="text-danger" style="cursor: pointer;"><i class="bi bi-pencil-square"></i></a></h4>
-          
-              </span>
-              
-        </div>
-        <p class="text-muted font-13 mb-3">
-          Je suis Sami, un développeur web passionné par la création 
-          d'expériences numériques innovantes. Ma passion pour le codage
-           et la conception web me pousse à explorer constamment de nouvelles t
-           echnologies pour offrir des solutions efficaces et esthétiques.
-        </p>
+  <div>
+    <div class="row mt-4 mb-4">
+      <div class="col-lg-11 col-sm-6 col-md-6">
+        <h5 class="text-uppercase">Concernant</h5>
+      </div>
+      <div class="col-lg-1 col-sm-6 col-md-6">
+        <h4><a (click)="onEdited(freelancerdata?.id, freelancerdata)" class="text-danger" style="cursor: pointer;"><i class="bi bi-pencil-square"></i></a></h4>
+      </div>
     </div>
 
 
 
-
-      <!-- modal edit -->
-      <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayEdit}">
-        <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                    <div class="modal-header">
-                          <h4 class="modal-title">Concernant</h4>
-                          <button type="button" class="close" aria-label="Close"  class="btn btn-light" (click)="onCloseHandledEdit()"><span aria-hidden="true">&times;</span></button>
-                        </div>
-              <div class="modal-body">
-                          <app-freelancer-update-about></app-freelancer-update-about>
-                        </div>
-                    <div class="modal-footer">
-                          <button type="button" class="btn btn-default" class="btn btn-light" (click)="onCloseHandledEdit()" >Close</button>
-                        </div>
-          </div>
+        <!-- Skeleton loader -->
+        <div *ngIf="isLoading" class="container mb-3">
+          <div class="pb-0 px-3 skeleton-card" *ngFor="let i of [1]">
+            <div class="card-body">
+              <div class="skeleton-title"></div>
+              <div class="skeleton-description"></div>
+              <div class="skeleton-budget"></div>
+              <div class="skeleton-description"></div>
+              <div class="skeleton-budget"></div>
             </div>
+          </div>
         </div>
+      </div>
 
-          <!-- end modal edit -->
 
+    <div class="form-group" *ngIf="!isLoading">
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" readonly>
+        {{freelancerdata?.summary}}
+      </textarea>
+    </div>
+    
+  <!-- modal edit -->
+  <div *ngIf="showedit" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
 
+        <app-freelancer-update-about [freelancerData]="selectedData" [freelancerID]="selectedID" (closeModal)="onCloseModal()"></app-freelancer-update-about>
+      </div>
+    </div>
+  </div>
+  <!-- end modal edit -->
 </div>
+
 

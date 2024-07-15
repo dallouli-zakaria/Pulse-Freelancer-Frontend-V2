@@ -8,6 +8,7 @@ import { Freelancer } from '../models/Freelancer';
   providedIn: 'root'
 })
 export class FreelancerService {
+  private freelancerData!: Freelancer;
   freelancer:any
   url=Constant.API_ENDPOINT
   conuntUrl:string='freelancerCount'
@@ -59,6 +60,14 @@ export class FreelancerService {
   show(id:any):Observable<Freelancer>{
     this.freelancer=this.http.get(`${this.url}/${Constant.FREELANCERS}/${id}`);
     return this.freelancer;
+  }
+
+  updateFreelancerData(data: Freelancer) {
+    this.freelancerData = data;
+  }
+
+  getFreelancerData(): Freelancer {
+    return this.freelancerData;
   }
 
 
