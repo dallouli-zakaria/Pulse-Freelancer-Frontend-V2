@@ -4,6 +4,8 @@ export interface Post {
     location:string,
     type:string,
     description:string,
+    freelancers_number:number,
+    skills_required:string,
     period:string,
     periodvalue:number | null,
     budget:string,

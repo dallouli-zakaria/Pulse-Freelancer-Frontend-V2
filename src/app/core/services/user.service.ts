@@ -50,8 +50,12 @@ url=Constant.API_ENDPOINT
   public getUserWithRole(roleName:any){
  return this.http.get(`${this.url}/users/role/${roleName}`)
   }
-  // public verify(id:number){
-  //   this.user=this.http.get(`${this.url}/verfy/${id}`)
-  //   return this.user
-  // }
+
+
+
+  public grantPermessionToUSer(permessionName:any,idUser:number){
+    return this.http.post(`${this.url}/'user'/{idUser}/'grant-permission'`,permessionName)
+
+  }
+
 }

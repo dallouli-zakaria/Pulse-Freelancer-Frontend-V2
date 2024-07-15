@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OffersService } from '../../../core/services/offers.service';
 import { PostsService } from '../../../core/services/posts.service';
@@ -12,6 +12,22 @@ import { AuthService } from '../../../core/services/auth.service';
   styleUrl: './user-add-offer.component.css'
 })
 export class UserAddOfferComponent {
+
+  @Output() skillsSubmitted = new EventEmitter<string[]>();
+
+
+
+  skills: string[] = ['JavaScript', 'PHP', 'Python', 'Java', 'C#', 'Angular', 'React'];
+  filteredSkills: string[] = [];
+  selectedSkills: string[] = [];
+  showSuggestions: boolean = false;
+  role!:string;
+  roles!:string;
+  isAuthenticated: boolean = false;
+
+
+
+
   selectedBudget!:string;
   selectedPeriod!:string;
   clientId!:number;
@@ -21,7 +37,6 @@ export class UserAddOfferComponent {
   userid:any=this.authservice.parseID();
   cities: string[] = ['Casablanca', 'Rabat', 'Fes', 'Marrakech', 'Tangier', 'Agadir', 'Meknes', 'Oujda', 'Kenitra', 'Tetouan','Autre'];
 
-
   constructor(  private fb:FormBuilder,private postsservice:PostsService,private router: Router,private authservice:AuthService){
 
     this.form = this.fb.group({
@@ -29,6 +44,8 @@ export class UserAddOfferComponent {
       location: ['', Validators.required],
       type: ['', Validators.required],
       description: ['', Validators.required],
+      nbrf: [''],
+      skills: [[]],
       period: ['', Validators.required],
       periodvalue:[0,Validators.required],
       budget: ['', Validators.required],
@@ -66,5 +83,73 @@ export class UserAddOfferComponent {
 
  
 
+
+  onSkillsSelected(skills: string[]) {
+    this.selectedSkills = skills;
+    this.form.patchValue({ skills: this.selectedSkills });
+  }
+
+
+
+
+
+  filterSkills(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.skills.filter(skill => 
+      skill.toLowerCase().includes(filterValue) && 
+      !this.selectedSkills.includes(skill)
+    );
+  }
+
+  onInput(event: Event): void {
+    const input = (event.target as HTMLInputElement).value;
+    if (input && input.length >= 2) {
+      this.filteredSkills = this.filterSkills(input);
+      this.showSuggestions = true;
+    } else {
+      this.filteredSkills = [];
+      this.showSuggestions = false;
+    }
+  }
+
+  addSkill(event: Event): void {
+    event.preventDefault();
+    const value = this.form.get('skillInput')?.value.trim();
+    
+    // Check if the entered skill exists in the predefined skills array
+    if (value && this.skills.includes(value) && !this.selectedSkills.includes(value)) {
+      this.selectedSkills.push(value);
+      this.form.get('skillInput')?.reset();
+      this.filteredSkills = [];
+      this.showSuggestions = false;
+    } else {
+      // Optionally, you can show a message or handle invalid skill entries here
+      console.log('Please select a skill from the suggestions.');
+    }
+  }
+
+  addSkillFromList(skill: string): void {
+    if (!this.selectedSkills.includes(skill)) {
+      this.selectedSkills.push(skill);
+      this.form.get('skillInput')?.reset();
+      this.filteredSkills = [];
+      this.showSuggestions = false;
+    }
+  }
+
+  removeSkill(skill: string): void {
+    const index = this.selectedSkills.indexOf(skill);
+    if (index >= 0) {
+      this.selectedSkills.splice(index, 1);
+    }
+  }
+
+  onSubmit(): void {
+    if (this.selectedSkills.length > 0) {
+      this.skillsSubmitted.emit(this.selectedSkills);
+      this.selectedSkills = [];
+    }
+  }
+ 
 
 }

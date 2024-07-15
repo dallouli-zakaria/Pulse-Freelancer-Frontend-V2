@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { SkillService } from '../../../../../core/services/skill.service';
+import { AuthService } from '../../../../../core/services/auth.service';
 
 
 @Component({
@@ -10,14 +11,17 @@ import { SkillService } from '../../../../../core/services/skill.service';
 })
 export class SkillchipsComponent implements OnInit {
   @Output() skillsSubmitted = new EventEmitter<string[]>();
+  @Output() skillsSelected = new EventEmitter<string[]>();
 
   form!: FormGroup;
   skills: string[] = ['JavaScript', 'PHP', 'Python', 'Java', 'C#', 'Angular', 'React'];
   filteredSkills: string[] = [];
   selectedSkills: string[] = [];
   showSuggestions: boolean = false;
-
-  constructor(private fb: FormBuilder, private skillservice:SkillService) { }
+  role!:string;
+  roles!:string;
+  isAuthenticated: boolean = false;
+  constructor(private fb: FormBuilder, private skillservice:SkillService,public authService: AuthService) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -33,6 +37,23 @@ export class SkillchipsComponent implements OnInit {
         this.showSuggestions = false;
       }
     });
+
+
+    this.isAuthenticated = this.authService.isLoggedIn();
+    //this.rolservice.getRoles('superadmin_role').subscribe((res)=>console.log(res));
+    if (this.isAuthenticated) {
+    let sub = this.authService.parseID();
+    this.authService.getuserdetails(sub).subscribe((res) => {
+      this.roles=res.roles;
+      if(res.roles=='client_role'){
+      this.role = 'Client';
+    }
+    else if(res.roles=='freelancer_role'){
+      this.role = 'Freelancer';
+    }
+    });
+  }
+
   }
 
   filterSkills(value: string): string[] {
@@ -64,6 +85,7 @@ export class SkillchipsComponent implements OnInit {
       this.form.get('skillInput')?.reset();
       this.filteredSkills = [];
       this.showSuggestions = false;
+      this.skillsSelected.emit(this.skills);
     } else {
       // Optionally, you can show a message or handle invalid skill entries here
       console.log('Please select a skill from the suggestions.');
@@ -76,6 +98,7 @@ export class SkillchipsComponent implements OnInit {
       this.form.get('skillInput')?.reset();
       this.filteredSkills = [];
       this.showSuggestions = false;
+      this.skillsSelected.emit(this.skills);
     }
   }
 

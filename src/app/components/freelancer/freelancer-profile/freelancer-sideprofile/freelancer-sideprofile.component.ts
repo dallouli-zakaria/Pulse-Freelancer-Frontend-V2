@@ -78,7 +78,7 @@ selectedID!:any
       if (this.isAllFieldsFilled() && this.freelancerdata?.status === 'verified') {
         return  'verified';
       } else if (this.isAllFieldsFilled() && this.freelancerdata?.status === 'not verified') {
-        return 'pas encore vérifié';
+        return 'en cours de vérification';
       } else {
         return 'Veuilez remplir toutes vos informations ';
       }

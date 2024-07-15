@@ -38,6 +38,7 @@ this.selectedData=data
 show = false;
 showedit = false;
 showedelete = false;
+showAssingRoleToUSer=false;
 
 
 onEdited(id: number, role: any): void {
@@ -56,12 +57,29 @@ this.showedelete = true;
 this.showedit = false;
 
 }
+showAssingRoleToUSers(id: number, role: any): void {
+  this.selectedID= id;
+  this.selectedData= role;
+this.show = true;
+this.showedelete = false;
+this.showedit = false;
+this.showAssingRoleToUSer=true;
+
+
+
+}
           
 onCloseModal(): void {
 this.show = false;
 this.showedit = false;
 this.showedelete = false;
+this.showAssingRoleToUSer=false;
 }
-//end manage pages
 
+onAssignPermessionTorole(data:any){
+  this.show = false;
+  this.showedit = false;
+}
+
+//end manage pages
 }
