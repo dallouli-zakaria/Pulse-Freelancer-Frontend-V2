@@ -14,6 +14,8 @@ export class UserProfileComponent {
 
   closeModal() {
     this.isModalOpen = false;
+    console.log('closed');
+    
   }
 
   items = [

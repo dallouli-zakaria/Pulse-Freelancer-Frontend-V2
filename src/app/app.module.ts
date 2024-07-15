@@ -118,6 +118,7 @@ import { AssignRoleToPermessionComponent } from './components/admin/buttons/assi
 import { AssignRoleToUserComponent } from './components/admin/buttons/assignement/assign-role-to-user/assign-role-to-user.component';
 import { AssignPermessionToRoleComponent } from './components/admin/buttons/assignement/assign-permession-to-role/assign-permession-to-role.component';
 import { AssignPermessionToUserComponent } from './components/admin/buttons/assignement/assign-permession-to-user/assign-permession-to-user.component';
+import { PostViewComponent } from './components/admin/pages/post-view/post-view.component';
 
 @NgModule({
   declarations: [
@@ -239,7 +240,8 @@ import { AssignPermessionToUserComponent } from './components/admin/buttons/assi
                     AssignRoleToPermessionComponent,
                     AssignRoleToUserComponent,
                     AssignPermessionToRoleComponent,
-                    AssignPermessionToUserComponent
+                    AssignPermessionToUserComponent,
+                    PostViewComponent
           
         
   ],
