@@ -57,7 +57,8 @@ const routes: Routes = [
       { path: 'users', component: UsersComponent },
       { path: 'contract', component: ContractComponent },
       { path: 'post',component:PostComponent},
-      { path: 'viewPost',component:PostViewComponent},
+      { path: 'client-offer/:postId', component: ViewClientOfferComponent },
+      { path: 'viewPost/:itemId',component:PostViewComponent},
       { path: '**', redirectTo: 'dashboard', pathMatch: 'full' } 
     ]
   },

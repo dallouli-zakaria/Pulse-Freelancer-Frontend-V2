@@ -35,10 +35,10 @@ export class PostTableComponent {
   }
  
 
-  sendid(id:any){
-  const postId=id
+  // sendid(id:any){
+  // const postId=id
 
-  }
+  // }
 
   //manage page edite delete and details for assingnig 
 show = false;

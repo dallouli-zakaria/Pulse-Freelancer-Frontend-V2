@@ -76,4 +76,25 @@ export class PostsService {
     const url = `${this.url}/posts/${postId}/freelancers/${freelancerId}/offer`;
     return this.http.get<{ offer_exists: boolean }>(url);
   }
+
+
+
+    //Method to get freelancers by postId
+    public getFreelancersByPostId(postId: number): Observable<any> {
+      const url = `${this.url}/offer/freelancers/${postId}`;
+      return this.http.get<any>(url);
+    }
+
+    getClientDetailsByPostId(postId: number): Observable<any> {
+      const url = `${this.url}/posts/${postId}/client`;
+      return this.http.get<any>(url);
+    }
+
+
+
+
+
+
+
+
 }
