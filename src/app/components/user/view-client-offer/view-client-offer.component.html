@@ -3,7 +3,9 @@
     <h4 class="col-lg-10">
       <span><a routerLink="../../client-profile/client-offers"> <i class="fas fa-arrow-left"></i> </a></span> Details de l'offre
     </h4>
-    <button class="btn btn-danger col-lg-2" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="trackdata(post)">Modifier l'offre</button>
+    <button *ngIf="roles == 'client_role'" class="btn btn-danger col-lg-2" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="trackdata(post)">Modifier l'offre</button>
+
+    <button *ngIf="roles == 'superadmin_role'" class="btn btn-primary col-lg-2">Cloturer l'offre</button>
   </div>
 
   <div *ngIf="isLoading" class="loading-skeleton">
@@ -17,6 +19,11 @@
 
   <div *ngIf="!isLoading && post">
     <div class="container mt-5 mb-3">
+      <div class="row">
+        <h5 class="col-lg-4">Entreprise </h5>
+        <h5 class="col-lg-8 text-muted" >&#64; {{ clients.company_name }}</h5>
+      </div>
+      <hr>
       <div class="row">
         <h5 class="col-lg-4">Titre de l'offre :</h5>
         <h5 class="col-lg-8 text-muted">{{ post.title }}</h5>
@@ -51,61 +58,45 @@
         <h5 class="col-lg-8 text-muted">{{ post.created_at | timeAgo }} le {{ post.created_at | date: 'dd-MM-yyyy' }}</h5>
       </div>
       <hr>
-      <h5 class="mb-3 mt-4">
+      <h5 *ngIf="roles == 'superadmin_role'" class="mb-3 mt-4">
         <i class="mdi mdi-cards-variant mr-1"></i> Freelancers
       </h5>
-      <div class="table-responsive">
+      <div *ngIf="roles == 'superadmin_role'" class="table-responsive">
         <table class="table table-borderless mb-0">
           <thead class="thead-light">
             <tr>
               <th>#</th>
               <th>nom</th>
               <th>Profession</th>
-              <th>Date de candidature</th>
-              <th>Status</th>
-              <th>Skills</th>
+              <th>Email</th>
+              <th>availability</th>
+              <th>Tjm</th>
+              <th>Atcion</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Amine B.</td>
-              <td>Développeur web</td>
-              <td>24/10/2024</td>
-              <td>confirmé</td>
-              <td>Angular, Springboot, PHP</td>
+            <tr *ngFor="let item of freelancers ; let i = index">
+              <td>{{i+1}}</td>
+              <td>{{item.user.name}}</td>
+              <td>{{item.title}}</td>
+              <td>{{item.user.email}}</td>
+              <td>{{item.availability}}</td>
+              <td>{{item.TJM}} Mad / J</td>
+              <td>
+                <div class="btn-group dropstart">
+                  <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-three-dots-vertical"></i>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-eye"></i> View</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-envelope-arrow-up"></i> Send</a></li>
+
+                  </ul>
+                </div>
+              </td>
             </tr>
-            <tr>
-              <td>2</td>
-              <td>Sarah K.</td>
-              <td>Développeuse front-end</td>
-              <td>15/11/2024</td>
-              <td>en attente</td>
-              <td>React, Vue.js, HTML/CSS</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Mehdi T.</td>
-              <td>Ingénieur logiciel</td>
-              <td>01/12/2024</td>
-              <td>confirmé</td>
-              <td>Java, Python, Docker</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>Laura M.</td>
-              <td>Développeuse full-stack</td>
-              <td>20/12/2024</td>
-              <td>rejeté</td>
-              <td>Node.js, Express, MongoDB</td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>Yassine R.</td>
-              <td>Architecte logiciel</td>
-              <td>05/01/2025</td>
-              <td>confirmé</td>
-              <td>Microservices, Kubernetes, AWS</td>
+            <tr *ngIf="freelancers.length === 0">
+              <td colspan="7">No freelancers found.</td>
             </tr>
           </tbody>
         </table>

@@ -2,6 +2,7 @@
     <caption><h1>Post List</h1></caption>
     <thead>
         <tr>
+          <th scope="col">#</th>
             <th scope="col">Title</th>
             <th scope="col">Location</th>
             <th scope="col">Type</th>
@@ -17,8 +18,8 @@
           </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of post">
-        <th scope="row">{{item.id}}</th>
+      <tr *ngFor="let item of post ; let i = index">
+        <th scope="row">{{i+1}}</th>
         <td>{{item.title}}</td>
         <td>{{item.location}}</td>
         <td>{{item.type}}</td>
@@ -28,14 +29,15 @@
         <td>{{item.budget}}</td>
         <td>{{item.budgetvalue}}</td>
         <td>{{item.client_id}}</td>
-        <td>{{item.created_at}}</td>
+        <td>{{item.created_at | timeAgo }}</td>
         <td>
           <button class="btn btn-primary btn-sm" style="margin-right: 5px;" (click)="onEdited(item.id,item)">
             <i class="fas fa-pen"></i> </button> 
          <button class="btn btn-danger btn-sm" style="margin-right: 5px;" (click)="ondeleted(item.id, item)">
             <i class="fas fa-trash"></i></button>
-            <!-- <button class="btn btn-secondary btn-sm" style="margin-right: 5px;" routerLink="./../viewPost" (click)="sendid(item.id)">
-              <i class="bi bi-eye"></i></button> -->
+            <button class="btn btn-secondary btn-sm" style="margin-right: 5px;" [routerLink]="['../client-offer',item.id] ">
+              <i class="bi bi-eye"></i></button>
+
         </td>
       </tr>
       
