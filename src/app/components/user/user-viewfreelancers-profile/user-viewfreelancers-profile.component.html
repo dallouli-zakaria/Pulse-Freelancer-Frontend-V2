@@ -2,7 +2,7 @@
 
     <div class="container p-4">
       <nav aria-label="breadcrumb " >
-        <ol class="breadcrumb ">
+        <ol class="breadcrumb" *ngIf="roles == 'client_role'">
           <li class="breadcrumb-item text-danger "><a routerLink="../home">Acceuil</a></li>
           <li class="breadcrumb-item text-danger "><a routerLink="../client-dashboard">Client</a></li>
           <li class="breadcrumb-item text-danger "><a routerLink="../view-freelancers">Voir liste freelancers</a></li>
@@ -24,12 +24,12 @@
             <h4 class="mb-0">Sami Q.</h4>
             <p class="text-muted">Developpeur web<br> <span> 50 MAD / H</span></p>
             
-            <div class="row ">
+            <div class="row" *ngIf="roles == 'client_role'">
               <button
               type="button"
               class="btn btn-danger btn-lg waves-effect m-2 waves-light "
             >
-              Embaucher
+            Ajouter au favoris
             </button>
             <!-- <button
             type="button"
@@ -295,7 +295,7 @@
                     <td>01/01/2015</td>
                     <td>10/15/2018</td>
                     <td>
-                      <span >En cours</span>
+                      <span >Terminé</span>
                     </td>
                     <td>Halette Boivin</td>
                   </tr>

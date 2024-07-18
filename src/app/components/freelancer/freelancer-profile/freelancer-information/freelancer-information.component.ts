@@ -53,15 +53,6 @@ selectedID!:any
  
 
 
-
-    
-   
-
-
-
-
-
-
   // selecteID!: number;
   // user!:any
   show: boolean=false;

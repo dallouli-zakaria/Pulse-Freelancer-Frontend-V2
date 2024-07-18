@@ -12,6 +12,8 @@ import { Client } from '../../../core/models/Client';
   styleUrl: './view-client-offer.component.css'
 })
 export class ViewClientOfferComponent implements OnInit {
+  isOfferClosed: boolean = false;
+  validatedFreelancers: Set<number> = new Set<number>();
   postId!: number;
   post!: Post;
   postdetails!: any;
@@ -105,6 +107,32 @@ export class ViewClientOfferComponent implements OnInit {
   
   
 
+  // selecteID!: number;
+  // user!:any
+  show: boolean=false;
 
+  showedit: boolean=false;
+  onEdited(): void {
+    this.show = true;
+    this.showedit = true; 
+    }
+    onCloseModal(): void {
+      this.show = false;
+      this.showedit = false;
+      }
+
+
+
+
+      validateFreelancer(index: number): void {
+        this.validatedFreelancers.add(index);
+      }
+    
+
+      closeOffer(): void {
+        this.isOfferClosed = true;
+        
+      }
   
+
 }

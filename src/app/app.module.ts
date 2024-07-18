@@ -57,7 +57,6 @@ import { AuthentificationComponent } from './components/auth/authentification/au
 import { LoginComponent } from './components/auth/login/login.component';
 import { Error404Component } from './components/errors/error404/error404.component';
 import { Error500Component } from './components/errors/error500/error500.component';
-import { ApplyOfferComponent } from './components/freelancer/apply-offer/apply-offer.component';
 import { FreelancerProfileComponent } from './components/freelancer/freelancer-profile/freelancer-profile.component';
 import { ViewOffersComponent } from './components/freelancer/view-offers/view-offers.component';
 import { ContactUsComponent } from './components/user/contact-us/contact-us.component';
@@ -189,7 +188,6 @@ import { PostViewComponent } from './components/admin/pages/post-view/post-view.
     Error404Component,
     Error500Component,
     ViewOffersComponent,
-    ApplyOfferComponent,
     ViewClientOfferComponent,
     UserUpdateProfileComponent,
     ContactUsComponent,

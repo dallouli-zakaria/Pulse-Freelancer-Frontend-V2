@@ -1,4 +1,4 @@
-import { Component, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
 import { DashboardComponent } from './components/admin/pages/dashboard/dashboard.component';
@@ -35,7 +35,6 @@ import { FreelancerOffersComponent } from './components/freelancer/freelancer-pr
 import { FreelancerContractsComponent } from './components/freelancer/freelancer-profile/freelancer-dashboard/freelancer-contracts/freelancer-contracts.component';
 import { PostComponent } from './components/admin/pages/post/post.component';
 import { authGuard } from './core/guards/auth.guard';
-import { roleGuard } from './core/guards/role.guard';
 import { PostViewComponent } from './components/admin/pages/post-view/post-view.component';
 
 const routes: Routes = [
@@ -124,7 +123,7 @@ const routes: Routes = [
 
   { path: 'register', component: AuthentificationComponent },
   { path: 'login', component: LoginComponent },
-  //{ path: 'page-notfound', component: Error404Component },
+  { path: 'page-notfound', component: Error404Component },
   { path: 'server-error', component: Error500Component },
   { path: '', redirectTo: 'home/pulse', pathMatch: 'full' },
   { path: '**', redirectTo: 'page-notfound', pathMatch: 'full' },

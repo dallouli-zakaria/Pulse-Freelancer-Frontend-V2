@@ -24,7 +24,10 @@ export class ContractService {
    
   public index(){
     this.contract=this.http.get<Contract[]>(`${this.url}/${Constant.CONTARCTS}`).subscribe({
-      next:(data: any)=>{this.subject.next(data)},
+      next:(data: any)=>{this.subject.next(data)
+        console.log(data);
+        
+      },
       error:(error)=>console.log(error),
       complete:()=>console.log('end operation')
     }).add(console.log('subjetc contract'));

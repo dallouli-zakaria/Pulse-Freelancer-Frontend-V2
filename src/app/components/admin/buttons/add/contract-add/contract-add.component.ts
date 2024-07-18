@@ -7,6 +7,7 @@ import { ClientService } from '../../../../../core/services/client.service';
 import { FreelancerService } from '../../../../../core/services/freelancer.service';
 import { Freelancer } from '../../../../../core/models/Freelancer';
 import { Observable } from 'rxjs';
+import { PostsService } from '../../../../../core/services/posts.service';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class ContractAddComponent implements OnInit {
  constructor(private contractService:ContractService,
              private fb:FormBuilder
              ,private clientservices:ClientService
-              ,private freelancerService:FreelancerService){}
+              ,private freelancerService:FreelancerService,
+            private postsService:PostsService){}
   @Output() closeModal = new EventEmitter<void>();
   close(): void {
     this.closeModal.emit();
@@ -34,6 +36,7 @@ export class ContractAddComponent implements OnInit {
   errorhandeling:any
  ngOnInit(): void {
   this.freelancerService.index()
+  this.postsdata();
     // freelancer
     this.freelancerIndex()
       this.freelnacerSubject=this.freelancerService.getdata
@@ -88,6 +91,12 @@ export class ContractAddComponent implements OnInit {
       error:(error)=>console.log(error),
       complete:()=>console.log('complet display data freelancer')
       })
+  }
+
+
+
+  postsdata(){
+    this.postsService.index()
   }
 
 

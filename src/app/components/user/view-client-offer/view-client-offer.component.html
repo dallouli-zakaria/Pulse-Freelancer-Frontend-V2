@@ -5,8 +5,13 @@
     </h4>
     <button *ngIf="roles == 'client_role'" class="btn btn-danger col-lg-2" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="trackdata(post)">Modifier l'offre</button>
 
-    <button *ngIf="roles == 'superadmin_role'" class="btn btn-primary col-lg-2">Cloturer l'offre</button>
-  </div>
+    <button *ngIf="roles == 'superadmin_role'" 
+            class="btn btn-primary col-lg-2" 
+            [disabled]="isOfferClosed"
+            (click)="closeOffer()">
+      {{ isOfferClosed ? 'offre cloturé' : 'Cloturer l\'offre' }}
+    </button>
+    </div>
 
   <div *ngIf="isLoading" class="loading-skeleton">
     <div class="skeleton-header"></div>
@@ -21,7 +26,7 @@
     <div class="container mt-5 mb-3">
       <div class="row">
         <h5 class="col-lg-4">Entreprise </h5>
-        <h5 class="col-lg-8 text-muted" >&#64; {{ clients.company_name }}</h5>
+        <h5 class="col-lg-8 text-muted" >&#64; Maroc Telecom</h5>
       </div>
       <hr>
       <div class="row">
@@ -81,15 +86,18 @@
               <td>{{item.title}}</td>
               <td>{{item.user.email}}</td>
               <td>{{item.availability}}</td>
-              <td>{{item.TJM}} Mad / J</td>
+              <td>{{item.TJM}} Mad / J
+                 <span *ngIf="validatedFreelancers.has(i)" ><span class="badge rounded-pill text-bg-success text-muted" role="alert">validé</span></span>
+                </td>
               <td>
                 <div class="btn-group dropstart">
                   <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="bi bi-three-dots-vertical"></i>
                   </button>
                   <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-eye"></i> View</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-envelope-arrow-up"></i> Send</a></li>
+                    <li><a class="dropdown-item" (click)="onEdited()"><i class="bi bi-eye"></i> View</a></li>
+                    <li><a class="dropdown-item"routerLink="../../mailing" ><i class="bi bi-envelope-arrow-up"></i> Send</a></li>
+                    <li><a class="dropdown-item" (click)="validateFreelancer(i)"><i class="bi bi-check-all"></i> Valider</a></li>
 
                   </ul>
                 </div>
@@ -114,6 +122,24 @@
         <div class="modal-body">
           <app-user-update-offer [parentdata]="postdetails"></app-user-update-offer>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- modal -->
+<div *ngIf="showedit" class="modal fade show d-block" tabindex="-1" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="btn-close" (click)="onCloseModal()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-user-viewfreelancers-profile></app-user-viewfreelancers-profile>
       </div>
     </div>
   </div>

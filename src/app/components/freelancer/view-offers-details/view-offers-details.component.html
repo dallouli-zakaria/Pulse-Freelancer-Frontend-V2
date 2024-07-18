@@ -54,18 +54,38 @@
       <div class="row">
         <h5 class="col-lg-4">Budget</h5>
         <h5 class="col-lg-8 text-muted">
-          <span *ngIf="postdata?.budget === 'month'">{{postdata?.budgetvalue}} Dh par Mois</span>
+          <!-- <span *ngIf="postdata?.budget === 'month'">{{postdata?.budgetvalue}} Dh par Mois</span>
           <span *ngIf="postdata?.budget === 'day'">{{postdata?.budgetvalue}} Dh par jours</span>
-          <span *ngIf="postdata?.budgetvalue == 0">Pas encore défini</span>
+          <span *ngIf="postdata?.budgetvalue == 0">Pas encore défini</span> -->
+          60 DH / jour
         </h5>
       </div>
       <hr>
       <div class="row">
         <h5 class="col-lg-4">Periode</h5>
         <h5 class="col-lg-8 text-muted">
-          <span *ngIf="postdata?.period === 'month'">{{postdata?.periodvalue}} Mois</span>
+          <!-- <span *ngIf="postdata?.period === 'month'">{{postdata?.periodvalue}} Mois</span>
           <span *ngIf="postdata?.period === 'day'">{{postdata?.periodvalue}} jours</span>
-          <span *ngIf="postdata?.periodvalue == 0">Pas encore défini</span>
+          <span *ngIf="postdata?.periodvalue == 0">Pas encore défini</span> -->
+          80 jours
+        </h5>
+      </div>
+      <hr>
+      <div class="row">
+        <h5 class="col-lg-4">skills</h5>
+        <h5 class="col-lg-8 text-muted">
+          <div
+            class="mt-2 mt-lg-0 d-flex flex-wrap align-items-start gap-1"
+          >
+            
+            <span  class="badge rounded-pill text-bg-secondary text-muted" role="alert"
+              >C#</span
+            ><span  class="badge rounded-pill text-bg-secondary text-muted" role="alert"
+              >Angular</span
+            ><span  class="badge rounded-pill text-bg-secondary text-muted" role="alert"
+              >Java</span
+            >
+          </div>
         </h5>
       </div>
       <hr>
@@ -74,6 +94,7 @@
         <h5 class="col-lg-8 text-muted">{{ postdata?.created_at | date: 'dd-MM-yyyy' }}</h5>
       </div>
       <hr>
+      
     </div>
 
 
