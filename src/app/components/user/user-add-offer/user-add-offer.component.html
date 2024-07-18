@@ -69,7 +69,7 @@
             <label for="skills">Compétences</label>
             <app-skillchips (skillsSelected)="onSkillsSelected($event)"></app-skillchips>
             <div *ngIf="selectedSkills.length" class="mt-2">
-              <span class="badge badge-primary mr-1" *ngFor="let skill of selectedSkills">{{ skill }}</span>
+              <span class="badge badge-primary mr-1" *ngFor="let skill of selectedSkills">{{skill}}</span>
             </div>
           </div>
         </div>

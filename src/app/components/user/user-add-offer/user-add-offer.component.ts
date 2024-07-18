@@ -67,15 +67,15 @@ export class UserAddOfferComponent {
   addoffer() {
     if (this.form.valid) {
       this.isSubmitting = true;
-      this.postsservice.store(this.form.value).subscribe(
-        (res) => {
+      this.postsservice.store(this.form.value).subscribe({
+      next:   (res) => {
           console.log(res);
           this.router.navigate(['../pulse/client-profile/client-offers']); 
         },
-        (err) => {
-          console.log(err);
-        }
-      );
+      error : (err) => 
+           console.log(err)
+        
+      })
     } else {
       console.log('Form is invalid');
     }
