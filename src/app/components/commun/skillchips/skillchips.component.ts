@@ -21,6 +21,7 @@ export class SkillchipsComponent implements OnInit {
   roles!: string;
   isAuthenticated: boolean = false;
   freelancerId: number = this.authService.parseID();
+ 
 
   constructor(private fb: FormBuilder, private skillservice: SkillService, public authService: AuthService) { }
 
@@ -117,7 +118,7 @@ export class SkillchipsComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.selectedSkills.length > 0) {
+    if (this.selectedSkills.length > 0 && this.roles=='freelancer_role') {
       const skillIds = this.selectedSkills.map(skill => ({ id: skill.id }));
   
       console.log('Skills to be updated:', skillIds);  // Log the data
