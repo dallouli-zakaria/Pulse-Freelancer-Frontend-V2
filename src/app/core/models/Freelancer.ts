@@ -4,7 +4,7 @@ export interface Freelancer{
     name: string;
     email: string;
     password?: string;
-  };
+}
   title: string;
   dateOfBirth: string;
   city: string;

@@ -9,26 +9,26 @@ import { SkillService } from '../../../core/services/skill.service';
   styleUrls: ['./skillchips.component.css']
 })
 export class SkillchipsComponent implements OnInit {
-  @Output() skillsSubmitted = new EventEmitter<{ id: number, title: string }[]>();
-  @Output() skillsSelected = new EventEmitter<{ id: number, title: string }[]>();
-
+  @Output() skillsSubmitted = new EventEmitter<number[]>();
+  @Output() skillsSelected = new EventEmitter<number[]>();
+  
   form!: FormGroup;
   skills: { id: number, title: string }[] = [];
   filteredSkills: { id: number, title: string }[] = [];
-  selectedSkills: { id: number, title: string }[] = [];
+  selectedSkills: number[] = []; // Array of skill IDs
   showSuggestions: boolean = false;
   role!: string;
   roles!: string;
   isAuthenticated: boolean = false;
   freelancerId: number = this.authService.parseID();
-
+  
   constructor(private fb: FormBuilder, private skillservice: SkillService, public authService: AuthService) { }
-
+  
   ngOnInit(): void {
     this.form = this.fb.group({
       skillInput: ['']
     });
-
+  
     this.form.get('skillInput')?.valueChanges.subscribe(value => {
       if (value && value.length >= 2) {
         this.filteredSkills = this.filterSkills(value);
@@ -38,7 +38,7 @@ export class SkillchipsComponent implements OnInit {
         this.showSuggestions = false;
       }
     });
-
+  
     this.isAuthenticated = this.authService.isLoggedIn();
     if (this.isAuthenticated) {
       let sub = this.authService.parseID();
@@ -51,25 +51,24 @@ export class SkillchipsComponent implements OnInit {
         }
       });
     }
-
     // Load skills from the service
     this.loadSkills();
   }
-
+  
   loadSkills(): void {
     this.skillservice.index().subscribe((res) => {
       this.skills = res;
     });
   }
-
+  
   filterSkills(value: string): { id: number, title: string }[] {
     const filterValue = value.toLowerCase();
     return this.skills.filter(skill => 
       skill.title.toLowerCase().includes(filterValue) && 
-      !this.selectedSkills.some(selectedSkill => selectedSkill.id === skill.id)
+      !this.selectedSkills.includes(skill.id)
     );
   }
-
+  
   onInput(event: Event): void {
     const input = (event.target as HTMLInputElement).value;
     if (input && input.length >= 2) {
@@ -80,16 +79,16 @@ export class SkillchipsComponent implements OnInit {
       this.showSuggestions = false;
     }
   }
-
+  
   addSkill(event: Event): void {
     event.preventDefault();
     const value = this.form.get('skillInput')?.value.trim();
-
+  
     // Find the skill object by title
     const skill = this.skills.find(s => s.title === value);
-
-    if (skill && !this.selectedSkills.some(selectedSkill => selectedSkill.id === skill.id)) {
-      this.selectedSkills.push(skill);
+  
+    if (skill && !this.selectedSkills.includes(skill.id)) {
+      this.selectedSkills.push(skill.id);
       this.form.get('skillInput')?.reset();
       this.filteredSkills = [];
       this.showSuggestions = false;
@@ -98,31 +97,31 @@ export class SkillchipsComponent implements OnInit {
       console.log('Please select a skill from the suggestions!');
     }
   }
-
+  
   addSkillFromList(skill: { id: number, title: string }): void {
-    if (!this.selectedSkills.some(selectedSkill => selectedSkill.id === skill.id)) {
-      this.selectedSkills.push(skill);
+    if (!this.selectedSkills.includes(skill.id)) {
+      this.selectedSkills.push(skill.id);
       this.form.get('skillInput')?.reset();
       this.filteredSkills = [];
       this.showSuggestions = false;
       this.skillsSelected.emit(this.selectedSkills);
     }
   }
-
-  removeSkill(skill: { id: number, title: string }): void {
-    const index = this.selectedSkills.findIndex(selectedSkill => selectedSkill.id === skill.id);
+  
+  removeSkill(skillId: number): void {
+    const index = this.selectedSkills.indexOf(skillId);
     if (index >= 0) {
       this.selectedSkills.splice(index, 1);
     }
   }
-
+  
   onSubmit(): void {
     if (this.selectedSkills.length > 0) {
-      const skillIds = this.selectedSkills.map(skill => ({ id: skill.id }));
+      const skillIds = this.selectedSkills; // Use the selectedSkills array directly
   
-      console.log('Skills to be updated:', skillIds);  // Log the data
+      console.log('Skills to be updated:', { skills: skillIds });  // Log the data
   
-      this.skillservice.updateFreelancerSkills(this.freelancerId, skillIds).subscribe(
+      this.skillservice.updateFreelancerSkills(this.freelancerId, { skills: skillIds }).subscribe(
         response => {
           console.log('Skills updated successfully:', response);
           this.selectedSkills = [];
@@ -139,4 +138,10 @@ export class SkillchipsComponent implements OnInit {
       );
     }
   }
+  
+  getSkillTitleById(skillId: number): string {
+    const skill = this.skills.find(s => s.id === skillId);
+    return skill ? skill.title : 'Unknown Skill';
+  }
+  
 }

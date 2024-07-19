@@ -42,9 +42,10 @@ export class SkillService {
  
  
    public showbyfreelancerid(id:any):Observable<Skill>{
-     this.Skill=this.http.get(`${this.url}/${Constant.SkillS}/freelancer/${id}`);
+     this.Skill=this.http.get(`${this.url}/freelancers/${id}/${Constant.SkillS}`);
      return this.Skill;
    }
+
 
        // Get all skills
        getSkills(): Observable<any> {
@@ -71,8 +72,8 @@ export class SkillService {
     // updateFreelancerSkills(freelancerId: number, skills: { id: number }[]): Observable<any> {
     //   return this.http.put(`${this.url}/freelancers/${freelancerId}/skills`, { skills });
     // }
-    updateFreelancerSkills(freelancerId: number, skills: { id: number }[]): Observable<any> {
-      return this.http.put(`${this.url}/freelancers/${freelancerId}/skills`, { skills });
+    updateFreelancerSkills(freelancerId: number, skills:any): Observable<any> {
+      return this.http.put(`${this.url}/freelancers/${freelancerId}/skills`, skills );
   }
   
   
