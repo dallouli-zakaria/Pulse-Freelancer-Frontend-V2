@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -52,48 +52,8 @@ import { OfferTableComponent } from './components/admin/table/offer-table/offer-
 import { PermissionTableComponent } from './components/admin/table/permission-table/permission-table.component';
 import { RoleTableComponent } from './components/admin/table/role-table/role-table.component';
 import { UsersTableComponent } from './components/admin/table/users-table/users-table.component';
-import { ViewOffersDetailsComponent } from './components/freelancer/view-offers-details/view-offers-details.component';
-import { AuthentificationComponent } from './components/auth/authentification/authentification.component';
-import { LoginComponent } from './components/auth/login/login.component';
-import { Error404Component } from './components/errors/error404/error404.component';
-import { Error500Component } from './components/errors/error500/error500.component';
-import { FreelancerProfileComponent } from './components/freelancer/freelancer-profile/freelancer-profile.component';
-import { ViewOffersComponent } from './components/freelancer/view-offers/view-offers.component';
-import { ContactUsComponent } from './components/user/contact-us/contact-us.component';
-import { UserAddOfferComponent } from './components/user/user-add-offer/user-add-offer.component';
-import { UserDashboardComponent } from './components/user/user-dashboard/user-dashboard.component';
-import { UserHomeComponent } from './components/user/user-home/user-home.component';
-import { UserIndexComponent } from './components/user/user-index/user-index.component';
-import { UserFooterComponent } from './components/user/user-layout/user-footer/user-footer.component';
-import { UserHeaderComponent } from './components/user/user-layout/user-header/user-header.component';
-import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
-import { UserUpdateOfferComponent } from './components/user/user-update-offer/user-update-offer.component';
-import { UserUpdateProfileComponent } from './components/user/user-update-profile/user-update-profile.component';
-import { UserViewFreelancersComponent } from './components/user/user-view-freelancers/user-view-freelancers.component';
-import { ViewClientOfferComponent } from './components/user/view-client-offer/view-client-offer.component';
+import { LoginComponent } from './components/commun/auth/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UserContractDownloadComponent } from './components/user/user-contract-download/user-contract-download.component';
-import { UserSideprofileComponent } from './components/user/user-profile/user-sideprofile/user-sideprofile.component';
-import { UserOffersComponent } from './components/user/user-profile/user-offers/user-offers.component';
-import { UsercontractsComponent } from './components/user/user-profile/usercontracts/usercontracts.component';
-import { UserinfosComponent } from './components/user/user-profile/userinfos/userinfos.component';
-import { UsersubscriptionsComponent } from './components/user/user-profile/usersubscriptions/usersubscriptions.component';
-import { UserUpdatecompanyComponent } from './components/user/user-updatecompany/user-updatecompany.component';
-import { UserViewfreelancersProfileComponent } from './components/user/user-viewfreelancers-profile/user-viewfreelancers-profile.component';
-import { FreelancerSideprofileComponent } from './components/freelancer/freelancer-profile/freelancer-sideprofile/freelancer-sideprofile.component';
-import { FreelancerExperienceComponent } from './components/freelancer/freelancer-profile/freelancer-experience/freelancer-experience.component';
-import { FreelancerProjectsComponent } from './components/freelancer/freelancer-profile/freelancer-projects/freelancer-projects.component';
-import { FreelancerSkillsComponent } from './components/freelancer/freelancer-profile/freelancer-skills/freelancer-skills.component';
-import { FreelancerAboutComponent } from './components/freelancer/freelancer-profile/freelancer-about/freelancer-about.component';
-import { FreelancerDashboardComponent } from './components/freelancer/freelancer-profile/freelancer-dashboard/freelancer-dashboard.component';
-import { FreelancerOffersComponent } from './components/freelancer/freelancer-profile/freelancer-dashboard/freelancer-offers/freelancer-offers.component';
-import { FreelancerContractsComponent } from './components/freelancer/freelancer-profile/freelancer-dashboard/freelancer-contracts/freelancer-contracts.component';
-import { FreelancerUpdateAboutComponent } from './components/freelancer/freelancer-profile/freelancer-about/freelancer-update-about/freelancer-update-about.component';
-import { FreelancerAddExperienceComponent } from './components/freelancer/freelancer-profile/freelancer-experience/freelancer-add-experience/freelancer-add-experience.component';
-import { FreelancerUpdateExperienceComponent } from './components/freelancer/freelancer-profile/freelancer-experience/freelancer-update-experience/freelancer-update-experience.component';
-import { FreelancerAddSkillsComponent } from './components/freelancer/freelancer-profile/freelancer-skills/freelancer-add-skills/freelancer-add-skills.component';
-import { FreelancerUpdateSkillsComponent } from './components/freelancer/freelancer-profile/freelancer-skills/freelancer-update-skills/freelancer-update-skills.component';
-import { SkeletonComponent } from './components/user/skeleton/skeleton.component';
 import { TimeAgoPipe } from './core/pipes/time-ago.pipe';
 import { AuthService } from './core/services/auth.service';
 import { PostCartComponent } from './components/admin/carts/post-cart/post-cart.component';
@@ -104,141 +64,163 @@ import { PostEditComponent } from './components/admin/buttons/edit/post-edit/pos
 import { PostDeleteComponent } from './components/admin/buttons/delete/post-delete/post-delete.component';
 import { RoleUserComponent } from './components/admin/table/users-table/role-user/role-user.component';
 import { RolechipsAutocompleteComponent } from './components/admin/buttons/edit/role-edit/rolechips-autocomplete/rolechips-autocomplete.component';
-import { LoadingComponent } from './components/user/loading/loading.component';
-import { FreelancerInformationComponent } from './components/freelancer/freelancer-profile/freelancer-information/freelancer-information.component';
-import { FreelancerEditinfoComponent } from './components/freelancer/freelancer-profile/freelancer-information/freelancer-editinfo/freelancer-editinfo.component';
 import { OfferAddComponent } from './components/admin/buttons/add/offer-add/offer-add.component';
 import { OfferDeleteComponent } from './components/admin/buttons/delete/offer-delete/offer-delete.component';
 import { OfferEditComponent } from './components/admin/buttons/edit/offer-edit/offer-edit.component';
-import { ToastComponent } from './components/user/toast/toast.component';
-import { SkillchipsComponent } from './components/freelancer/freelancer-profile/freelancer-skills/skillchips/skillchips.component';
-import { SkillprogressComponent } from './components/freelancer/freelancer-profile/freelancer-skills/skillprogress/skillprogress.component';
 import { AssignRoleToPermessionComponent } from './components/admin/buttons/assignement/assign-role-to-permession/assign-role-to-permession.component';
 import { AssignRoleToUserComponent } from './components/admin/buttons/assignement/assign-role-to-user/assign-role-to-user.component';
 import { AssignPermessionToRoleComponent } from './components/admin/buttons/assignement/assign-permession-to-role/assign-permession-to-role.component';
 import { AssignPermessionToUserComponent } from './components/admin/buttons/assignement/assign-permession-to-user/assign-permession-to-user.component';
 import { PostViewComponent } from './components/admin/pages/post-view/post-view.component';
+import { ConnectedLandingPageComponent } from './components/commun/connected-landing-page/connected-landing-page.component';
+import { IndexComponent } from './components/commun/index/index.component';
+import { LandingPageComponent } from './components/commun/landing-page/landing-page.component';
+import { SkeletonLoadingComponent } from './components/commun/skeleton-loading/skeleton-loading.component';
+import { AuthentificationComponent } from './components/commun/auth/authentification/authentification.component';
+import { AddPostComponent } from './components/client/pages/add-post/add-post.component';
+import { ClientContractsComponent } from './components/client/pages/client-contracts/client-contracts.component';
+import { ClientIndexComponent } from './components/client/pages/client-index/client-index.component';
+import { ClientInfosComponent } from './components/client/pages/client-infos/client-infos.component';
+import { ClientPostsComponent } from './components/client/pages/client-posts/client-posts.component';
+import { ClientProfileComponent } from './components/client/pages/client-profile/client-profile.component';
+import { ClientSideprofileComponent } from './components/client/pages/client-sideprofile/client-sideprofile.component';
+import { ClientPostDetailsComponent } from './components/client/pages/client-post-details/client-post-details.component';
+import { ClientSubscriptionsComponent } from './components/client/pages/client-subscriptions/client-subscriptions.component';
+import { ClientViewFreelancerDetailsComponent } from './components/client/pages/client-view-freelancer-details/client-view-freelancer-details.component';
+import { ClientViewFreelancersComponent } from './components/client/pages/client-view-freelancers/client-view-freelancers.component';
+import { ClientContractDownloadComponent } from './components/client/actions/client-contract-download/client-contract-download.component';
+import { ClientUpdateCompanyInfosComponent } from './components/client/actions/client-update-company-infos/client-update-company-infos.component';
+import { ClientUpdatePersonalInfosComponent } from './components/client/actions/client-update-personal-infos/client-update-personal-infos.component';
+import { ClientUpdatePostComponent } from './components/client/actions/client-update-post/client-update-post.component';
+import { HeaderComponent } from './components/commun/client-freelancer-layouts/header/header.component';
+import { FooterComponent } from './components/commun/client-freelancer-layouts/footer/footer.component';
+import { FreelancerIndexComponent } from './components/freelancers/pages/freelancer-index/freelancer-index.component';
+import { FreelancerPersonalInfosComponent } from './components/freelancers/pages/freelancer-personal-infos/freelancer-personal-infos.component';
+import { FreelancerProjectsHistoryComponent } from './components/freelancers/pages/freelancer-projects-history/freelancer-projects-history.component';
+import { FreelancerViewPostsComponent } from './components/freelancers/pages/freelancer-view-posts/freelancer-view-posts.component';
+import { FreelancerUpdatePersonalInfosComponent } from './components/freelancers/actions/freelancer-update-personal-infos/freelancer-update-personal-infos.component';
+import { FreelancerViewPostDetailsComponent } from './components/freelancers/actions/freelancer-view-post-details/freelancer-view-post-details.component';
+import { SkillchipsComponent } from './components/commun/skillchips/skillchips.component';
+import { SkillprogressComponent } from './components/commun/skillprogress/skillprogress.component';
+import { FreelancerAboutComponent } from './components/freelancers/pages/freelancer-about/freelancer-about.component';
+import { FreelancerExperienceComponent } from './components/freelancers/pages/freelancer-experience/freelancer-experience.component';
+import { FreelancerSkillsComponent } from './components/freelancers/pages/freelancer-skills/freelancer-skills.component';
+import { FreelancerProfileComponent } from './components/freelancers/pages/freelancer-profile/freelancer-profile.component';
+import { FreelancerSideprofileComponent } from './components/freelancers/pages/freelancer-sideprofile/freelancer-sideprofile.component';
+import { FreelancerUpdateAboutComponent } from './components/freelancers/actions/freelancer-update-about/freelancer-update-about.component';
+import { FreelancerAddExperienceComponent } from './components/freelancers/actions/freelancer-add-experience/freelancer-add-experience.component';
+import { FreelancerUpdateExperienceComponent } from './components/freelancers/actions/freelancer-update-experience/freelancer-update-experience.component';
+import { CommonModule } from '@angular/common';
+import { FreelancerOffersComponent } from './components/freelancers/pages/freelancer-offers/freelancer-offers.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    AdminDashboardComponent,
-    AdminLeftbarComponent,
-    AdminTopbarComponent,
-    AdminTableComponent,
-    FreelancerCartComponent,
-    ClientCartComponent,
-    DashboardComponent,
-    ContractCartComponent,
-    OfferCartComponent,
-    AdminComponent,
-    ClientComponent,
-    FreelancerComponent,
-    RoleComponent,
-    PermissionComponent,
-    ContractComponent,
-    OfferComponent,
-    ClientTableComponent,
-    FreelancerTableComponent,
-    ContractTableComponent,
-    OfferTableComponent,
-    RoleTableComponent,
-    PermissionTableComponent,
-    AdminEditComponent,
-    ClientEditComponent,
-    FreelancerEditComponent,
-    AdminDeleteComponent,
-    ClientDeleteComponent,
+    AddPostComponent,
     AdminAddComponent,
-    FreelancerDeleteComponent,
-    ClientAddComponent,
-    FreelancerAddComponent,
-    MailingComponent,
-    ContractAddComponent,
-    ContractDeleteComponent,
-    ContractEditComponent,
-    UsersComponent,
-    UsersTableComponent,
-    UsersEditComponent,
-    UsersDeleteComponent,
-    UserDetailsComponent,
-    RoleDeleteComponent,
-    PermissionDeleteComponent,
-    RoleEditComponent,
-    PermissionEditComponent,
-    RoleAddComponent,
-    PermissionAddComponent,
-    RoleDetailsComponent,
-    ViewOffersDetailsComponent,
-    AppComponent,
+    AdminComponent,
     AdminDashboardComponent,
+    AdminDeleteComponent,
+    AdminEditComponent,
     AdminLeftbarComponent,
+    AdminTableComponent,
     AdminTopbarComponent,
-    UserIndexComponent,
-    UserHeaderComponent,
-    UserFooterComponent,
-    UserHomeComponent,
-    LoginComponent,
-    AuthentificationComponent,
-    UserViewFreelancersComponent,
-    UserProfileComponent,
-    FreelancerProfileComponent,
-    UserAddOfferComponent,
-    UserDashboardComponent,
-    Error404Component,
-    Error500Component,
-    ViewOffersComponent,
-    ViewClientOfferComponent,
-    UserUpdateProfileComponent,
-    ContactUsComponent,
-    ViewOffersDetailsComponent,
-    UserUpdateOfferComponent,
-    UserContractDownloadComponent,
-    UserSideprofileComponent,
-    UserOffersComponent,
-    UsercontractsComponent,
-    UserinfosComponent,
-    UsersubscriptionsComponent,
-    UserUpdatecompanyComponent,
-    UserViewfreelancersProfileComponent,
-    FreelancerSideprofileComponent,
-    FreelancerExperienceComponent,
-    FreelancerProjectsComponent,
-    FreelancerSkillsComponent,
-    FreelancerAboutComponent,
-    FreelancerDashboardComponent,
-    FreelancerOffersComponent,
-    FreelancerContractsComponent,
-    FreelancerUpdateAboutComponent,
-    FreelancerAddExperienceComponent,
-    FreelancerUpdateExperienceComponent,
-    FreelancerAddSkillsComponent,
-    FreelancerUpdateSkillsComponent,
-    SkeletonComponent,
-    TimeAgoPipe,
-    PostComponent,
-    PostCartComponent,
-    PostTableComponent,
-    PostAddComponent,
-    PostEditComponent,
-    PostDeleteComponent,
-    RoleUserComponent,
-    RolechipsAutocompleteComponent,
-    LoadingComponent,
-    FreelancerInformationComponent,
-    FreelancerEditinfoComponent,
-    OfferAddComponent,
-    OfferDeleteComponent,
-    OfferEditComponent,
-    AssignRoleToPermessionComponent,
-    AssignRoleToUserComponent,
+    AppComponent,
     AssignPermessionToRoleComponent,
     AssignPermessionToUserComponent,
-    ToastComponent, 
+    AssignRoleToPermessionComponent,
+    AssignRoleToUserComponent,
+    AuthentificationComponent,
+    ClientAddComponent,
+    ClientCartComponent,
+    ClientComponent,
+    ClientContractDownloadComponent,
+    ClientContractsComponent,
+    ClientDeleteComponent,
+    ClientEditComponent,
+    ClientIndexComponent,
+    ClientInfosComponent,
+    ClientPostDetailsComponent,
+    ClientPostsComponent,
+    ClientProfileComponent,
+    ClientSideprofileComponent,
+    ClientSubscriptionsComponent,
+    ClientTableComponent,
+    ClientUpdateCompanyInfosComponent,
+    ClientUpdatePersonalInfosComponent,
+    ClientUpdatePostComponent,
+    ClientViewFreelancerDetailsComponent,
+    ClientViewFreelancersComponent,
+    ConnectedLandingPageComponent,
+    ContractAddComponent,
+    ContractCartComponent,
+    ContractComponent,
+    ContractDeleteComponent,
+    ContractEditComponent,
+    ContractTableComponent,
+    DashboardComponent,
+    FooterComponent,
+    FreelancerAboutComponent,
+    FreelancerAddComponent,
+    FreelancerAddExperienceComponent,
+    FreelancerCartComponent,
+    FreelancerComponent,
+    FreelancerDeleteComponent,
+    FreelancerEditComponent,
+    FreelancerExperienceComponent,
+    FreelancerIndexComponent,
+    FreelancerOffersComponent,
+    FreelancerPersonalInfosComponent,
+    FreelancerProfileComponent,
+    FreelancerProjectsHistoryComponent,
+    FreelancerSideprofileComponent,
+    FreelancerSkillsComponent,
+    FreelancerTableComponent,
+    FreelancerUpdateAboutComponent,
+    FreelancerUpdateExperienceComponent,
+    FreelancerUpdatePersonalInfosComponent,
+    FreelancerViewPostDetailsComponent,
+    FreelancerViewPostsComponent,
+    HeaderComponent,
+    IndexComponent,
+    LandingPageComponent,
+    LoginComponent,
+    MailingComponent,
+    OfferAddComponent,
+    OfferCartComponent,
+    OfferComponent,
+    OfferDeleteComponent,
+    OfferEditComponent,
+    OfferTableComponent,
+    PermissionAddComponent,
+    PermissionComponent,
+    PermissionDeleteComponent,
+    PermissionEditComponent,
+    PermissionTableComponent,
+    PostAddComponent,
+    PostCartComponent,
+    PostComponent,
+    PostDeleteComponent,
+    PostEditComponent,
+    PostTableComponent,
+    PostViewComponent,
+    RoleAddComponent,
+    RoleComponent,
+    RoleDeleteComponent,
+    RoleDetailsComponent,
+    RoleEditComponent,
+    RoleTableComponent,
+    RoleUserComponent,
+    RolechipsAutocompleteComponent,
+    SkeletonLoadingComponent,
     SkillchipsComponent,
     SkillprogressComponent,
-    PostViewComponent,
-        
+    TimeAgoPipe,
+    UserDetailsComponent,
+    UsersComponent,
+    UsersDeleteComponent,
+    UsersEditComponent,
+    UsersTableComponent
+    
   ],
   imports: [
      FormsModule,
@@ -246,6 +228,7 @@ import { PostViewComponent } from './components/admin/pages/post-view/post-view.
       AppRoutingModule,
       NgbModule,
       ReactiveFormsModule,
+      CommonModule,
   ],
   providers: [provideHttpClient(),AuthService],
   bootstrap: [AppComponent]

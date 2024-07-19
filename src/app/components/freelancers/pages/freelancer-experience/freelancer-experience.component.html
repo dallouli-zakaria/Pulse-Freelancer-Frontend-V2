@@ -1,0 +1,111 @@
+<div class="card-box"  >
+  <div class="tab-content">
+    <div class="tab-pane show active" id="about-me">
+      <div class="row  mb-4" >
+      
+          <span class="col-lg-11 col-sm-6 col-md-6"><h5 class="text-uppercase">Experience</h5></span>
+          <span class="col-lg-1 col-sm-6 col-md-6">
+              <div class="row">
+                  <h4 ><a (click)="openModalAdd()" class="text-danger" style="cursor: pointer;"><i class="bi bi-plus-circle"></i></a></h4>
+              </div>
+            </span>
+            
+      </div>
+
+          <!-- Skeleton loader -->
+    <div *ngIf="isLoading" class="container mb-3">
+      <div class="pb-0 px-3 skeleton-card" *ngFor="let i of [1,2,3,4,5]">
+        <div class="card-body">
+          <div class="skeleton-title"></div>
+          <div class="skeleton-description"></div>
+          <div class="skeleton-budget"></div>
+        </div>
+      </div>
+    </div>
+      
+      <ul class="list-unstyled timeline-sm" *ngIf="!isLoading && experienceData!.length > 0">
+        <li class="timeline-sm-item" *ngFor="let item of experienceData">
+          <span class="timeline-sm-date">{{ getYear(item.startDate) }} - {{ getYear(item.endDate) }}</span> 
+          <h5 class="mt-0 mb-1">
+          <span class="row">
+              <span class="col-lg-10 col-sm-6 col-md-6 text-uppercase">
+            {{item.title}}
+              </span>
+              <span class="col-lg-2 col-sm-6 col-md-6">
+                <a (click)="openModalEdit(item)" class="text-danger" style="cursor: pointer;"><i class="bi bi-pencil-square"></i></a>&nbsp;
+                <a (click)="openDeleteModal(item.id)" class="text-danger" style="cursor: pointer;"><i class="bi bi-x-square"></i></a>
+              </span>
+          </span>
+          </h5>
+          <span>&#64;{{item.companyName}}. <i class="bi bi-geo-alt-fill"></i>{{item.country}} - {{item.city}} </span>
+          <p class="text-muted mt-2">
+            {{item.description}}
+          </p>
+          
+        </li>
+      </ul>
+      
+      
+    </div>
+  </div>
+
+      <!-- modal add -->
+      <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayAdd}">
+        <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                    <div class="modal-header">
+                          <h4 class="modal-title">Expérience</h4>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal"  (click)="onCloseHandledAdd()"></button>
+                        </div>
+              <div class="modal-body">
+                          <app-freelancer-add-experience  (experienceAdded)="onExperienceAdded()"></app-freelancer-add-experience>
+                        </div>
+
+          </div>
+            </div>
+      </div>
+
+        <!-- end modal add -->
+
+   <!-- modal edit -->
+   <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayEdit}">
+    <div class="modal-dialog" role="document">
+      
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Modifier l'experience</h4>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="onCloseHandledEdit()"></button>
+              
+            </div>
+          <div class="modal-body">
+            <app-freelancer-update-experience (experienceUpdated)="onExperienceUpdated()"></app-freelancer-update-experience>
+          </div>
+      </div>
+        </div>
+    </div>
+
+      <!-- end modal edit -->
+
+      <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayDelete}">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Supprimer experience</h4>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="onCloseHandledDelete()"></button>
+              
+            </div>
+            <div class="modal-body">
+              <p>Êtes-vous sûr de vouloir supprimer cette expérience ?</p>
+            </div>
+            <div class="modal-footer">
+              
+              <button type="button" class="btn btn-danger" (click)="confirmDeleteExperience()" [disabled]="isSubmitting">
+                {{ isSubmitting ? 'Supression...' : 'Supprimer' }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+</div>

@@ -1,0 +1,32 @@
+<body>
+
+
+    <div class="container p-4 ">
+      <nav aria-label="breadcrumb " >
+        <ol class="breadcrumb ">
+          <li class="breadcrumb-item text-danger "><a routerLink="../home">Acceuil</a></li>
+          <li class="breadcrumb-item text-danger "><a routerLink="../client-dashboard">Client</a></li>
+          <li class="breadcrumb-item text-danger "><a routerLink="../add-offer">Création offre</a></li>
+          <li class="breadcrumb-item active " aria-current="page">Mon profile</li>
+        </ol>
+      </nav>
+      <h3 class="mt-4 mb-3">Profile Client</h3>
+      <div class="row">
+        
+        <div class="col-lg-4 col-xl-4">
+         
+          <app-client-sideprofile></app-client-sideprofile>
+        </div>
+  
+        <div class="col-lg-8 col-xl-8">
+          
+          <!-- display -->
+          <router-outlet></router-outlet>
+         
+        </div>
+    
+         
+      </div>
+    </div>
+  </body>
+  
