@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Constant } from '../Constant';
-import { UserIndexComponent } from './../../components/user/user-index/user-index.component';
 import { Observable } from 'rxjs';
 import { Offer } from '../models/Offer';
 

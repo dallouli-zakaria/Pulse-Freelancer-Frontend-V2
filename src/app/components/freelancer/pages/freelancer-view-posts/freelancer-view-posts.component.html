@@ -1,0 +1,396 @@
+<body>
+  <section class="section">
+    
+    <div class="container">
+      <nav aria-label="breadcrumb " >
+        <ol class="breadcrumb ">
+          <li class="breadcrumb-item text-danger "><a routerLink="../home">Acceuil</a></li>
+          <li class="breadcrumb-item active " aria-current="page">Voir offres</li>
+        </ol>
+      </nav>
+      <div class="justify-content-center row">
+        <h3 class="m-4">Découvrir les Différents offres</h3>
+        <div class="col-lg-12">
+          <div class="candidate-list-widgets mb-4">
+            <form action="#" class>
+              <div class="g-2 row">
+                <div class="col-lg-3">
+                  <div class="filler-job-form">
+                    <i class="uil uil-briefcase-alt"></i
+                    ><input
+                      id="exampleFormControlInput1"
+                      placeholder="Domaine d'expertise "
+                      type="search"
+                      class="form-control filler-job-input-box form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="filler-job-form">
+                    <i class="uil uil-location-point"></i>
+                    <select
+                      class="form-select selectForm__inner"
+                      data-trigger="true"
+                      name="choices-single-location"
+                      id="choices-single-location"
+                      aria-label="Default select example"
+                    >
+                    <option value="4">--none--</option>
+                      <option value="AF">Développement web</option>
+                      <option value="AX">Application Desktop</option>
+                      <option value="AL">Applications mobile</option>
+                      <option value="AL">Design graphique</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="filler-job-form">
+                    <i class="uil uil-clipboard-notes"></i>
+                    <select
+                      class="form-select selectForm__inner"
+                      data-trigger="true"
+                      name="choices-single-categories"
+                      id="choices-single-categories"
+                      aria-label="Default select example"
+                    >
+                    <option value="4">--none--</option>
+                      <option value="4">Python </option>
+                      <option value="1">JavaScript </option>
+                      <option value="3">Java </option>
+                      <option value="5">Ruby </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div>
+                    <button class="btn btn-light" href="#"
+                      ><i class="uil uil-filter"></i>Vider le filtre</button
+                    ><button class="btn btn-danger ms-2" href="#"
+                      ><i class="uil uil-cog"></i> Chercher</button
+                    >
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="align-items-center row">
+            <div class="col-lg-8">
+              <div class="mb-3 mb-lg-0">
+                <h6 class="fs-16 mb-0">Showing 1 – 8 of 11 results</h6>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="candidate-list-widgets">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="selection-widget">
+                      <select
+                        class="form-select"
+                        data-trigger="true"
+                        name="choices-single-filter-orderby"
+                        id="choices-single-filter-orderby"
+                        aria-label="Default select example"
+                      >
+                        <option value="df">Default</option>
+                        <option value="ne">Newest</option>
+                        <option value="od">Oldest</option>
+                        <option value="rd">Random</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="selection-widget mt-2 mt-lg-0">
+                      <select
+                        class="form-select"
+                        data-trigger="true"
+                        name="choices-candidate-page"
+                        id="choices-candidate-page"
+                        aria-label="Default select example"
+                      >
+                        <option value="df">All</option>
+                        <option value="ne">8 per Page</option>
+                        <option value="ne">12 per Page</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+
+          
+          
+          <div class="candidate-list">
+            
+
+            <div *ngFor="let post of posts" class="candidate-list-box card mt-4">
+              <div class="p-4 card-body">
+                <div class="align-items-center row">
+                  <div class="col-auto">
+                    <div class="candidate-list-images">
+                      <a href="#">
+                        <img src="assets/img/gallery/company-image.jpg" alt class="avatar-md img-thumbnail rounded-circle" />
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-lg-5">
+                    <div class="candidate-list-content mt-3 mt-lg-0">
+                      <h5 class="fs-19 mb-0">
+                        <a class="primary-link" [routerLink]="['/freelancer-profile', post.id]">{{ post.title }}</a>
+                      </h5>
+                      <p class="text-muted mb-2">{{ post.description }}</p>
+                      <ul class="list-inline mb-0 text-muted">
+                        <li class="list-inline-item">
+                          <i class="bi bi-geo-alt-fill"></i> {{ post.location }}
+                        </li>
+                        <li class="list-inline-item">
+                          <i class="bi bi-cash-stack"></i>
+                          <span *ngIf="post?.budget === 'month'">{{post?.budgetvalue}} Dh par Mois</span>
+                          <span *ngIf="post?.budget === 'day'">{{post?.budgetvalue}} Dh par jours</span>
+                          <span *ngIf="post?.budgetvalue == 0"> Pas encore défini </span>
+                         
+                        </li>
+                      </ul>
+                    </div>
+                    <i class="bi bi-clock"></i><span> Crée il y a {{ post.created_at | timeAgo }}</span>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="mt-2 mt-lg-0 d-flex flex-wrap align-items-start gap-1">
+                      <!-- <span class="badge bg-soft-secondary fs-14 mt-1">Angular</span>
+                      <span class="badge bg-soft-secondary fs-14 mt-1">Springboot</span>
+                      <span class="badge bg-soft-secondary fs-14 mt-1">Wordpress</span> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="postuler">
+                  <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="selectPostId(post.id)"  >voir l'offre</button>
+                </div>
+              </div>
+            </div>
+           
+           
+<!-- post -->
+<div class="candidate-list-box card mt-4">
+  <div class="p-4 card-body">
+    <div class="align-items-center row">
+      <div class="col-auto">
+        <div class="candidate-list-images">
+          <a href="#"
+            ><img
+              src="assets/img/gallery/company-image.jpg"
+              alt
+              class="avatar-md img-thumbnail rounded-circle"
+          /></a>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="candidate-list-content mt-3 mt-lg-0">
+          <h5 class="fs-19 mb-0">
+            <a class="primary-link" routerLink="../freelancer-profile">Refonte de Site Web Corporatif</a>
+          </h5>
+          <p class="text-muted mb-2">Nous avons besoin d'un développeur web créatif pour refondre notre site web corporatif en freelance. Le projet implique une refonte complète du design, l'intégration de nouvelles fonctionnalités et l'optimisation pour la vitesse et la sécurité.</p>
+          <ul class="list-inline mb-0 text-muted">
+              <li class="list-inline-item">
+                  <i class="mdi mdi-home-modern"></i> Maroc Telecom
+                </li>
+            <li class="list-inline-item">
+              <i class="mdi mdi-map-marker"></i> Casablanca
+            </li>
+            <li class="list-inline-item">
+              <i class="mdi mdi-wallet"></i> 60 Dh /h
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-4">
+       
+        <div
+          class="mt-2 mt-lg-0 d-flex flex-wrap align-items-start gap-1"
+        >
+          
+          <span class="badge bg-soft-secondary fs-14 mt-1"
+            >Angular</span
+          ><span class="badge bg-soft-secondary fs-14 mt-1"
+            >Springboot</span
+          ><span class="badge bg-soft-secondary fs-14 mt-1"
+            >Wordpress</span
+          >
+        </div>
+      </div>
+    </div>
+    <div class="postuler">
+     <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">voir l'offre</button>
+     
+    </div>
+  </div>
+</div>
+<!-- end post -->
+                 <!-- post -->
+<div class="candidate-list-box card mt-4">
+  <div class="p-4 card-body">
+    <div class="align-items-center row">
+      <div class="col-auto">
+        <div class="candidate-list-images">
+          <a href="#"
+            ><img
+              src="assets/img/gallery/company-image.jpg"
+              alt
+              class="avatar-md img-thumbnail rounded-circle"
+          /></a>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="candidate-list-content mt-3 mt-lg-0">
+          <h5 class="fs-19 mb-0">
+            <a class="primary-link" routerLink="../freelancer-profile">Application Mobile Innovante</a>
+          </h5>
+          <p class="text-muted mb-2">Nous recherchons un développeur mobile talentueux pour un projet freelance. Votre mission sera de créer une application mobile intuitive et performante, avec une attention particulière à l'expérience utilisateur et à l'intégration de fonctionnalités avancées.</p>
+          <ul class="list-inline mb-0 text-muted">
+              <li class="list-inline-item">
+                  <i class="mdi mdi-home-modern"></i> Narsa
+                </li>
+            <li class="list-inline-item">
+              <i class="mdi mdi-map-marker"></i> Tanger
+            </li>
+            <li class="list-inline-item">
+              <i class="mdi mdi-wallet"></i> 8000 Dh /Mois
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-4">
+         
+        <div
+          class="mt-2 mt-lg-0 d-flex flex-wrap align-items-start gap-1"
+        >
+          
+          <span class="badge bg-soft-secondary fs-14 mt-1"
+            >Flutter</span
+          ><span class="badge bg-soft-secondary fs-14 mt-1"
+            >Java</span
+          ><span class="badge bg-soft-secondary fs-14 mt-1"
+            >Figma</span
+          >
+        </div>
+      </div>
+    </div>
+    <div class="postuler">
+     <button class="btn btn-outline-danger">voir l'offre</button>
+    </div>
+  </div>
+</div>
+<!-- end post -->
+                 <!-- post -->
+<div class="candidate-list-box card mt-4">
+  <div class="p-4 card-body">
+    <div class="align-items-center row">
+      <div class="col-auto">
+        <div class="candidate-list-images">
+          <a href="#"
+            ><img
+              src="assets/img/gallery/company-image.jpg"
+              alt
+              class="avatar-md img-thumbnail rounded-circle"
+          /></a>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="candidate-list-content mt-3 mt-lg-0">
+          <h5 class="fs-19 mb-0">
+            <a class="primary-link" routerLink="../freelancer-profile">site web e commerce</a>
+          </h5>
+          <p class="text-muted mb-2">Nous cherchons un developpeur web passionné pour une mission freelancer, le project consiste a réaliser un site web ecommerce avec l'implementation du SEO </p>
+          <ul class="list-inline mb-0 text-muted">
+              <li class="list-inline-item">
+                  <i class="mdi mdi-home-modern"></i> Majorelle
+                </li>
+            <li class="list-inline-item">
+              <i class="mdi mdi-map-marker"></i> Marrakech
+            </li>
+            <li class="list-inline-item">
+              <i class="mdi mdi-wallet"></i> Indeterminé
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-4">
+         
+        <div
+          class="mt-2 mt-lg-0 d-flex flex-wrap align-items-start gap-1"
+        >
+          
+          <span class="badge bg-soft-secondary fs-14 mt-1"
+            >Wordpress</span
+          ><span class="badge bg-soft-secondary fs-14 mt-1"
+            >Php</span
+          ><span class="badge bg-soft-secondary fs-14 mt-1"
+            >Python</span
+          >
+        </div>
+      </div>
+    </div>
+    <div class="postuler">
+     <button class="btn btn-outline-danger">voir l'offre</button>
+    </div>
+  </div>
+</div>
+<!-- end post -->
+
+
+      </div>
+  </div>
+</div>
+      <div class="row">
+        <div class="mt-4 pt-2 col-lg-12">
+          <nav aria-label="Page navigation example">
+            <div
+              class="pagination job-pagination mb-0 justify-content-center"
+            >
+              <li class="page-item disabled">
+                <a class="page-link " tabindex="-1" href="#"
+                  ><i class="mdi mdi-chevron-double-left fs-15"></i
+                ></a>
+              </li>
+              <li class="page-item active">
+                <a class="page-link" href="#">1</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">4</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#"
+                  ><i class="mdi mdi-chevron-double-right fs-15"></i
+                ></a>
+              </li>
+            </div>
+          </nav>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Voir l'offre</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <app-freelancer-view-post-details [postId]="selectedPostId"></app-freelancer-view-post-details>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</body>

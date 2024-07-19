@@ -8,9 +8,11 @@ import { ContractService } from '../../../../core/services/contract.service';
   styleUrl: './contract-table.component.css'
 })
 export class ContractTableComponent {
-   contarct:Contract[]=[];
+   contract:Contract[]=[];
 
-  constructor(private contractServices:ContractService){}
+  constructor(private contractServices:ContractService){
+    this.index();
+  }
 
   //manage page edite delete and details for assingnig 
   show = false;
@@ -44,7 +46,8 @@ export class ContractTableComponent {
   index(){
     this.contractServices.index()
     this.contractServices.contractData.subscribe({
-      next:(data:any)=>{this.contarct=data; console.log(data)},
+      next:(data:any)=>{this.contract=data;
+        },
       error: (error)=>console.log(error),
       complete:()=>console.log('end desplay data')
     })

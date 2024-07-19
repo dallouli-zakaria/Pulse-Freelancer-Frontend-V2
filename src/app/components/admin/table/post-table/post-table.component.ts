@@ -39,8 +39,8 @@ export class PostTableComponent {
   // const postId=id
 
   // }
-
-  //manage page edite delete and details for assingnig 
+  
+//manage page edite delete and details for assingnig 
 show = false;
 showedit = false;
 showedelete = false;

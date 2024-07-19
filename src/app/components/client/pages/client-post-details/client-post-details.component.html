@@ -1,0 +1,147 @@
+<div class="container card-box mt-4">
+    <div class="row">
+      <h4 class="col-lg-10">
+        <span><a routerLink="../../client-profile/client-offers"> <i class="fas fa-arrow-left"></i> </a></span> Details de l'offre
+      </h4>
+      <button *ngIf="roles == 'client_role'" class="btn btn-danger col-lg-2" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="trackdata(post)">Modifier l'offre</button>
+  
+      <button *ngIf="roles == 'superadmin_role'" 
+              class="btn btn-primary col-lg-2" 
+              [disabled]="isOfferClosed"
+              (click)="closeOffer()">
+        {{ isOfferClosed ? 'offre cloturé' : 'Cloturer l\'offre' }}
+      </button>
+      </div>
+  
+    <div *ngIf="isLoading" class="loading-skeleton">
+      <div class="skeleton-header"></div>
+      <div class="skeleton-row"></div>
+      <div class="skeleton-row"></div>
+      <div class="skeleton-row"></div>
+      <div class="skeleton-row"></div>
+      <div class="skeleton-row"></div>
+    </div>
+  
+    <div *ngIf="!isLoading && post">
+      <div class="container mt-5 mb-3">
+        <div class="row">
+          <h5 class="col-lg-4">Entreprise </h5>
+          <h5 class="col-lg-8 text-muted" >&#64; Maroc Telecom</h5>
+        </div>
+        <hr>
+        <div class="row">
+          <h5 class="col-lg-4">Titre de l'offre :</h5>
+          <h5 class="col-lg-8 text-muted">{{ post.title }}</h5>
+        </div>
+        <hr>
+        <div class="row">
+          <h5 class="col-lg-4">Type de l'offre :</h5>
+          <h5 class="col-lg-8 text-muted">{{ post.type }}</h5>
+        </div>
+        <hr>
+        <div class="row">
+          <h5 class="col-lg-4">Description de l'offre :</h5>
+          <h5 class="col-lg-8 text-muted">{{ post.description }}</h5>
+        </div>
+        <hr>
+        <div class="row">
+          <h5 class="col-lg-4">Budget :</h5>
+          <h5 class="col-lg-8 text-muted">
+            {{ post.budget === 'month' ? post.budgetvalue + ' DH par mois' : (post.budget === 'day' ? post.budgetvalue + ' DH par jour' : 'pas encore défini') }}
+          </h5>
+        </div>
+        <hr>
+        <div class="row">
+          <h5 class="col-lg-4">Période :</h5>
+          <h5 class="col-lg-8 text-muted">
+            {{ post.period === 'undefined' ? 'pas encore défini' : (post.period === 'month' ? post.periodvalue + ' mois' : (post.period === 'day' ? post.periodvalue + ' jour' : post.periodvalue)) }}
+          </h5>
+        </div>
+        <hr>
+        <div class="row">
+          <h5 class="col-lg-4">Crée :</h5>
+          <h5 class="col-lg-8 text-muted">{{ post.created_at | timeAgo }} le {{ post.created_at | date: 'dd-MM-yyyy' }}</h5>
+        </div>
+        <hr>
+        <h5 *ngIf="roles == 'superadmin_role'" class="mb-3 mt-4">
+          <i class="mdi mdi-cards-variant mr-1"></i> Freelancers
+        </h5>
+        <div *ngIf="roles == 'superadmin_role'" class="table-responsive">
+          <table class="table table-borderless mb-0">
+            <thead class="thead-light">
+              <tr>
+                <th>#</th>
+                <th>nom</th>
+                <th>Profession</th>
+                <th>Email</th>
+                <th>availability</th>
+                <th>Tjm</th>
+                <th>Atcion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of freelancers ; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{item.user.name}}</td>
+                <td>{{item.title}}</td>
+                <td>{{item.user.email}}</td>
+                <td>{{item.availability}}</td>
+                <td>{{item.TJM}} Mad / J
+                   <span *ngIf="validatedFreelancers.has(i)" ><span class="badge rounded-pill text-bg-success text-muted" role="alert">validé</span></span>
+                  </td>
+                <td>
+                  <div class="btn-group dropstart">
+                    <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" (click)="onEdited()"><i class="bi bi-eye"></i> View</a></li>
+                      <li><a class="dropdown-item"routerLink="../../mailing" ><i class="bi bi-envelope-arrow-up"></i> Send</a></li>
+                      <li><a class="dropdown-item" (click)="validateFreelancer(i)"><i class="bi bi-check-all"></i> Valider</a></li>
+  
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+              <tr *ngIf="freelancers.length === 0">
+                <td colspan="7">No freelancers found.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">modifier</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <app-client-update-post [parentdata]="postdetails"></app-client-update-post>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  
+  <!-- modal -->
+  <div *ngIf="showedit" class="modal fade show d-block" tabindex="-1" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
+          <button type="button" class="btn-close" (click)="onCloseModal()" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <app-client-view-freelancer-details></app-client-view-freelancer-details>
+        </div>
+      </div>
+    </div>
+  </div>
+  
