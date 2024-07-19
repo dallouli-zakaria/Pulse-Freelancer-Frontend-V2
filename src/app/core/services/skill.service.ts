@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Constant } from '../Constant';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 import { Skill } from '../models/skill';
 
 @Injectable({
@@ -45,6 +45,38 @@ export class SkillService {
      this.Skill=this.http.get(`${this.url}/${Constant.SkillS}/freelancer/${id}`);
      return this.Skill;
    }
+
+       // Get all skills
+       getSkills(): Observable<any> {
+        return this.http.get<any>(`${this.url}/skills`)
+          .pipe(catchError(this.handleError));
+      }
+    
+      // Get a specific skill by ID
+      getSkillById(id: number): Observable<any> {
+        return this.http.get<any>(`${this.url}/skills/${id}`)
+          .pipe(catchError(this.handleError));
+      }
+
+          // Handle errors
+    private handleError(error: any): Observable<never> {
+      console.error('An error occurred:', error);
+      throw error; // Rethrow error to be handled by the caller
+    }
+
+    // updateFreelancerSkills(freelancerId: number, skills: string[]): Observable<any> {
+    //   return this.http.put<any>(`${this.url}/freelancers/${freelancerId}/skills`, { skills });
+    // }
+
+    // updateFreelancerSkills(freelancerId: number, skills: { id: number }[]): Observable<any> {
+    //   return this.http.put(`${this.url}/freelancers/${freelancerId}/skills`, { skills });
+    // }
+    updateFreelancerSkills(freelancerId: number, skills: { id: number }[]): Observable<any> {
+      return this.http.put(`${this.url}/freelancers/${freelancerId}/skills`, { skills });
+  }
+  
+  
+
 
 
    

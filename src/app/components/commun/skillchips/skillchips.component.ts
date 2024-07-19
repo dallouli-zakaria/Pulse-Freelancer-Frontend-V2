@@ -6,21 +6,23 @@ import { SkillService } from '../../../core/services/skill.service';
 @Component({
   selector: 'app-skillchips',
   templateUrl: './skillchips.component.html',
-  styleUrl: './skillchips.component.css'
+  styleUrls: ['./skillchips.component.css']
 })
-export class SkillchipsComponent implements OnInit{
-  @Output() skillsSubmitted = new EventEmitter<string[]>();
-  @Output() skillsSelected = new EventEmitter<string[]>();
+export class SkillchipsComponent implements OnInit {
+  @Output() skillsSubmitted = new EventEmitter<{ id: number, title: string }[]>();
+  @Output() skillsSelected = new EventEmitter<{ id: number, title: string }[]>();
 
   form!: FormGroup;
-  skills: string[] = ['JavaScript', 'PHP', 'Python', 'Java', 'C#', 'Angular', 'React'];
-  filteredSkills: string[] = [];
-  selectedSkills: string[] = [];
+  skills: { id: number, title: string }[] = [];
+  filteredSkills: { id: number, title: string }[] = [];
+  selectedSkills: { id: number, title: string }[] = [];
   showSuggestions: boolean = false;
-  role!:string;
-  roles!:string;
+  role!: string;
+  roles!: string;
   isAuthenticated: boolean = false;
-  constructor(private fb: FormBuilder, private skillservice:SkillService,public authService: AuthService) { }
+  freelancerId: number = this.authService.parseID();
+
+  constructor(private fb: FormBuilder, private skillservice: SkillService, public authService: AuthService) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -37,29 +39,34 @@ export class SkillchipsComponent implements OnInit{
       }
     });
 
-
     this.isAuthenticated = this.authService.isLoggedIn();
-    //this.rolservice.getRoles('superadmin_role').subscribe((res)=>console.log(res));
     if (this.isAuthenticated) {
-    let sub = this.authService.parseID();
-    this.authService.getuserdetails(sub).subscribe((res) => {
-      this.roles=res.roles;
-      if(res.roles=='client_role'){
-      this.role = 'Client';
+      let sub = this.authService.parseID();
+      this.authService.getuserdetails(sub).subscribe((res) => {
+        this.roles = res.roles;
+        if (res.roles === 'client_role') {
+          this.role = 'Client';
+        } else if (res.roles === 'freelancer_role') {
+          this.role = 'Freelancer';
+        }
+      });
     }
-    else if(res.roles=='freelancer_role'){
-      this.role = 'Freelancer';
-    }
+
+    // Load skills from the service
+    this.loadSkills();
+  }
+
+  loadSkills(): void {
+    this.skillservice.index().subscribe((res) => {
+      this.skills = res;
     });
   }
 
-  }
-
-  filterSkills(value: string): string[] {
+  filterSkills(value: string): { id: number, title: string }[] {
     const filterValue = value.toLowerCase();
     return this.skills.filter(skill => 
-      skill.toLowerCase().includes(filterValue) && 
-      !this.selectedSkills.includes(skill)
+      skill.title.toLowerCase().includes(filterValue) && 
+      !this.selectedSkills.some(selectedSkill => selectedSkill.id === skill.id)
     );
   }
 
@@ -77,32 +84,33 @@ export class SkillchipsComponent implements OnInit{
   addSkill(event: Event): void {
     event.preventDefault();
     const value = this.form.get('skillInput')?.value.trim();
-    
-    // Check if the entered skill exists in the predefined skills array
-    if (value && this.skills.includes(value) && !this.selectedSkills.includes(value)) {
-      this.selectedSkills.push(value);
-      this.form.get('skillInput')?.reset();
-      this.filteredSkills = [];
-      this.showSuggestions = false;
-      this.skillsSelected.emit(this.skills);
-    } else {
-      // Optionally, you can show a message or handle invalid skill entries here
-      console.log('Please select a skill from the suggestions.');
-    }
-  }
 
-  addSkillFromList(skill: string): void {
-    if (!this.selectedSkills.includes(skill)) {
+    // Find the skill object by title
+    const skill = this.skills.find(s => s.title === value);
+
+    if (skill && !this.selectedSkills.some(selectedSkill => selectedSkill.id === skill.id)) {
       this.selectedSkills.push(skill);
       this.form.get('skillInput')?.reset();
       this.filteredSkills = [];
       this.showSuggestions = false;
-      this.skillsSelected.emit(this.skills);
+      this.skillsSelected.emit(this.selectedSkills);
+    } else {
+      console.log('Please select a skill from the suggestions.');
     }
   }
 
-  removeSkill(skill: string): void {
-    const index = this.selectedSkills.indexOf(skill);
+  addSkillFromList(skill: { id: number, title: string }): void {
+    if (!this.selectedSkills.some(selectedSkill => selectedSkill.id === skill.id)) {
+      this.selectedSkills.push(skill);
+      this.form.get('skillInput')?.reset();
+      this.filteredSkills = [];
+      this.showSuggestions = false;
+      this.skillsSelected.emit(this.selectedSkills);
+    }
+  }
+
+  removeSkill(skill: { id: number, title: string }): void {
+    const index = this.selectedSkills.findIndex(selectedSkill => selectedSkill.id === skill.id);
     if (index >= 0) {
       this.selectedSkills.splice(index, 1);
     }
@@ -110,10 +118,25 @@ export class SkillchipsComponent implements OnInit{
 
   onSubmit(): void {
     if (this.selectedSkills.length > 0) {
-      this.skillsSubmitted.emit(this.selectedSkills);
-      this.selectedSkills = [];
+      const skillIds = this.selectedSkills.map(skill => ({ id: skill.id }));
+  
+      console.log('Skills to be updated:', skillIds);  // Log the data
+  
+      this.skillservice.updateFreelancerSkills(this.freelancerId, skillIds).subscribe(
+        response => {
+          console.log('Skills updated successfully:', response);
+          this.selectedSkills = [];
+          this.form.reset();
+        },
+        error => {
+          console.error('Error updating skills:', error);
+          if (error.status === 500) {
+            console.log('Internal Server Error');
+          } else {
+            console.log('Error:', error.message);
+          }
+        }
+      );
     }
   }
-  
-
 }
