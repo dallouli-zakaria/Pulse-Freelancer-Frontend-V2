@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Constant } from '../Constant';
-import { BehaviorSubject, Observable, Observer, shareReplay } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, Observer, shareReplay } from 'rxjs';
 import { Freelancer } from '../models/Freelancer';
 
 @Injectable({
@@ -69,6 +69,33 @@ export class FreelancerService {
   getFreelancerData(): Freelancer {
     return this.freelancerData;
   }
+
+
+    // Add a new skill to a freelancer
+    addSkillToFreelancer(freelancerId: number, skillData: any): Observable<any> {
+      return this.http.post<any>(`${this.url}/freelancers/${freelancerId}/skills`, skillData)
+        .pipe(catchError(this.handleError));
+    }
+  
+    // Update a skill level for a freelancer
+    updateSkillLevel(freelancerId: number, skillId: number, level: string): Observable<any> {
+      return this.http.put<any>(`${this.url}/freelancers/${freelancerId}/skills/${skillId}`, { level })
+        .pipe(catchError(this.handleError));
+    }
+  
+    // Remove a skill from a freelancer
+    removeSkillFromFreelancer(freelancerId: number, skillId: number): Observable<any> {
+      return this.http.delete<any>(`${this.url}/freelancers/${freelancerId}/skills/${skillId}`)
+        .pipe(catchError(this.handleError));
+    }
+  
+
+  
+    // Handle errors
+    private handleError(error: any): Observable<never> {
+      console.error('An error occurred:', error);
+      throw error; // Rethrow error to be handled by the caller
+    }
 
 
 }
