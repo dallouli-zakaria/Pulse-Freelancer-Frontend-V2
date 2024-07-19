@@ -95,7 +95,7 @@ export class SkillchipsComponent implements OnInit {
       this.showSuggestions = false;
       this.skillsSelected.emit(this.selectedSkills);
     } else {
-      console.log('Please select a skill from the suggestions.');
+      console.log('Please select a skill from the suggestions!');
     }
   }
 
