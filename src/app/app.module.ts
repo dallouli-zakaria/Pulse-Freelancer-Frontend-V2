@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -94,24 +93,25 @@ import { ClientUpdatePersonalInfosComponent } from './components/client/actions/
 import { ClientUpdatePostComponent } from './components/client/actions/client-update-post/client-update-post.component';
 import { HeaderComponent } from './components/commun/client-freelancer-layouts/header/header.component';
 import { FooterComponent } from './components/commun/client-freelancer-layouts/footer/footer.component';
-import { FreelancerIndexComponent } from './components/freelancers/pages/freelancer-index/freelancer-index.component';
-import { FreelancerPersonalInfosComponent } from './components/freelancers/pages/freelancer-personal-infos/freelancer-personal-infos.component';
-import { FreelancerProjectsHistoryComponent } from './components/freelancers/pages/freelancer-projects-history/freelancer-projects-history.component';
-import { FreelancerViewPostsComponent } from './components/freelancers/pages/freelancer-view-posts/freelancer-view-posts.component';
-import { FreelancerUpdatePersonalInfosComponent } from './components/freelancers/actions/freelancer-update-personal-infos/freelancer-update-personal-infos.component';
-import { FreelancerViewPostDetailsComponent } from './components/freelancers/actions/freelancer-view-post-details/freelancer-view-post-details.component';
 import { SkillchipsComponent } from './components/commun/skillchips/skillchips.component';
 import { SkillprogressComponent } from './components/commun/skillprogress/skillprogress.component';
-import { FreelancerAboutComponent } from './components/freelancers/pages/freelancer-about/freelancer-about.component';
-import { FreelancerExperienceComponent } from './components/freelancers/pages/freelancer-experience/freelancer-experience.component';
-import { FreelancerSkillsComponent } from './components/freelancers/pages/freelancer-skills/freelancer-skills.component';
-import { FreelancerProfileComponent } from './components/freelancers/pages/freelancer-profile/freelancer-profile.component';
-import { FreelancerSideprofileComponent } from './components/freelancers/pages/freelancer-sideprofile/freelancer-sideprofile.component';
-import { FreelancerUpdateAboutComponent } from './components/freelancers/actions/freelancer-update-about/freelancer-update-about.component';
-import { FreelancerAddExperienceComponent } from './components/freelancers/actions/freelancer-add-experience/freelancer-add-experience.component';
-import { FreelancerUpdateExperienceComponent } from './components/freelancers/actions/freelancer-update-experience/freelancer-update-experience.component';
 import { CommonModule } from '@angular/common';
-import { FreelancerOffersComponent } from './components/freelancers/pages/freelancer-offers/freelancer-offers.component';
+import { FreelancerAddExperienceComponent } from './components/freelancer/actions/freelancer-add-experience/freelancer-add-experience.component';
+import { FreelancerUpdateAboutComponent } from './components/freelancer/actions/freelancer-update-about/freelancer-update-about.component';
+import { FreelancerUpdateExperienceComponent } from './components/freelancer/actions/freelancer-update-experience/freelancer-update-experience.component';
+import { FreelancerUpdatePersonalInfosComponent } from './components/freelancer/actions/freelancer-update-personal-infos/freelancer-update-personal-infos.component';
+import { FreelancerViewPostDetailsComponent } from './components/freelancer/actions/freelancer-view-post-details/freelancer-view-post-details.component';
+import { FreelancerAboutComponent } from './components/freelancer/pages/freelancer-about/freelancer-about.component';
+import { FreelancerExperienceComponent } from './components/freelancer/pages/freelancer-experience/freelancer-experience.component';
+import { FreelancerIndexComponent } from './components/freelancer/pages/freelancer-index/freelancer-index.component';
+import { FreelancerOffersComponent } from './components/freelancer/pages/freelancer-offers/freelancer-offers.component';
+import { FreelancerPersonalInfosComponent } from './components/freelancer/pages/freelancer-personal-infos/freelancer-personal-infos.component';
+import { FreelancerProfileComponent } from './components/freelancer/pages/freelancer-profile/freelancer-profile.component';
+import { FreelancerProjectsHistoryComponent } from './components/freelancer/pages/freelancer-projects-history/freelancer-projects-history.component';
+import { FreelancerSideprofileComponent } from './components/freelancer/pages/freelancer-sideprofile/freelancer-sideprofile.component';
+import { FreelancerSkillsComponent } from './components/freelancer/pages/freelancer-skills/freelancer-skills.component';
+import { FreelancerViewPostsComponent } from './components/freelancer/pages/freelancer-view-posts/freelancer-view-posts.component';
+;
 
 @NgModule({
   declarations: [
@@ -219,7 +219,8 @@ import { FreelancerOffersComponent } from './components/freelancers/pages/freela
     UsersComponent,
     UsersDeleteComponent,
     UsersEditComponent,
-    UsersTableComponent
+    UsersTableComponent,
+    ClientUpdatePersonalInfosComponent
     
   ],
   imports: [

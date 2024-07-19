@@ -30,13 +30,13 @@ import { ConnectedLandingPageComponent } from './components/commun/connected-lan
 import { IndexComponent } from './components/commun/index/index.component';
 import { ClientPostDetailsComponent } from './components/client/pages/client-post-details/client-post-details.component';
 import { ClientViewFreelancerDetailsComponent } from './components/client/pages/client-view-freelancer-details/client-view-freelancer-details.component';
-import { FreelancerViewPostDetailsComponent } from './components/freelancers/actions/freelancer-view-post-details/freelancer-view-post-details.component';
 import { ContactUsComponent } from './components/commun/contact-us/contact-us.component';
-import { FreelancerProfileComponent } from './components/freelancers/pages/freelancer-profile/freelancer-profile.component';
-import { FreelancerViewPostsComponent } from './components/freelancers/pages/freelancer-view-posts/freelancer-view-posts.component';
-import { FreelancerContractsComponent } from './components/freelancers/pages/freelancer-contracts/freelancer-contracts.component';
-import { FreelancerIndexComponent } from './components/freelancers/pages/freelancer-index/freelancer-index.component';
-import { FreelancerOffersComponent } from './components/freelancers/pages/freelancer-offers/freelancer-offers.component';
+import { FreelancerContractsComponent } from './components/freelancer/pages/freelancer-contracts/freelancer-contracts.component';
+import { FreelancerIndexComponent } from './components/freelancer/pages/freelancer-index/freelancer-index.component';
+import { FreelancerOffersComponent } from './components/freelancer/pages/freelancer-offers/freelancer-offers.component';
+import { FreelancerProfileComponent } from './components/freelancer/pages/freelancer-profile/freelancer-profile.component';
+import { FreelancerViewPostsComponent } from './components/freelancer/pages/freelancer-view-posts/freelancer-view-posts.component';
+
 
 const routes: Routes = [
 
