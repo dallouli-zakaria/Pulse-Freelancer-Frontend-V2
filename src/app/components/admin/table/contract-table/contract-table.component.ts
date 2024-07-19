@@ -10,6 +10,8 @@ import { ContractService } from '../../../../core/services/contract.service';
 export class ContractTableComponent {
    contract:Contract[]=[];
 
+   selectedIdContract!:number;
+    selectedDataContarct:any
   constructor(private contractServices:ContractService){
     this.index();
   }
@@ -27,8 +29,9 @@ export class ContractTableComponent {
   this.showedelete = false;
   }
   
-  ondeleted(): void {
- 
+  ondeleted(id:number,object:any): void {
+ this.selectedIdContract=id;
+ this.selectedDataContarct=object;
   this.show = true;
   this.showedelete = true;
   this.showedit = false;
@@ -47,6 +50,7 @@ export class ContractTableComponent {
     this.contractServices.index()
     this.contractServices.contractData.subscribe({
       next:(data:any)=>{this.contract=data;
+        
         },
       error: (error)=>console.log(error),
       complete:()=>console.log('end desplay data')

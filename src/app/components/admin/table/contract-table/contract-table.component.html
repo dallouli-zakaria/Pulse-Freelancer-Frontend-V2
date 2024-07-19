@@ -24,7 +24,7 @@
         <td>
           <button class="btn btn-primary btn-sm" style="margin-right: 5px;" (click)="onEdited()">
             <i class="fas fa-pen"></i> </button> 
-         <button class="btn btn-danger btn-sm" style="margin-right: 5px;" (click)="ondeleted()">
+         <button class="btn btn-danger btn-sm" style="margin-right: 5px;" (click)="ondeleted(item.id,item)">
             <i class="fas fa-trash"></i></button>
 
             
@@ -46,7 +46,7 @@
   <!-- delete -->
   <div *ngIf="showedelete" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
   <div class="modal-dialog modal-m"><div class="modal-content">
-  <app-contract-delete (closeModal)="onCloseModal()"></app-contract-delete>
+  <app-contract-delete (closeModal)="onCloseModal()" [idContract]="selectedIdContract" ></app-contract-delete>
   </div>
   </div>  
   

@@ -48,7 +48,7 @@ export class ContractService {
 
 
   public delete(id:any):Observable<Contract> {
-    this.contract=this.http.delete(`${this.url}/${Constant.CONTARCTS}`);
+    this.contract=this.http.delete(`${this.url}/${Constant.CONTARCTS}/${id}`);
     return this.contract
   }
 

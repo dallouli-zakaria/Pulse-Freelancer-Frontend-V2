@@ -45,18 +45,23 @@ export class ContractAddComponent implements OnInit {
       this.clientIndex()
       //form builderContract
      this.form=this.fb.group({
-      id: [null, Validators.required],
+    
       title: ['', [Validators.required, Validators.maxLength(255)]],
       period: [''],
       budget: [null, [Validators.min(0)]],
       project_description: ['', Validators.required],
-      client_id: [''],
-      freelancer_id: ['']
+      client_id: [this.freelancerid],
+      freelancer_id: [this.clientid]
      })
  }
 
   add(){
-    if(this.form.valid){
+
+    console.log('clickeddddd -------------------');
+    
+    // if(this.form.valid){
+      console.log(this.form.value);
+      
      this.contractService.store(this.form.value).subscribe({
       next:(data)=>{console.log(data);
         this.contractService.index();
@@ -70,9 +75,9 @@ export class ContractAddComponent implements OnInit {
         }
       }
      }) 
-    }else{
-      this.errorhandeling='error validation'
-    } 
+    // }else{
+    //   this.errorhandeling='error validation'
+    // } 
   }
   clientIndex(){
     this.clientservices.index()
@@ -82,6 +87,14 @@ export class ContractAddComponent implements OnInit {
     error:(error)=>console.log(error),
     complete:()=>console.log('complet display data client')
     })
+  }
+freelancerid!:number
+  eventlistFreelancer($event:any){
+this.freelancerid=$event.target.value
+  }
+  clientid!:number
+  eventlistclient($event:any){
+  this.clientid=$event.target.value
   }
   freelancerIndex(){
     this.freelancerService.index()
