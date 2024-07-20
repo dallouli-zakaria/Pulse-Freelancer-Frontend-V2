@@ -22,8 +22,9 @@ export class ContractTableComponent {
   showedelete = false;
   
   
-  onEdited(): void {
-
+  onEdited(id:number,object:any): void {
+    this.selectedIdContract=id;
+    this.selectedDataContarct=object;
   this.show = true;
   this.showedit = true;
   this.showedelete = false;

@@ -22,7 +22,7 @@
         <td>{{item.client_id}} </td>
         <td>{{item.freelancer_id}}</td>
         <td>
-          <button class="btn btn-primary btn-sm" style="margin-right: 5px;" (click)="onEdited()">
+          <button class="btn btn-primary btn-sm" style="margin-right: 5px;" (click)="onEdited(item.id,item)">
             <i class="fas fa-pen"></i> </button> 
          <button class="btn btn-danger btn-sm" style="margin-right: 5px;" (click)="ondeleted(item.id,item)">
             <i class="fas fa-trash"></i></button>
@@ -38,7 +38,7 @@
   <!-- edit -->
   <div *ngIf="showedit" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
   <div class="modal-dialog modal-m"><div class="modal-content">
-  <app-contract-edit (closeModal)="onCloseModal()"></app-contract-edit>
+  <app-contract-edit (closeModal)="onCloseModal()" [conatracID]="selectedIdContract" [conatracData]="selectedDataContarct" ></app-contract-edit>
   </div>
   </div>
   </div>

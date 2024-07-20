@@ -41,8 +41,8 @@ export class ContractService {
   return this.contract
   }
    
-  public update(id:any):Observable<Contract>{
-    this.contract=this.http.put(`${this.url}/${Constant.CONTARCTS}`,id);
+  public update(id:number,data:any):Observable<Contract>{
+    this.contract=this.http.put(`${this.url}/${Constant.CONTARCTS}/${id}`,data);
     return this.contract
   }
 
