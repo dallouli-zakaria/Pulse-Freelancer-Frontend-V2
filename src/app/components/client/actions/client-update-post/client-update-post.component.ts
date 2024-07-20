@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Post } from '../../../../core/models/post';
@@ -12,8 +12,12 @@ import { PostsService } from '../../../../core/services/posts.service';
 })
 export class ClientUpdatePostComponent implements OnChanges{
   @Input() parentdata!:Post;
+  @Output() skillsSubmitted = new EventEmitter<string[]>();
 
-  
+  selectedSkillIds: number[] = [];
+  selectedSkills: string[] = [];
+
+
   selectedBudget!:string;
   selectedPeriod!:string;
   clientId!:number;
@@ -31,6 +35,8 @@ export class ClientUpdatePostComponent implements OnChanges{
       location: [this.parentdata?.location, Validators.required],
       type: [this.parentdata?.type, Validators.required],
       description: [this.parentdata?.description, Validators.required],
+      freelancers_number: [this.parentdata?.freelancers_number, Validators.required],
+      skills_required: [[]],
       period: [this.parentdata?.period, Validators.required],
       periodvalue:[0,Validators.required],
       budget: [this.parentdata?.budget, Validators.required],
@@ -44,6 +50,8 @@ export class ClientUpdatePostComponent implements OnChanges{
       location: [this.parentdata?.location, Validators.required],
       type: [this.parentdata?.type, Validators.required],
       description: [this.parentdata?.description, Validators.required],
+      freelancers_number: [this.parentdata?.freelancers_number, Validators.required],
+      skills_required: [[]],
       period: [this.parentdata?.period, Validators.required],
       periodvalue:[this.parentdata?.periodvalue,Validators.required],
       budget: [this.parentdata?.budget, Validators.required],
@@ -78,5 +86,10 @@ export class ClientUpdatePostComponent implements OnChanges{
     } else {
       console.log('Form is invalid');
     }
+  }
+
+  onSkillsSelected2(skillIds: number[]) {
+    this.selectedSkillIds = skillIds;
+    this.form.patchValue({ skills_required: this.selectedSkillIds });
   }
 }

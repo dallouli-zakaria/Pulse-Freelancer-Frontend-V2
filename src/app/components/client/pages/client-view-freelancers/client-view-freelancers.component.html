@@ -130,6 +130,50 @@
               </div>
             </div>
             <div class="candidate-list">
+              <div *ngFor="let freelancer of freelancers" class="candidate-list-box card mt-4">
+                <div class="p-4 card-body">
+                  <div class="align-items-center row">
+                    <div class="col-auto">
+                      <div class="candidate-list-images">
+                        <a 
+                          ><img
+                            src="assets/img/gallery/user-demo.png"
+                            alt
+                            class="avatar-md img-thumbnail rounded-circle"
+                        /></a>
+                      </div>
+                    </div>
+                    <div class="col-lg-5">
+                      <div class="candidate-list-content mt-3 mt-lg-0">
+                        <h5 class="fs-19 mb-0">
+                          <a class="primary-link" [routerLink]="['../view-freelancerprofile', freelancer.id]">{{freelancer.user.name}}</a>
+                        </h5>
+                        <p class="text-muted mb-2">{{freelancer.title}}</p>
+                        <ul class="list-inline mb-0 text-muted">
+                          <li class="list-inline-item">
+                            <i class="mdi mdi-map-marker"></i> {{freelancer.city}}
+                          </li>
+                          <li class="list-inline-item">
+                            <i class="mdi mdi-wallet"></i> {{freelancer.TJM}} Mad / J
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div
+                        class="mt-2 mt-lg-0 d-flex flex-wrap align-items-start gap-1">
+                        <span *ngFor="let skill of freelancer.skills" class="badge bg-soft-secondary fs-14 mt-1">
+                          {{skill.title}}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="favorite-icon">
+  
+                    <a href="#"><i class="mdi mdi-heart fs-18"></i></a>
+                  </div>
+                </div>
+              </div>
               <div class="candidate-list-box card mt-4">
                 <div class="p-4 card-body">
                   <div class="align-items-center row">

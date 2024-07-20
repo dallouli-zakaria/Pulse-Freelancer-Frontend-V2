@@ -37,15 +37,16 @@
 
   <!-- edit -->
   <div *ngIf="showedit" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
-    <div class="modal-dialog modal-m"><div class="modal-content">
-      <app-contract-edit (closeModal)="onCloseModal()"></app-contract-edit>
-    </div>
+  <div class="modal-dialog modal-m"><div class="modal-content">
+  <app-contract-edit (closeModal)="onCloseModal()"></app-contract-edit>
   </div>
   </div>
+  </div>
+
   <!-- delete -->
   <div *ngIf="showedelete" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
-    <div class="modal-dialog modal-m"><div class="modal-content">
-      <app-contract-delete (closeModal)="onCloseModal()"></app-contract-delete>
-    </div>
+  <div class="modal-dialog modal-m"><div class="modal-content">
+  <app-contract-delete (closeModal)="onCloseModal()"></app-contract-delete>
+  </div>
   </div>  
   

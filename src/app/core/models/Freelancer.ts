@@ -4,7 +4,7 @@ export interface Freelancer{
     name: string;
     email: string;
     password?: string;
-  };
+}
   title: string;
   dateOfBirth: string;
   city: string;
@@ -15,5 +15,6 @@ export interface Freelancer{
   phone: string;
   portfolio_Url?: string;
   CV?: string;
-  status:string
+  status:string;
+  skills: any[];
 }

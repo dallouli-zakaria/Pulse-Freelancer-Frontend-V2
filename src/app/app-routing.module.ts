@@ -91,7 +91,7 @@ const routes: Routes = [
       { path: 'offers', component: FreelancerViewPostsComponent },
       { path: 'contact', component: ContactUsComponent },
       { path: 'home', component: ConnectedLandingPageComponent },
-      {path:'view-freelancerprofile',component:ClientViewFreelancerDetailsComponent},
+      {path:'view-freelancerprofile/:freelancerId',component:ClientViewFreelancerDetailsComponent},
       {path:'freelancer-dashboard',component:FreelancerProfileComponent,
         children:
         [
