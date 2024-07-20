@@ -106,17 +106,21 @@ export class SkillchipsComponent implements OnInit {
       this.showSuggestions = false;
       this.skillsSelected.emit(this.selectedSkills);
     }
+
+    
   }
   
   removeSkill(skillId: number): void {
     const index = this.selectedSkills.indexOf(skillId);
     if (index >= 0) {
       this.selectedSkills.splice(index, 1);
+      this.skillsSelected.emit(this.selectedSkills);
     }
+    
   }
   
   onSubmit(): void {
-    if (this.selectedSkills.length > 0) {
+    if (this.selectedSkills.length > 0 && this.roles=='freelancer_role') {
       const skillIds = this.selectedSkills; // Use the selectedSkills array directly
   
       console.log('Skills to be updated:', { skills: skillIds });  // Log the data

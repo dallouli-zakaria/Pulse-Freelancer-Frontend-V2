@@ -60,16 +60,16 @@
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="nbrf">Nombre de freelancers </label>
-              <input type="number" class="form-control" id="nbrf" placeholder="" formControlName="nbrf" required>
+              <input type="number" class="form-control" id="nbrf" placeholder="" formControlName="freelancers_number" min="1" max="100" required>
               <div class="invalid-feedback">
                 remplir le nombre des freelancers !
               </div>
             </div>
             <div class="col-md-6 mb-3">
-              <!-- <label for="skills">Compétences</label> -->
-              <app-skillchips ></app-skillchips>
+              <label for="skills">Compétences requis</label>
+              <app-skillchips (skillsSelected)="onSkillsSelected2($event)"></app-skillchips>
               <div *ngIf="selectedSkills.length" class="mt-2">
-                <span class="badge badge-primary mr-1" *ngFor="let skill of selectedSkills">{{ skill }}</span>
+                <span class="badge badge-primary mr-1" *ngFor="let skill of selectedSkills" >{{ skill }}</span>
               </div>
             </div>
           </div>

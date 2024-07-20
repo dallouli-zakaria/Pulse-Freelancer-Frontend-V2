@@ -70,4 +70,6 @@ export class FreelancerSkillsComponent {
   onCloseHandledEdit() {
     this.displayEdit = "none";
   }
+
+   
 }

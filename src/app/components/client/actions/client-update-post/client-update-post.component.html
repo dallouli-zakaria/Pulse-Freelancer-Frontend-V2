@@ -26,7 +26,7 @@
             <div class="col-md-6 mb-3">
               <label for="location">Localisation</label>
               <select class="form-control" id="location" formControlName="location">
-                <option>--Choisir la ville de l'offre--</option>
+      
                 <option *ngFor="let city of cities" [value]="city">{{city}}</option>
               </select>
               <div class="invalid-feedback">
@@ -36,7 +36,7 @@
             <div class="col-md-6 mb-3">
               <label for="type">Type</label>
               <select class="form-control" id="type" formControlName="type">
-                <option >--Choisir le type de votre offre--</option>
+
                 <option value="fulltime">Plein temps</option>
                 <option value="partime">Temps partiel</option>
               </select>
@@ -45,6 +45,27 @@
               </div>
             </div>
           </div>
+  
+  
+          
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="nbrf">Nombre de freelancers </label>
+              <input type="number" class="form-control" id="nbrf" placeholder="" formControlName="freelancers_number" min="1" required>
+              <div class="invalid-feedback">
+                remplir le nombre des freelancers !
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="skills">Compétences requis</label>
+              <app-skillchips (skillsSelected)="onSkillsSelected2($event)"></app-skillchips>
+              <div *ngIf="selectedSkills.length" class="mt-2">
+                <span class="badge badge-primary mr-1" *ngFor="let skill of selectedSkills" >{{ skill }}</span>
+              </div>
+            </div>
+          </div>
+  
+  
   
           <div class="mb-3">
             <label for="desc">Description</label>

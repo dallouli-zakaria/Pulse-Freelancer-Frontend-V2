@@ -24,7 +24,7 @@ export class AddPostComponent {
   isAuthenticated: boolean = false;
 
 
-
+  selectedSkillIds: number[] = [];
 
   selectedBudget!:string;
   selectedPeriod!:string;
@@ -42,8 +42,8 @@ export class AddPostComponent {
       location: ['', Validators.required],
       type: ['', Validators.required],
       description: ['', Validators.required],
-      nbrf: [''],
-      skills: [[]],
+      freelancers_number: [''],
+      skills_required: [[]],
       period: ['', Validators.required],
       periodvalue:[0,Validators.required],
       budget: ['', Validators.required],
@@ -65,6 +65,7 @@ export class AddPostComponent {
   addoffer() {
     if (this.form.valid) {
       this.isSubmitting = true;
+      console.log('Form value before submission:', this.form.value);
       this.postsservice.store(this.form.value).subscribe({
       next:   (res) => {
           console.log(res);
@@ -77,6 +78,10 @@ export class AddPostComponent {
     } else {
       console.log('Form is invalid');
     }
+
+
+
+
   }
 
  
@@ -86,6 +91,15 @@ export class AddPostComponent {
     this.selectedSkills = skills;
     this.form.patchValue({ skills: this.selectedSkills });
   }
+
+  onSkillsSelected2(skillIds: number[]) {
+    this.selectedSkillIds = skillIds;
+    this.form.patchValue({ skills_required: this.selectedSkillIds });
+  }
+
+
+
+  
 
 
 
@@ -148,4 +162,6 @@ export class AddPostComponent {
       this.selectedSkills = [];
     }
   }
+
+
 }

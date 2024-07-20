@@ -30,9 +30,18 @@ export class FreelancerService {
    
    }
 
+   public verifiedfreelancer():Observable<Freelancer[]>{
+    this.freelancer=this.http.get(`${this.url}/freelancer/verified`);
+    return this.freelancer;
+   }
+
    get getdata():Observable<Freelancer[]>{
    return this.subjectBe.asObservable();
    }
+
+
+
+
     public store(data:any):Observable<Freelancer>{
       this.freelancer=this.http.post(`${this.url}/${Constant.FREELANCERS}`,data);
       return this.freelancer

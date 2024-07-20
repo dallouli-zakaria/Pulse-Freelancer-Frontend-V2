@@ -15,5 +15,6 @@ export interface Freelancer{
   phone: string;
   portfolio_Url?: string;
   CV?: string;
-  status:string
+  status:string;
+  skills: any[];
 }

@@ -65,13 +65,6 @@ export class SkillService {
       throw error; // Rethrow error to be handled by the caller
     }
 
-    // updateFreelancerSkills(freelancerId: number, skills: string[]): Observable<any> {
-    //   return this.http.put<any>(`${this.url}/freelancers/${freelancerId}/skills`, { skills });
-    // }
-
-    // updateFreelancerSkills(freelancerId: number, skills: { id: number }[]): Observable<any> {
-    //   return this.http.put(`${this.url}/freelancers/${freelancerId}/skills`, { skills });
-    // }
     updateFreelancerSkills(freelancerId: number, skills:any): Observable<any> {
       return this.http.put(`${this.url}/freelancers/${freelancerId}/skills`, skills );
   }

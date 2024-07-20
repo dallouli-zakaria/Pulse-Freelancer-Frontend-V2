@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label for="skillInput">Add Skills</label>
+
       <input id="skillInput" type="text" class="form-control" formControlName="skillInput" 
              (input)="onInput($event)" (keydown.enter)="addSkill($event)">
     </div>
@@ -11,13 +11,13 @@
         {{ skill.title }}
       </li>
     </ul>
-    <span *ngIf="roles !== 'client_role'">
+    <span *ngIf="roles != 'client_role'">
       <button type="submit" class="btn btn-primary mt-3">Submit</button>
     </span>
   </form>
 
   <div *ngIf="selectedSkills.length > 0" class="mt-4">
-    <h5>Selected Skills:</h5>
+    <h5>Compétences choisis :</h5>
     <div class="selected-skills">
       <span *ngFor="let skillId of selectedSkills" class="badge bg-primary me-2 mb-2">
         {{ getSkillTitleById(skillId) }}

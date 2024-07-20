@@ -50,6 +50,8 @@ export class FreelancerViewPostDetailsComponent implements OnInit,OnChanges{
   getposts() {
     if (this.postId !== null) {
       this.postservice.show(this.postId).subscribe((res) => {
+        console.log(res);
+        
         this.postdata = res;
         this.clientid = res.client_id;
         this.getclient(this.clientid);
@@ -67,7 +69,7 @@ export class FreelancerViewPostDetailsComponent implements OnInit,OnChanges{
   }
 
   postuler() {
-    this.isButtonDisabled = true; // Show "Envoi..." on button
+    this.isButtonDisabled = true; 
     let data = {
       selected: this.company_name,
       freelancer_id: this.freelancerId,
@@ -76,10 +78,13 @@ export class FreelancerViewPostDetailsComponent implements OnInit,OnChanges{
 
     this.offerservice.store(data).subscribe((res) => {
       this.successMessage = 'Vous avez postulé avec succès!';
-      this.offerExists = true; // Mark offer as existing
-      this.isButtonDisabled = false; // Reset button state if needed
+      this.offerExists = true; 
+      this.isButtonDisabled = false; 
       // this.router.navigate(['../pulse/freelancer-dashboard/freelancer-offers']);
     });
+    setTimeout(() => {
+      this.successMessage = '';
+    }, 5000);
   }
 
   truefalse(postId: any) {
@@ -95,4 +100,6 @@ export class FreelancerViewPostDetailsComponent implements OnInit,OnChanges{
       this.freelancerstatus = res.status;
     });
   }
+
+  
 }
