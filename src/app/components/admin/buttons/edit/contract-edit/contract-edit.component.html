@@ -1,53 +1,55 @@
 <div class="modal-header">
-    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Client</h1>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="close()"></button>
+  <h1 class="modal-title fs-5" id="exampleModalLabel">Add Contract</h1>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="close()"></button>
 </div>
-    <form >
-     <div class="modal-body">
+  <form [formGroup]="form" (ngSubmit)="updated()">
+   <div class="modal-body">
+        <!-- title -->
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Title</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" formControlName="title" aria-describedby="emailHelp">
+    </div>
+    
+    <!-- perdio -->
+   <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label"> Period</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" formControlName="period" aria-describedby="emailHelp">
+    </div>
+   
+    
+     <!-- buget -->
+    <div class="mb-3 ">
+      <label for="exampleInputEmail1" class="form-label">budget</label>
+      <input type="number" class="form-control" id="exampleInputEmail1" formControlName="budget" aria-describedby="emailHelp">
+      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+     <!-- description -->
+     <div class="mb-3 ">
+      <label for="exampleInputEmail1" class="form-label">Porject description</label>
+      <textarea class="form-control" id="exampleInputEmail1" formControlName="project_description" aria-describedby="emailHelp"></textarea>
+    </div>
+   
 
-      <!-- titel -->
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label"> title</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-      </div>
-       <!-- period -->
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">period</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-      </div>
-       <!-- budget -->
-      <div class="mb-3 ">
-        <label for="exampleInputEmail1" class="form-label">budget</label>
-        <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-      </div>
-       <!-- description -->
-       <div class="mb-3 xl ">
-        <label for="exampleInputEmail1" class="form-label">description</label>
-        <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-      </div>
+  
 
-      <!-- client -->
-      <div class="mb-3 ">
-      <select class="form-select form-select-m" aria-label="Small select example">
-        <option selected>Client</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-      </div>
-       
-      <!-- freelancer -->
-      <div class="mb-3 ">
-      <select class="form-select form-select-m" aria-label="Small select example">
-        <option selected>Freelancer</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-        </select>
-      </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
-        <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Save changes</button>
-       </div>
-    </form>
+     <!-- client -->
+    <!-- <select class="form-select form-select-m mb-3" aria-label="Small select example" formControlName="client_id" (change)="eventlistclient($event)" >
+      <option selected >Client</option>
+      <option value="1" *ngFor="let cli of client" [value]="cli.id">{{cli.user.name}}</option>
+     
+    </select> -->
+    <!-- freelancer -->
+    <!-- <select class="form-select form-select-m mb-2" aria-label="Small select example" formControlName="freelancer_id" (change)="eventlistFreelancer($event)">
+      <option selected>Freelancer</option>
+      <option value="1" *ngFor="let item of freelancer" [value]="item.id">{{item.user.name}}</option>
+  
+    </select> -->
+    
+    </div>
+     
+    <h5 style="color: red; margin-left: 10px;">{{errorhandling}} </h5> 
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+      <button type="submit" class="btn btn-success">Save changes</button>
+     </div>
+  </form>
