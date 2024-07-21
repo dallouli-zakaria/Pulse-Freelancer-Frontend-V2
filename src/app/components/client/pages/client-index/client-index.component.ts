@@ -10,7 +10,7 @@ import { RoleService } from '../../../../core/services/role.service';
 })
 export class ClientIndexComponent implements OnInit{
   userId:number=this.authService.parseID();
-  role!:string[];
+  role!:string;
   userdetails!:any;
   isAuthenticated: boolean = false;
 
@@ -34,5 +34,16 @@ export class ClientIndexComponent implements OnInit{
     )
 
     }; 
+
+
+
+   
+    
+  
     }
+
+    
+
+
+    
 }

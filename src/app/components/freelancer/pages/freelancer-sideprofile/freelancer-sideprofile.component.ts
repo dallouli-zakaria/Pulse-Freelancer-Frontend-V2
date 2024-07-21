@@ -14,6 +14,7 @@ export class FreelancerSideprofileComponent implements OnInit{
   freelancerId!: number;
   freelancerdata?:Freelancer;
   displayEdit = "none";
+  isLoading = true;
 
   constructor(
     private freelancerService: FreelancerService,
@@ -27,7 +28,7 @@ export class FreelancerSideprofileComponent implements OnInit{
     this.freelancerService.show(this.freelancerId).subscribe({
       next: (data) => {
         this.freelancerdata = data;
-        
+        this.isLoading = false;
         console.log(this.freelancerdata);
       },
       error: (error: any) => console.log(error),
@@ -38,7 +39,7 @@ export class FreelancerSideprofileComponent implements OnInit{
 
 
   ngOnInit(): void {
-    this.fetchData();
+    
   }
 selectedData:any
 selectedID!:any
@@ -54,21 +55,9 @@ selectedID!:any
 
 
 
-    //skeleton loading
-    isLoading = true;
-    data: any[] = [];
-  
-  
-    fetchData() {
-      // Simulate an API call
-      setTimeout(() => {
-        this.data = [
-          { title: 'Item 1', description: 'Description 1' },
-          { title: 'Item 2', description: 'Description 2' }
-        ];
-        this.isLoading = false;
-      }, 1000);
-    }
+    
+    
+
 
 
     getStatusMessage(): string {

@@ -43,7 +43,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminDashboardComponent,
-    canActivate:[authGuard],
+    canActivate:[authGuard],data: { roles: ['superadmin_role'] },
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
@@ -69,42 +69,41 @@ const routes: Routes = [
   {
     path: 'pulse',
     component: IndexComponent,
-    canActivate:[authGuard],
+    
     children: [
-      { path: 'view-freelancers', component: ClientViewFreelancersComponent },
-      { path: 'add-offer', component: AddPostComponent },
-      { path: 'client-dashboard', component: ClientIndexComponent },
+      { path: 'view-freelancers', component: ClientViewFreelancersComponent,canActivate:[authGuard],data: { roles: ['Client'] } },
+      { path: 'add-offer', component: AddPostComponent,canActivate:[authGuard],data: { roles: ['Client'] } },
+      { path: 'client-dashboard', component: ClientIndexComponent,canActivate:[authGuard],data: { roles: ['Client'] } },
       // { path: 'client-profile', component: UserProfileComponent },
       { path: 'client-profile', component: ClientProfileComponent,
         children:
         [
 
-          {path:'client-infos',component:ClientInfosComponent},
-          {path:'client-offers',component:ClientPostsComponent},
-          {path:'client-contracts',component:ClientContractsComponent},
-          {path:'client-subscription',component:ClientSubscriptionsComponent},
+          {path:'client-infos',component:ClientInfosComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
+          {path:'client-offers',component:ClientPostsComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
+          {path:'client-contracts',component:ClientContractsComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
+          {path:'client-subscription',component:ClientSubscriptionsComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
           { path: '', redirectTo: 'client-infos', pathMatch: 'full' },
           
         ]
        },
-      { path: 'client-offer/:postId', component: ClientPostDetailsComponent },
-      { path: 'offers', component: FreelancerViewPostsComponent },
-      { path: 'contact', component: ContactUsComponent },
-      { path: 'home', component: ConnectedLandingPageComponent },
-      {path:'view-freelancerprofile/:freelancerId',component:ClientViewFreelancerDetailsComponent},
+      { path: 'client-offer/:postId', component: ClientPostDetailsComponent,canActivate:[authGuard],data: { roles: ['Client'] } },
+      { path: 'offers', component: FreelancerViewPostsComponent,canActivate:[authGuard],data: { roles: ['Freelancer'] } },
+      { path: 'contact', component: ContactUsComponent,canActivate:[authGuard] },
+      {path:'view-freelancerprofile/:freelancerId',component:ClientViewFreelancerDetailsComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
       {path:'freelancer-dashboard',component:FreelancerProfileComponent,
         children:
         [
 
-          {path:'freelancer-offers',component:FreelancerOffersComponent},
-          {path:'freelancer-contracts',component:FreelancerContractsComponent},
-          { path: 'freelancer-profile', component: FreelancerIndexComponent },
+          {path:'freelancer-offers',component:FreelancerOffersComponent,canActivate:[authGuard],data: { roles: ['Freelancer'] } },
+          {path:'freelancer-contracts',component:FreelancerContractsComponent,canActivate:[authGuard],data: { roles: ['Freelancer'] } },
+          { path: 'freelancer-profile', component: FreelancerIndexComponent ,canActivate:[authGuard],data: { roles: ['Freelancer'] } },
 
           { path: '', redirectTo: 'freelancer-offers', pathMatch: 'full' },
           
         ]
       },
-      { path: '**', redirectTo: 'home', pathMatch: 'full' } ,
+      { path: '**', redirectTo: '/', pathMatch: 'full' } ,
     
     ]
   },

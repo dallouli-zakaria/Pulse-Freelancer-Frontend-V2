@@ -19,8 +19,6 @@ export class AddPostComponent {
   filteredSkills: string[] = [];
   selectedSkills: string[] = [];
   showSuggestions: boolean = false;
-  role!:string;
-  roles!:string;
   isAuthenticated: boolean = false;
 
 

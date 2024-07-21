@@ -11,41 +11,31 @@ import { ClientService } from '../../../../core/services/client.service';
 export class ClientSideprofileComponent implements OnInit{
   clientid!:number;
   client?:Client;
-
+  isLoading = true;
   constructor(private clientservice:ClientService,private authservice:AuthService){
     this.getclient();
   }
 
   getclient(){
     this.clientid=this.authservice.parseID();
-    console.log(this.clientid);
-    
     this.clientservice.show(this.clientid).subscribe({
-      next:(data:any)=>{this.client=data},
+      next:(data:any)=>{this.client=data;
+        this.isLoading = false;
+      },
       error:(error:any)=>console.log(error),
       complete:()=>console.log("get client done")})
   }
 
 
 
-  //skeleton loading
-  isLoading = true;
-  data: any[] = [];
+
+  
+ 
 
   ngOnInit() {
-    this.fetchData();
+   
   }
 
-  fetchData() {
-    // Simulate an API call
-    setTimeout(() => {
-      this.data = [
-        { title: 'Item 1', description: 'Description 1' },
-        { title: 'Item 2', description: 'Description 2' }
-      ];
-      this.isLoading = false;
-    }, 1000);
-  }
 
 
 }

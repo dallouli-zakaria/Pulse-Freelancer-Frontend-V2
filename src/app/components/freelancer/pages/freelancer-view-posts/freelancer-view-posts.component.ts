@@ -14,6 +14,8 @@ import { OffersService } from '../../../../core/services/offers.service';
 })
 export class FreelancerViewPostsComponent {
   
+
+  isLoading:boolean=true;
   posts:Post[]=[];
   freelancerid:number=this.authservice.parseID();
   company_name!: string;
@@ -37,6 +39,7 @@ export class FreelancerViewPostsComponent {
     this.postsService.index();
     this.postsService.postData.subscribe((res)=>{
       this.posts=res;
+      this.isLoading=false;
       
     })
   }

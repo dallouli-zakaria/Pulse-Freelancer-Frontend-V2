@@ -11,7 +11,7 @@ import { ClientService } from '../../../../core/services/client.service';
 export class ClientInfosComponent {
   clientdetails!:Client;
   clientdetails2!:Client;
-
+  isLoading = true;
   selectedata:any;
 
   isModalOpen = false;
@@ -45,7 +45,7 @@ export class ClientInfosComponent {
   ngOnInit(): void {
  
     this.getclient();
-    this.fetchData();
+
     
   }
 
@@ -55,27 +55,20 @@ export class ClientInfosComponent {
     this.clientservice.index()
     this.clientid=this.authservice.parseID();
     this.clientservice.show(this.clientid).subscribe({
-      next:(data:any)=>{this.client=data},
+      next:(data:any)=>{this.client=data;
+        this.isLoading = false;
+      },
       error:(error:any)=>console.log(error),
       complete:()=>console.log("get client done")})
   }
 
 
 
-    //skeleton loading
-    isLoading = true;
-    data: any[] = [];
+  
+    
+ 
   
 
   
-    fetchData() {
-      // Simulate an API call
-      setTimeout(() => {
-        this.data = [
-          { title: 'Item 1', description: 'Description 1' },
-          { title: 'Item 2', description: 'Description 2' }
-        ];
-        this.isLoading = false;
-      }, 1000);
-    }
+    
 }
