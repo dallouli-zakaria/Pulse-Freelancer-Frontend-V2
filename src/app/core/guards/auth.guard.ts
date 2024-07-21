@@ -15,8 +15,8 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   const requiredRoles = route.data['roles'];
   return new Promise<boolean>((resolve) => {
-    authService.getUserRole().subscribe(
-      (role: string) => {
+    authService.getUserRole().subscribe({
+     next: (role: string) => {
         if (requiredRoles.includes(role)) {
           resolve(true);
         } else {
@@ -24,11 +24,11 @@ export const authGuard: CanActivateFn = (route, state) => {
           resolve(false);
         }
       },
-      (error) => {
+     error: (error) => {
         routerService.navigate(['/login']); 
-        resolve(false);
+        resolve(false)
       }
-    );
-  });
+   } )
+ });
   
-};
+}

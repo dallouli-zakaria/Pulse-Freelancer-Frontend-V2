@@ -36,6 +36,7 @@ import { FreelancerIndexComponent } from './components/freelancer/pages/freelanc
 import { FreelancerOffersComponent } from './components/freelancer/pages/freelancer-offers/freelancer-offers.component';
 import { FreelancerProfileComponent } from './components/freelancer/pages/freelancer-profile/freelancer-profile.component';
 import { FreelancerViewPostsComponent } from './components/freelancer/pages/freelancer-view-posts/freelancer-view-posts.component';
+import { PackComponent } from './components/admin/pages/pack/pack.component';
 
 
 const routes: Routes = [
@@ -59,6 +60,7 @@ const routes: Routes = [
       { path: 'post',component:PostComponent},
       { path: 'client-offer/:postId', component: ClientPostDetailsComponent },
       { path: 'viewPost/:itemId',component:PostViewComponent},
+      { path: 'pack', component:PackComponent},
       { path: '**', redirectTo: 'dashboard', pathMatch: 'full' } 
     ]
   },

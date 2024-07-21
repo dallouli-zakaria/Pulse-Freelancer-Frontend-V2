@@ -111,6 +111,10 @@ import { FreelancerProjectsHistoryComponent } from './components/freelancer/page
 import { FreelancerSideprofileComponent } from './components/freelancer/pages/freelancer-sideprofile/freelancer-sideprofile.component';
 import { FreelancerSkillsComponent } from './components/freelancer/pages/freelancer-skills/freelancer-skills.component';
 import { FreelancerViewPostsComponent } from './components/freelancer/pages/freelancer-view-posts/freelancer-view-posts.component';
+import { PackComponent } from './components/admin/pages/pack/pack.component';
+import { PackTableComponent } from './components/admin/table/pack-table/pack-table.component';
+import { PackAddComponent } from './components/admin/buttons/add/pack-add/pack-add.component';
+import { PackDeleteComponent } from './components/admin/buttons/delete/pack-delete/pack-delete.component';
 ;
 
 @NgModule({
@@ -220,7 +224,11 @@ import { FreelancerViewPostsComponent } from './components/freelancer/pages/free
     UsersDeleteComponent,
     UsersEditComponent,
     UsersTableComponent,
-    ClientUpdatePersonalInfosComponent
+    ClientUpdatePersonalInfosComponent,
+    PackComponent,
+    PackTableComponent,
+    PackAddComponent,
+    PackDeleteComponent
     
   ],
   imports: [

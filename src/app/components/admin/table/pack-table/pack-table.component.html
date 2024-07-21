@@ -1,0 +1,46 @@
+<table class="table caption-top">
+    <caption><h1>Pack List</h1></caption>
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Price</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of pack">
+        <td>{{[item.id]}}</td>
+        <td  >{{item.title}}</td>
+        <td>{{item.description}}</td>
+        <td>{{item.price}} </td>
+        
+        <td>
+          <button class="btn btn-primary btn-sm" style="margin-right: 5px;" (click)="onEdited(item.id,item)">
+            <i class="fas fa-pen"></i> </button> 
+         <button class="btn btn-danger btn-sm" style="margin-right: 5px;" (click)="ondeleted(item.id,item)">
+            <i class="fas fa-trash"></i></button>
+      
+        </td>
+      </tr>
+      
+    </tbody>
+</table> 
+
+<div *ngIf="show" class="modal-backdrop fade show"><button (click)="onCloseModal()"></button></div>
+
+
+  <!-- edit -->
+  <!-- <div *ngIf="showedit" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-m"><div class="modal-content">
+    <app-offer-edit [offerId]="slecteID" [offerObject]="selectedData" (closeModal)="onCloseModal()"></app-offer-edit>
+  </div>
+</div>
+</div> -->
+<!-- delete -->
+<div *ngIf="showedelete" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-m"><div class="modal-content">
+    <app-pack-delete [packID]="slecteID" [packData]="selectedData" (closeModal)="onCloseModal()"></app-pack-delete>
+  </div>
+</div>  

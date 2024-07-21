@@ -1,0 +1,33 @@
+<div class="modal-header">
+    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Pack</h1>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="close()"></button>
+</div>
+    <form [formGroup]="form" (submit)="stored()">
+     <div class="modal-body">
+
+      <!-- Username -->
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Title</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="title">
+      </div>
+
+   
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Description</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="description">
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">price</label>
+        <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="price">
+      </div>
+
+
+      
+      </div>
+      <h5 style="color: red; margin-left: 10px;">{{errorhandling}} </h5> 
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+        <button type="submit" class="btn btn-success" >Save changes</button>
+       </div>
+    </form>
