@@ -130,7 +130,15 @@
               </div>
             </div>
             <div class="candidate-list">
-              <div *ngFor="let freelancer of freelancers" class="candidate-list-box card mt-4">
+              <div *ngIf="isLoading; else dataLoaded" class="card-box">
+                <app-skeleton-loading></app-skeleton-loading>
+                <br>
+                <app-skeleton-loading></app-skeleton-loading>
+                <br>
+                <app-skeleton-loading></app-skeleton-loading>
+              </div>
+              <ng-template #dataLoaded>
+              <div *ngFor="let freelancer of freelancers" class="candidate-list-box card mt-4" >
                 <div class="p-4 card-body">
                   <div class="align-items-center row">
                     <div class="col-auto">
@@ -553,8 +561,10 @@
                   </div>
                 </div>
               </div>
+            </ng-template>
             </div>
           </div>
+        
         </div>
         <div class="row">
           <div class="mt-4 pt-2 col-lg-12">

@@ -18,7 +18,8 @@ export class ClientViewFreelancerDetailsComponent implements OnInit{
   isAuthenticated: boolean = false;
   freelancerId!:number;
   freelancer!:Freelancer;
-  experienceData?:Experience[]
+  experienceData?:Experience[];
+  isLoading:boolean=true;
   constructor(private authService:AuthService,private route: ActivatedRoute,private freelancerService:FreelancerService,private experienceService:ExperienceService) { }
 
 
@@ -29,6 +30,7 @@ export class ClientViewFreelancerDetailsComponent implements OnInit{
     let sub = this.authService.parseID();
     this.authService.getuserdetails(sub).subscribe((res) => {
       this.roles=res.roles;
+      this.isLoading=false;
       if(res.roles=='client_role'){
       this.role = 'Client';
     }

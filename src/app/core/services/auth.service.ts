@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, retry, tap, throwError } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 @Injectable({
   providedIn: 'root'
@@ -14,8 +14,10 @@ export class AuthService {
   private loggedUser?: string;
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private isAuthenticated: boolean = false;
-  
   public verifrole!:any;
+  isLoading: boolean = true;
+  role!: string;
+  roles!: string[];
 
 
   API_URL2: any = 'http://127.0.0.1:8000/api/auth';
@@ -106,7 +108,35 @@ export class AuthService {
     return false;
   }
 
-  
+  getUserRole(): Observable<string> {
+    return new Observable(observer => {
+      if (this.isLoggedIn()) {
+        let sub = this.parseID();
+        this.getuserdetails(sub).subscribe(
+          (res: any) => {
+            this.roles = res.roles;
+            this.isLoading = false;
+            if (res.roles.includes('client_role')) {
+              this.role = 'Client';
+            } else if (res.roles.includes('freelancer_role')) {
+              this.role = 'Freelancer';
+            } else {
+              this.role = 'superadmin_role'; 
+            }
+            observer.next(this.role);
+            observer.complete();
+          },
+          (error) => {
+            observer.error(error);
+          }
+        );
+      } else {
+        observer.error('User is not logged in');
+      }
+    });
+  }
+
+
 
 
 

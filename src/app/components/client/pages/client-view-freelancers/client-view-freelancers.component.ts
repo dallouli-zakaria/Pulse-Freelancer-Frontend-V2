@@ -10,6 +10,7 @@ import { Freelancer } from '../../../../core/models/Freelancer';
 })
 export class ClientViewFreelancersComponent implements OnInit{
 
+  isLoading = true;
   freelancerList!:Observable<Freelancer[]>;
   freelancers:Freelancer[]=[]
 
@@ -24,10 +25,12 @@ this.freelancerList=this.freelancerService.getdata
   index(){
   
     this.freelancerService.index();
-  
+
     this.freelancerService.verifiedfreelancer().subscribe({
+      
       next:(data:any)=>{
         this.freelancers=data;
+        this.isLoading=false;
         console.log(data);
       },
       error:(error:any)=>{console.log(error);

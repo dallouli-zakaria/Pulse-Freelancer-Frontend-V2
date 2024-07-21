@@ -16,7 +16,7 @@ export class FreelancerExperienceComponent implements OnInit {
   displayEdit = "none";
   displayDelete="none";
   isLoading = false;
-  experienceData?:Experience[];
+  experienceData?:Experience[]
   experienceToDeleteId!: number;
   isSubmitting = false; 
   freelancerId:number=this.authserice.parseID();
@@ -103,5 +103,7 @@ export class FreelancerExperienceComponent implements OnInit {
       });
     }
   }
+
+  
 
 }

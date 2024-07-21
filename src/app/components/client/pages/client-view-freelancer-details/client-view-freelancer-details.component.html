@@ -3,9 +3,9 @@
     <div class="container p-4">
       <nav aria-label="breadcrumb " >
         <ol class="breadcrumb" *ngIf="roles == 'client_role'">
-          <li class="breadcrumb-item text-danger "><a routerLink="../home">Acceuil</a></li>
-          <li class="breadcrumb-item text-danger "><a routerLink="../client-dashboard">Client</a></li>
-          <li class="breadcrumb-item text-danger "><a routerLink="../view-freelancers">Voir liste freelancers</a></li>
+          <li class="breadcrumb-item text-danger "><a routerLink="../../home">Acceuil</a></li>
+          <li class="breadcrumb-item text-danger "><a routerLink="../../client-dashboard">Client</a></li>
+          <li class="breadcrumb-item text-danger "><a routerLink="../../view-freelancers">Voir liste freelancers</a></li>
           <li class="breadcrumb-item active " aria-current="page">Voir freelancer </li>
         </ol>
       </nav>     
@@ -13,7 +13,22 @@
 
         <h3 class="mt-3 mb-3">Profile Freelanceur</h3>
       </span>
+      <div *ngIf="isLoading; else dataLoaded" class="row"> 
+          <span class="col-lg-4">
+            <app-skeleton-loading></app-skeleton-loading>
+
+          </span>
+
+          <span class="col-lg-8">
+            <app-skeleton-loading></app-skeleton-loading>
+
+          </span>
+
+      </div>
+      <ng-template #dataLoaded>
       <div class="row">
+
+        
         <div *ngIf="freelancer?.user" class="col-lg-4 col-xl-4">
           <div class="card-box text-center">
             <img
@@ -236,6 +251,7 @@
           
         </div>
       </div>
+    </ng-template>
     </div>
   </body>
   
