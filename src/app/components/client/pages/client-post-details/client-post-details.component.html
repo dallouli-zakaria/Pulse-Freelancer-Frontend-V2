@@ -1,7 +1,9 @@
 <div class="container card-box mt-4">
     <div class="row">
       <h4 class="col-lg-10">
-        <span><a routerLink="../../client-profile/client-offers"> <i class="fas fa-arrow-left"></i> </a></span> Details de l'offre
+        <span *ngIf="roles == 'client_role'"><a routerLink="../../client-profile/client-offers-open"> <i class="fas fa-arrow-left"></i> </a></span> 
+        <span *ngIf="roles == 'superadmin_role'" ><a routerLink="../../post"> <i class="fas fa-arrow-left"></i> </a></span> Details de l'offre
+
       </h4>
       <button *ngIf="roles == 'client_role'" class="btn btn-danger col-lg-2" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="trackdata(post)">Modifier l'offre</button>
   

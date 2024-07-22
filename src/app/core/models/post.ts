@@ -10,6 +10,7 @@ export interface Post {
     periodvalue:number | null,
     budget:string,
     budgetvalue:number | null,
+    status:string,
     client_id:number,
     created_at: string;
 }

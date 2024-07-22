@@ -26,7 +26,6 @@ import { ClientPostsComponent } from './components/client/pages/client-posts/cli
 import { ClientProfileComponent } from './components/client/pages/client-profile/client-profile.component';
 import { ClientSubscriptionsComponent } from './components/client/pages/client-subscriptions/client-subscriptions.component';
 import { ClientViewFreelancersComponent } from './components/client/pages/client-view-freelancers/client-view-freelancers.component';
-import { ConnectedLandingPageComponent } from './components/commun/connected-landing-page/connected-landing-page.component';
 import { IndexComponent } from './components/commun/index/index.component';
 import { ClientPostDetailsComponent } from './components/client/pages/client-post-details/client-post-details.component';
 import { ClientViewFreelancerDetailsComponent } from './components/client/pages/client-view-freelancer-details/client-view-freelancer-details.component';
@@ -37,6 +36,7 @@ import { FreelancerOffersComponent } from './components/freelancer/pages/freelan
 import { FreelancerProfileComponent } from './components/freelancer/pages/freelancer-profile/freelancer-profile.component';
 import { FreelancerViewPostsComponent } from './components/freelancer/pages/freelancer-view-posts/freelancer-view-posts.component';
 import { PackComponent } from './components/admin/pages/pack/pack.component';
+import { ConnectedLandingPageComponent } from './components/commun/connected-landing-page/connected-landing-page.component';
 
 
 const routes: Routes = [
@@ -82,7 +82,10 @@ const routes: Routes = [
         [
 
           {path:'client-infos',component:ClientInfosComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
-          {path:'client-offers',component:ClientPostsComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
+          {path:'client-offers-open',component:ClientPostsComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
+          {path:'client-offers-waiting',component:ClientPostsComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
+          {path:'client-offers-closed',component:ClientPostsComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
+
           {path:'client-contracts',component:ClientContractsComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
           {path:'client-subscription',component:ClientSubscriptionsComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
           { path: '', redirectTo: 'client-infos', pathMatch: 'full' },
