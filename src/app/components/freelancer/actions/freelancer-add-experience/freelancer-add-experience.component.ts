@@ -43,9 +43,11 @@ export class FreelancerAddExperienceComponent implements OnInit {
       this.experienceService.store(newExperience).subscribe({
         next: (res) => {
           console.log('Experience added successfully', res);
-          this.form.reset();
-          this.experienceAdded.emit();
 
+          this.experienceAdded.emit();
+          this.form.reset({
+            freelancer_id: this.freelancerId
+          });
           this.isSubmitting = false;
         },
         error: (error) => {
@@ -54,5 +56,6 @@ export class FreelancerAddExperienceComponent implements OnInit {
         }
       });
     }
+    
   }
 }

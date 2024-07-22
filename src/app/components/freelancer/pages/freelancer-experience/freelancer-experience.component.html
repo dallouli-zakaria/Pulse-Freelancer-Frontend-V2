@@ -27,7 +27,7 @@
         </div>
       </div>
 
-      <ul class="list-unstyled timeline-sm" *ngIf="!isLoading && experienceData!.length > 0">
+      <ul class="list-unstyled timeline-sm" *ngIf="!isLoading && experienceData.length > 0">
         <li class="timeline-sm-item" *ngFor="let item of experienceData">
           <span class="timeline-sm-date">{{ getYear(item.startDate) }} - {{ getYear(item.endDate) }}</span>
           <h5 class="mt-0 mb-1">
