@@ -14,50 +14,54 @@ import { FreelancerUpdateExperienceComponent } from '../../actions/freelancer-up
 export class FreelancerExperienceComponent implements OnInit {
   displayAdd = "none";
   displayEdit = "none";
-  displayDelete="none";
+  displayDelete = "none";
   isLoading = false;
-  experienceData?:Experience[]
+  experienceData?: Experience[];
   experienceToDeleteId!: number;
-  isSubmitting = false; 
-  freelancerId:number=this.authserice.parseID();
-  listExperience!:Observable<Experience[]>
+  isSubmitting = false;
+  freelancerId: number = this.authService.parseID();
+  listExperience!: Observable<Experience[]>;
   @ViewChild(FreelancerAddExperienceComponent) addExperienceComponent!: FreelancerAddExperienceComponent;
   @ViewChild(FreelancerUpdateExperienceComponent) updateExperienceComponent!: FreelancerUpdateExperienceComponent;
 
-  constructor(private experienceservice:ExperienceService,private authserice :AuthService){}
+  constructor(private experienceService: ExperienceService, private authService: AuthService) { }
+
   ngOnInit(): void {
-    this.getdata();
-    this.listExperience=this.experienceservice.experienceData;
+    this.getData();
+    this.listExperience = this.experienceService.experienceData;
   }
 
   openModalAdd() {
-      this.displayAdd = "block";
-      
-    }
+    this.displayAdd = "block";
+  }
+
   onCloseHandledAdd() {
-    this.getdata();
+    this.getData();
     this.displayAdd = "none";
   }
 
-  openModalEdit(experience:Experience) {
-      this.displayEdit = "block";
-      this.updateExperienceComponent.setExperienceToUpdate(experience);
-    }
+  openModalEdit(experience: Experience) {
+    this.displayEdit = "block";
+    this.updateExperienceComponent.setExperienceToUpdate(experience);
+  }
+
   onCloseHandledEdit() {
     this.displayEdit = "none";
   }
-  getdata(){
+
+  getData() {
     this.isLoading = true;
-    this.experienceservice.showByFreelancer(this.freelancerId).subscribe({next:(res)=>{
-      this.experienceData=res;
-      console.log(res);
-      this.isLoading = false;
-    
-    },
-      error: (error) => console.error('Error fetching experiences:', error)
-      
-      
-    })
+    this.experienceService.showByFreelancer(this.freelancerId).subscribe({
+      next: (res) => {
+        this.experienceData = res;
+        console.log(res);
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error fetching experiences:', error);
+        this.isLoading = false;
+      }
+    });
   }
 
   getYear(dateString: string): string {
@@ -66,15 +70,14 @@ export class FreelancerExperienceComponent implements OnInit {
   }
 
   onExperienceUpdated() {
-    this.getdata();
+    this.getData();
     this.onCloseHandledEdit();
   }
 
   onExperienceAdded() {
-    this.getdata();
+    this.getData();
     this.onCloseHandledAdd();
   }
-
 
   openDeleteModal(id: number) {
     this.experienceToDeleteId = id;
@@ -86,24 +89,20 @@ export class FreelancerExperienceComponent implements OnInit {
   }
 
   confirmDeleteExperience() {
-    this.isSubmitting = true; 
+    this.isSubmitting = true;
     if (this.experienceToDeleteId) {
-      this.experienceservice.delete(this.experienceToDeleteId).subscribe({
-        
+      this.experienceService.delete(this.experienceToDeleteId).subscribe({
         next: () => {
-          this.getdata(); 
+          this.getData();
           this.onCloseHandledDelete();
-          this.isSubmitting = false; 
+          this.isSubmitting = false;
         },
         error: (error) => {
           console.error('Error deleting experience:', error);
           this.onCloseHandledDelete();
-          this.isSubmitting = false; 
+          this.isSubmitting = false;
         }
       });
     }
   }
-
-  
-
 }

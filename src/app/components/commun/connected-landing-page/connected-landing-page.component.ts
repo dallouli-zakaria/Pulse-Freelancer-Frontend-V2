@@ -1,3 +1,4 @@
+import { PackService } from './../../../core/services/pack.service';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../core/services/auth.service';
 
@@ -10,9 +11,11 @@ export class ConnectedLandingPageComponent implements OnInit{
   userId!:number;
   role!:string[];
   isAuthenticated: boolean = false;
-  constructor(private authService:AuthService) {}
+  packs!:any;
+  constructor(private authService:AuthService,private packService:PackService) {}
 
   ngOnInit(): void {
+    this.index();
     // console.log(this.authService.verifyrole());
    
     
@@ -28,7 +31,17 @@ export class ConnectedLandingPageComponent implements OnInit{
 
     }); 
     }
+  }
 
+  index(){
+    this.packService.index()
+    this.packService.getData.subscribe({
+      next:(data:any)=>{this.packs=data;
+        
+        },
+      error: (error)=>console.log(error),
+      complete:()=>console.log('end desplay data')
+    })
   }
 
 }

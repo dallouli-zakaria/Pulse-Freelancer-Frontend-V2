@@ -7,14 +7,14 @@ import { ExperienceService } from '../../../../core/services/experience.service'
 @Component({
   selector: 'app-freelancer-add-experience',
   templateUrl: './freelancer-add-experience.component.html',
-  styleUrl: './freelancer-add-experience.component.css'
+  styleUrls: ['./freelancer-add-experience.component.css']
 })
-export class FreelancerAddExperienceComponent implements OnInit{
+export class FreelancerAddExperienceComponent implements OnInit {
   @Output() experienceAdded = new EventEmitter<void>();
 
   freelancerId: number = this.authService.parseID();
   form: FormGroup;
-  isSubmitting=false;
+  isSubmitting = false;
 
   constructor(
     private experienceService: ExperienceService,
@@ -33,26 +33,24 @@ export class FreelancerAddExperienceComponent implements OnInit{
     });
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 
   addExperience() {
-    this.isSubmitting=true;
+    this.isSubmitting = true;
     if (this.form.valid) {
-
       const newExperience: Experience = this.form.value;
 
       this.experienceService.store(newExperience).subscribe({
         next: (res) => {
           console.log('Experience added successfully', res);
-          this.experienceAdded.emit();
           this.form.reset();
-          this.isSubmitting=false;
+          this.experienceAdded.emit();
+
+          this.isSubmitting = false;
         },
         error: (error) => {
           console.error('Error adding experience:', error);
-     
+          this.isSubmitting = false;
         }
       });
     }

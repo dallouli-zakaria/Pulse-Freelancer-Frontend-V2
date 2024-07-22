@@ -27,7 +27,8 @@ deleted(){
   if(this.packID !==null){
     this.packService.delete(this.packID).subscribe({
     next:(data)=>{console.log(data);
-    
+      this.close();
+      this.packService.index()
     },
      error:(error:any)=>{console.log(error); if ( error.error.errors) {
       this.errorhandling = Object.values(error.error.errors).flat();

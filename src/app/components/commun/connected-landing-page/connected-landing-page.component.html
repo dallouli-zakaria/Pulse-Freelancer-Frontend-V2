@@ -133,8 +133,54 @@
       
   
       </section>
+
+      <section *ngIf="isAuthenticated" class="bg-100 py-7" id="nospacks">
   
-      <section class="bg-100 py-7" id="nospacks">
+        <div class="container-lg">
+          <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-5 text-center mb-3">
+              <h2>Choisissez votre plan</h2>
+              <p>Choisissons le forfait qui vous convient le mieux .</p>
+            </div>
+          </div>
+          <div class="row h-100 justify-content-center">
+            <div *ngFor="let pack of packs" class="col-md-4 pt-4 px-md-2 px-lg-3">
+              <div class="card h-100">
+                <div class="card-body d-flex flex-column justify-content-around mx-auto">
+                  <div class="text-center pt-5"><img class="img-fluid" src="assets/img/icons/pricing.png" alt="" />
+                    <h5 class="my-4">{{pack.title}}</h5>
+                  </div>
+                  <ul class="list-unstyled">
+                    <li class="mb-3"><span class="me-2">
+                      <i class="bi bi-check-lg text-success"></i></span>Frais de service : 5 % du coût du projet
+                    </li>
+                    <li class="mb-3"><span class="me-2">
+                      <i class="bi bi-check-lg text-success"></i></span>Publication de projet : 1 projet
+  
+                    </li>
+                    <li class="mb-3"><span class="me-2">
+                      <i class="bi bi-check-lg text-success"></i></span>Système de messagerie intégré
+                    </li>
+                    <li class="mb-3"><span class="me-2">
+                      <i class="bi bi-check-lg text-success"></i></span>Support par email
+                    </li>
+                  </ul>
+                  <div class="text-center my-5">
+                    <h2 class="mb-3">{{pack.price}} mad / an
+                    </h2>
+                    <button class="btn btn-outline-danger rounded-pill" type="submit">Choisir </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+           
+          </div>
+        </div>
+   
+  
+      </section>
+      
+      <section *ngIf="!isAuthenticated" class="bg-100 py-7" id="nospacks">
   
         <div class="container-lg">
           <div class="row justify-content-center">
