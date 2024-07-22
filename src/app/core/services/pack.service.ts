@@ -28,7 +28,7 @@ get getData():Observable<Pack[]>{
   return this.subject.asObservable();
 }
 
-public update(data:any,id:number):Observable<Pack[]>{
+public update(id:number,data:any):Observable<Pack[]>{
  this.pack=this.http.put<Pack[]>(`${this.url}/pack/${id}`,data);
  return this.pack
 }

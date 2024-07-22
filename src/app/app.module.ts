@@ -115,6 +115,7 @@ import { PackComponent } from './components/admin/pages/pack/pack.component';
 import { PackTableComponent } from './components/admin/table/pack-table/pack-table.component';
 import { PackAddComponent } from './components/admin/buttons/add/pack-add/pack-add.component';
 import { PackDeleteComponent } from './components/admin/buttons/delete/pack-delete/pack-delete.component';
+import { PackEditComponent } from './components/admin/buttons/edit/pack-edit/pack-edit.component';
 ;
 
 @NgModule({
@@ -228,7 +229,8 @@ import { PackDeleteComponent } from './components/admin/buttons/delete/pack-dele
     PackComponent,
     PackTableComponent,
     PackAddComponent,
-    PackDeleteComponent
+    PackDeleteComponent,
+    PackEditComponent
     
   ],
   imports: [
