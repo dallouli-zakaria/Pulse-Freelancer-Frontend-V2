@@ -33,8 +33,10 @@ export class FreelancerSkillsComponent {
  }
   public index(){
     this.skillService.showbyfreelancerid(this.freelancerId).subscribe({
-      next:(data:any)=>{
+      next:(data:any)=>{ 
+        this.skillService.index()
         this.freelancerSkillsData=data
+       
       },
       error:(error:any)=>{
         console.log(error) 

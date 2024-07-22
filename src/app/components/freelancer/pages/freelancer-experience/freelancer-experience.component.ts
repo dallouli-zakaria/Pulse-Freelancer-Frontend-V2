@@ -58,8 +58,10 @@ export class FreelancerExperienceComponent implements OnInit {
         this.isLoading = false;
       },
       error: (error) => {
-        console.error('Error fetching experiences:', error);
-        this.isLoading = false;
+        // console.error('Error fetching experiences:', error);
+        
+        console.log(error);
+        
       }
     });
   }
@@ -101,9 +103,9 @@ export class FreelancerExperienceComponent implements OnInit {
           this.isSubmitting = false;
         },
         error: (error) => {
-          console.error('Error deleting experience:', error);
+          // console.error('Error deleting experience:', error);
           this.onCloseHandledDelete();
-          this.isSubmitting = false;
+          // this.isSubmitting = false;
         }
       });
     }
