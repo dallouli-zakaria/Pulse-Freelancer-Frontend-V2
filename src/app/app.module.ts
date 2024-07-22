@@ -94,7 +94,6 @@ import { ClientUpdatePostComponent } from './components/client/actions/client-up
 import { HeaderComponent } from './components/commun/client-freelancer-layouts/header/header.component';
 import { FooterComponent } from './components/commun/client-freelancer-layouts/footer/footer.component';
 import { SkillchipsComponent } from './components/commun/skillchips/skillchips.component';
-import { SkillprogressComponent } from './components/commun/skillprogress/skillprogress.component';
 import { CommonModule } from '@angular/common';
 import { FreelancerAddExperienceComponent } from './components/freelancer/actions/freelancer-add-experience/freelancer-add-experience.component';
 import { FreelancerUpdateAboutComponent } from './components/freelancer/actions/freelancer-update-about/freelancer-update-about.component';
@@ -218,7 +217,6 @@ import { PackEditComponent } from './components/admin/buttons/edit/pack-edit/pac
     RolechipsAutocompleteComponent,
     SkeletonLoadingComponent,
     SkillchipsComponent,
-    SkillprogressComponent,
     TimeAgoPipe,
     UserDetailsComponent,
     UsersComponent,

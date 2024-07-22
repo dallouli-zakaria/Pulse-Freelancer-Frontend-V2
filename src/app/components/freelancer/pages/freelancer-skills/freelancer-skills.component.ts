@@ -35,8 +35,6 @@ export class FreelancerSkillsComponent {
     this.skillService.showbyfreelancerid(this.freelancerId).subscribe({
       next:(data:any)=>{
         this.freelancerSkillsData=data
-      
-        
       },
       error:(error:any)=>{
         console.log(error) 
@@ -53,23 +51,13 @@ export class FreelancerSkillsComponent {
 
   displayAdd = "none";
 
-  openModalAdd() {
-      this.displayAdd = "block";
-    }
-  onCloseHandledAdd() {
-    this.displayAdd = "none";
-  }
+
 
   
 
  
 
-  openModalEdit() {
-      this.displayEdit = "block";
-    }
-  onCloseHandledEdit() {
-    this.displayEdit = "none";
-  }
+
 
    
 }

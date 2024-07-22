@@ -1,7 +1,9 @@
+import { ExperienceService } from './../../../../core/services/experience.service';
 import { Component, OnInit } from '@angular/core';
 import { Freelancer } from '../../../../core/models/Freelancer';
 import { AuthService } from '../../../../core/services/auth.service';
 import { FreelancerService } from '../../../../core/services/freelancer.service';
+import { Experience } from '../../../../core/models/experience';
 
 @Component({
   selector: 'app-freelancer-sideprofile',
@@ -10,7 +12,7 @@ import { FreelancerService } from '../../../../core/services/freelancer.service'
 })
 export class FreelancerSideprofileComponent implements OnInit{
   freelancername!:string;
-
+  experienceData:any;
   freelancerId!: number;
   freelancerdata?:Freelancer;
   displayEdit = "none";
@@ -19,6 +21,7 @@ export class FreelancerSideprofileComponent implements OnInit{
   constructor(
     private freelancerService: FreelancerService,
     private authService: AuthService,
+    private experienceService:ExperienceService
    
   ) {
     this.getFreelancer();
@@ -34,6 +37,18 @@ export class FreelancerSideprofileComponent implements OnInit{
       error: (error: any) => console.log(error),
       complete: () => console.log("get freelancer done")
     }); 
+
+    this.experienceService.showByFreelancer(this.freelancerId).subscribe({
+      next: (res) => {
+        this.experienceData = res;
+        console.log(res);
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error fetching experiences:', error);
+        this.isLoading = false;
+      }
+    });
   }
 
 
@@ -91,7 +106,9 @@ selectedID!:any
         this.freelancerdata?.availability !== null &&
         this.freelancerdata?.adress !== null &&
         this.freelancerdata?.phone !== null &&
-        this.freelancerdata?.portfolio_Url !== null 
+        this.freelancerdata?.portfolio_Url !== null &&
+        this.experienceData !== null
+
       );
     }
 }
