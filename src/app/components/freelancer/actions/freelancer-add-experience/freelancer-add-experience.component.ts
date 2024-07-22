@@ -16,6 +16,18 @@ export class FreelancerAddExperienceComponent implements OnInit {
   form: FormGroup;
   isSubmitting = false;
 
+  countries = [
+    'Maroc', 'Algérie', 'Tunisie', 'Égypte', 'Afrique du Sud', 'Kenya', 'Nigeria', 'Ghana',
+    'France', 'Espagne', 'Allemagne', 'Italie', 'Royaume-Uni', 'Pays-Bas', 'Belgique', 
+    'Suède', 'Norvège', 'Danemark', 'Finlande', 'Suisse', 'Autriche', 'Portugal', 
+    'Grèce', 'Turquie', 'Arabie Saoudite', 'Émirats Arabes Unis', 'Qatar', 'Koweït', 
+    'Bahreïn', 'Jordanie', 'Liban', 'Oman', 'Autre'
+  ];
+  
+  moroccanCities = ['Casablanca', 'Rabat', 'Marrakech', 'Fès', 'Tanger', 'Agadir', 'Essaouira', 'Meknès', 'Autre'];
+  isMorocco = false;
+  selectedCity = '';
+
   constructor(
     private experienceService: ExperienceService,
     private authService: AuthService,
@@ -34,6 +46,26 @@ export class FreelancerAddExperienceComponent implements OnInit {
   }
 
   ngOnInit(): void { }
+
+  onCountryChange(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    const country = selectElement.value;
+    this.isMorocco = country === 'Maroc';
+    if (!this.isMorocco) {
+      this.form.get('city')?.setValue('');
+    }
+  }
+
+  onCityChange(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    const city = selectElement.value;
+    this.selectedCity = city;
+    if (city !== 'Autre') {
+      this.form.get('city')?.setValue(city);
+    } else {
+      this.form.get('city')?.setValue('');
+    }
+  }
 
   addExperience() {
     this.isSubmitting = true;
@@ -56,6 +88,5 @@ export class FreelancerAddExperienceComponent implements OnInit {
         }
       });
     }
-    
   }
 }
