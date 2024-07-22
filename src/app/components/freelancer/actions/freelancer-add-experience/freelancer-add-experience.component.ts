@@ -77,8 +77,8 @@ export class FreelancerAddExperienceComponent implements OnInit {
       this.experienceService.store(newExperience).subscribe({
         next: (res) => {
           console.log('Experience added successfully', res);
-
           this.experienceAdded.emit();
+          this.experienceService.index();
           this.form.reset({
             freelancer_id: this.freelancerId
           });

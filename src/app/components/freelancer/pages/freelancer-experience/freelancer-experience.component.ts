@@ -92,9 +92,12 @@ export class FreelancerExperienceComponent implements OnInit {
     this.isSubmitting = true;
     if (this.experienceToDeleteId) {
       this.experienceService.delete(this.experienceToDeleteId).subscribe({
-        next: () => {
+        next: (data:any) => {
+          console.log(data);
+          
           this.getData();
           this.onCloseHandledDelete();
+          this.experienceService.index();
           this.isSubmitting = false;
         },
         error: (error) => {
