@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Constant } from '../Constant';
 import { HttpClient } from '@angular/common/http';
-import { catchError, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, shareReplay } from 'rxjs';
 import { Skill } from '../models/skill';
 
 @Injectable({
@@ -10,22 +10,30 @@ import { Skill } from '../models/skill';
 export class SkillService {
   Skill:any
   url=Constant.API_ENDPOINT
+  public subject:BehaviorSubject<Skill[]>=new BehaviorSubject<Skill[]>([])
    constructor(private http:HttpClient) { }
    
    public count(){
      this.Skill=this.http.get(`${this.url}/SkillCount`);
      return this.Skill
    }
-   public index():Observable<Skill[]>{
-     this.Skill=this.http.get(`${this.url}/${Constant.SkillS}`);
-     return this.Skill
+   public index(){
+     this.Skill=this.http.get(`${this.url}/${Constant.SkillS}`).pipe(shareReplay(1)).subscribe({
+      next:(data:any)=>this.subject.next(data),
+      error:(error)=>console.log(error),
+      complete:()=>console.log('end operation') 
+    }).add(console.log('suject permession'))
    }
- 
+    
+   get skillData():Observable<Skill[]>{
+    return this.subject.asObservable()
+}
    public store(data:any):Observable<Skill>{
    this.Skill=this.http.post(`${this.url}/${Constant.SkillS}`,data);
    return this.Skill
    }
- 
+   
+    
    public update(id: any, value: any):Observable<Skill>{
      this.Skill=this.http.put(`${this.url}/${Constant.SkillS}`,id);
      return this.Skill
