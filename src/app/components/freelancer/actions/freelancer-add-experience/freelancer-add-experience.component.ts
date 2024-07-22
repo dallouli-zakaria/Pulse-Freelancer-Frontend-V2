@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Experience } from '../../../../core/models/experience';
 import { AuthService } from '../../../../core/services/auth.service';
 import { ExperienceService } from '../../../../core/services/experience.service';
+import { dateRangeValidator } from '../../../../core/validators/date-range.validator';
 
 @Component({
   selector: 'app-freelancer-add-experience',
@@ -17,11 +18,12 @@ export class FreelancerAddExperienceComponent implements OnInit {
   isSubmitting = false;
 
   countries = [
-    'Maroc', 'Algérie', 'Tunisie', 'Égypte', 'Afrique du Sud', 'Kenya', 'Nigeria', 'Ghana',
-    'France', 'Espagne', 'Allemagne', 'Italie', 'Royaume-Uni', 'Pays-Bas', 'Belgique', 
-    'Suède', 'Norvège', 'Danemark', 'Finlande', 'Suisse', 'Autriche', 'Portugal', 
-    'Grèce', 'Turquie', 'Arabie Saoudite', 'Émirats Arabes Unis', 'Qatar', 'Koweït', 
-    'Bahreïn', 'Jordanie', 'Liban', 'Oman', 'Autre'
+'Maroc','Afrique du Sud', 'Allemagne', 'Algérie', 'Arabie Saoudite', 
+'Autriche', 'Bahreïn', 'Belgique', 'Danemark', 'Égypte', 
+'Émirats Arabes Unis', 'Espagne', 'Finlande', 'France', 'Ghana', 'Grèce', 'Italie',
+ 'Jordanie', 'Kenya', 'Koweït', 'Liban',  'Nigeria', 'Norvège', 'Oman', 'Pays-Bas',
+  'Portugal', 'Qatar', 'Royaume-Uni', 'Suède', 'Suisse', 'Turquie', 'Tunisie', 'Autre'
+
   ];
   
   moroccanCities = ['Casablanca', 'Rabat', 'Marrakech', 'Fès', 'Tanger', 'Agadir', 'Essaouira', 'Meknès', 'Autre'];
@@ -42,7 +44,7 @@ export class FreelancerAddExperienceComponent implements OnInit {
       endDate: ['', Validators.required],
       description: ['', Validators.required],
       freelancer_id: [this.freelancerId]
-    });
+    },{ validators: dateRangeValidator() });
   }
 
   ngOnInit(): void { }
