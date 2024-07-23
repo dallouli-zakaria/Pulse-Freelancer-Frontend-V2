@@ -1,6 +1,6 @@
 export interface Offer{
     id:number
-    selected:string;
+    selected:boolean;
     freelancer_id:number,
     post_id:number,
 }

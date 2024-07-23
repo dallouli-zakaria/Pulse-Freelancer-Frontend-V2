@@ -1,11 +1,11 @@
 <div class="container card-box mt-4">
     <div class="row">
       <h4 class="col-lg-10">
-        <span *ngIf="roles == 'client_role'"><a routerLink="../../client-profile/client-offers-open"> <i class="fas fa-arrow-left"></i> </a></span> 
-        <span *ngIf="roles == 'superadmin_role'" ><a routerLink="../../post"> <i class="fas fa-arrow-left"></i> </a></span> Details de l'offre
+        <span *ngIf="roles == 'Client'"><a routerLink="../../client-profile/client-offers-open"> <i class="fas fa-arrow-left"></i> </a></span> 
+        <span *ngIf="roles == 'superadmin_role'" ><a routerLink="../../post-open"> <i class="fas fa-arrow-left"></i> </a></span> Details de l'offre
 
       </h4>
-      <button *ngIf="roles == 'client_role'" class="btn btn-danger col-lg-2" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="trackdata(post)">Modifier l'offre</button>
+      <button *ngIf="roles == 'Client'" class="btn btn-danger col-lg-2" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="trackdata(post)">Modifier l'offre</button>
   
       <button *ngIf="roles == 'superadmin_role'" 
               class="btn btn-primary col-lg-2" 
@@ -95,28 +95,83 @@
                 <th>Email</th>
                 <th>availability</th>
                 <th>Tjm</th>
-                <th>Atcion</th>
+                <th>Offer status</th>
+                <th>Score</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of freelancers ; let i = index">
+              <tr *ngFor="let item of freelancerfalse ; let i = index">
                 <td>{{i+1}}</td>
                 <td>{{item.user.name}}</td>
                 <td>{{item.title}}</td>
                 <td>{{item.user.email}}</td>
                 <td>{{item.availability}}</td>
-                <td>{{item.TJM}} Mad / J
+                <td>{{item.TJM}} Mad / J 
                    <span *ngIf="validatedFreelancers.has(i)" ><span class="badge rounded-pill text-bg-success text-muted" role="alert">validé</span></span>
                   </td>
+                  <td class="badge rounded-pill text-bg-warning text-muted" role="alert">En attente</td>
+                  <td>100</td>
                 <td>
                   <div class="btn-group dropstart">
                     <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                       <i class="bi bi-three-dots-vertical"></i>
                     </button>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" (click)="onEdited()"><i class="bi bi-eye"></i> View</a></li>
+                      <li><a class="dropdown-item" (click)="onEdited(item.id)"><i class="bi bi-eye"></i> View</a></li>
                       <li><a class="dropdown-item"routerLink="../../mailing" ><i class="bi bi-envelope-arrow-up"></i> Send</a></li>
-                      <li><a class="dropdown-item" (click)="validateFreelancer(i)"><i class="bi bi-check-all"></i> Valider</a></li>
+                      <li><a class="dropdown-item" (click)="validateFreelancer(i,post.id,item.id)"><i class="bi bi-check-all"></i> Valider</a></li>
+  
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+              <tr *ngIf="freelancers.length === 0">
+                <td colspan="7">No freelancers found.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h5 *ngIf="roles == 'superadmin_role' || roles == 'Client' " class="mb-3 mt-4">
+          <i class="mdi mdi-cards-variant mr-1"></i> Selected Freelancers
+        </h5>
+        <div *ngIf="roles == 'superadmin_role' || roles == 'Client' " class="table-responsive">
+          <table class="table table-borderless mb-0">
+            <thead class="thead-light">
+              <tr>
+                <th>#</th>
+                <th>nom</th>
+                <th>Profession</th>
+                <th>Email</th>
+                <th>availability</th>
+                <th>Tjm</th>
+                <th>Offer status</th>
+                <th>Score</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of freelancertrue ; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{item.user.name}}</td>
+                <td>{{item.title}}</td>
+                <td>{{item.user.email}}</td>
+                <td>{{item.availability}}</td>
+                <td>{{item.TJM}} Mad / J 
+                   <span *ngIf="disqualifiedFreelancer.has(i)" ><span class="badge rounded-pill text-bg-warning text-muted" role="alert">disqualifié</span></span>
+                  </td>
+                  <td class="badge rounded-pill text-bg-success text-muted" role="alert" >Validé</td>
+                  <td>100</td>
+                <td>
+                  <div class="btn-group dropstart">
+                    <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" (click)="onEdited(item.id)"><i class="bi bi-eye"></i> View</a></li>
+                      <li><a class="dropdown-item"routerLink="../../mailing" ><i class="bi bi-envelope-arrow-up"></i> Send</a></li>
+                      <li><a class="dropdown-item" (click)="disqualifyFreelancer(i,post.id,item.id)"><i class="bi bi-x"></i> Disqualifier</a></li>
   
                     </ul>
                   </div>
@@ -158,7 +213,7 @@
           <button type="button" class="btn-close" (click)="onCloseModal()" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <app-client-view-freelancer-details></app-client-view-freelancer-details>
+          <app-client-view-freelancer-details [freelancerid]="selectedFreelancerId"></app-client-view-freelancer-details>
         </div>
       </div>
     </div>

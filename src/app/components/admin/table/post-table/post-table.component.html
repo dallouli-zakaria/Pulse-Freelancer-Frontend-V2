@@ -1,70 +1,123 @@
-<table class="table caption-top">
-    <caption><h1>Post List</h1></caption>
-    <thead>
-        <tr>
-          <th scope="col">#</th>
-            <th scope="col">Title</th>
-            <th scope="col">Location</th>
-            <th scope="col">Type</th>
-            <th scope="col">Description</th>
-            <th scope="col">Period</th>
-            <th scope="col">Period Value</th>
-            <th scope="col">Budget</th>
-            <th scope="col">Budget Value</th>
-            <th scope="col">Client ID</th>
-            <th scope="col">Created At</th>
-            <th scope="col">Actions</th>
-            <th scope="col"></th>
-          </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of post ; let i = index">
-        <th scope="row">{{i+1}}</th>
-        <td>{{item.title}}</td>
-        <td>{{item.location}}</td>
-        <td>{{item.type}}</td>
-        <td>{{item.description}}</td>
-        <td>{{item.period}}</td>
-        <td>{{item.periodvalue}}</td>
-        <td>{{item.budget}}</td>
-        <td>{{item.budgetvalue}}</td>
-        <td>{{item.client_id}}</td>
-        <td>{{item.created_at | timeAgo }}</td>
-        <td>
-          <button class="btn btn-primary btn-sm" style="margin-right: 5px;" (click)="onEdited(item.id,item)">
-            <i class="fas fa-pen"></i> </button> 
-         <button class="btn btn-danger btn-sm" style="margin-right: 5px;" (click)="ondeleted(item.id, item)">
-            <i class="fas fa-trash"></i></button>
-            <button class="btn btn-secondary btn-sm" style="margin-right: 5px;" [routerLink]="['../client-offer',item.id] ">
-              <i class="bi bi-eye"></i></button>
+<div class="card-box">
+  <div class="tab-content">
+    <div class="tab-pane show active" id="about-me">
+      <h5 class="mb-4 text-uppercase">
+        <span class="link-texts">
+          <a routerLink="../post-open" 
+          [ngClass]="{'text-primary': dataStatus === 'open'}">Mes offres</a> /
+          <a routerLink="../post-waiting"
+          [ngClass]="{'text-primary': dataStatus === 'waiting'}">Offres en attente</a> / 
+          <a routerLink="../post-closed"
+          [ngClass]="{'text-primary': dataStatus === 'closed'}">Offres terminé</a>
+        </span>
+      </h5>
+      <div *ngIf="isLoading; else dataLoaded">
+        <app-skeleton-loading></app-skeleton-loading>
+      </div>
+      <ng-template #dataLoaded>
+        <div *ngIf="post.length === 0; else postList">
+          <div class="container mb-3">
+            <div class="card pb-0 px-3">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12">
+                    <h5 class="card-title"><a>Vous n'avez aucun offre!</a></h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-        </td>
-      </tr>
-      
-    </tbody>
-</table> 
+        <!-- begin -->
+        <ng-template  #postList>
+          <span *ngIf="dataStatus === 'open'">
+            <div  class="container mb-3"  *ngFor="let posts of post">
+              <span *ngIf="posts.status ==='open'">
+                <a [routerLink]="['../client-offer', posts.id]" >
+              <div class="card pb-0 px-3">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-12">
+                      <h5 class="card-title">
+                        {{ posts.title }}   <small> <span class="badge rounded-pill text-bg-success " role="alert" >  ouvert</span></small>
+                      </h5>
+                    </div>
+                    <div class="col">
+                      <h6 class="card-subtitle mb-2">
+                        <p class="text-muted">{{ posts.description }}</p>
+                        <p class="card-text text-muted">Crée il y a {{ posts.created_at | timeAgo }}  </p>
+                      </h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+            </span>
+            </div>
+          </span>
 
 
-<!-- Backdrop -->
-<div *ngIf="show" class="modal-backdrop fade show"></div>
-<!-- add -->
-<div *ngIf="showedit" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
-    <div class="modal-dialog modal-m"><div class="modal-content">
-<app-post-edit [postId]="selectedId" [posetObject]="selectedObject" (closeModal)="onCloseModal()"></app-post-edit>
-  </div>
-  </div>
-  <!-- delete -->
-  <div *ngIf="showedelete" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
-    <div class="modal-dialog modal-m"><div class="modal-content">
-     <app-post-delete (closeModal)="onCloseModal()"></app-post-delete>
+
+          <span *ngIf="dataStatus === 'waiting'">
+            <div  class="container mb-3"  *ngFor="let posts of post">
+              <span *ngIf="posts.status ==='waiting'">
+                <a [routerLink]="['../client-offer', posts.id]">
+              <div class="card pb-0 px-3">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-12">
+                      <h5 class="card-title">
+                        {{ posts.title }} <small> <span class="badge rounded-pill text-bg-warning " role="alert" > en attente</span></small>
+                      </h5>
+                    </div>
+                    <div class="col">
+                      <h6 class="card-subtitle mb-2">
+                        <p class="text-muted">{{ posts.description }}</p>
+                        <p class="card-text text-muted">Crée il y a {{ posts.created_at | timeAgo }}</p>
+                      </h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a> 
+            </span>
+            </div>
+          </span>
+
+
+
+
+          <span *ngIf="dataStatus === 'closed'">
+            <div  class="container mb-3"  *ngFor="let posts of post">
+              <span *ngIf="posts.status ==='closed'">
+              <div class="card pb-0 px-3">
+                <a [routerLink]="['../client-offer', posts.id]">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-12">
+                      <h5 class="card-title">
+                        {{ posts.title }} <small> <span class="badge rounded-pill text-bg-secondary " role="alert" > terminé</span></small>
+                      </h5>
+                    </div>
+                    <div class="col">
+                      <h6 class="card-subtitle mb-2">
+                        <p class="text-muted">{{ posts.description }}</p>
+                        <p class="card-text text-muted">Crée il y a {{ posts.created_at | timeAgo }}</p>
+                      </h6>
+                    </div>
+                  </div>
+                </div>
+              </a>
+              </div>
+            </span>
+            </div>
+          </span>
+
+
+        </ng-template>
+        <!-- end -->
+      </ng-template>
     </div>
-  </div>  
-
-
-
-
-
-
-  
-  
-  
+  </div>
+</div>
