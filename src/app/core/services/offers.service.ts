@@ -64,6 +64,18 @@ export class OffersService {
     return  this.freelancer;
   }
 
+  getFreelancerDetailsByPostIdDeclined(postId: number): Observable<any>{
+    this.freelancer=this.http.get<any>(`${this.url}/offer/freelancerDeclined/${postId}`);
+    return  this.freelancer;
+  }
+
+  getOffersByPostId(postId: number): Observable<Offer> {
+    this.offer=this.http.get(`${this.url}/offers/post/${postId}`);
+    return this.offer;
+  }
+
+
+
 
 
 

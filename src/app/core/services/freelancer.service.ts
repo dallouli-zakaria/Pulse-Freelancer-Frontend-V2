@@ -10,6 +10,7 @@ import { Freelancer } from '../models/Freelancer';
 export class FreelancerService {
   private freelancerData!: Freelancer;
   freelancer:any
+  score!:any;
   url=Constant.API_ENDPOINT
   conuntUrl:string='freelancerCount'
   private readonly subjectBe:BehaviorSubject<Freelancer[]>=new BehaviorSubject<Freelancer[]>([])
@@ -105,6 +106,14 @@ export class FreelancerService {
       console.error('An error occurred:', error);
       throw error; // Rethrow error to be handled by the caller
     }
+
+    
+   public getScore(freelancerId: number,postId:number): Observable<any>{
+      this.score=this.http.get<any>(`${this.url}/${Constant.FREELANCERS}/${freelancerId}/posts/${postId}/skills-match-score`);
+      return this.score;
+
+    }
+
 
 
 

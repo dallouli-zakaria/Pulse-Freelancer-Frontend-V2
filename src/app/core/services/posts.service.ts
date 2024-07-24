@@ -3,13 +3,14 @@ import { Constant } from '../Constant';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, shareReplay } from 'rxjs';
 import { Post } from '../models/post';
+import { Client } from '../models/Client';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostsService {
 
-
+  
   post:any
   url=Constant.API_ENDPOINT
   public subject:BehaviorSubject<Post[]>=new BehaviorSubject<Post[]>([])
@@ -85,9 +86,14 @@ export class PostsService {
       return this.http.get<any>(url);
     }
 
-    getClientDetailsByPostId(postId: number): Observable<any> {
-      const url = `${this.url}/posts/${postId}/client`;
-      return this.http.get<any>(url);
+    getClientDetailsByPostId(postId: number): Observable<Client> {
+      return this.http.get<Client>(`${this.url}/posts/${postId}/client`);
+    }
+
+
+    checkIfOfferExists(postId: number): Observable<boolean> {
+      const url = `${this.url}/posts/${postId}/check-offer`;
+      return this.http.get<boolean>(url);
     }
 
 
