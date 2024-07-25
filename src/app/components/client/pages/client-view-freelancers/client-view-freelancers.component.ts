@@ -39,6 +39,15 @@ this.freelancerList=this.freelancerService.getdata
       
     })
   }
+
+
+  getFirstName(fullName: string | undefined): string {
+    if (!fullName) {
+      return '';
+    }
+    const nameParts = fullName.split(' ');
+    return nameParts.length > 1 ? nameParts[1] : fullName;
+  }
   
 
 

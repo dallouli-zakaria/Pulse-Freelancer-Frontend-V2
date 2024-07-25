@@ -154,7 +154,7 @@
                     <div class="col-lg-5">
                       <div class="candidate-list-content mt-3 mt-lg-0">
                         <h5 class="fs-19 mb-0">
-                          <a class="primary-link" [routerLink]="['../view-freelancerprofile', freelancer.id]">{{freelancer.user.name}}</a>
+                          <a class="primary-link" [routerLink]="['../view-freelancerprofile', freelancer.id]">{{getFirstName(freelancer.user.name)}}</a>
                         </h5>
                         <p class="text-muted mb-2">{{freelancer.title}}</p>
                         <ul class="list-inline mb-0 text-muted">
