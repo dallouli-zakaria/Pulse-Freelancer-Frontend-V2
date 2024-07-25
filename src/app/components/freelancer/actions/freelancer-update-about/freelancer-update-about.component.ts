@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output, OnInit, OnChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Freelancer } from '../../../../core/models/Freelancer';
 import { FreelancerService } from '../../../../core/services/freelancer.service';
@@ -8,56 +8,60 @@ import { FreelancerService } from '../../../../core/services/freelancer.service'
   templateUrl: './freelancer-update-about.component.html',
   styleUrl: './freelancer-update-about.component.css'
 })
-export class FreelancerUpdateAboutComponent {
-  @Input() freelancerID!:number
-  @Input() freelancerData?:Freelancer;
+export class FreelancerUpdateAboutComponent implements OnInit, OnChanges {
+  @Input() freelancerID!: number;
+  @Input() freelancerData?: Freelancer;
   
-   freelancer:Freelancer[]=[]
-   form!:FormGroup
-   errorhandling:any
-   private fb:FormBuilder=inject(FormBuilder)
-   private frelancerservices:FreelancerService=inject(FreelancerService)
+  freelancer: Freelancer[] = [];
+  form!: FormGroup;
+  errorhandling: any;
+  characterCount: number = 0;
+  
+  private fb: FormBuilder = inject(FormBuilder);
+  private freelancerService: FreelancerService = inject(FreelancerService);
 
+  ngOnInit(): void {
+    this.initForm();
+  }
 
- ngOnInit(): void {
-  this.form=this.fb.group({
-    summary: [this.freelancerData?.summary, Validators.required],
+  ngOnChanges(): void {
+    this.initForm();
+  }
 
+  private initForm(): void {
+    this.form = this.fb.group({
+      summary: [this.freelancerData?.summary, [Validators.required, Validators.minLength(30)]],
+    });
+    this.onSummaryInput();
+  }
 
-  })
-}
-
-updated(){
-  if(this.freelancerID!==null){
-    console.log(this.freelancerID);
-    
-     this.frelancerservices.update(this.freelancerID,this.form.value).subscribe({
-    next:(data:any)=>{
-      console.log(data);
-      this.close();
-       this.frelancerservices.index()},
-       error:(error)=>{ if ( error.error.errors) {
-        this.errorhandling = Object.values(error.error.errors).flat();
-      } else {
-        this.errorhandling = [error.message || 'An error occurred'];
-      }
-       
-         }, 
-       
-  })}else{
-    console.log('null id of freelancer');
-    
+  onSummaryInput(): void {
+    const summaryControl = this.form.get('summary');
+    if (summaryControl) {
+      this.characterCount = summaryControl.value?.length || 0;
     }
-  } 
+  }
 
-ngOnChanges(): void {
-  this.form=this.fb.group({
-    summary: [this.freelancerData?.summary, Validators.required],
-
-  })
-}
-
-
+  updated(): void {
+    if (this.form.valid && this.freelancerID !== null) {
+      this.freelancerService.update(this.freelancerID, this.form.value).subscribe({
+        next: (data: any) => {
+          console.log(data);
+          this.close();
+          this.freelancerService.index();
+        },
+        error: (error) => {
+          if (error.error.errors) {
+            this.errorhandling = Object.values(error.error.errors).flat();
+          } else {
+            this.errorhandling = [error.message || 'An error occurred'];
+          }
+        },
+      });
+    } else {
+      this.errorhandling = 'Please enter at least 30 characters.';
+    }
+  }
 
   @Output() closeModal = new EventEmitter<void>();
 

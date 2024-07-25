@@ -27,7 +27,6 @@ export class FreelancerEditComponent implements OnInit,OnChanges {
     this.form=this.fb.group({
       name: [this.freelancerData?.user.name, Validators.required],
       email: [this.freelancerData?.user?.email, [Validators.required, Validators.email]],
-      password: [this.freelancerData?.user.password],
       title: [this.freelancerData?.title, Validators.required],
       dateOfBirth: [this.freelancerData?.dateOfBirth, Validators.required],
       city: [this.freelancerData?.city, Validators.required],
@@ -64,7 +63,6 @@ export class FreelancerEditComponent implements OnInit,OnChanges {
     this.form=this.fb.group({
       name: [this.freelancerData?.user?.name, Validators.required],
       email: [this.freelancerData?.user?.email, [Validators.required, Validators.email]],
-      password: [this.freelancerData?.user.password],
       title: [this.freelancerData?.title, Validators.required],
       dateOfBirth: [this.freelancerData?.dateOfBirth, Validators.required],
       city: [this.freelancerData?.city, Validators.required],

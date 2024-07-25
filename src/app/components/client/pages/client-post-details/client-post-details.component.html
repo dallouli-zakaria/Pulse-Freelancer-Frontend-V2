@@ -93,7 +93,7 @@
         <div class="row">
           <h5 class="col-lg-4">Compétences requis :</h5>
           <h5 class="col-lg-8 text-muted" >
-            <span *ngFor="let skill of post.skills" class="badge rounded-pill text-bg-secondary" role="alert">
+            <span *ngFor="let skill of post.skills" class="badge bg-soft-secondary fs-14 mt-1">
               {{skill.title}}   
             </span> 
            
@@ -149,10 +149,9 @@
                 <td>{{item.title}}</td>
                 <td>{{item.user.email}}</td>
                 <td>{{item.availability}}</td>
-                <td>{{item.TJM}} Mad / J 
-                  </td>
-                  <td class="badge rounded-pill text-bg-warning text-muted" role="alert">En attente</td>
-                  <td >100</td>
+                <td>{{item.TJM}} Mad / J </td>
+                  <td class="badge rounded-pill text-bg-warning text-muted " role="alert">En attente</td>
+                  <td><app-circular-progressbar *ngIf="item && post" [itemId]="item.id" [postId2]="post.id"></app-circular-progressbar></td>
                 <td>
                   <div class="btn-group dropstart">
                     <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -172,6 +171,7 @@
               </tr>
             </tbody>
           </table>
+          <hr>
         </div>
 
         <h5 *ngIf="roles == 'superadmin_role' || (roles == 'Client' && status=='waiting') " class="mb-3 mt-4">
@@ -189,7 +189,7 @@
                 <th>Tjm</th>
                 <th>Offer status</th>
                 <th>Score</th>
-                <th *ngIf="post?.status =='open'">Action</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -202,7 +202,7 @@
                 <td>{{item.TJM}} Mad / J 
                   </td>
                   <td class="badge rounded-pill text-bg-success text-muted" role="alert" >Validé</td>
-                  <td>100</td>
+                  <td><app-circular-progressbar *ngIf="item && post" [itemId]="item.id" [postId2]="post.id"></app-circular-progressbar></td>
                 <td >
                   <div class="btn-group dropstart">
                     <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -244,7 +244,7 @@
                 <th>Tjm</th>
                 <th>Offer status</th>
                 <th>Score</th>
-                <th *ngIf="post?.status =='open'">Action</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -257,7 +257,7 @@
                 <td>{{item.TJM}} Mad / J 
                   </td>
                   <td class="badge rounded-pill text-bg-danger text-muted" role="alert" >Refusé</td>
-                  <td>100</td>
+                  <td><app-circular-progressbar *ngIf="item && post" [itemId]="item.id" [postId2]="post.id"></app-circular-progressbar></td>
                 <td >
                   <div class="btn-group dropstart">
                     <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">

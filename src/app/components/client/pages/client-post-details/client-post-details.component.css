@@ -105,5 +105,12 @@ a:hover{
 }
 
 
+.bg-soft-secondary {
+  background-color: rgba(116, 120, 141, 0.15) !important;
+  color: #74788d !important;
+  margin-left: 2px;
+}
+
+
 
   

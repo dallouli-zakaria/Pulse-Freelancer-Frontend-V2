@@ -4,6 +4,7 @@ import { Freelancer } from '../../../../core/models/Freelancer';
 import { AuthService } from '../../../../core/services/auth.service';
 import { FreelancerService } from '../../../../core/services/freelancer.service';
 import { Experience } from '../../../../core/models/experience';
+import { SkillService } from '../../../../core/services/skill.service';
 
 @Component({
   selector: 'app-freelancer-sideprofile',
@@ -12,16 +13,18 @@ import { Experience } from '../../../../core/models/experience';
 })
 export class FreelancerSideprofileComponent implements OnInit{
   freelancername!:string;
-  experienceData:any;
+  experienceData: Experience[] = [];
   freelancerId!: number;
   freelancerdata?:Freelancer;
+  freelancerSkillsData: any[] = [];
   displayEdit = "none";
   isLoading = true;
 
   constructor(
     private freelancerService: FreelancerService,
     private authService: AuthService,
-    private experienceService:ExperienceService
+    private experienceService:ExperienceService,
+    private skillService:SkillService
    
   ) {
     this.getFreelancer();
@@ -49,6 +52,18 @@ export class FreelancerSideprofileComponent implements OnInit{
         this.isLoading = false;
       }
     });
+
+
+    this.skillService.showbyfreelancerid(this.freelancerId).subscribe({
+      next: (data: any) => {
+        this.freelancerSkillsData = data;
+        console.log(data);
+      },
+      error: (error: any) => {
+        console.log(error);
+      }
+    });
+
   }
 
 
@@ -107,8 +122,8 @@ selectedID!:any
         this.freelancerdata?.adress !== null &&
         this.freelancerdata?.phone !== null &&
         this.freelancerdata?.portfolio_Url !== null &&
-        this.experienceData !== null
-
+        this.experienceData.length > 0 &&
+        this.freelancerSkillsData.length > 0
       );
     }
 }

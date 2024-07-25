@@ -115,7 +115,7 @@ import { PackTableComponent } from './components/admin/table/pack-table/pack-tab
 import { PackAddComponent } from './components/admin/buttons/add/pack-add/pack-add.component';
 import { PackDeleteComponent } from './components/admin/buttons/delete/pack-delete/pack-delete.component';
 import { PackEditComponent } from './components/admin/buttons/edit/pack-edit/pack-edit.component';
-import { CircularProgressBarComponent } from './components/commun/client-freelancer-layouts/circular-progress-bar/circular-progress-bar.component';
+import { CircularProgressbarComponent } from './components/commun/client-freelancer-layouts/circular-progressbar/circular-progressbar.component';
 ;
 
 @NgModule({
@@ -230,7 +230,7 @@ import { CircularProgressBarComponent } from './components/commun/client-freelan
     PackAddComponent,
     PackDeleteComponent,
     PackEditComponent,
-    CircularProgressBarComponent
+    CircularProgressbarComponent
     
   ],
   imports: [
@@ -241,7 +241,7 @@ import { CircularProgressBarComponent } from './components/commun/client-freelan
       ReactiveFormsModule,
       CommonModule,
   ],
-  providers: [provideHttpClient(),AuthService,CircularProgressBarComponent],
+  providers: [provideHttpClient(),AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

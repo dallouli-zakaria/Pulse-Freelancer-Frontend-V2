@@ -17,4 +17,14 @@ export class FreelanceSkillsService {
     this.Skill=this.http.post(`${this.url}/freelancer_skills`,data);
     return this.Skill
    }
+
+
+   delete(id:any):Observable<SkillWithProgress>{
+    this.Skill=this.http.delete(`${this.url}/freelancer_skills/${id}`);
+    return this.Skill
+   }
+
+   deleteSkillbyfreelancerId(freelancerId: number, skillId: number): Observable<any> {
+    return this.http.delete(`${this.url}/freelancer/${freelancerId}/skill/${skillId}`);
+  }
 }

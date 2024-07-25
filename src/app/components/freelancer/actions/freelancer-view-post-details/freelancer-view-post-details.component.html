@@ -54,14 +54,14 @@
       </div>
       <hr>
       <div class="row">
-        <h5 class="col-lg-4">Compétences requis :</h5>
-        <h5 class="col-lg-8 text-muted" >
-          <span *ngFor="let skill of postdata?.skills" class="badge rounded-pill text-bg-secondary" role="alert">
-            {{skill.title}}   
-          </span> 
-         
+        <h5 class="col-lg-4">Compétences requises :</h5>
+        <h5 class="col-lg-8 text-muted">
+          <span *ngFor="let skill of postdata?.skills" class="badge bg-soft-secondary fs-14 mt-1 skill-badge">
+            {{skill.title}}
+          </span>
         </h5>
       </div>
+      
       <hr>
       <div class="row">
         <h5 class="col-lg-4">Description de l'offre :</h5>

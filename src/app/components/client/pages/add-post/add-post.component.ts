@@ -67,7 +67,7 @@ export class AddPostComponent {
       this.postsservice.store(this.form.value).subscribe({
       next:   (res) => {
           console.log(res);
-          this.router.navigate(['../pulse/client-profile/client-offers']); 
+          this.router.navigate(['../pulse/client-profile/client-offers-open']); 
         },
       error : (err) => 
            console.log(err)

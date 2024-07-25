@@ -12,7 +12,8 @@ export class FreelancerUpdatePersonalInfosComponent {
 
   @Input() freelancerID!:number
   @Input() freelancerData?:Freelancer;
-  
+   moroccanCities = ['Casablanca', 'Rabat', 'Marrakech', 'Fès', 'Tanger', 'Agadir', 'Essaouira', 'Meknès', 'Autre'];
+   availability=['disponible','sous préavis']
    freelancer:Freelancer[]=[]
    form!:FormGroup
    errorhandling:any
