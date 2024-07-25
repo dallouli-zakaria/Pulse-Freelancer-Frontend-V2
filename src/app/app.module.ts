@@ -115,6 +115,7 @@ import { PackTableComponent } from './components/admin/table/pack-table/pack-tab
 import { PackAddComponent } from './components/admin/buttons/add/pack-add/pack-add.component';
 import { PackDeleteComponent } from './components/admin/buttons/delete/pack-delete/pack-delete.component';
 import { PackEditComponent } from './components/admin/buttons/edit/pack-edit/pack-edit.component';
+import { EmailVerifyComponent } from './components/commun/auth/email-verify/email-verify.component';
 ;
 
 @NgModule({
@@ -228,7 +229,8 @@ import { PackEditComponent } from './components/admin/buttons/edit/pack-edit/pac
     PackTableComponent,
     PackAddComponent,
     PackDeleteComponent,
-    PackEditComponent
+    PackEditComponent,
+    EmailVerifyComponent
     
   ],
   imports: [

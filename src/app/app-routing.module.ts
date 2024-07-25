@@ -37,6 +37,7 @@ import { FreelancerProfileComponent } from './components/freelancer/pages/freela
 import { FreelancerViewPostsComponent } from './components/freelancer/pages/freelancer-view-posts/freelancer-view-posts.component';
 import { PackComponent } from './components/admin/pages/pack/pack.component';
 import { ConnectedLandingPageComponent } from './components/commun/connected-landing-page/connected-landing-page.component';
+import { EmailVerifyComponent } from './components/commun/auth/email-verify/email-verify.component';
 
 
 const routes: Routes = [
@@ -127,6 +128,7 @@ const routes: Routes = [
 
 
   { path: 'register', component: AuthentificationComponent },
+  { path: 'email',component:EmailVerifyComponent},
   { path: 'login', component: LoginComponent },
   { path: 'page-notfound', component: Error404Component },
   { path: 'server-error', component: Error500Component },

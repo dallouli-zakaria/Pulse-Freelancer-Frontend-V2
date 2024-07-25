@@ -69,7 +69,7 @@ export class AuthentificationComponent {
     const navigationExtras: NavigationExtras = {
       queryParams: { message }
     };
-    this.router.navigate(['/login'], navigationExtras);
+    this.router.navigate(['/email'], navigationExtras);
   }
 
   private handleErrorResponse(error: any) {
