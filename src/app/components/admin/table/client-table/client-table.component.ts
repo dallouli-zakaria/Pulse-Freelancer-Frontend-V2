@@ -29,7 +29,7 @@ export class ClientTableComponent implements OnInit {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class. 
 
-   this.listClient=this.clientSe.getData;
+   this.loadClient(this.currentPage);
    
   }
     selecteID!:number;
@@ -41,7 +41,7 @@ export class ClientTableComponent implements OnInit {
        this.selecteID=id
     }
 
-    loadFreelancers(page: number): void {
+    loadClient(page: number): void {
       this.isLoading = true;
       this.clientSe.fetchPaginatedClient(page).subscribe({
         next: (response: PaginatedResponse<Client>) => {
@@ -60,7 +60,7 @@ export class ClientTableComponent implements OnInit {
     }
     onPageChange(page: number): void {
       if (page >= 1 && page <= this.totalPages) {
-        this.loadFreelancers(page);
+        this.loadClient(page);
       }
     }
 
