@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Contract } from '../../../../core/models/Contract';
 import { ContractService } from '../../../../core/services/contract.service';
+import { PaginatedResponse } from '../../../../core/models/PaginatedResponse';
 
 @Component({
   selector: 'app-contract-table',
@@ -9,11 +10,16 @@ import { ContractService } from '../../../../core/services/contract.service';
 })
 export class ContractTableComponent {
    contract:Contract[]=[];
-
+   filteredCleint: Contract[] = [];
+   currentPage = 1;
+   totalPages = 5;
+   isLoading = true;
+   searchTerm: string = '';
+   
    selectedIdContract!:number;
     selectedDataContarct:any
   constructor(private contractServices:ContractService){
-    this.index();
+
   }
 
   //manage page edite delete and details for assingnig 
@@ -47,15 +53,27 @@ export class ContractTableComponent {
   //end manage pages
   
 
-  index(){
-    this.contractServices.index()
-    this.contractServices.contractData.subscribe({
-      next:(data:any)=>{this.contract=data;
-        
-        },
-      error: (error)=>console.log(error),
-      complete:()=>console.log('end desplay data')
-    })
+  loadFreelancers(page: number): void {
+    this.isLoading = true;
+    this.contractServices.fetchPaginatedContracts(page).subscribe({
+      next: (response: PaginatedResponse<Contract>) => {
+        this.contract = response.data;
+        this.filteredCleint = this.contract; // Initialize filtered list
+        this.totalPages = response.last_page;
+        this.currentPage = response.current_page;
+        this.isLoading = false;
+      },
+      error: (error: any) => {
+        console.error(error);
+        this.isLoading = false;
+      },
+      complete: () => console.log('End operation get data')
+    });
+  }
+  onPageChange(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.loadFreelancers(page);
+    }
   }
 
 }

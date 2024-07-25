@@ -116,6 +116,8 @@ import { PackAddComponent } from './components/admin/buttons/add/pack-add/pack-a
 import { PackDeleteComponent } from './components/admin/buttons/delete/pack-delete/pack-delete.component';
 import { PackEditComponent } from './components/admin/buttons/edit/pack-edit/pack-edit.component';
 import { EmailVerifyComponent } from './components/commun/auth/email-verify/email-verify.component';
+import { CircularProgressBarComponent } from './components/commun/client-freelancer-layouts/circular-progress-bar/circular-progress-bar.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 ;
 
 @NgModule({
@@ -230,7 +232,8 @@ import { EmailVerifyComponent } from './components/commun/auth/email-verify/emai
     PackAddComponent,
     PackDeleteComponent,
     PackEditComponent,
-    EmailVerifyComponent
+    EmailVerifyComponent,
+    CircularProgressBarComponent
     
   ],
   imports: [
@@ -239,9 +242,9 @@ import { EmailVerifyComponent } from './components/commun/auth/email-verify/emai
       AppRoutingModule,
       NgbModule,
       ReactiveFormsModule,
-      CommonModule,
+      CommonModule,NgxPaginationModule,FormsModule 
   ],
-  providers: [provideHttpClient(),AuthService],
+  providers: [provideHttpClient(),AuthService,CircularProgressBarComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Constant } from '../Constant';
 import { Client } from '../models/Client';
 import { BehaviorSubject, Observable, Subject, shareReplay } from 'rxjs';
+import { PaginatedResponse } from '../models/PaginatedResponse';
 
 
 @Injectable({
@@ -33,6 +34,12 @@ url=Constant.API_ENDPOINT
   get getData(): Observable<Client[]> {
     return this.dataSubject.asObservable(); 
   }
+
+  fetchPaginatedClient(page: number = 1): Observable<PaginatedResponse<Client>> {
+    const params = new HttpParams().set('page', page.toString());
+    return this.http.get<PaginatedResponse<Client>>(`${this.url}/clientPagination`, { params });
+  }
+
 
   public update(id:any,data:Partial<Client>): Observable<Client> {
    this.client=this.http.put<Client>(`${this.url}/${Constant.CLIENTS}/${id}`,data)

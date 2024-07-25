@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ClientService } from '../../../../core/services/client.service';
 import { Client } from '../../../../core/models/Client';
 import { Observable } from 'rxjs';
+import { PaginatedResponse } from '../../../../core/models/PaginatedResponse';
 
 @Component({
   selector: 'app-client-table',
@@ -11,6 +12,11 @@ import { Observable } from 'rxjs';
 export class ClientTableComponent implements OnInit {
 
   clients: Client[] = [];
+  filteredCleint: Client[] = [];
+  currentPage = 1;
+  totalPages = 5;
+  isLoading = true;
+  searchTerm: string = '';
 
  
 
@@ -22,7 +28,7 @@ export class ClientTableComponent implements OnInit {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class. 
-   this.index();
+
    this.listClient=this.clientSe.getData;
    
   }
@@ -35,19 +41,28 @@ export class ClientTableComponent implements OnInit {
        this.selecteID=id
     }
 
-    index(){
-      this.clientSe.index()
-      this.clientSe.getData.subscribe({
-      next:(data)=>{
-        this.clients=data; 
-      },
-      error:(error:any)=>{
-        console.log(error);  
-      }
-      })
-
+    loadFreelancers(page: number): void {
+      this.isLoading = true;
+      this.clientSe.fetchPaginatedClient(page).subscribe({
+        next: (response: PaginatedResponse<Client>) => {
+          this.clients = response.data;
+          this.filteredCleint = this.clients; // Initialize filtered list
+          this.totalPages = response.last_page;
+          this.currentPage = response.current_page;
+          this.isLoading = false;
+        },
+        error: (error: any) => {
+          console.error(error);
+          this.isLoading = false;
+        },
+        complete: () => console.log('End operation get data')
+      });
     }
- 
+    onPageChange(page: number): void {
+      if (page >= 1 && page <= this.totalPages) {
+        this.loadFreelancers(page);
+      }
+    }
 
     
   //manage page edite delete and details for assingnig 

@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Constant } from '../Constant';
 import { BehaviorSubject, catchError, Observable, Observer, shareReplay } from 'rxjs';
 import { Freelancer } from '../models/Freelancer';
+import { PaginatedResponse } from '../models/PaginatedResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { Freelancer } from '../models/Freelancer';
 export class FreelancerService {
   private freelancerData!: Freelancer;
   freelancer:any
+  score!:any;
   url=Constant.API_ENDPOINT
   conuntUrl:string='freelancerCount'
   private readonly subjectBe:BehaviorSubject<Freelancer[]>=new BehaviorSubject<Freelancer[]>([])
@@ -39,6 +41,10 @@ export class FreelancerService {
    return this.subjectBe.asObservable();
    }
 
+   fetchPaginatedFreelancers(page: number = 1): Observable<PaginatedResponse<Freelancer>> {
+    const params = new HttpParams().set('page', page.toString());
+    return this.http.get<PaginatedResponse<Freelancer>>(`${this.url}/freelancerPagination`, { params });
+  }
 
 
 
@@ -105,6 +111,16 @@ export class FreelancerService {
       console.error('An error occurred:', error);
       throw error; // Rethrow error to be handled by the caller
     }
+
+    
+   public getScore(freelancerId: number,postId:number): Observable<any>{
+      this.score=this.http.get<any>(`${this.url}/${Constant.FREELANCERS}/${freelancerId}/posts/${postId}/skills-match-score`);
+      return this.score;
+
+    }
+
+
+
 
 
 }

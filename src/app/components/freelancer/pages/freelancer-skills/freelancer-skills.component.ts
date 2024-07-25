@@ -47,19 +47,9 @@ export class FreelancerSkillsComponent {
 
 
 
-
-
-
-
   displayAdd = "none";
 
-
-
-  
-
  
-
-
 
    
 }

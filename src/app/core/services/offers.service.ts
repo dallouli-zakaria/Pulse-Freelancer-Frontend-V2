@@ -10,6 +10,8 @@ import { Offer } from '../models/Offer';
 export class OffersService {
  offer:any
  url=Constant.API_ENDPOINT
+ freelancer!:any;
+ 
   constructor(private http:HttpClient) { }
   
   public count(){
@@ -27,7 +29,7 @@ export class OffersService {
   }
 
   public update(id: any, value: any):Observable<Offer>{
-    this.offer=this.http.put(`${this.url}/${Constant.OFFERS}`,id);
+    this.offer=this.http.put(`${this.url}/${Constant.OFFERS}/${id}`,value);
     return this.offer
   }
    
@@ -45,6 +47,41 @@ export class OffersService {
     this.offer=this.http.get(`${this.url}/${Constant.OFFERS}/freelancer/${id}`);
     return this.offer;
   }
+
+  getOffersByPostAndFreelancer(postId: number, freelancerId: number): Observable<Offer>{
+    this.offer=this.http.get<Offer>(`${this.url}/offers/${postId}/${freelancerId}`);
+    return  this.offer;
+  }
+
+
+  getFreelancerDetailsByPostIdTrue(postId: number): Observable<any>{
+    this.freelancer=this.http.get<any>(`${this.url}/offer/freelancerTrue/${postId}`);
+    return  this.freelancer;
+  }
+
+  getFreelancerDetailsByPostIdFalse(postId: number): Observable<any>{
+    this.freelancer=this.http.get<any>(`${this.url}/offer/freelancerFalse/${postId}`);
+    return  this.freelancer;
+  }
+
+  getFreelancerDetailsByPostIdDeclined(postId: number): Observable<any>{
+    this.freelancer=this.http.get<any>(`${this.url}/offer/freelancerDeclined/${postId}`);
+    return  this.freelancer;
+  }
+
+  getOffersByPostId(postId: number): Observable<Offer> {
+    this.offer=this.http.get(`${this.url}/offers/post/${postId}`);
+    return this.offer;
+  }
+
+
+
+
+
+
+
+
+
 
   
 }

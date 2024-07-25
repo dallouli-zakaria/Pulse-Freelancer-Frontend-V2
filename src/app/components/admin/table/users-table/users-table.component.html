@@ -10,7 +10,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of user">
+      <tr *ngFor="let item of users">
         <th scope="row">{{item.id}}</th>
         <td> {{item.name }} </td>
         <td>{{item.email}}</td>
@@ -37,7 +37,25 @@
       </nav> -->
     </tbody>
 </table>    
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item" [ngClass]="{'disabled': currentPage === 1}">
+      <a class="page-link" (click)="onPageChange(currentPage - 1)" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
 
+    <li *ngFor="let page of [].constructor(totalPages); let i = index" class="page-item" [ngClass]="{'active': i + 1 === currentPage}">
+      <a class="page-link" (click)="onPageChange(i + 1)">{{ i + 1 }}</a>
+    </li>
+
+    <li class="page-item" [ngClass]="{'disabled': currentPage === totalPages}">
+      <a class="page-link" (click)="onPageChange(currentPage + 1)" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
 <div *ngIf="show" class="modal-backdrop fade show"></div>
   <!-- edit -->
   <div *ngIf="showedit" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">

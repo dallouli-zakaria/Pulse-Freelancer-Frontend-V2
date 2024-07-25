@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Post } from '../../../../core/models/post';
 import { PostsService } from '../../../../core/services/posts.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-table',
@@ -11,12 +12,15 @@ import { Observable } from 'rxjs';
 export class PostTableComponent {
  
   post:Post[]=[]
-  constructor(private postService:PostsService){}
+  constructor(private postService:PostsService,private router: Router){}
   postobservable!:Observable<Post[]>
   selectedId!:number
-  selectedObject:any
+  selectedObject:any;
+  dataStatus!: string;
+  isLoading = true;
   ngOnInit(): void {
-    this.index()
+    this.index();
+    this.getdata();
    this.postobservable=this.postService.postData
     
   }
@@ -28,11 +32,69 @@ export class PostTableComponent {
   index(){
     this.postService.index();
     this.postService.postData.subscribe({
-      next:(data)=>{this.post=data},
+      next:(data)=>{
+        this.post=data;
+        this.isLoading = false;
+      
+      },
       error:(error)=>console.log(error),
       complete:()=>console.log('end operation post Data')    
     })
   }
+
+
+  getdata() {
+    const currentUrl = this.router.url;
+    console.log('Current URL:', currentUrl);
+    if (currentUrl === '/admin/post-waiting') {
+      this.dataStatus = 'waiting';
+    } else if(currentUrl === '/admin/post-closed'){
+      this.dataStatus = 'closed';
+    } else if(currentUrl === '/admin/post-open'){
+      this.dataStatus = 'open';
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  
 
   // sendid(id:any){
@@ -70,5 +132,7 @@ this.showedelete = false;
 }
 //end manage pages
 
-  }
+
+
+}
   

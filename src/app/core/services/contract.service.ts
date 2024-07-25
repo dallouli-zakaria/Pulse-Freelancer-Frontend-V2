@@ -1,10 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Constant } from '../Constant';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Contract } from '../models/Contract';
 import { controllers } from 'chart.js';
 import { Freelancer } from '../models/Freelancer';
+import { PaginatedResponse } from '../models/PaginatedResponse';
 
 
 @Injectable({
@@ -36,6 +37,12 @@ export class ContractService {
   get contractData():Observable<Contract[]>{
     return this.subject.asObservable();
   }
+
+  fetchPaginatedContracts(page: number = 1): Observable<PaginatedResponse<Contract>> {
+    const params = new HttpParams().set('page', page.toString());
+    return this.http.get<PaginatedResponse<Contract>>(`${this.url}/freelancerPagination`, { params });
+  }
+
   public store(data:any):Observable<Contract>{
   this.contract=this.http.post(`${this.url}/${Constant.CONTARCTS}`,data);
   return this.contract

@@ -1,5 +1,5 @@
 import { Permission } from './../../../../core/models/Permission';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from '../../../../core/services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { FreelancerService } from '../../../../core/services/freelancer.service';
@@ -13,6 +13,8 @@ import { Experience } from '../../../../core/models/experience';
   styleUrl: './client-view-freelancer-details.component.css'
 })
 export class ClientViewFreelancerDetailsComponent implements OnInit{
+
+  @Input() freelancerid: number | null = null;
   role!:string;
   roles!:string;
   isAuthenticated: boolean = false;
@@ -49,8 +51,13 @@ export class ClientViewFreelancerDetailsComponent implements OnInit{
       console.log("error");
     }
   }
-  }
 
+  if (this.freelancerid !== null) {
+    this.fetchFreelancerDetails(this.freelancerid);
+    console.log(this.freelancerid);
+    
+  }
+  }
 
   getfreelancerdetails(freelancerId:number){
 
@@ -58,6 +65,23 @@ export class ClientViewFreelancerDetailsComponent implements OnInit{
       this.freelancer=res;
     })
 
+
+  }
+
+  fetchFreelancerDetails(id: number) {
+    this.freelancerService.show(id).subscribe((res)=>{
+      this.freelancer=res;
+    });
+    this.experienceService.showByFreelancer(id).subscribe({next:(res)=>{
+      this.experienceData=res;
+      console.log(res);
+
+    
+    },
+      error: (error) => console.error('Error fetching experiences:', error)
+      
+      
+    })
   }
 
   getfreelancerexperience(freelancerId:number){

@@ -21,7 +21,7 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-12">
-                    <h4 class="card-title"><a>Vous n'avez aucun offre!</a></h4>
+                    <h5 class="card-title"><a>Vous n'avez aucun offre!</a></h5>
                   </div>
                 </div>
               </div>
@@ -34,23 +34,25 @@
           <span *ngIf="dataStatus === 'open'">
             <div  class="container mb-3"  *ngFor="let posts of post">
               <span *ngIf="posts.status ==='open'">
+                <a [routerLink]="['../../client-offer', posts.id]" >
               <div class="card pb-0 px-3">
                 <div class="card-body">
                   <div class="row">
                     <div class="col-12">
-                      <h4 class="card-title">
-                        <a [routerLink]="['../../client-offer', posts.id]" >{{ posts.title }} </a>
-                      </h4>
+                      <h5 class="card-title">
+                       {{ posts.title }}   <small> <span class="badge rounded-pill text-bg-success " role="alert" >  ouvert</span></small>
+                      </h5>
                     </div>
                     <div class="col">
                       <h6 class="card-subtitle mb-2">
                         <p class="text-muted">{{ posts.description }}</p>
-                        <p class="card-text text-muted">Crée il y a {{ posts.created_at | timeAgo }}</p>
+                        <p class="card-text text-muted">Crée il y a {{ posts.created_at | timeAgo }}  </p>
                       </h6>
                     </div>
                   </div>
                 </div>
               </div>
+            </a>
             </span>
             </div>
           </span>
@@ -60,13 +62,14 @@
           <span *ngIf="dataStatus === 'waiting'">
             <div  class="container mb-3"  *ngFor="let posts of post">
               <span *ngIf="posts.status ==='waiting'">
+                <a [routerLink]="['../../client-offer', posts.id]">
               <div class="card pb-0 px-3">
                 <div class="card-body">
                   <div class="row">
                     <div class="col-12">
-                      <h4 class="card-title">
-                        <a [routerLink]="['../../client-offer', posts.id]">{{ posts.title }}</a>
-                      </h4>
+                      <h5 class="card-title">
+                      {{ posts.title }} <small> <span class="badge rounded-pill text-bg-warning " role="alert" > en attente</span></small>
+                      </h5>
                     </div>
                     <div class="col">
                       <h6 class="card-subtitle mb-2">
@@ -77,6 +80,7 @@
                   </div>
                 </div>
               </div>
+            </a> 
             </span>
             </div>
           </span>
@@ -87,13 +91,14 @@
           <span *ngIf="dataStatus === 'closed'">
             <div  class="container mb-3"  *ngFor="let posts of post">
               <span *ngIf="posts.status ==='closed'">
+                <a [routerLink]="['../../client-offer', posts.id]">
               <div class="card pb-0 px-3">
                 <div class="card-body">
                   <div class="row">
                     <div class="col-12">
-                      <h4 class="card-title">
-                        <a [routerLink]="['../../client-offer', posts.id]">{{ posts.title }}</a>
-                      </h4>
+                      <h5 class="card-title">
+                      {{ posts.title }} <small> <span class="badge rounded-pill text-bg-secondary " role="alert" > terminé</span></small>
+                      </h5>
                     </div>
                     <div class="col">
                       <h6 class="card-subtitle mb-2">
@@ -104,6 +109,7 @@
                   </div>
                 </div>
               </div>
+            </a>
             </span>
             </div>
           </span>
