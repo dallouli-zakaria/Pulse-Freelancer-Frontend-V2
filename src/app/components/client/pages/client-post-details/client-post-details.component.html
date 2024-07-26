@@ -2,7 +2,9 @@
     <div class="row">
       <h4 class="col-lg-10">
         <span *ngIf="roles == 'Client'"><a routerLink="../../client-profile/client-offers-open"> <i class="fas fa-arrow-left"></i> </a></span> 
-        <span *ngIf="roles == 'superadmin_role'" ><a routerLink="../../post-open"> <i class="fas fa-arrow-left"></i> </a></span> Details de l'offre
+        <span *ngIf="roles == 'superadmin_role'" ><a routerLink="../../post-open"> <i class="fas fa-arrow-left"></i> </a></span>
+        <span *ngIf="roles == 'Freelancer'"><a routerLink="../../freelancer-dashboard/freelancer-offers-open"> <i class="fas fa-arrow-left"></i> </a></span> 
+         Details de l'offre
 
       </h4>
       <button *ngIf="roles == 'Client' " class="btn btn-danger col-lg-2"  data-bs-toggle="modal" data-bs-target="#exampleModal"  (click)="trackdata(post)" [disabled]="disabledbutton">Modifier l'offre</button>
@@ -80,7 +82,7 @@
         <hr>
         <div class="row">
           <h5 class="col-lg-4">Nombre de freelancers:</h5>
-          <h5 class="col-lg-8 text-muted">{{post.freelancers_number}} freelancers</h5>
+          <h5 class="col-lg-8 text-muted">{{freelancertrue.length}} / {{post.freelancers_number}} freelancers</h5>
         </div>
         <hr>
         <div class="row">

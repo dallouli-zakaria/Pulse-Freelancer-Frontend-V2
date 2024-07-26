@@ -94,7 +94,7 @@ const routes: Routes = [
           
         ]
        },
-      { path: 'client-offer/:postId', component: ClientPostDetailsComponent,canActivate:[authGuard],data: { roles: ['Client'] } },
+      { path: 'client-offer/:postId', component: ClientPostDetailsComponent,canActivate:[authGuard],data: { roles: ['Client','Freelancer'] } },
       { path: 'offers', component: FreelancerViewPostsComponent,canActivate:[authGuard],data: { roles: ['Freelancer'] } },
       { path: 'contact', component: ContactUsComponent,canActivate:[authGuard] },
       {path:'view-freelancerprofile/:freelancerId',component:ClientViewFreelancerDetailsComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
@@ -102,7 +102,10 @@ const routes: Routes = [
         children:
         [
 
-          {path:'freelancer-offers',component:FreelancerOffersComponent,canActivate:[authGuard],data: { roles: ['Freelancer'] } },
+          //{path:'freelancer-offers',component:FreelancerOffersComponent,canActivate:[authGuard],data: { roles: ['Freelancer'] } },
+          {path:'freelancer-offers-open',component:FreelancerOffersComponent,canActivate:[authGuard],data: { roles: ['Freelancer'] }},
+          {path:'freelancer-offers-waiting',component:FreelancerOffersComponent,canActivate:[authGuard],data: { roles: ['Freelancer'] }},
+          {path:'freelancer-offers-closed',component:FreelancerOffersComponent,canActivate:[authGuard],data: { roles: ['Freelancer'] }},
           {path:'freelancer-contracts',component:FreelancerContractsComponent,canActivate:[authGuard],data: { roles: ['Freelancer'] } },
           { path: 'freelancer-profile', component: FreelancerIndexComponent ,canActivate:[authGuard],data: { roles: ['Freelancer'] } },
 

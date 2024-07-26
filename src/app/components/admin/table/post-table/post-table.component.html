@@ -8,7 +8,7 @@
           <a routerLink="../post-waiting"
           [ngClass]="{'text-primary': dataStatus === 'waiting'}">Offres en attente</a> / 
           <a routerLink="../post-closed"
-          [ngClass]="{'text-primary': dataStatus === 'closed'}">Offres terminé</a>
+          [ngClass]="{'text-primary': dataStatus === 'closed'}">Offres terminés</a>
         </span>
       </h5>
       <div *ngIf="isLoading; else dataLoaded">

@@ -30,6 +30,7 @@
     </div>
     <div class="container mt-5 mb-3">
       <div class="row text-center">
+        
         <div>
           <h5 class=" text-muted text-uppercase">&#64;{{company_name}}</h5>
         </div>
@@ -91,6 +92,8 @@
         <h5 class="col-lg-8 text-muted">{{ postdata?.created_at | date: 'dd-MM-yyyy' }}</h5>
       </div>
       <hr>
+      <h5 class="d-flex justify-content-center">Score</h5>
+      <div class="d-flex justify-content-center"><app-circular-progressbar *ngIf="freelancerId && postId" [itemId]="freelancerId" [postId2]="postId"></app-circular-progressbar></div>
     </div>
 
 

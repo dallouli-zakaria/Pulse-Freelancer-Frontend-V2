@@ -1,45 +1,64 @@
 import { Component, OnInit } from '@angular/core';
 import { FreelancerService } from '../../../../core/services/freelancer.service';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { Freelancer } from '../../../../core/models/Freelancer';
+import { AuthService } from '../../../../core/services/auth.service';
+import { WishListService } from '../../../../core/services/wish-list.service';
 
 @Component({
   selector: 'app-client-view-freelancers',
   templateUrl: './client-view-freelancers.component.html',
-  styleUrl: './client-view-freelancers.component.css'
+  styleUrls: ['./client-view-freelancers.component.css']
 })
-export class ClientViewFreelancersComponent implements OnInit{
-
+export class ClientViewFreelancersComponent implements OnInit {
   isLoading = true;
-  freelancerList!:Observable<Freelancer[]>;
-  freelancers:Freelancer[]=[]
+  freelancerList!: Observable<Freelancer[]>;
+  freelancers: Freelancer[] = [];
+  favoriteFreelancers: Set<number> = new Set<number>();
+  clientId:number=this.authservice.parseID();
+  constructor(private freelancerService: FreelancerService,private authservice:AuthService,private wishListservice:WishListService) {}
 
-  constructor(private freelancerService:FreelancerService){}
   ngOnInit(): void {
     this.index();
-this.freelancerList=this.freelancerService.getdata
   }
 
-
-
-  index(){
-  
+  index() {
     this.freelancerService.index();
-
     this.freelancerService.verifiedfreelancer().subscribe({
-      
-      next:(data:any)=>{
-        this.freelancers=data;
-        this.isLoading=false;
+      next: (data: any) => {
+        this.freelancers = data;
+        this.isLoading = false;
         console.log(data);
       },
-      error:(error:any)=>{console.log(error);
+      error: (error: any) => {
+        console.log(error);
       },
-      complete:()=>console.log('end operation get data')
-      
-    })
+      complete: () => console.log('end operation get data')
+    });
+    
+    // Load favorite freelancers
+    this.wishListservice.getFavoriteFreelancers(this.clientId).subscribe({
+      next: (data: any) => {
+        this.favoriteFreelancers = new Set(data.map((item: any) => item.freelancer_id));
+      }
+    });
   }
 
+  toggleFavorite(freelancerId: number) {
+    if (this.favoriteFreelancers.has(freelancerId)) {
+      this.wishListservice.removeFromWishlist(this.clientId,freelancerId).subscribe(() => {
+        this.favoriteFreelancers.delete(freelancerId);
+      });
+    } else {
+      this.wishListservice.addToWishlist(this.clientId,freelancerId).subscribe(() => {
+        this.favoriteFreelancers.add(freelancerId);
+      });
+    }
+  }
+
+  isFavorite(freelancerId: number): boolean {
+    return this.favoriteFreelancers.has(freelancerId);
+  }
 
   getFirstName(fullName: string | undefined): string {
     if (!fullName) {
@@ -48,8 +67,4 @@ this.freelancerList=this.freelancerService.getdata
     const nameParts = fullName.split(' ');
     return nameParts.length > 1 ? nameParts[1] : fullName;
   }
-  
-
-
-
 }

@@ -9,5 +9,5 @@
       [attr.stroke-dasharray]="strokeDashArray"
       [attr.stroke]="getProgressColor()"></circle>
   </svg>
-  <div class="percentage">{{ progress.score }}%</div>
+  <div class="percentage">{{  getFormattedScore(progress.score) }}%</div>
 </div>

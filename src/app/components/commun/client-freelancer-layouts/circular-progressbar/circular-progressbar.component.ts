@@ -49,4 +49,7 @@ export class CircularProgressbarComponent implements OnChanges {
       return 'green';
     }
   }
+  getFormattedScore(score: number): number {
+    return Math.floor(score);
+  }
 }
