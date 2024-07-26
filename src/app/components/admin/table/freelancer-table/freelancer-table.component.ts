@@ -13,13 +13,13 @@ export class FreelancerTableComponent implements OnInit{
   slecteID!: number;
   selectedData?: Freelancer;
   freelancers: Freelancer[] = [];
-  filteredFreelancers: Freelancer[] = [];
+  filteredFreelancersVariable?: Freelancer[] ;
   currentPage = 1;
-  totalPages = 5;
+  totalPages = 1;
   isLoading = true;
   searchTerm: string = '';
 
-  private freelancerService: FreelancerService = inject(FreelancerService);
+  constructor(private freelancerService: FreelancerService) {}
 
   ngOnInit(): void {
     this.loadFreelancers(this.currentPage);
@@ -27,10 +27,11 @@ export class FreelancerTableComponent implements OnInit{
 
   loadFreelancers(page: number): void {
     this.isLoading = true;
-    this.freelancerService.fetchPaginatedFreelancers(page).subscribe({
-      next: (response: PaginatedResponse<Freelancer>) => {
+    this.freelancerService.fetchPaginatedFreelancers(page);
+      this.freelancerService.freelancers$.subscribe({
+      next: (response:any) => {
         this.freelancers = response.data;
-        this.filteredFreelancers = this.freelancers; // Initialize filtered list
+        this. filteredFreelancersVariable = this.freelancers; // Initialize filtered list
         this.totalPages = response.last_page;
         this.currentPage = response.current_page;
         this.isLoading = false;
@@ -45,13 +46,18 @@ export class FreelancerTableComponent implements OnInit{
 
   filterFreelancers(): void {
     if (this.searchTerm) {
-      this.filteredFreelancers = this.freelancers.filter(freelancer => 
-        freelancer.user.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        freelancer.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        freelancer.user.email.toLowerCase().includes(this.searchTerm.toLowerCase())
-      );
+      this.freelancerService.searchFreelancers(this.searchTerm).subscribe({
+        next: (freelancer: Freelancer[]) => {
+          this. filteredFreelancersVariable = freelancer;
+          console.log(this. filteredFreelancersVariable)
+          
+        },
+        error: (error: any) => {
+          console.error(error);
+        }
+      });
     } else {
-      this.filteredFreelancers = this.freelancers;
+      this. filteredFreelancersVariable= this.freelancers;
     }
   }
 
@@ -95,7 +101,6 @@ export class FreelancerTableComponent implements OnInit{
     this.showedit = false;
     this.showedelete = false;
   }
-  // End manage pages
 
   getStatus(): string {
     if (this.isAllFieldsFilled() && this.selectedData?.status === 'verified') {
@@ -126,5 +131,9 @@ export class FreelancerTableComponent implements OnInit{
     if (page >= 1 && page <= this.totalPages) {
       this.loadFreelancers(page);
     }
+  }
+
+  onSearchTermChange(): void {
+    this.filterFreelancers();
   }
 }

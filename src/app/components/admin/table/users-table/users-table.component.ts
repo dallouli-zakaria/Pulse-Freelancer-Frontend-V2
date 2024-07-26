@@ -25,7 +25,7 @@ export class UsersTableComponent implements OnInit{
    searchTerm: string = '';
    
   ngOnInit(): void {
-
+    this.loadFreelancers(this.currentPage);
   
     
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.

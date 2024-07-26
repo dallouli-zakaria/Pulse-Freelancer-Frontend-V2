@@ -41,11 +41,17 @@ export class FreelancerService {
    return this.subjectBe.asObservable();
    }
 
-   fetchPaginatedFreelancers(page: number = 1): Observable<PaginatedResponse<Freelancer>> {
+   fetchPaginatedFreelancers(page: number = 1): void {
     const params = new HttpParams().set('page', page.toString());
-    return this.http.get<PaginatedResponse<Freelancer>>(`${this.url}/freelancerPagination`, { params });
+    this.http.get<PaginatedResponse<Freelancer>>(`${this.url}/freelancerPagination`, { params })
+      .pipe(shareReplay(1))
+      .subscribe({
+        next: (data:any) => this.subjectBe.next(data),
+        error: (error: any) => console.error(error),
+        complete: () => console.log('Fetched paginated freelancers data')
+      });
   }
-
+  freelancers$ = this.subjectBe.asObservable();
 
 
     public store(data:any):Observable<Freelancer>{
@@ -118,8 +124,10 @@ export class FreelancerService {
       return this.score;
 
     }
-
-
+    searchFreelancers(searchTerm: string): Observable<Freelancer[]> {
+      let params = new HttpParams().set('query', searchTerm);
+      return this.http.get<Freelancer[]>(`${this.url}/searchBar`, { params });
+    }
 
 
 

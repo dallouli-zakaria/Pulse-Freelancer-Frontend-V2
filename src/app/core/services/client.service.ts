@@ -35,6 +35,11 @@ url=Constant.API_ENDPOINT
     return this.dataSubject.asObservable(); 
   }
 
+  searchClient(searchTerm: string): Observable<Client[]> {
+    let params = new HttpParams().set('query', searchTerm);
+    return this.http.get<Client[]>(`${this.url}/clientsearchBar`, { params });
+  }
+
   fetchPaginatedClient(page: number = 1): Observable<PaginatedResponse<Client>> {
     const params = new HttpParams().set('page', page.toString());
     return this.http.get<PaginatedResponse<Client>>(`${this.url}/clientPagination`, { params });

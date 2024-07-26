@@ -22,9 +22,9 @@ export class FreelancerUpdatePersonalInfosComponent {
 
  ngOnInit(): void {
   this.form=this.fb.group({
-    name: [this.freelancerData?.user.name, Validators.required],
+    name: [this.freelancerData?.user?.name, Validators.required],
     email: [this.freelancerData?.user?.email, [Validators.required, Validators.email]],
-    password: [this.freelancerData?.user.password],
+    password: [this.freelancerData?.user?.password],
     title: [this.freelancerData?.title, Validators.required],
     dateOfBirth: [this.freelancerData?.dateOfBirth, Validators.required],
     city: [this.freelancerData?.city, Validators.required],
@@ -67,7 +67,7 @@ ngOnChanges(): void {
   this.form=this.fb.group({
     name: [this.freelancerData?.user?.name, Validators.required],
     email: [this.freelancerData?.user?.email, [Validators.required, Validators.email]],
-    password: [this.freelancerData?.user.password],
+    password: [this.freelancerData?.user?.password],
     title: [this.freelancerData?.title, Validators.required],
     dateOfBirth: [this.freelancerData?.dateOfBirth, Validators.required],
     city: [this.freelancerData?.city, Validators.required],

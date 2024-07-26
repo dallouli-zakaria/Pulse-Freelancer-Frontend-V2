@@ -1,3 +1,13 @@
+
+<div class="search-bar">
+  <input 
+    type="text" 
+    class="form-control" 
+    placeholder="Search client by name or email" 
+    [(ngModel)]="searchTerm"
+    (ngModelChange)="onSearchTermChange()">
+</div>
+
 <table  class="table caption-top" >
     <caption><h1>Clients List</h1></caption>
     <thead>
@@ -14,7 +24,7 @@
     </thead>
     <tbody >
        
-      <tr *ngFor="let client of clients">
+      <tr *ngFor="let client of filteredCleint">
         <th scope="row">{{client.id}}</th>
         <td>{{client.user.name}}</td>
         <td>{{client.user.email}}</td>
@@ -36,7 +46,7 @@
 
 
 <nav aria-label="Page navigation">
-  <ul class="pagination">
+  <ul class="pagination justify-content-center">
     <li class="page-item" [ngClass]="{'disabled': currentPage === 1}">
       <a class="page-link" (click)="onPageChange(currentPage - 1)" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>

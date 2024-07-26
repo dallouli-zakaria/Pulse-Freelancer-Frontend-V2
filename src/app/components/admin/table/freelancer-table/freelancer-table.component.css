@@ -15,3 +15,14 @@
     backdrop-filter: blur(10px);
     transition: backdrop-filter 0.3s ease-in-out, opacity 0.3s ease-in-out;
   }
+  .search-bar{
+   
+      position: absolute; 
+      left:50%;
+      top: 140px;
+      width: 305px;
+      max-width: 400px; /* Adjust width as needed */
+      padding: 0.4rem 0.8rem; /* Adjust padding */
+      font-size: 0.2rem; /* Adjust font size */ 
+
+  }

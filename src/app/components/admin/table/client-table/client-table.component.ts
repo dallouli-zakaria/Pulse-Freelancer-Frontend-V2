@@ -63,6 +63,25 @@ export class ClientTableComponent implements OnInit {
         this.loadClient(page);
       }
     }
+    
+
+    
+  filterClient(): void {
+    if (this.searchTerm) {
+      this.clientSe.searchClient(this.searchTerm).subscribe({
+        next: (client: Client[]) => {
+          this.filteredCleint= client;
+          console.log(this.filteredCleint)
+          
+        },
+        error: (error: any) => {
+          console.error(error);
+        }
+      });
+    } else {
+      this.filteredCleint= this.clients;
+    }
+  }
 
     
   //manage page edite delete and details for assingnig 
@@ -95,5 +114,7 @@ this.showedelete = false;
 }
 //end manage pages
 
-
+onSearchTermChange(): void {
+  this.filterClient();
+}
 }

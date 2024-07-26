@@ -25,9 +25,9 @@ export class FreelancerEditComponent implements OnInit,OnChanges {
 
    ngOnInit(): void {
     this.form=this.fb.group({
-      name: [this.freelancerData?.user.name, Validators.required],
+      name: [this.freelancerData?.user?.name, Validators.required],
       email: [this.freelancerData?.user?.email, [Validators.required, Validators.email]],
-      password: [this.freelancerData?.user.password],
+      password: [this.freelancerData?.user?.password],
       title: [this.freelancerData?.title, Validators.required],
       dateOfBirth: [this.freelancerData?.dateOfBirth, Validators.required],
       city: [this.freelancerData?.city, Validators.required],
@@ -37,7 +37,7 @@ export class FreelancerEditComponent implements OnInit,OnChanges {
       adress: [this.freelancerData?.adress, Validators.required],
       phone: [this.freelancerData?.phone, Validators.required],
       portfolio_Url: [this.freelancerData?.portfolio_Url],
-      status:['']
+      status:[this.freelancerData?.status]
     })
   }
 
@@ -49,7 +49,7 @@ export class FreelancerEditComponent implements OnInit,OnChanges {
       next:(data:any)=>{
         console.log(data);
         this.close();
-         this.frelancerservices.index()},
+         this.frelancerservices.fetchPaginatedFreelancers()},
          error:(error:string)=>{
            console.log(error);
            }, 
@@ -64,7 +64,7 @@ export class FreelancerEditComponent implements OnInit,OnChanges {
     this.form=this.fb.group({
       name: [this.freelancerData?.user?.name, Validators.required],
       email: [this.freelancerData?.user?.email, [Validators.required, Validators.email]],
-      password: [this.freelancerData?.user.password],
+      password: [this.freelancerData?.user?.password],
       title: [this.freelancerData?.title, Validators.required],
       dateOfBirth: [this.freelancerData?.dateOfBirth, Validators.required],
       city: [this.freelancerData?.city, Validators.required],

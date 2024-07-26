@@ -1,7 +1,11 @@
-<div>
-  <input type="text" placeholder="Search..." [(ngModel)]="searchTerm" (input)="filterFreelancers()" />
+<div class="search-bar">
+  <input 
+    type="text" 
+    class="form-control" 
+    placeholder="Search freelancers by name or email" 
+    [(ngModel)]="searchTerm"
+    (ngModelChange)="onSearchTermChange()">
 </div>
-
 <table class="table caption-top">
   <caption><h1>Freelancers List</h1></caption>
   <thead>
@@ -10,7 +14,6 @@
       <th scope="col">Name</th>
       <th scope="col">Title</th>
       <th scope="col">Email</th>
-      <th scope="col">Password</th>
       <th scope="col">TJM</th>
       <th scope="col">Availability</th>
       <th scope="col">Phone</th>
@@ -20,19 +23,18 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let freelancer of filteredFreelancers">
+    <tr *ngFor="let freelancer of  filteredFreelancersVariable">
       <th scope="row">{{ freelancer.id }}</th>
-      <td>{{ freelancer.user.name }}</td>
+      <td>{{ freelancer?.user?.name }}</td> 
       <td>{{ freelancer.title }}</td>
-      <td>{{ freelancer.user.email }}</td>
-      <td>{{ freelancer.user.password }}</td>
+      <td>{{ freelancer?.user?.email }}</td> 
       <td>{{ freelancer.TJM }}</td>
       <td>{{ freelancer.availability }}</td>
       <td>{{ freelancer.phone }}</td>
       <td [ngClass]="{'text-success': (freelancer?.phone && freelancer?.summary), 'text-danger': !(freelancer?.phone && freelancer?.summary)}">
         {{ (freelancer?.phone && freelancer?.summary) ? 'Complet' : 'Incomplet' }}
       </td>
-      <td>{{ freelancer.status }}</td>
+      <td>{{freelancer?.status}}</td>
       <td>
         <button class="btn btn-primary btn-sm" style="margin-right: 5px;" (click)="onEdited(freelancer.id, freelancer)">
           <i class="fas fa-pen"></i>
@@ -45,8 +47,8 @@
   </tbody>
 </table>
 
-<nav aria-label="Page navigation">
-  <ul class="pagination">
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
     <li class="page-item" [ngClass]="{'disabled': currentPage === 1}">
       <a class="page-link" (click)="onPageChange(currentPage - 1)" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
@@ -64,23 +66,21 @@
     </li>
   </ul>
 </nav>
-
-
-
-  <!-- edit -->
-  <div *ngIf="showedit" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
-    <div class="modal-dialog modal-m">
-      <div class="modal-content">
-        <app-freelancer-edit [freelancerID]="slecteID" [freelancerData]="selectedData" (closeModal)="onCloseModal()"></app-freelancer-edit>
-      </div>
+<div *ngIf="show" class="modal-backdrop fade show"></div>
+<!-- edit -->
+<div *ngIf="showedit" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-m">
+    <div class="modal-content">
+      <app-freelancer-edit [freelancerID]="slecteID" [freelancerData]="selectedData" (closeModal)="onCloseModal()"></app-freelancer-edit>
     </div>
   </div>
+</div>
 
-  <!-- delete -->
-  <div *ngIf="showedelete " class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
-    <div class="modal-dialog modal-m">
-      <div class="modal-content">
-        <app-freelancer-delete [freelancerID]="slecteID" [freelancerData]="selectedData" (closeModal)="onCloseModal()"></app-freelancer-delete>
-      </div>
+<!-- delete -->
+<div *ngIf="showedelete" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-m">
+    <div class="modal-content">
+      <app-freelancer-delete [freelancerID]="slecteID" [freelancerData]="selectedData" (closeModal)="onCloseModal()"></app-freelancer-delete>
     </div>
   </div>
+</div>
