@@ -40,6 +40,8 @@ export class ClientViewFreelancersComponent implements OnInit {
     this.wishListservice.getFavoriteFreelancers(this.clientId).subscribe({
       next: (data: any) => {
         this.favoriteFreelancers = new Set(data.map((item: any) => item.freelancer_id));
+        console.log(this.favoriteFreelancers);
+        
       }
     });
   }

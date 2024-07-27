@@ -71,7 +71,7 @@ export class FreelancerViewPostDetailsComponent implements OnInit,OnChanges{
   postuler() {
     this.isButtonDisabled = true; 
     let data = {
-      selected: this.company_name,
+      selected: 'false',
       freelancer_id: this.freelancerId,
       post_id: this.postId
     };

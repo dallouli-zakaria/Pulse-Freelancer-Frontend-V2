@@ -116,6 +116,7 @@ import { PackAddComponent } from './components/admin/buttons/add/pack-add/pack-a
 import { PackDeleteComponent } from './components/admin/buttons/delete/pack-delete/pack-delete.component';
 import { PackEditComponent } from './components/admin/buttons/edit/pack-edit/pack-edit.component';
 import { CircularProgressbarComponent } from './components/commun/client-freelancer-layouts/circular-progressbar/circular-progressbar.component';
+import { WishlistComponent } from './components/client/pages/wishlist/wishlist.component';
 ;
 
 @NgModule({
@@ -230,7 +231,8 @@ import { CircularProgressbarComponent } from './components/commun/client-freelan
     PackAddComponent,
     PackDeleteComponent,
     PackEditComponent,
-    CircularProgressbarComponent
+    CircularProgressbarComponent,
+    WishlistComponent
     
   ],
   imports: [

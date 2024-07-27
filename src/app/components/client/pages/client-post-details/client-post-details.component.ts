@@ -34,6 +34,7 @@ export class ClientPostDetailsComponent implements OnInit {
   progressText: string = '';
   offerExists: boolean | null = null;
   disabledbutton:boolean=true;
+  disabledbutton2:boolean=false;
   steps = [
     { label: 'Ouvert', progress: 25 },
     { label: 'En cours', progress: 50 },
@@ -206,6 +207,7 @@ export class ClientPostDetailsComponent implements OnInit {
 
 
   declineFreelancer(index: number, offerId: number, singlefreelancerid: number): void {
+    this.disabledbutton2=true;
     this.disqualifiedFreelancer.add(index);
     this.offerservice.getOffersByPostAndFreelancer(offerId, singlefreelancerid).subscribe((res) => {
       const updateValue = { selected: 'declined' };

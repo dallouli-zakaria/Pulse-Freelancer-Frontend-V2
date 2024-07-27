@@ -37,6 +37,7 @@ import { FreelancerProfileComponent } from './components/freelancer/pages/freela
 import { FreelancerViewPostsComponent } from './components/freelancer/pages/freelancer-view-posts/freelancer-view-posts.component';
 import { PackComponent } from './components/admin/pages/pack/pack.component';
 import { ConnectedLandingPageComponent } from './components/commun/connected-landing-page/connected-landing-page.component';
+import { WishlistComponent } from './components/client/pages/wishlist/wishlist.component';
 
 
 const routes: Routes = [
@@ -84,6 +85,7 @@ const routes: Routes = [
         [
 
           {path:'client-infos',component:ClientInfosComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
+          {path:'client-wishlist',component:WishlistComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
           {path:'client-offers-open',component:ClientPostsComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
           {path:'client-offers-waiting',component:ClientPostsComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
           {path:'client-offers-closed',component:ClientPostsComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
