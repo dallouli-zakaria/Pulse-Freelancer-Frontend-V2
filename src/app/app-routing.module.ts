@@ -38,6 +38,7 @@ import { FreelancerViewPostsComponent } from './components/freelancer/pages/free
 import { PackComponent } from './components/admin/pages/pack/pack.component';
 import { ConnectedLandingPageComponent } from './components/commun/connected-landing-page/connected-landing-page.component';
 import { EmailVerifyComponent } from './components/commun/auth/email-verify/email-verify.component';
+import { WishlistComponent } from './components/client/pages/wishlist/wishlist.component';
 
 
 const routes: Routes = [
@@ -85,6 +86,7 @@ const routes: Routes = [
         [
 
           {path:'client-infos',component:ClientInfosComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
+          {path:'client-wishlist',component:WishlistComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
           {path:'client-offers-open',component:ClientPostsComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
           {path:'client-offers-waiting',component:ClientPostsComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
           {path:'client-offers-closed',component:ClientPostsComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
@@ -95,7 +97,7 @@ const routes: Routes = [
           
         ]
        },
-      { path: 'client-offer/:postId', component: ClientPostDetailsComponent,canActivate:[authGuard],data: { roles: ['Client'] } },
+      { path: 'client-offer/:postId', component: ClientPostDetailsComponent,canActivate:[authGuard],data: { roles: ['Client','Freelancer'] } },
       { path: 'offers', component: FreelancerViewPostsComponent,canActivate:[authGuard],data: { roles: ['Freelancer'] } },
       { path: 'contact', component: ContactUsComponent,canActivate:[authGuard] },
       {path:'view-freelancerprofile/:freelancerId',component:ClientViewFreelancerDetailsComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
@@ -103,7 +105,10 @@ const routes: Routes = [
         children:
         [
 
-          {path:'freelancer-offers',component:FreelancerOffersComponent,canActivate:[authGuard],data: { roles: ['Freelancer'] } },
+          //{path:'freelancer-offers',component:FreelancerOffersComponent,canActivate:[authGuard],data: { roles: ['Freelancer'] } },
+          {path:'freelancer-offers-open',component:FreelancerOffersComponent,canActivate:[authGuard],data: { roles: ['Freelancer'] }},
+          {path:'freelancer-offers-waiting',component:FreelancerOffersComponent,canActivate:[authGuard],data: { roles: ['Freelancer'] }},
+          {path:'freelancer-offers-closed',component:FreelancerOffersComponent,canActivate:[authGuard],data: { roles: ['Freelancer'] }},
           {path:'freelancer-contracts',component:FreelancerContractsComponent,canActivate:[authGuard],data: { roles: ['Freelancer'] } },
           { path: 'freelancer-profile', component: FreelancerIndexComponent ,canActivate:[authGuard],data: { roles: ['Freelancer'] } },
 

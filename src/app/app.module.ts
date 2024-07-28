@@ -116,8 +116,10 @@ import { PackAddComponent } from './components/admin/buttons/add/pack-add/pack-a
 import { PackDeleteComponent } from './components/admin/buttons/delete/pack-delete/pack-delete.component';
 import { PackEditComponent } from './components/admin/buttons/edit/pack-edit/pack-edit.component';
 import { EmailVerifyComponent } from './components/commun/auth/email-verify/email-verify.component';
-import { CircularProgressBarComponent } from './components/commun/client-freelancer-layouts/circular-progress-bar/circular-progress-bar.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { CircularProgressbarComponent } from './components/commun/client-freelancer-layouts/circular-progressbar/circular-progressbar.component';
+import { WishlistComponent } from './components/client/pages/wishlist/wishlist.component';
+import { LoadingPageComponent } from './components/commun/loading/loading-page/loading-page.component';
 ;
 
 @NgModule({
@@ -233,7 +235,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
     PackDeleteComponent,
     PackEditComponent,
     EmailVerifyComponent,
-    CircularProgressBarComponent
+   
+    CircularProgressbarComponent,
+    WishlistComponent,
+    LoadingPageComponent
     
   ],
   imports: [
@@ -244,7 +249,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
       ReactiveFormsModule,
       CommonModule,NgxPaginationModule,FormsModule 
   ],
-  providers: [provideHttpClient(),AuthService,CircularProgressBarComponent],
+  providers: [provideHttpClient(),AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

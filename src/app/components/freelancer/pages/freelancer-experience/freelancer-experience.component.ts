@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Experience } from '../../../../core/models/experience';
 import { AuthService } from '../../../../core/services/auth.service';
@@ -11,7 +11,7 @@ import { FreelancerUpdateExperienceComponent } from '../../actions/freelancer-up
   templateUrl: './freelancer-experience.component.html',
   styleUrls: ['./freelancer-experience.component.css']
 })
-export class FreelancerExperienceComponent implements OnInit {
+export class FreelancerExperienceComponent implements OnInit,OnChanges{
   displayAdd = "none";
   displayEdit = "none";
   displayDelete = "none";
@@ -25,10 +25,14 @@ export class FreelancerExperienceComponent implements OnInit {
   @ViewChild(FreelancerUpdateExperienceComponent) updateExperienceComponent!: FreelancerUpdateExperienceComponent;
 
   constructor(private experienceService: ExperienceService, private authService: AuthService) { }
-
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.getData();
     this.listExperience = this.experienceService.experienceData;
+  }
+
+  ngOnInit(): void {
+      this.getData();
+
   }
 
   openModalAdd() {
@@ -36,7 +40,7 @@ export class FreelancerExperienceComponent implements OnInit {
   }
 
   onCloseHandledAdd() {
-    this.getData();
+    // this.getData();
     this.displayAdd = "none";
   }
 
@@ -97,10 +101,12 @@ export class FreelancerExperienceComponent implements OnInit {
         next: (data:any) => {
           console.log(data);
           
-          this.getData();
+      
           this.onCloseHandledDelete();
           this.experienceService.index();
-          this.isSubmitting = false;
+          this.isSubmitting = false;  
+          this.getData();
+        
         },
         error: (error) => {
           // console.error('Error deleting experience:', error);
@@ -110,4 +116,5 @@ export class FreelancerExperienceComponent implements OnInit {
       });
     }
   }
+  
 }

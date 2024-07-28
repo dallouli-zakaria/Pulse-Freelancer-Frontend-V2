@@ -54,6 +54,18 @@ export class SkillService {
      return this.Skill;
    }
 
+   public index2(id:any){
+    this.Skill=this.http.get(`${this.url}/freelancers/${id}/${Constant.SkillS}`).pipe(shareReplay(1)).subscribe({
+     next:(data:any)=>this.subject.next(data),
+     error:(error)=>console.log(error),
+     complete:()=>console.log('end operation') 
+   }).add(console.log('suject permession'))
+  }
+   
+  get skillData2():Observable<Skill[]>{
+   return this.subject.asObservable()
+}
+
 
        // Get all skills
        getSkills(): Observable<any> {

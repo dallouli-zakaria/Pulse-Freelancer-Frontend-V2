@@ -3,6 +3,16 @@ body {
     font-family: "Rubik", "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   }
   
+
+  .card-box {
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #e7eaed;
+    padding: 1.5rem;
+    margin-bottom: 24px;
+    border-radius: .25rem;
+}
+
   .card:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     background-color: #f8f9fa;
@@ -76,15 +86,54 @@ body {
     cursor: pointer;
   }
 
-  
-  .smaller-popup {
-    font-size: 10px; /* Adjust the font size */
-    width: 400px; /* Width of the popup */
-    padding: 1em; /* Padding inside the popup */
+  .page-link {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    color: #212529; 
+    transition: all 0.3s ease;
+    padding: 0.5rem 0.75rem;
+    margin: 0 0.25rem;
   }
   
-  .heart-icon {
-    color: red; /* Color of the heart icon */
-    font-size: 20px; /* Size of the heart icon */
+
+  .page-item:not(:first-child):not(:last-child):not(.disabled):not(.active):hover .page-link {
+    color: #dc3545 !important;
+    background-color: transparent;
+    border: 1px solid #dc3545;
+    border-radius: 0.25rem;
   }
+  
+  .page-item.active .page-link {
+    color: #fff !important;
+    background-color: #dc3545;
+    border-radius: 0.25rem;
+  }
+  
+  .page-item.disabled .page-link {
+    color: #6c757d !important;
+    pointer-events: none;
+    background-color: transparent;
+  }
+  
+  
+  .page-item:first-child .page-link,
+  .page-item:last-child .page-link {
+    background-color: transparent;
+    border: none;
+  }
+  
+  .page-item:first-child:not(.disabled) .page-link,
+  .page-item:last-child:not(.disabled) .page-link {
+    color: #dc3545;
+  }
+  
+  .pagination {
+    --bs-pagination-focus-box-shadow: none;
+  }
+  
+  .page-link:focus {
+    box-shadow: none;
+  }
+
   

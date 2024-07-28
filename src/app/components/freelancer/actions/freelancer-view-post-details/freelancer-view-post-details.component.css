@@ -60,3 +60,14 @@ a:hover{
       background-position: -200% 0;
     }
   }
+
+    
+
+
+  .bg-soft-secondary {
+    background-color: rgba(116, 120, 141, 0.15) !important;
+    color: #74788d !important;
+    font-size: 16px;
+    margin-right: 8px; /* Adjust the margin as needed */
+    margin-bottom: 8px; /* For spacing in the next row */
+  }

@@ -105,6 +105,23 @@ export class PostsService {
     }
 
 
+    getClosedPostsByFreelancerId(freelancerId: number): Observable<any> {
+      this.post = this.http.get(`${this.url}/posts/closed-by-freelancer/${freelancerId}`);
+      return this.post
+    }
+
+    showbfreelancer(id:any){
+      this.post=this.http.get(`${this.url}/${Constant.POSTS}/freelancer/${id}`);
+      return this.post
+    }
+
+    showOpenPosts(): Observable<any>{
+      this.post=this.http.get(`${this.url}/${Constant.POSTS}/open/all`);
+      return this.post
+    }
+  
+
+
 
 
 

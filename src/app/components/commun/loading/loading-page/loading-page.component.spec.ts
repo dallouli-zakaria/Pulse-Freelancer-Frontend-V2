@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ClientPostsComponent } from './client-posts.component';
+import { LoadingPageComponent } from './loading-page.component';
 
-describe('ClientPostsComponent', () => {
-  let component: ClientPostsComponent;
-  let fixture: ComponentFixture<ClientPostsComponent>;
+describe('LoadingPageComponent', () => {
+  let component: LoadingPageComponent;
+  let fixture: ComponentFixture<LoadingPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ClientPostsComponent]
+      declarations: [LoadingPageComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(ClientPostsComponent);
+    fixture = TestBed.createComponent(LoadingPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
