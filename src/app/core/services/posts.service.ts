@@ -106,6 +106,11 @@ export class PostsService {
       this.post=this.http.get(`${this.url}/${Constant.POSTS}/freelancer/${id}`);
       return this.post
     }
+
+    showOpenPosts(): Observable<any>{
+      this.post=this.http.get(`${this.url}/${Constant.POSTS}/open/all`);
+      return this.post
+    }
   
 
 

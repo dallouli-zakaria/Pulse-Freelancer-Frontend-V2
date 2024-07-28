@@ -7,6 +7,7 @@ import { ClientService } from '../../../../core/services/client.service';
 import { FreelancerService } from '../../../../core/services/freelancer.service';
 import { OffersService } from '../../../../core/services/offers.service';
 import { PostsService } from '../../../../core/services/posts.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-freelancer-view-post-details',
@@ -82,9 +83,13 @@ export class FreelancerViewPostDetailsComponent implements OnInit,OnChanges{
       this.isButtonDisabled = false; 
       // this.router.navigate(['../pulse/freelancer-dashboard/freelancer-offers']);
     });
-    setTimeout(() => {
-      this.successMessage = '';
-    }, 5000);
+    Swal.fire({
+      icon: "success",
+      title: "Vous avez polstuler avec succès",
+      showConfirmButton: false,
+      timer: 1500
+    });
+
   }
 
   truefalse(postId: any) {

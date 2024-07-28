@@ -77,3 +77,14 @@ body {
   }
 
   
+  .smaller-popup {
+    font-size: 10px; /* Adjust the font size */
+    width: 400px; /* Width of the popup */
+    padding: 1em; /* Padding inside the popup */
+  }
+  
+  .heart-icon {
+    color: red; /* Color of the heart icon */
+    font-size: 20px; /* Size of the heart icon */
+  }
+  

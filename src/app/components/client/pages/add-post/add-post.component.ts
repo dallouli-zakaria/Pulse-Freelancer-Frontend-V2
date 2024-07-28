@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../core/services/auth.service';
 import { PostsService } from '../../../../core/services/posts.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-post',
@@ -67,6 +68,12 @@ export class AddPostComponent {
       this.postsservice.store(this.form.value).subscribe({
       next:   (res) => {
           console.log(res);
+          Swal.fire({
+            icon: "success",
+            title: "Votre offer a été ajouté avec succès",
+            showConfirmButton: false,
+            timer: 1500
+          });
           this.router.navigate(['../pulse/client-profile/client-offers-open']); 
         },
       error : (err) => 

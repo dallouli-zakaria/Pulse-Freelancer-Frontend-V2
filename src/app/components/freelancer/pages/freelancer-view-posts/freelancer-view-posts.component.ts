@@ -3,7 +3,7 @@ import { Post } from '../../../../core/models/post';
 import { AuthService } from '../../../../core/services/auth.service';
 import { ClientService } from '../../../../core/services/client.service';
 import { PostsService } from '../../../../core/services/posts.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
 import { Offer } from '../../../../core/models/Offer';
 import { OffersService } from '../../../../core/services/offers.service';
 
@@ -36,11 +36,13 @@ export class FreelancerViewPostsComponent {
   }
 
   getposts(){
-    this.postsService.index();
-    this.postsService.postData.subscribe((res)=>{
+
+
+
+
+    this.postsService.showOpenPosts().subscribe((res)=>{
       this.posts=res;
       this.isLoading=false;
-      
     })
   }
 

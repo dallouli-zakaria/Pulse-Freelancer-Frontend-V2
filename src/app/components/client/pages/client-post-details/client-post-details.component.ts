@@ -6,6 +6,7 @@ import { AuthService } from '../../../../core/services/auth.service';
 import { PostsService } from '../../../../core/services/posts.service';
 import { OffersService } from '../../../../core/services/offers.service';
 import { Offer } from '../../../../core/models/Offer';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-client-post-details',
@@ -35,6 +36,7 @@ export class ClientPostDetailsComponent implements OnInit {
   offerExists: boolean | null = null;
   disabledbutton:boolean=true;
   disabledbutton2:boolean=false;
+  isLoadingClose = false;
   steps = [
     { label: 'Ouvert', progress: 25 },
     { label: 'En cours', progress: 50 },
@@ -187,6 +189,13 @@ export class ClientPostDetailsComponent implements OnInit {
         }
       );
     });
+
+    Swal.fire({
+      icon: "success",
+      title: "freelancer validé !",
+      showConfirmButton: false,
+      timer: 1500
+    });
   }
 
   disqualifyFreelancer(index: number, offerId: number, singlefreelancerid: number): void {
@@ -203,30 +212,75 @@ export class ClientPostDetailsComponent implements OnInit {
         }
       );
     });
+
+    
+    Swal.fire({
+      icon: "error",
+      title: "freelancer disqualifié !",
+      showConfirmButton: false,
+      timer: 1500
+    });
   }
 
 
   declineFreelancer(index: number, offerId: number, singlefreelancerid: number): void {
-    this.disabledbutton2=true;
-    this.disqualifiedFreelancer.add(index);
-    this.offerservice.getOffersByPostAndFreelancer(offerId, singlefreelancerid).subscribe((res) => {
-      const updateValue = { selected: 'declined' };
-      this.offerservice.update(res.id, updateValue).subscribe(
-        (updatedOffer: Offer) => {
-          console.log('Offer updated successfully:', updatedOffer);
-          this.declineOffer()
-          this.progress = 50;
-          this.progressText = 'en cours';
-          this.refreshTableData();
-
-        },
-        (error) => {
-          console.error('Error updating offer:', error);
-        }
-      );
+    // Create the Swal mixin with custom classes
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    });
+  
+    // Show the confirmation popup
+    swalWithBootstrapButtons.fire({
+      title: 'êtes-vous sûr?',
+      text: "vous ne pouvez pas confirmer un freelancer après disqualification !",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Accepter!',
+      cancelButtonText: 'Retour!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // If confirmed, proceed with the offer update
+        this.disabledbutton2 = true;
+        this.disqualifiedFreelancer.add(index);
+        
+        this.offerservice.getOffersByPostAndFreelancer(offerId, singlefreelancerid).subscribe((res) => {
+          const updateValue = { selected: 'declined' };
+          this.offerservice.update(res.id, updateValue).subscribe(
+            (updatedOffer: Offer) => {
+              console.log('Offer updated successfully:', updatedOffer);
+              this.declineOffer();
+              this.progress = 50;
+              this.progressText = 'en cours';
+              this.refreshTableData();
+              // Show success popup
+              swalWithBootstrapButtons.fire({
+                title: 'Réfusé!',
+                text: 'Le freelancer est refusé. Notre équipe se chargera du processus de recrutement une autre fois. Vous serez notifié par mail :) ! ',
+                icon: 'success'
+              });
+            },
+            (error) => {
+              console.error('Error updating offer:', error);
+              this.disabledbutton2 = false; // Reset the disabled state if there's an error
+            }
+          );
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // If cancelled, show the cancelled popup
+        swalWithBootstrapButtons.fire({
+          title: 'Annulé',
+          text: 'le freelancer est en attente de validation de l\'offre ',
+          icon: 'error'
+        });
+      }
     });
   }
-
+  
   getFreelancerTrue(postid: number): void {
     this.offerservice.getFreelancerDetailsByPostIdTrue(postid).subscribe((res) => {
       this.freelancertrue = res;
@@ -259,27 +313,55 @@ export class ClientPostDetailsComponent implements OnInit {
   }
 
   ValidateOffer(): void {
+    this.isLoading = true;
     const updateValue = { status: 'waiting' };
-    this.postService.update(this.postId, updateValue).subscribe((updatedPost: Post) => {
-      console.log('Offer updated successfully:', updatedPost);
-      this.refreshTableData();
-      this.initializeData();
-    },
-    (error) => {
-      console.error('Error updating offer:', error);
-    });
+
+    this.postService.update(this.postId, updateValue).subscribe(
+      (updatedPost: Post) => {
+        console.log('Offer updated successfully:', updatedPost);
+        this.refreshTableData();
+        this.initializeData();
+        this.isLoading = false;
+        Swal.fire({
+          icon: "success",
+          title: "Offre validé",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      },
+      (error) => {
+        console.error('Error updating offer:', error);
+        this.isLoading = false;
+      }
+    );
   }
 
-  CloseOffer(): void {
+   CloseOffer(): void {
+    this.isLoadingClose = true;
     const updateValue = { status: 'closed' };
-    this.postService.update(this.postId, updateValue).subscribe((updatedPost: Post) => {
-      console.log('Offer updated successfully:', updatedPost);
-      this.refreshTableData();
-      this.initializeData();
-    },
-    (error) => {
-      console.error('Error updating offer:', error);
-    });
+
+    this.postService.update(this.postId, updateValue).subscribe(
+      (updatedPost: Post) => {
+        console.log('Offer updated successfully:', updatedPost);
+        this.refreshTableData();
+        this.initializeData();
+        this.isLoadingClose = false;
+        Swal.fire({
+          title: 'Success!',
+          text: 'Votre offre a été clôturée avec succès. Nous passerons à l\'évaluation des contrats et nous reviendrons vers vous par mail dans les plus brefs délais !',
+          icon: 'success',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#28a745',
+          customClass: {
+            popup: 'custom-swal-popup'
+          }
+        });
+      },
+      (error) => {
+        console.error('Error updating offer:', error);
+        this.isLoadingClose = false;
+      }
+    );
   }
 
   
@@ -317,5 +399,11 @@ export class ClientPostDetailsComponent implements OnInit {
     );
   }
 
+
+
+
+  createcontract(){
+
+  }
  
 }
