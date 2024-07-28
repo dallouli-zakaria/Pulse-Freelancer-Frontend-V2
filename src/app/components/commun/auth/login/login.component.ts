@@ -58,7 +58,14 @@ export class LoginComponent {
       },
       error: (err) => {
         this.isSubmitting = false;
-        this.errorMessage = 'Échec de la connexion. Veuillez vérifier vos identifiants.';
+        this.isSubmitting = false;
+        console.log(err);
+        
+        if (err.status === 403 && err.error.message === 'Please verify your email') {
+            this.errorMessage = 'Échec de la connexion. Veuillez vérifier votre email.';
+        } else {
+            this.errorMessage = 'Échec de la connexion. Veuillez vérifier vos identifiants.';
+        }
       }
     });
   }
