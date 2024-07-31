@@ -120,6 +120,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { CircularProgressbarComponent } from './components/commun/client-freelancer-layouts/circular-progressbar/circular-progressbar.component';
 import { WishlistComponent } from './components/client/pages/wishlist/wishlist.component';
 import { LoadingPageComponent } from './components/commun/loading/loading-page/loading-page.component';
+import { PostRegiterComponent } from './components/commun/auth/post-regiter/post-regiter.component';
 ;
 
 @NgModule({
@@ -238,7 +239,8 @@ import { LoadingPageComponent } from './components/commun/loading/loading-page/l
    
     CircularProgressbarComponent,
     WishlistComponent,
-    LoadingPageComponent
+    LoadingPageComponent,
+    PostRegiterComponent
     
   ],
   imports: [

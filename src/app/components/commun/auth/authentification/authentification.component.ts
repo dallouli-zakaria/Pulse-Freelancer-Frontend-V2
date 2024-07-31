@@ -1,7 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, NavigationExtras } from '@angular/router';
-
 import { HttpClient } from '@angular/common/http';
 import { ClientService } from '../../../../core/services/client.service';
 import { FreelancerService } from '../../../../core/services/freelancer.service';
@@ -13,22 +12,30 @@ import { passwordStrengthValidator } from '../../../../core/validators/password-
   templateUrl: './authentification.component.html',
   styleUrls: ['./authentification.component.css']
 })
-export class AuthentificationComponent {
+export class AuthentificationComponent implements OnInit {
   applyForm: FormGroup;
   http = inject(HttpClient);
   router = inject(Router);
   isSubmitting: boolean = false;
   errorMessage: string = '';
+  dataStatus!: string;
 
-  constructor(public formBuilder: FormBuilder, private clientService: ClientService, private freelancerService: FreelancerService) {
+  constructor(
+    public formBuilder: FormBuilder, 
+    private clientService: ClientService, 
+    private freelancerService: FreelancerService
+  ) {
     this.applyForm = this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6), passwordStrengthValidator()]],
       password_confirmation: ['', Validators.required],
-      option: ['', Validators.required],
-      status:['not verified'],
+      status: ['not verified'],
     }, { validators: passwordMatchValidator() });
+  }
+
+  ngOnInit(): void {
+    this.getdata();
   }
 
   submitApplication() {
@@ -40,23 +47,23 @@ export class AuthentificationComponent {
     this.isSubmitting = true;
     const formValue = this.applyForm.getRawValue();
 
-    if (formValue.option === 'client') {
+    if (this.dataStatus === 'client') {
       this.clientService.register(formValue)
         .subscribe(
           (res) => {
             console.log(res);
-            this.navigateToLoginWithSuccessMessage('Votre compte client a été créer avec succès!');
-          },  
+            this.navigateToLoginWithSuccessMessage('Votre compte client a été créé avec succès!');
+          },
           (error) => {
             this.handleErrorResponse(error);
           }
         );
-    } else {
+    } else if (this.dataStatus === 'freelancer') {
       this.freelancerService.register(formValue)
         .subscribe(
           (res) => {
             console.log(res);
-            this.navigateToLoginWithSuccessMessage('Votre compte freelancer a été créer avec succès!');
+            this.navigateToLoginWithSuccessMessage('Votre compte freelancer a été créé avec succès!');
           },
           (error) => {
             this.handleErrorResponse(error);
@@ -81,5 +88,14 @@ export class AuthentificationComponent {
     } else {
       this.errorMessage = 'Email déjà existant';
     }
+  }
+
+  getdata() {
+    const currentUrl = this.router.url;
+    if (currentUrl.includes('register/client')) {
+      this.dataStatus = 'client';
+    } else if (currentUrl.includes('register/freelancer')) {
+      this.dataStatus = 'freelancer';
+    } 
   }
 }

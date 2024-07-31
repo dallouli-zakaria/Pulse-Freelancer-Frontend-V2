@@ -39,6 +39,7 @@ import { PackComponent } from './components/admin/pages/pack/pack.component';
 import { ConnectedLandingPageComponent } from './components/commun/connected-landing-page/connected-landing-page.component';
 import { EmailVerifyComponent } from './components/commun/auth/email-verify/email-verify.component';
 import { WishlistComponent } from './components/client/pages/wishlist/wishlist.component';
+import { PostRegiterComponent } from './components/commun/auth/post-regiter/post-regiter.component';
 
 
 const routes: Routes = [
@@ -133,8 +134,9 @@ const routes: Routes = [
     ]
   },
 
-
-  { path: 'register', component: AuthentificationComponent },
+  { path: 'register', component: PostRegiterComponent },
+  { path: 'register/client', component: AuthentificationComponent },
+  { path: 'register/freelancer', component: AuthentificationComponent },
   { path: 'email',component:EmailVerifyComponent},
   { path: 'login', component: LoginComponent },
   { path: 'page-notfound', component: Error404Component },

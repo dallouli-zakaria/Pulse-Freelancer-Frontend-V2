@@ -130,4 +130,17 @@
   a {
     color: black; 
   }
+
+
+  .button-wrapper {
+    display: flex;
+    justify-content: center; /* Centers the button horizontally */
+}
+
+.centered-button {
+    padding: 10px 20px; /* Adjust the padding as needed */
+    width: fit-content; /* Shrinks the button to fit its content */
+}
+
+
   
