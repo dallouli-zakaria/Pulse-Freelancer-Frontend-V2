@@ -15,117 +15,147 @@ export class PostsService {
   post:any
   url=Constant.API_ENDPOINT
   public subject:BehaviorSubject<Post[]>=new BehaviorSubject<Post[]>([])
+  // Observable to allow other components to subscribe to the post data
+  postData$=this.subject.asObservable();
 
   constructor(private http:HttpClient) { }
-  
-  public count(){
-    this.post=this.http.get(`${this.url}/postCount`);
-    return this.post
+   // Get the count of posts
+   public count(): Observable<any> {
+    this.post = this.http.get(`${this.url}/postCount`);
+    return this.post;  // Return the post count as an observable
   }
-  public index(){
-    this.post=this.http.get(`${this.url}/${Constant.POSTS}`).pipe(shareReplay(1)).subscribe({
-      next:(data:any)=>this.subject.next(data),
-      error:(error)=>console.log(error),
-      complete:()=>console.log('end operation') 
-    }).add(console.log('suject permession'))
- 
+
+  // Get all posts
+  public index() {
+    // HTTP GET request to fetch all posts
+    this.http.get(`${this.url}/${Constant.POSTS}`).pipe(shareReplay(1)).subscribe({
+      next: (data: any) => this.subject.next(data), 
+      error: (error: any) => console.log(error),  
+      complete: () => console.log('end operation')  
+    }).add(console.log('subject permission'));  
   }
-  get postData():Observable<Post[]>{
-    return this.subject.asObservable();
-  }
-    
-  fetchPaginatedPosts(page: number = 1): Observable<PaginatedResponse<Post>> {
+
+
+  // Fetch paginated posts
+  public fetchPaginatedPosts(page: number = 1){
     const params = new HttpParams().set('page', page.toString());
-    return this.http.get<PaginatedResponse<Post>>(`${this.url}/postPagination`, { params });
+   this.http.get<PaginatedResponse<Post>>(`${this.url}/postPagination`, { params }).pipe(shareReplay(1)).subscribe({
+    next: (data: any) => this.subject.next(data), 
+    error: (error: any) => console.log(error),  
+    complete: () => console.log('end operation')  
+  }).add(console.log('subject permission'))
   }
 
-
-
-  public store(data:any):Observable<Post>{
-  this.post=this.http.post(`${this.url}/${Constant.POSTS}`,data);
-  return this.post
+  // Create a new post
+  public store(data: any): Observable<Post> {
+    this.post = this.http.post<Post>(`${this.url}/${Constant.POSTS}`, data);
+    return this.post;  // Return the newly created post as an observable
   }
 
-  public update(id:any,data:any):Observable<Post>{
-    this.post=this.http.put(`${this.url}/${Constant.POSTS}/${id}`,data);
-    return this.post
-  }
-   
-  public delete(id:number):Observable<Post>{
-    this.post=this.http.delete(`${this.url}/${Constant.POSTS}/${id}`);
-    return this.post
-  }
-  public addpost(data:any,id:number){
-
-    this.post=this.http.post(`${this.url}/${Constant.POSTS}/${id}/posts`,data);
-
-    return this.post
-
+  // Update a post by ID
+  public update(id: any, data: any): Observable<Post> {
+    this.post = this.http.put<Post>(`${this.url}/${Constant.POSTS}/${id}`, data);
+    return this.post;  // Return the updated post as an observable
   }
 
-
-  public show(id:any):Observable<Post>{
-    this.post=this.http.get(`${this.url}/${Constant.POSTS}/${id}`);
-    return this.post
+  // Delete a post by ID
+  public delete(id: number): Observable<Post> {
+    this.post = this.http.delete<Post>(`${this.url}/${Constant.POSTS}/${id}`);
+    return this.post;  // Return the deleted post as an observable
   }
 
-  public showbclient(id:any){
-    this.post=this.http.get(`${this.url}/${Constant.POSTS}/client/${id}`);
-    return this.post
-
+  // Add a post to another post by ID
+  public addpost(data: any, id: number): Observable<Post> {
+    this.post = this.http.post<Post>(`${this.url}/${Constant.POSTS}/${id}/posts`, data);
+    return this.post;  // Return the added post as an observable
   }
 
-  public showbpost(id:any){
-    this.post=this.http.get(`${this.url}/${Constant.POSTS}/post_id/${id}`);
-    return this.post
-
+  // Show a post by ID
+  public show(id: any){
+    this.post = this.http.get<Post>(`${this.url}/${Constant.POSTS}/${id}`).pipe(shareReplay(1)).subscribe({
+      next: (data: any) => this.subject.next(data), 
+      error: (error: any) => console.log(error),  
+      complete: () => console.log('end operation')  
+    }).add(console.log('subject permission'))
   }
 
-  checkFreelancerOffer(postId: number, freelancerId: number): Observable<{ offer_exists: boolean }> {
+  // Show posts by client ID
+  public showbclient(id: any){
+    this.post = this.http.get<Post[]>(`${this.url}/${Constant.POSTS}/client/${id}`).pipe(shareReplay(1)).subscribe({
+      next: (data: any) => this.subject.next(data), 
+      error: (error: any) => console.log(error),  
+      complete: () => console.log('end operation')  
+    }).add(console.log('subject permission'))
+  }
+
+  // Show posts by post ID
+  public showbpost(id: any){
+    this.post = this.http.get<Post>(`${this.url}/${Constant.POSTS}/post_id/${id}`).pipe(shareReplay(1)).subscribe({
+      next: (data: any) => this.subject.next(data), 
+      error: (error: any) => console.log(error),  
+      complete: () => console.log('end operation')  
+    }).add(console.log('subject permission'))
+  }
+
+  // Check if a freelancer has made an offer on a post
+  public checkFreelancerOffer(postId: number, freelancerId: number): Observable<{ offer_exists: boolean }> {
     const url = `${this.url}/posts/${postId}/freelancers/${freelancerId}/offer`;
-    return this.http.get<{ offer_exists: boolean }>(url);
+    return this.http.get<{ offer_exists: boolean }>(url);  // Return if an offer exists as an observable
   }
 
+  // Get freelancers by post ID
+  public getFreelancersByPostId(postId: number){
+    const url = `${this.url}/offer/freelancers/${postId}`;
+    this.http.get<any>(url).pipe(shareReplay(1)).subscribe({
+      next: (data: any) => this.subject.next(data), 
+      error: (error: any) => console.log(error),  
+      complete: () => console.log('end operation')  
+    }).add(console.log('subject permission'));
+  }
 
+  // Get client details by post ID
+  public getClientDetailsByPostId(postId: number) {
+    return this.http.get<Client>(`${this.url}/posts/${postId}/client`).pipe(shareReplay(1)).subscribe({
+      next: (data: any) => this.subject.next(data), 
+      error: (error: any) => console.log(error),  
+      complete: () => console.log('end operation')  
+    }).add(console.log('subject permission'))
+  }
 
-    //Method to get freelancers by postId
-    public getFreelancersByPostId(postId: number): Observable<any> {
-      const url = `${this.url}/offer/freelancers/${postId}`;
-      return this.http.get<any>(url);
-    }
+  // Check if an offer exists for a post by ID
+ public checkIfOfferExists(postId: number) {
+    const url = `${this.url}/posts/${postId}/check-offer`;
+   this.http.get<boolean>(url).pipe(shareReplay(1)).subscribe({
+    next: (data: any) => this.subject.next(data), 
+    error: (error: any) => console.log(error),  
+    complete: () => console.log('end operation')  
+  }).add(console.log('subject permission'))
+  }
 
-    getClientDetailsByPostId(postId: number): Observable<Client> {
-      return this.http.get<Client>(`${this.url}/posts/${postId}/client`);
-    }
+  // Get closed posts by freelancer ID
+  public getClosedPostsByFreelancerId(freelancerId: number){
+    this.post = this.http.get<any>(`${this.url}/posts/closed-by-freelancer/${freelancerId}`).pipe(shareReplay(1)).subscribe({
+      next: (data: any) => this.subject.next(data), 
+      error: (error: any) => console.log(error),  
+      complete: () => console.log('end operation')  
+    }).add(console.log('subject permission'))
+  }
 
+  // Show posts by freelancer ID
+  public showbfreelancer(id: any){
+    this.post = this.http.get<Post[]>(`${this.url}/${Constant.POSTS}/freelancer/${id}`).pipe(shareReplay(1)).subscribe({
+      next: (data: any) => this.subject.next(data), 
+      error: (error: any) => console.log(error),  
+      complete: () => console.log('end operation')  
+    }).add(console.log('subject permission'))
+  }
 
-    checkIfOfferExists(postId: number): Observable<boolean> {
-      const url = `${this.url}/posts/${postId}/check-offer`;
-      return this.http.get<boolean>(url);
-    }
-
-
-    getClosedPostsByFreelancerId(freelancerId: number): Observable<any> {
-      this.post = this.http.get(`${this.url}/posts/closed-by-freelancer/${freelancerId}`);
-      return this.post
-    }
-
-    showbfreelancer(id:any){
-      this.post=this.http.get(`${this.url}/${Constant.POSTS}/freelancer/${id}`);
-      return this.post
-    }
-
-    showOpenPosts(): Observable<any>{
-      this.post=this.http.get(`${this.url}/${Constant.POSTS}/open/all`);
-      return this.post
-    }
-  
-
-
-
-
-
-
-
-
+  // Show open posts
+  public showOpenPosts(){
+    this.post = this.http.get<any>(`${this.url}/${Constant.POSTS}/open/all`).pipe(shareReplay(1)).subscribe({
+      next: (data: any) => this.subject.next(data), 
+      error: (error: any) => console.log(error),  
+      complete: () => console.log('end operation')  
+    }).add(console.log('subject permission'))
+  }
 }

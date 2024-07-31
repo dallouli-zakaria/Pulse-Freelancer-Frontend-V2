@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Constant } from '../Constant';
-import { BehaviorSubject, Observable, shareReplay } from 'rxjs';
-import { Post } from '../models/post';
+import { BehaviorSubject, catchError, Observable, shareReplay, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Experience } from '../models/experience';
 
@@ -9,63 +8,66 @@ import { Experience } from '../models/experience';
   providedIn: 'root'
 })
 export class ExperienceService {
-
+  //variables
+  private url = Constant.API_ENDPOINT;
+  private subject = new BehaviorSubject<Experience[]>([]);
   
-  experience:any
-  url=Constant.API_ENDPOINT
-  public subject:BehaviorSubject<Experience[]>=new BehaviorSubject<Experience[]>([])
-
-  constructor(private http:HttpClient) { }
+  public experienceData$ = this.subject.asObservable();
   
-  public count(){
-    this.experience=this.http.get(`${this.url}/experienceCount`);
-    return this.experience
-  }
-  public index(){
-    this.experience=this.http.get(`${this.url}/${Constant.EXPERIENCE}`).pipe(shareReplay(1)).subscribe({
-      next:(data:any)=>this.subject.next(data),
-      error:(error)=>console.log(error),
-      complete:()=>console.log('end operation') 
-    }).add(console.log('suject permession'))
- 
-  }
-  get experienceData():Observable<Experience[]>{
-    return this.subject.asObservable();
+  constructor(private http: HttpClient) {}
+
+  // Count function
+  public count(): Observable<number> {
+    return this.http.get<number>(`${this.url}/experienceCount`);
   }
 
-  public store(data:any):Observable<Experience[]>{
-  this.experience=this.http.post(`${this.url}/${Constant.EXPERIENCE}`,data);
-  return this.experience
+  // Get data from database
+  public index(): void {
+    this.http.get<Experience[]>(`${this.url}/${Constant.EXPERIENCE}`)
+      .pipe(
+        shareReplay(1),
+        tap(data => this.subject.next(data)),
+        catchError(this.handleError('index', []))
+      )
+      .subscribe();
   }
 
-  public update(id:any,data:any):Observable<Experience>{
-    this.experience=this.http.put(`${this.url}/${Constant.EXPERIENCE}/${id}`,data);
-    return this.experience
-  }
-   
-  public delete(id:number):Observable<Experience>{
-    this.experience=this.http.delete(`${this.url}/${Constant.EXPERIENCE}/${id}`);
-    return this.experience
-  }
-  public addexperience(data:any,id:number){
-
-    this.experience=this.http.post(`${this.url}/${Constant.EXPERIENCE}/${id}/experience`,data);
-
-    return this.experience
-
+  // Add function
+  public store(data: Experience): Observable<Experience[]> {
+    return this.http.post<Experience[]>(`${this.url}/${Constant.EXPERIENCE}`, data);
   }
 
-
-  public show(id:any):Observable<Experience>{
-    this.experience=this.http.get(`${this.url}/${Constant.EXPERIENCE}/${id}`);
-    return this.experience
+  // Update function
+  public update(id: number, data: Experience): Observable<Experience> {
+    return this.http.put<Experience>(`${this.url}/${Constant.EXPERIENCE}/${id}`, data);
   }
 
+  // Delete function
+  public delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.url}/${Constant.EXPERIENCE}/${id}`);
+  }
 
+  // Add experience
+  public addExperience(data: Experience, id: number): Observable<Experience> {
+    return this.http.post<Experience>(`${this.url}/${Constant.EXPERIENCE}/${id}/experience`, data);
+  }
 
-  public showByFreelancer(id:any):Observable<Experience[]>{
-    this.experience=this.http.get(`${this.url}/${Constant.EXPERIENCE}/freelancer/${id}`);
-    return this.experience
+  // Get experience by ID using subject behavior
+  public show(id: number): void {
+    this.http.get<Experience>(`${this.url}/${Constant.EXPERIENCE}/${id}`)
+      .pipe(
+       shareReplay(1),
+       tap(data => this.subject.next([data])) // Assuming you want to update the subject with a single item
+      )
+      .subscribe();
+  }
+
+  // Error handling
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(`${operation} failed: ${error.message}`);
+      return new Observable<T>(); // Return an empty result or handle appropriately
+    };
   }
 
 }

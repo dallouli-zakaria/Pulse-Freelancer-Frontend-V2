@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, shareReplay } from 'rxjs';
 import { Constant } from '../Constant';
 import { WishList } from '../models/wish-list';
 import { HttpClient } from '@angular/common/http';
@@ -15,13 +15,17 @@ export class WishListService {
   post:any
   url=Constant.API_ENDPOINT
   public subject:BehaviorSubject<WishList[]>=new BehaviorSubject<WishList[]>([])
+  wishlist$=this.subject.asObservable()
 
   constructor(private http:HttpClient) { }
 
 
-  getFavoriteFreelancersdetails(id:number): Observable<any> {
-    this.freelancer=this.http.get<any>(`${this.url}/wishlist/client/${id}/freelancers`);
-    return this.freelancer;
+  getFavoriteFreelancersdetails(id:number){
+    this.freelancer=this.http.get<any>(`${this.url}/wishlist/client/${id}/freelancers`).pipe(shareReplay(1)).subscribe({
+      next:(data:any)=>this.subject.next(data),
+      error:(error)=>{console.log(error) },
+      complete:()=>console.log('end operation of subject show')
+    }).add(()=>console.log("user subject"))
  }
 
   getFavoriteFreelancers(id:number): Observable<any> {
