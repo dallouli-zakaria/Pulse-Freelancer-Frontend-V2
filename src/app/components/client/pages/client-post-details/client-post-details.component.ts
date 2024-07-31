@@ -85,8 +85,9 @@ export class ClientPostDetailsComponent implements OnInit {
   }
 
   fetchOfferDetails(postId: number): void {
-    this.postService.show(postId).subscribe(
-      data => {
+    this.postService.show(postId)
+    this.postService.postData$.subscribe(
+     (data:any) => {
         this.post = data;
         this.isLoading = false;
         this.status = data.status;
@@ -126,7 +127,8 @@ export class ClientPostDetailsComponent implements OnInit {
   }
 
   getFreelancers(postId: number): void {
-    this.postService.getFreelancersByPostId(postId).subscribe(
+    this.postService.getFreelancersByPostId(postId)
+    this.postService.postData$.subscribe(
       (data) => {
         this.freelancers = data;
         console.log(this.freelancers);
@@ -138,8 +140,9 @@ export class ClientPostDetailsComponent implements OnInit {
   }
 
   getclientdetails(postId: number): void {
-    this.postService.getClientDetailsByPostId(postId).subscribe(
-      (data) => {
+    this.postService.getClientDetailsByPostId(postId)
+    this.postService.postData$.subscribe(
+      (data:any) => {
         this.client = data;
         console.log(this.client); 
       },
@@ -177,7 +180,8 @@ export class ClientPostDetailsComponent implements OnInit {
 
   validateFreelancer(index: number, offerId: number, singlefreelancerid: number): void {
     this.validatedFreelancers.add(index);
-    this.offerservice.getOffersByPostAndFreelancer(offerId, singlefreelancerid).subscribe((res) => {
+    this.offerservice.getOffersByPostAndFreelancer(offerId, singlefreelancerid)
+    this.offerservice.offer$.subscribe((res:any) => {
       const updateValue = { selected: 'true' };
       this.offerservice.update(res.id, updateValue).subscribe(
         (updatedOffer: Offer) => {
@@ -200,7 +204,8 @@ export class ClientPostDetailsComponent implements OnInit {
 
   disqualifyFreelancer(index: number, offerId: number, singlefreelancerid: number): void {
     this.disqualifiedFreelancer.add(index);
-    this.offerservice.getOffersByPostAndFreelancer(offerId, singlefreelancerid).subscribe((res) => {
+    this.offerservice.getOffersByPostAndFreelancer(offerId, singlefreelancerid)
+    this.offerservice.offer$.subscribe((res:any) => {
       const updateValue = { selected: 'false' };
       this.offerservice.update(res.id, updateValue).subscribe(
         (updatedOffer: Offer) => {
@@ -248,7 +253,8 @@ export class ClientPostDetailsComponent implements OnInit {
         this.disabledbutton2 = true;
         this.disqualifiedFreelancer.add(index);
         
-        this.offerservice.getOffersByPostAndFreelancer(offerId, singlefreelancerid).subscribe((res) => {
+        this.offerservice.getOffersByPostAndFreelancer(offerId, singlefreelancerid)
+        this.offerservice.offer$.subscribe((res:any) => {
           const updateValue = { selected: 'declined' };
           this.offerservice.update(res.id, updateValue).subscribe(
             (updatedOffer: Offer) => {
@@ -282,21 +288,24 @@ export class ClientPostDetailsComponent implements OnInit {
   }
   
   getFreelancerTrue(postid: number): void {
-    this.offerservice.getFreelancerDetailsByPostIdTrue(postid).subscribe((res) => {
+    this.offerservice.getFreelancerDetailsByPostIdTrue(postid)
+    this.offerservice.offer$.subscribe((res) => {
       this.freelancertrue = res;
       console.log(res);
     });  
   }
 
   getFreelancerFalse(postid: number): void {
-    this.offerservice.getFreelancerDetailsByPostIdFalse(postid).subscribe((res) => {
+    this.offerservice.getFreelancerDetailsByPostIdFalse(postid)
+    this.offerservice.offer$.subscribe((res:any) => {
       this.freelancerfalse = res;
       console.log(res);
     });  
   }
 
   getFreelancerDeclined(postid: number): void {
-    this.offerservice.getFreelancerDetailsByPostIdDeclined(postid).subscribe((res) => {
+    this.offerservice.getFreelancerDetailsByPostIdDeclined(postid)
+    this.offerservice.offer$.subscribe((res) => {
       this.freelancerDeclined = res;
       console.log(res);
     });  
@@ -379,8 +388,9 @@ export class ClientPostDetailsComponent implements OnInit {
   }
 
   checkifExists(postid: number): void {
-    this.postService.checkIfOfferExists(postid).subscribe(
-      response => {
+    this.postService.checkIfOfferExists(postid)
+    this.postService.postData$.subscribe(
+      (response:any )=> {
         this.offerExists = response;
         if (this.offerExists && this.status=='open') {
           this.disabledbutton=true;

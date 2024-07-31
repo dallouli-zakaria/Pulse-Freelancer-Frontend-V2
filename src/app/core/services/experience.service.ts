@@ -11,7 +11,7 @@ export class ExperienceService {
   //variables
   private url = Constant.API_ENDPOINT;
   private subject = new BehaviorSubject<Experience[]>([]);
-  
+  private freelancer:any
   public experienceData$ = this.subject.asObservable();
   
   constructor(private http: HttpClient) {}
@@ -60,6 +60,17 @@ export class ExperienceService {
        tap(data => this.subject.next([data])) // Assuming you want to update the subject with a single item
       )
       .subscribe();
+  }
+
+  public showByFreelancer(id:any){
+    this.freelancer=this.http.get(`${this.url}/${Constant.FREELANCERS}/${id}`).subscribe({
+      next:(data: any)=>{this.subject.next(data)
+      console.log(data);
+        
+       },
+      error:(error)=>console.log(error),
+      complete:()=>console.log('end operation')
+    }).add(console.log('subjetc contract'));
   }
 
   // Error handling

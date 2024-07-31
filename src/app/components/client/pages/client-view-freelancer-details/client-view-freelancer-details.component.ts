@@ -2,13 +2,13 @@ import { Permission } from './../../../../core/models/Permission';
 import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from '../../../../core/services/auth.service';
 import { ActivatedRoute } from '@angular/router';
-import { FreelancerService } from '../../../../core/services/freelancer.service';
 import { Freelancer } from '../../../../core/models/Freelancer';
 import { ExperienceService } from '../../../../core/services/experience.service';
 import { Experience } from '../../../../core/models/experience';
 import { ClientService } from '../../../../core/services/client.service';
 import { PostsService } from '../../../../core/services/posts.service';
 import { Post } from '../../../../core/models/post';
+import { FreelancerService } from './../../../../core/services/freelancer.service';
 
 @Component({
   selector: 'app-client-view-freelancer-details',
@@ -68,7 +68,8 @@ export class ClientViewFreelancerDetailsComponent implements OnInit{
 
   getfreelancerdetails(freelancerId:number){
 
-    this.freelancerService.show(freelancerId).subscribe((res)=>{
+    this.freelancerService.show(freelancerId)
+    this.freelancerService.freelancers$.subscribe((res)=>{
       this.freelancer=res;
 
     })
@@ -77,10 +78,12 @@ export class ClientViewFreelancerDetailsComponent implements OnInit{
   }
 
   fetchFreelancerDetails(id: number) {
-    this.freelancerService.show(id).subscribe((res)=>{
+    this.freelancerService.show(id)
+    this.freelancerService.freelancers$.subscribe((res)=>{
       this.freelancer=res;
     });
-    this.experienceService.showByFreelancer(id).subscribe({next:(res)=>{
+    this.experienceService.showByFreelancer(id)
+    this.experienceService.experienceData$.subscribe({next:(res)=>{
       this.experienceData=res;
       console.log(res);
 
@@ -93,7 +96,8 @@ export class ClientViewFreelancerDetailsComponent implements OnInit{
   }
 
   getClosedPostsByFreelancerId(freelancerId:number) {
-    this.postservice.getClosedPostsByFreelancerId(freelancerId).subscribe((res) => {
+    this.postservice.getClosedPostsByFreelancerId(freelancerId)
+    this.postservice.postData$.subscribe((res) => {
       console.log(res);
       this.postdata = res;
       
@@ -102,7 +106,8 @@ export class ClientViewFreelancerDetailsComponent implements OnInit{
       res.forEach((post:any) => {
         const clientId = post.client_id;
         if (clientId) {
-          this.clientservice.show(clientId).subscribe((clres) => {
+          this.clientservice.show(clientId)
+          this.clientservice.getData$.subscribe((clres:any) => {
             console.log(clres);
             this.clientData[clientId] = clres.company_name; 
             this.isLoading=false;
@@ -116,7 +121,8 @@ export class ClientViewFreelancerDetailsComponent implements OnInit{
   }
 
   getfreelancerexperience(freelancerId:number){
-    this.experienceService.showByFreelancer(freelancerId).subscribe({next:(res)=>{
+    this.experienceService.showByFreelancer(freelancerId)
+    this.experienceService.experienceData$.subscribe({next:(res)=>{
       this.experienceData=res;
       console.log(res);
 

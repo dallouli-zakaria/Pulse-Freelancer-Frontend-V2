@@ -36,7 +36,8 @@ export class WishlistComponent implements OnInit {
    
     
     // Load favorite freelancers
-    this.wishListService.getFavoriteFreelancersdetails(this.clientId).subscribe({
+    this.wishListService.getFavoriteFreelancersdetails(this.clientId)
+    this.wishListService.wishlist$.subscribe({
       next: (data: any) => {
         this.freelancers = data;
         this.isLoading = false;

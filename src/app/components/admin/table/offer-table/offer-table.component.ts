@@ -30,7 +30,8 @@ export class OfferTableComponent {
    
   
   index(){
-    this.offerService.index().subscribe({
+    this.offerService.index()
+    this.offerService.offer$.subscribe({
       next:(data:any)=>{this.offers=data;console.log(data);
       },
       error:(error:any)=>{console.log(error);

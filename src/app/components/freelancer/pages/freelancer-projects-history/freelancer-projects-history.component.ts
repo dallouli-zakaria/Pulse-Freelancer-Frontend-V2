@@ -29,7 +29,8 @@ export class FreelancerProjectsHistoryComponent implements OnInit {
   }
 
   getClosedPostsByFreelancerId() {
-    this.postservice.getClosedPostsByFreelancerId(this.freelancerId).subscribe((res) => {
+    this.postservice.getClosedPostsByFreelancerId(this.freelancerId)
+    this.postservice.postData$.subscribe((res) => {
       console.log(res);
       this.postdata = res;
       
@@ -38,7 +39,8 @@ export class FreelancerProjectsHistoryComponent implements OnInit {
       res.forEach((post:any) => {
         const clientId = post.client_id;
         if (clientId) {
-          this.clientservice.show(clientId).subscribe((clres) => {
+          this.clientservice.show(clientId)
+          this.clientservice.getData$.subscribe((clres:any) => {
             console.log(clres);
             this.clientData[clientId] = clres.company_name; 
             this.isLoading=false;

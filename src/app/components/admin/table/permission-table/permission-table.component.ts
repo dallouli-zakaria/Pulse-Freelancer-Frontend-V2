@@ -17,7 +17,7 @@ export class PermissionTableComponent implements OnInit {
  constructor(private permissionService:PermissionService){}
  ngOnInit(): void {
   this.index()
-  this.permessionObservable=this.permissionService.permessionData
+  this.permessionObservable=this.permissionService.permissionData
  }
 trackPemission(id:number,data:any){
 this.selectedID=id;
@@ -26,7 +26,7 @@ this.selectedData=data
 
  index(){
   this.permissionService.index();
-  this.permissionService.permessionData.subscribe({
+  this.permissionService.permissionData.subscribe({
     next:(data)=>{this.permession=data},
     error:(error)=>console.log(error),
     complete:()=>console.log('end operation')

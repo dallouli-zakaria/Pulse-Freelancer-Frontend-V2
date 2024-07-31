@@ -20,11 +20,11 @@ export class PostsService {
 
   constructor(private http:HttpClient) { }
    // Get the count of posts
-   public count(): Observable<any> {
-    this.post = this.http.get(`${this.url}/postCount`);
-    return this.post;  // Return the post count as an observable
-  }
-
+  
+  public count(){
+    this.post =this.http.get(`${this.url}/postCount`);
+    return this.post ;
+   }
   // Get all posts
   public index() {
     // HTTP GET request to fetch all posts

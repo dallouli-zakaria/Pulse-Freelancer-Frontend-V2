@@ -54,7 +54,8 @@ export class ClientInfosComponent {
   getclient(){
     this.clientservice.index()
     this.clientid=this.authservice.parseID();
-    this.clientservice.show(this.clientid).subscribe({
+    this.clientservice.show(this.clientid)
+    this.clientservice.getData$.subscribe({
       next:(data:any)=>{this.client=data;
         this.isLoading = false;
       },

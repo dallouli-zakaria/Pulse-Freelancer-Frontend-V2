@@ -59,7 +59,8 @@ export class ClientUpdateCompanyInfosComponent implements OnInit,OnChanges{
     });
   }
   getdata(){
-    this.clients.show(this.clientId).subscribe(
+    this.clients.show(this.clientId)
+    this.clients.getData$.subscribe(
       (res:any)=>{this.clientdetails=res;
 
         

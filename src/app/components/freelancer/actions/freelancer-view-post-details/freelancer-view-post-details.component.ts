@@ -50,7 +50,8 @@ export class FreelancerViewPostDetailsComponent implements OnInit,OnChanges{
 
   getposts() {
     if (this.postId !== null) {
-      this.postservice.show(this.postId).subscribe((res) => {
+      this.postservice.show(this.postId)
+      this.postservice.postData$.subscribe((res:any) => {
         console.log(res);
         
         this.postdata = res;
@@ -62,7 +63,8 @@ export class FreelancerViewPostDetailsComponent implements OnInit,OnChanges{
   }
 
   getclient(clientId: number) {
-    this.clientservice.show(clientId).subscribe((res) => {
+    this.clientservice.show(clientId)
+    this.clientservice.getData$.subscribe((res:any) => {
       this.company_name = res.company_name;
       this.isLoading = false;
       console.log(res);
@@ -101,7 +103,8 @@ export class FreelancerViewPostDetailsComponent implements OnInit,OnChanges{
   }
 
   getfreelancer() {
-    this.freelancerservice.show(this.freelancerId).subscribe((res) => {
+    this.freelancerservice.show(this.freelancerId)
+    this.freelancerservice.freelancers$.subscribe((res:any) => {
       this.freelancerstatus = res.status;
     });
   }

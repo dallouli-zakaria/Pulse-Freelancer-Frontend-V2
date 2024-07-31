@@ -21,7 +21,7 @@ export class PostTableComponent {
   ngOnInit(): void {
     this.index();
     this.getdata();
-   this.postobservable=this.postService.postData
+   this.postobservable=this.postService.postData$
     
   }
 
@@ -31,13 +31,13 @@ export class PostTableComponent {
   }
   index(){
     this.postService.index();
-    this.postService.postData.subscribe({
+    this.postService.postData$.subscribe({
       next:(data)=>{
         this.post=data;
         this.isLoading = false;
       
       },
-      error:(error)=>console.log(error),
+      error:(error:any)=>console.log(error),
       complete:()=>console.log('end operation post Data')    
     })
   }

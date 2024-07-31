@@ -31,8 +31,9 @@ export class PostViewComponent {
   }
 
   fetchOfferDetails(postId: number): void {
-    this.postService.show(postId).subscribe(
-      data => {
+    this.postService.show(postId)
+    this.postService.postData$.subscribe(
+      (data:any) => {
         this.post = data;
         this.isLoading = false;
         console.log(data);

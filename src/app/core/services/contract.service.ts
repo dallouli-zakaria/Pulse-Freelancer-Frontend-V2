@@ -42,14 +42,9 @@ export class ContractService {
      return this.http.get<PaginatedResponse<Contract>>(`${this.url}/freelancerPagination`, { params });
      }
     // get contracts by id
-    public store(data:any){
-    this.contract=this.http.post(`${this.url}/${Constant.CONTARCTS}`,data).subscribe({
-      next:(data: any)=>{this.subject.next(data)
-              console.log(data);},
-      error:(error)=>console.log(error),
-      complete:()=>console.log('end operation')
-    }).add(console.log('subjetc contract get by id'));
-    
+    public store(data:any):Observable<Contract>{
+    this.contract=this.http.post(`${this.url}/${Constant.CONTARCTS}`,data)
+    return this.contract
    }
    //update function
     public update(id:number,data:any):Observable<Contract>{
