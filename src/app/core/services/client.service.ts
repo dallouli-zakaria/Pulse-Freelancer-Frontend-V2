@@ -14,10 +14,10 @@ export class ClientService {
   client!:any;
   private dataSubject:BehaviorSubject<Client[]> = new BehaviorSubject<Client[]>([]);
   url=Constant.API_ENDPOINT
-  //constauctor injection
+
   constructor(private http:HttpClient) {}
 
-   //get all data form index and get by id
+   //
     getData$=this.dataSubject.asObservable()
 
   //counte function 

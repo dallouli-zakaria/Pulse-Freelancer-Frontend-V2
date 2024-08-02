@@ -52,7 +52,7 @@ export class ClientInfosComponent {
 
 
   getclient(){
-    this.clientservice.index()
+   
     this.clientid=this.authservice.parseID();
     this.clientservice.show(this.clientid)
     this.clientservice.getData$.subscribe({

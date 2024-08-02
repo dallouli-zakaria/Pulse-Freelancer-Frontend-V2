@@ -48,7 +48,7 @@ export class ClientUpdateCompanyInfosComponent implements OnInit,OnChanges{
 
     this.clients.update(this.clientId, this.form.value).subscribe({
       next: (data: any) => {
-        this.clients.index();
+        this.clients.show(this.clientId);
       },
       error: (error: any) => {
         console.log(error);
