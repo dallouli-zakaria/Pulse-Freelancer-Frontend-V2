@@ -82,10 +82,25 @@
             </div>
 
             <div class="text-center text-lg-start mt-4 pt-2">
-              <button class="btn btn-danger btn-lg btn-block mb-4" type="submit" [disabled]="isSubmitting || applyForm.invalid">
-                {{ isSubmitting ? 'Création...' : 'Créer un compte !' }}
-              </button>
-              <p class="small fw-bold mt-2 pt-1 mb-0">Avez-vous déjà un compte? <a routerLink="../login" class="link-danger">Se connecter</a></p>
+
+              <button 
+              class="btn btn-danger btn-lg btn-block mb-4" 
+              type="submit" 
+              [disabled]="isSubmitting || applyForm.invalid"
+              *ngIf="dataStatus === 'client'">
+              {{ isSubmitting ? 'Création...' : 'Créer un compte client !' }}
+            </button>
+
+
+            <button 
+              class="btn btn-danger btn-lg btn-block mb-4" 
+              type="submit" 
+              [disabled]="isSubmitting || applyForm.invalid"
+              *ngIf="dataStatus === 'freelancer'">
+              {{ isSubmitting ? 'Création...' : 'Créer un compte freelancer!' }}
+            </button>
+
+              <p class="small fw-bold mt-2 pt-1 mb-0">Avez-vous déjà un compte? <a routerLink="../../login" class="link-danger">Se connecter</a></p>
               <p class="small fw-bold mt-2 pt-1 mb-0"><a routerLink="../" class="link-danger">Retour à la page d'accueil</a></p>
             </div>
           </form>

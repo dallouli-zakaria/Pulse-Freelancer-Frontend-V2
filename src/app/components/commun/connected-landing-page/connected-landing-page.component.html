@@ -26,46 +26,39 @@
         </div>
       </section>
 
-      <section *ngIf="isAuthenticated == false" class="py-4 position-relative" style="margin-top: -200px;" >
+      <section *ngIf="isAuthenticated == false" class="py-4 position-relative responsive-margin">
         <div class="container">
-          <div class="card py-5 border-0 shadow-sm ">
+          <div class="card shadow-sm">
             <div class="card-body">
               <div class="row">
-                
-                <div class="col-6">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                   <div class="border-end d-flex justify-content-md-center">
-                      <div class="row p-4">
-                          <p class="fw-bolder text-1000 mb-0 fs-5">Vous cherchez à embaucher?</p>
-                          <p class="text-muted">
-                            Trouvez le freelanceur idéal et concentrez-vous sur l'essentiel, nous nous occupons du reste !
-                          </p>
-                          <div class="button-wrapper">
-                            
-                              <button class="centered-button btn btn-lg btn-danger hover-top btn-glow" routerLink="/register/client">Entreprise</button>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              
-              <div class="col-6">
-                <div class="border-end d-flex justify-content-md-center">
                     <div class="row p-4">
-                        <p class="fw-bolder text-1000 mb-0 fs-5">
-                          Vous êtes à la recherche d'un emploi?</p>
-                        <p class="text-muted">
-                            Découvrez l'emploi idéal parmi des milliers d'offres disponibles en ligne sur notre site. Pour simplifier votre recherche et postuler en un seul clic.
-                        </p>
-                        <div class="button-wrapper">
-                            <button class="centered-button btn btn-lg btn-outline-danger hover-top btn-glow" routerLink="/register/freelancer">Freelancer</button>
-                        </div>
+                      <p class="fw-bolder text-1000 mb-0 fs-5">Vous cherchez à embaucher?</p>
+                      <p class="text-muted">
+                        Trouvez le freelanceur idéal et concentrez-vous sur l'essentiel, nous nous occupons du reste !
+                      </p>
+                      <div class="button-wrapper">
+                        <button class="centered-button btn btn-lg btn-danger hover-top btn-glow" routerLink="/register/client">Entreprise</button>
+                      </div>
                     </div>
+                  </div>
                 </div>
-
-
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                  <div class=" d-flex justify-content-md-center">
+                    <div class="row p-4">
+                      <p class="fw-bolder text-1000 mb-0 fs-5">Vous êtes à la recherche d'un emploi?</p>
+                      <p class="text-muted">
+                        Découvrez l'emploi idéal parmi des milliers d'offres disponibles en ligne sur notre site. Pour simplifier votre recherche et postuler en un seul clic.
+                      </p>
+                      <div class="button-wrapper">
+                        <button class="centered-button btn btn-lg btn-outline-danger hover-top btn-glow" routerLink="/register/freelancer">Freelancer</button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </section>
@@ -110,10 +103,10 @@
       </section>
 
 
-      <section class="py-4">
+      <section>
   
         <div class="container">
-          <div class="card py-5 border-0 shadow-sm ">
+          <div class="card">
             <div class="card-body">
               <div class="row">
                 <div class="col-4">
@@ -129,7 +122,7 @@
                     </div>
                     <div>
                       <p class="fw-bolder text-1000 mb-0">1000+ </p>
-                      <p class="mb-0">Freelaceurs </p>
+                      <p class="mb-0">Freelacers </p>
                     </div>
                   </div>
                 </div>
@@ -253,7 +246,7 @@
                   <div class="text-center my-5">
                     <h2 class="mb-3">Gratuit
                     </h2>
-                    <button class="btn btn-outline-danger rounded-pill" type="submit">Choisir </button>
+                    <button class="btn btn-outline-danger rounded-pill" routerLink="/login" >Choisir </button>
                   </div>
                 </div>
               </div>
@@ -284,7 +277,7 @@
                   <div class="text-center my-5">
                     <h2 class="mb-3">490 mad<span class="text-900">/an</span>
                     </h2>
-                    <button class="btn btn-outline-danger rounded-pill" type="submit">Choisir </button>
+                    <button class="btn btn-outline-danger rounded-pill" routerLink="/login">Choisir </button>
                   </div>
                 </div>
               </div>
@@ -318,7 +311,7 @@
                   <div class="text-center my-5">
                     <h2 class="mb-3">990 mad<span class="text-900">/an</span>
                     </h2>
-                    <button class="btn btn-danger hover-top btn-glow rounded-pill border-0" type="submit">Choisir</button>
+                    <button class="btn btn-danger hover-top btn-glow rounded-pill border-0" routerLink="/login">Choisir</button>
                   </div>
                 </div>
               </div>

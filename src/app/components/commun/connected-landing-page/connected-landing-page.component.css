@@ -102,7 +102,7 @@
     margin-left: 3px;
     text-indent: -999px;
     cursor: pointer;
-    background-color: #F53838;
+    background-color: #dc3545;
     background-clip: padding-box;
     border: 0;
     border-top: 0 solid transparent;
@@ -140,6 +140,21 @@
 .centered-button {
     padding: 10px 20px; /* Adjust the padding as needed */
     width: fit-content; /* Shrinks the button to fit its content */
+}
+.responsive-margin {
+  margin-top: -200px;
+}
+
+@media (max-width: 769px) {
+  .responsive-margin {
+    margin-top: -100px;
+  }
+}
+
+@media (max-width: 576px) {
+  .responsive-margin {
+    margin-top: -50px;
+  }
 }
 
 
