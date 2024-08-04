@@ -6,7 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
 import { AdminLeftbarComponent } from './components/admin/admin-layout/admin-leftbar/admin-leftbar.component';
 import { AdminTopbarComponent } from './components/admin/admin-layout/admin-topbar/admin-topbar.component';
-import { provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
 import { AdminAddComponent } from './components/admin/buttons/add/admin-add/admin-add.component';
 import { ClientAddComponent } from './components/admin/buttons/add/client-add/client-add.component';
 import { ContractAddComponent } from './components/admin/buttons/add/contract-add/contract-add.component';
@@ -29,10 +29,10 @@ import { FreelancerEditComponent } from './components/admin/buttons/edit/freelan
 import { PermissionEditComponent } from './components/admin/buttons/edit/permission-edit/permission-edit.component';
 import { RoleEditComponent } from './components/admin/buttons/edit/role-edit/role-edit.component';
 import { UsersEditComponent } from './components/admin/buttons/edit/users-edit/users-edit.component';
-import { ClientCartComponent } from './components/admin/carts/client-cart/client-cart.component';
-import { ContractCartComponent } from './components/admin/carts/contract-cart/contract-cart.component';
-import { FreelancerCartComponent } from './components/admin/carts/freelancer-cart/freelancer-cart.component';
-import { OfferCartComponent } from './components/admin/carts/offer-cart/offer-cart.component';
+import { ClientCartComponent } from './components/admin/cards/client-cart/client-cart.component';
+import { ContractCartComponent } from './components/admin/cards/contract-cart/contract-cart.component';
+import { FreelancerCartComponent } from './components/admin/cards/freelancer-cart/freelancer-cart.component';
+import { OfferCartComponent } from './components/admin/cards/offer-cart/offer-cart.component';
 import { AdminComponent } from './components/admin/pages/admin/admin.component';
 import { ClientComponent } from './components/admin/pages/client/client.component';
 import { ContractComponent } from './components/admin/pages/contract/contract.component';
@@ -55,7 +55,7 @@ import { LoginComponent } from './components/commun/auth/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TimeAgoPipe } from './core/pipes/time-ago.pipe';
 import { AuthService } from './core/services/auth.service';
-import { PostCartComponent } from './components/admin/carts/post-cart/post-cart.component';
+import { PostCartComponent } from './components/admin/cards/post-cart/post-cart.component';
 import { PostTableComponent } from './components/admin/table/post-table/post-table.component';
 import { PostComponent } from './components/admin/pages/post/post.component';
 import { PostAddComponent } from './components/admin/buttons/add/post-add/post-add.component';
@@ -121,6 +121,7 @@ import { CircularProgressbarComponent } from './components/commun/client-freelan
 import { WishlistComponent } from './components/client/pages/wishlist/wishlist.component';
 import { LoadingPageComponent } from './components/commun/loading/loading-page/loading-page.component';
 import { PostRegiterComponent } from './components/commun/auth/post-regiter/post-regiter.component';
+import { tokenInterceptor } from './core/interceptors/token.interceptor';
 ;
 
 @NgModule({
@@ -251,7 +252,7 @@ import { PostRegiterComponent } from './components/commun/auth/post-regiter/post
       ReactiveFormsModule,
       CommonModule,NgxPaginationModule,FormsModule 
   ],
-  providers: [provideHttpClient(),AuthService],
+  providers: [provideHttpClient(),AuthService,  { provide: HTTP_INTERCEPTORS, useFactory: () => tokenInterceptor, multi: true },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

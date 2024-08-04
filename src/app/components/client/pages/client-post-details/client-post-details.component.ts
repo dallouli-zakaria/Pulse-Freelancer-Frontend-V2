@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, inject, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from '../../../../core/models/Client';
 import { Post } from '../../../../core/models/post';
 import { AuthService } from '../../../../core/services/auth.service';
@@ -19,6 +19,7 @@ export class ClientPostDetailsComponent implements OnInit {
   disqualifiedFreelancer: Set<number> = new Set<number>();
   postId!: number;
   post!: Post;
+  router = inject(Router);
   postdetails!: any;
   isLoading: boolean = true;
   roles!: string;
@@ -52,6 +53,19 @@ export class ClientPostDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
+    this.isAuthenticated = this.authService.isLoggedIn();
+    if (this.isAuthenticated) {
+      this.authService.getUserRole().subscribe((res) => {
+        this.roles = res;
+
+
+        
+      });
+    }
+
+
+
     const postIdParam = this.route.snapshot.paramMap.get('postId');
     if (postIdParam !== null) {
       this.postId = +postIdParam;
@@ -60,16 +74,53 @@ export class ClientPostDetailsComponent implements OnInit {
       console.log("error");
     }
 
-    this.isAuthenticated = this.authService.isLoggedIn();
-    if (this.isAuthenticated) {
-      this.authService.getUserRole().subscribe((res) => {
-        this.roles = res;
-      });
-    }
+
+
+
+
+
   }
 
+  
+  verifyFreelancerPosts(){   
+    this.isLoadingClose = true;
+    let freelancerId=this.authService.parseID();
+      this.postService.verifyFreelancerPost(freelancerId,this.postId).subscribe((res)=>{
+        if(!res && this.roles == 'Freelancer'){        
+          this.router.navigate(['/']);     
+        }      
+      })
+  }
+
+
+  verifyClientPosts(){   
+    this.isLoadingClose = true;
+    let clientId=this.authService.parseID();
+      this.postService.verifyClientPost(clientId,this.postId).subscribe((res)=>{
+        if(!res && this.roles == 'Client'){        
+          this.router.navigate(['/']);     
+        }      
+      })
+  }
+
+  verifyProperty(){
+    const postIdParam = this.route.snapshot.paramMap.get('postId');
+    if (postIdParam !== null) {
+      this.postId = +postIdParam;
+
+    } else {
+      console.log("error");
+    }
+
+
+  }
+
+
+
+
   initializeData(): void {
-   
+    this.verifyFreelancerPosts();
+    this.verifyClientPosts();
     this.fetchOfferDetails(this.postId);
     this.getFreelancers(this.postId);
     this.getclientdetails(this.postId);
@@ -405,5 +456,18 @@ export class ClientPostDetailsComponent implements OnInit {
   createcontract(){
 
   }
+
+  showadd=false
+  show2=false
+  
+  onAdd(): void {
+    this.show2 = true;
+      this.showadd = true;
+  }
+    onCloseModal2(): void {
+      this.show2 = false;
+      this.showadd = false;
+     
+    }
  
 }

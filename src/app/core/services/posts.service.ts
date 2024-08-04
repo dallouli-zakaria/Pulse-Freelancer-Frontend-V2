@@ -119,6 +119,14 @@ export class PostsService {
       this.post=this.http.get(`${this.url}/${Constant.POSTS}/open/all`);
       return this.post
     }
+
+    verifyClientPost(id:number,postid:number){
+      return this.http.get(`${this.url}/verify-client-post/${id}/${postid}`);
+    }
+
+    verifyFreelancerPost(id:number,postid:number){
+      return this.http.get(`${this.url}/verify-freelancer-post/${id}/${postid}`);
+    }
   
 
 

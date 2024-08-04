@@ -30,9 +30,20 @@
       
 
 
-      <button *ngIf="roles == 'superadmin_role' && post?.status =='closed'"  class="btn btn-outline-primary col-lg-2"  (click)="createcontract()">
-        dsajvd
-      </button>
+       
+<div *ngIf="roles == 'superadmin_role' && post?.status =='closed'"  class="container col-lg-2">
+  <button type="button" class="btn btn-primary btn-sm" (click)="onAdd()">
+   <i class="fas fa-download fa-sm text-white-50"></i>  Add contract
+   </button>
+   </div>
+ <div *ngIf="show2" class="modal-backdrop fade show"></div>
+ <!-- add -->
+ <div  *ngIf="showadd" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-m"><div class="modal-content">
+    <app-contract-add (closeModal)="onCloseModal2()"></app-contract-add>
+  </div>
+ </div>
+</div>
 
 
       <!-- <button *ngIf="roles == 'superadmin_role' && post?.status =='waiting'  " 

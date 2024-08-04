@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Freelancer } from '../../../../core/models/Freelancer';
 import { AuthService } from '../../../../core/services/auth.service';
 import { FreelancerService } from '../../../../core/services/freelancer.service';
 import { WishListService } from '../../../../core/services/wish-list.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-wishlist',
@@ -33,12 +33,11 @@ export class WishlistComponent implements OnInit {
   }
 
   index() {
-   
-    
-    // Load favorite freelancers
     this.wishListService.getFavoriteFreelancersdetails(this.clientId).subscribe({
       next: (data: any) => {
         this.freelancers = data;
+        this.filteredFreelancers = data;
+        this.updatePagination();
         this.isLoading = false;
         console.log(data);
       },
@@ -48,29 +47,43 @@ export class WishlistComponent implements OnInit {
       complete: () => console.log('end operation get data')
     });
 
-
-    // Load favorite freelancers
     this.wishListService.getFavoriteFreelancers(this.clientId).subscribe({
       next: (data: any) => {
         this.favoriteFreelancers = new Set(data.map((item: any) => item.freelancer_id));
         console.log(this.favoriteFreelancers);
-        
       }
     });
-
-
   }
 
   toggleFavorite(freelancerId: number) {
     if (this.favoriteFreelancers.has(freelancerId)) {
       this.wishListService.removeFromWishlist(this.clientId, freelancerId).subscribe(() => {
         this.favoriteFreelancers.delete(freelancerId);
+        this.index(); // Refresh data to reflect changes
+        Swal.fire({
+          position: 'top-end',
+          iconHtml: '<i class="fas fa-heart"></i>', // Use Font Awesome heart icon
+          title: 'Retiré des favoris',
+          customClass: {
+            popup: 'smaller-popup',
+            icon: 'heart-icon'
+          },
+          showConfirmButton: false,
+          timer: 1500,
+          backdrop: false, // Disable background overlay
+          width: '400px', // Adjust the width to make it smaller
+          padding: '1em', // Adjust padding to make it smaller
+        })
       });
-    } else {
-      this.wishListService.addToWishlist(this.clientId, freelancerId).subscribe(() => {
-        this.favoriteFreelancers.add(freelancerId);
-      });
+    // } else {
+    //   this.wishListService.addToWishlist(this.clientId, freelancerId).subscribe(() => {
+    //     this.favoriteFreelancers.add(freelancerId);
+    //     this.index(); // Refresh data to reflect changes
+    //   });
     }
+
+
+   
   }
 
   isFavorite(freelancerId: number): boolean {
@@ -105,6 +118,7 @@ export class WishlistComponent implements OnInit {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = Math.min(startIndex + this.itemsPerPage, this.filteredFreelancers.length);
     this.paginatedFreelancers = this.filteredFreelancers.slice(startIndex, endIndex);
+    this.totalPages = Math.ceil(this.filteredFreelancers.length / this.itemsPerPage);
   }
 
   getPageNumbers(): number[] {

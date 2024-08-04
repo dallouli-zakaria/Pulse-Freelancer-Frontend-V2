@@ -157,5 +157,13 @@
   }
 }
 
+.accordion-button:focus, .accordion-button:not(.collapsed) {
+  box-shadow: none;
+}
+.accordion-button:not(.collapsed) {
+  background-color: #e9ecef;
+  color: #000;
+}
+
 
   

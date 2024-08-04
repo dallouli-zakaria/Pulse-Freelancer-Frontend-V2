@@ -129,6 +129,7 @@ const routes: Routes = [
     path: 'home',
     component: IndexComponent,
     children: [
+      { path: '', redirectTo: 'pulse', pathMatch: 'full' },
       { path: 'pulse', component: ConnectedLandingPageComponent },
       { path: 'contact', component: ContactUsComponent },
     ]
