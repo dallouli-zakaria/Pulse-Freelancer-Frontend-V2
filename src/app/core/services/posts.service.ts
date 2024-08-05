@@ -16,7 +16,6 @@ export class PostsService {
   url=Constant.API_ENDPOINT
   public subject:BehaviorSubject<Post[]>=new BehaviorSubject<Post[]>([])
   // Observable to allow other components to subscribe to the post data
-  postData$=this.subject.asObservable();
 
   constructor(private http:HttpClient) { }
    // Get the count of posts
@@ -28,22 +27,16 @@ export class PostsService {
   // Get all posts
   public index() {
     // HTTP GET request to fetch all posts
-    this.http.get(`${this.url}/${Constant.POSTS}`).pipe(shareReplay(1)).subscribe({
-      next: (data: any) => this.subject.next(data), 
-      error: (error: any) => console.log(error),  
-      complete: () => console.log('end operation')  
-    }).add(console.log('subject permission'));  
+   return  this.http.get(`${this.url}/${Constant.POSTS}`)
   }
 
 
   // Fetch paginated posts
   public fetchPaginatedPosts(page: number = 1){
     const params = new HttpParams().set('page', page.toString());
-   this.http.get<PaginatedResponse<Post>>(`${this.url}/postPagination`, { params }).pipe(shareReplay(1)).subscribe({
-    next: (data: any) => this.subject.next(data), 
-    error: (error: any) => console.log(error),  
-    complete: () => console.log('end operation')  
-  }).add(console.log('subject permission'))
+
+    this.post = this.http.get<PaginatedResponse<Post>>(`${this.url}/postPagination`, { params });
+    return this.post
   }
 
   // Create a new post
@@ -72,29 +65,20 @@ export class PostsService {
 
   // Show a post by ID
   public show(id: any){
-    this.post = this.http.get<Post>(`${this.url}/${Constant.POSTS}/${id}`).pipe(shareReplay(1)).subscribe({
-      next: (data: any) => this.subject.next(data), 
-      error: (error: any) => console.log(error),  
-      complete: () => console.log('end operation')  
-    }).add(console.log('subject permission'))
+    this.post = this.http.get<Post>(`${this.url}/${Constant.POSTS}/${id}`);
+    return this.post
   }
 
   // Show posts by client ID
   public showbclient(id: any){
-    this.post = this.http.get<Post[]>(`${this.url}/${Constant.POSTS}/client/${id}`).pipe(shareReplay(1)).subscribe({
-      next: (data: any) => this.subject.next(data), 
-      error: (error: any) => console.log(error),  
-      complete: () => console.log('end operation')  
-    }).add(console.log('subject permission'))
+    this.post = this.http.get<Post[]>(`${this.url}/${Constant.POSTS}/client/${id}`)
+    return this.post
   }
 
   // Show posts by post ID
   public showbpost(id: any){
-    this.post = this.http.get<Post>(`${this.url}/${Constant.POSTS}/post_id/${id}`).pipe(shareReplay(1)).subscribe({
-      next: (data: any) => this.subject.next(data), 
-      error: (error: any) => console.log(error),  
-      complete: () => console.log('end operation')  
-    }).add(console.log('subject permission'))
+    this.post = this.http.get<Post>(`${this.url}/${Constant.POSTS}/post_id/${id}`)
+    return this.post
   }
 
   // Check if a freelancer has made an offer on a post
@@ -106,56 +90,37 @@ export class PostsService {
   // Get freelancers by post ID
   public getFreelancersByPostId(postId: number){
     const url = `${this.url}/offer/freelancers/${postId}`;
-    this.http.get<any>(url).pipe(shareReplay(1)).subscribe({
-      next: (data: any) => this.subject.next(data), 
-      error: (error: any) => console.log(error),  
-      complete: () => console.log('end operation')  
-    }).add(console.log('subject permission'));
+    this.post = this.http.get<any>(url)
+    return this.post
   }
 
   // Get client details by post ID
   public getClientDetailsByPostId(postId: number) {
-    return this.http.get<Client>(`${this.url}/posts/${postId}/client`).pipe(shareReplay(1)).subscribe({
-      next: (data: any) => this.subject.next(data), 
-      error: (error: any) => console.log(error),  
-      complete: () => console.log('end operation')  
-    }).add(console.log('subject permission'))
+    return this.http.get<Client>(`${this.url}/posts/${postId}/client`)
+
   }
 
   // Check if an offer exists for a post by ID
  public checkIfOfferExists(postId: number) {
     const url = `${this.url}/posts/${postId}/check-offer`;
-   this.http.get<boolean>(url).pipe(shareReplay(1)).subscribe({
-    next: (data: any) => this.subject.next(data), 
-    error: (error: any) => console.log(error),  
-    complete: () => console.log('end operation')  
-  }).add(console.log('subject permission'))
+   return this.http.get<boolean>(url)
   }
 
   // Get closed posts by freelancer ID
   public getClosedPostsByFreelancerId(freelancerId: number){
-    this.post = this.http.get<any>(`${this.url}/posts/closed-by-freelancer/${freelancerId}`).pipe(shareReplay(1)).subscribe({
-      next: (data: any) => this.subject.next(data), 
-      error: (error: any) => console.log(error),  
-      complete: () => console.log('end operation')  
-    }).add(console.log('subject permission'))
+    this.post = this.http.get<any>(`${this.url}/posts/closed-by-freelancer/${freelancerId}`)
+    return this.post
   }
 
   // Show posts by freelancer ID
   public showbfreelancer(id: any){
-    this.post = this.http.get<Post[]>(`${this.url}/${Constant.POSTS}/freelancer/${id}`).pipe(shareReplay(1)).subscribe({
-      next: (data: any) => this.subject.next(data), 
-      error: (error: any) => console.log(error),  
-      complete: () => console.log('end operation')  
-    }).add(console.log('subject permission'))
+    this.post = this.http.get<Post[]>(`${this.url}/${Constant.POSTS}/freelancer/${id}`);
+    return this.post
   }
 
   // Show open posts
   public showOpenPosts(){
-    this.post = this.http.get<any>(`${this.url}/${Constant.POSTS}/open/all`).pipe(shareReplay(1)).subscribe({
-      next: (data: any) => this.subject.next(data), 
-      error: (error: any) => console.log(error),  
-      complete: () => console.log('end operation')  
-    }).add(console.log('subject permission'))
+    this.post = this.http.get<any>(`${this.url}/${Constant.POSTS}/open/all`);
+    return this.post
   }
 }

@@ -96,8 +96,7 @@ export class ClientViewFreelancerDetailsComponent implements OnInit{
   }
 
   getClosedPostsByFreelancerId(freelancerId:number) {
-    this.postservice.getClosedPostsByFreelancerId(freelancerId)
-    this.postservice.postData$.subscribe((res) => {
+    this.postservice.getClosedPostsByFreelancerId(freelancerId).subscribe((res: any[]) => {
       console.log(res);
       this.postdata = res;
       

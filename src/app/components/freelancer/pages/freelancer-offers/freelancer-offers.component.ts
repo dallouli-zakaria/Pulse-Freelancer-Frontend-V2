@@ -34,8 +34,7 @@ export class FreelancerOffersComponent implements OnInit{
   }
 
   getposts() {
-    this.postservice.showbfreelancer(this.freelancerId)
-    this.postservice.postData$.subscribe({
+    this.postservice.showbfreelancer(this.freelancerId).subscribe({
       next: (data: any) => {
         this.allPosts = data;
         this.categorizePosts();

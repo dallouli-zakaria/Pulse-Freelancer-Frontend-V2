@@ -29,8 +29,7 @@ export class FreelancerProjectsHistoryComponent implements OnInit {
   }
 
   getClosedPostsByFreelancerId() {
-    this.postservice.getClosedPostsByFreelancerId(this.freelancerId)
-    this.postservice.postData$.subscribe((res) => {
+    this.postservice.getClosedPostsByFreelancerId(this.freelancerId).subscribe((res: any[]) => {
       console.log(res);
       this.postdata = res;
       

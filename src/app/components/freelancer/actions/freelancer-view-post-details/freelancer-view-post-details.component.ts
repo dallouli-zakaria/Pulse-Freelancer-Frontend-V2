@@ -50,8 +50,7 @@ export class FreelancerViewPostDetailsComponent implements OnInit,OnChanges{
 
   getposts() {
     if (this.postId !== null) {
-      this.postservice.show(this.postId)
-      this.postservice.postData$.subscribe((res:any) => {
+      this.postservice.show(this.postId).subscribe((res:any) => {
         console.log(res);
         
         this.postdata = res;

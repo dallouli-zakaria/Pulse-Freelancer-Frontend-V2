@@ -31,14 +31,13 @@ export class PostViewComponent {
   }
 
   fetchOfferDetails(postId: number): void {
-    this.postService.show(postId)
-    this.postService.postData$.subscribe(
+    this.postService.show(postId).subscribe(
       (data:any) => {
         this.post = data;
         this.isLoading = false;
         console.log(data);
       },
-      error => {
+      (error: any) => {
         console.error('Error fetching offer details', error);
         this.isLoading = false;
       }

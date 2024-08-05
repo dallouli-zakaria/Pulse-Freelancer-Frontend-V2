@@ -21,8 +21,7 @@ export class PostTableComponent {
   ngOnInit(): void {
     this.index();
     this.getdata();
-   this.postobservable=this.postService.postData$
-    
+  
   }
 
   trackPost(id:number,data:any){
@@ -30,9 +29,8 @@ export class PostTableComponent {
    this.selectedObject=data
   }
   index(){
-    this.postService.index();
-    this.postService.postData$.subscribe({
-      next:(data)=>{
+    this.postService.index().subscribe({
+      next:(data:any)=>{
         this.post=data;
         this.isLoading = false;
       

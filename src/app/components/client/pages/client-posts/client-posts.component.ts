@@ -30,8 +30,7 @@ export class ClientPostsComponent implements OnInit {
   }
 
   getposts() {
-    this.postservice.showbclient(this.clientid);
-    this.postservice.postData$.subscribe({
+    this.postservice.showbclient(this.clientid).subscribe({
       next: (data: any) => {
         if (Array.isArray(data)) {
           this.allPosts = data;

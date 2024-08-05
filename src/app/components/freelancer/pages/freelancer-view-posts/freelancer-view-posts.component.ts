@@ -40,8 +40,7 @@ export class FreelancerViewPostsComponent {
 
 
 
-    this.postsService.showOpenPosts()
-    this.postsService.postData$.subscribe((res:any)=>{
+    this.postsService.showOpenPosts().subscribe((res:any)=>{
       this.posts=res;
       this.isLoading=false;
     })
