@@ -147,7 +147,7 @@
         <hr>
         <div class="row">
           <h5 class="col-lg-4">date de création :</h5>
-          <h5 class="col-lg-8 text-muted">{{ post.created_at | timeAgo }} le {{ post.created_at | date: 'dd-MM-yyyy' }}</h5>
+          <h5 class="col-lg-8 text-muted">{{ post.created_at ? (post.created_at | timeAgo) : 'Date not available' }} le {{ post.created_at | date: 'dd-MM-yyyy' }}</h5>
         </div>
         <hr>
         <h5 *ngIf="roles == 'superadmin_role'" class="mb-3 mt-4">

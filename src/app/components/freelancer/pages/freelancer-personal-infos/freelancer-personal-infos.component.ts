@@ -25,8 +25,9 @@ export class FreelancerPersonalInfosComponent {
   getFreelancer() {
     this.isLoading = true; 
     this.freelancerId = this.authService.parseID();
-    this.freelancerService.show(this.freelancerId).subscribe({
-      next: (data) => {
+    this.freelancerService.show(this.freelancerId)
+    this.freelancerService.freelancers$.subscribe({
+      next: (data:any) => {
         this.freelancerdata = data;
         
         this.isLoading = false; 

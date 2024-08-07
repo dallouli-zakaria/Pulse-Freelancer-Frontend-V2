@@ -22,7 +22,7 @@ export class RolechipsAutocompleteComponent {
   console.log(this.options);
   
     this.index();
-  this.subject = this.permissionService.permessionData;
+  this.subject = this.permissionService.permissionData;
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value ))
@@ -36,8 +36,8 @@ export class RolechipsAutocompleteComponent {
 
   index() {
     this.permissionService.index();
-    this.permissionService.permessionData.subscribe({
-      next: (data) => {
+    this.permissionService.permissionData.subscribe({
+      next: (data:any) => {
         this.options = data;
       
       },

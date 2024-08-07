@@ -27,7 +27,7 @@ export class FreelancerExperienceComponent implements OnInit,OnChanges{
   constructor(private experienceService: ExperienceService, private authService: AuthService) { }
   ngOnChanges(changes: SimpleChanges): void {
     this.getData();
-    this.listExperience = this.experienceService.experienceData;
+    this.listExperience = this.experienceService.experienceData$;
   }
 
   ngOnInit(): void {
@@ -55,7 +55,8 @@ export class FreelancerExperienceComponent implements OnInit,OnChanges{
 
   getData() {
     this.isLoading = true;
-    this.experienceService.showByFreelancer(this.freelancerId).subscribe({
+    this.experienceService.showByFreelancer(this.freelancerId)
+    this.experienceService.experienceData$.subscribe({
       next: (res) => {
         this.experienceData = res;
         console.log(res);

@@ -40,14 +40,15 @@ export class FreelancerViewPostsComponent {
 
 
 
-    this.postsService.showOpenPosts().subscribe((res)=>{
+    this.postsService.showOpenPosts().subscribe((res:any)=>{
       this.posts=res;
       this.isLoading=false;
     })
   }
 
   getclient(clientId: number) {
-    this.clientservice.show(clientId).subscribe((res) => {
+    this.clientservice.show(clientId)
+    this.clientservice.getData$.subscribe((res:any) => {
       this.company_name = res.company_name;
       console.log(res);
     });

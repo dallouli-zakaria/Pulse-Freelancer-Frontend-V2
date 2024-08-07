@@ -31,14 +31,15 @@ export class UsersTableComponent implements OnInit{
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
 
-    this.subject=this.userService.getData 
+    this.subject=this.userService.getdata$
   
   }
   
   loadFreelancers(page: number): void {
     this.isLoading = true;
-    this.userService.fetchPaginatedUser(page).subscribe({
-      next: (response: PaginatedResponse<User>) => {
+    this.userService.fetchPaginatedUser(page)
+    this.userService.getdata$.subscribe({
+      next: (response: any) => {
         this.users = response.data;
         this.filteredUser = this.users; // Initialize filtered list
         this.totalPages = response.last_page;

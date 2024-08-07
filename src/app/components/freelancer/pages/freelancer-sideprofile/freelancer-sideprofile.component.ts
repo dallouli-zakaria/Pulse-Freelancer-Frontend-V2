@@ -31,8 +31,9 @@ export class FreelancerSideprofileComponent implements OnInit{
   }
   getFreelancer() {
     this.freelancerId = this.authService.parseID();
-    this.freelancerService.show(this.freelancerId).subscribe({
-      next: (data) => {
+    this.freelancerService.show(this.freelancerId)
+    this.freelancerService.freelancers$.subscribe({
+      next: (data:any) => {
         this.freelancerdata = data;
         this.isLoading = false;
         console.log(this.freelancerdata);
@@ -41,7 +42,8 @@ export class FreelancerSideprofileComponent implements OnInit{
       complete: () => console.log("get freelancer done")
     }); 
 
-    this.experienceService.showByFreelancer(this.freelancerId).subscribe({
+    this.experienceService.showByFreelancer(this.freelancerId)
+    this.experienceService.experienceData$.subscribe({
       next: (res) => {
         this.experienceData = res;
         console.log(res);

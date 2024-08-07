@@ -17,6 +17,7 @@ export class FreelancerService {
   private readonly subjectBe:BehaviorSubject<Freelancer[]>=new BehaviorSubject<Freelancer[]>([])
   constructor(private http:HttpClient) { }
 
+   freelancers$ = this.subjectBe.asObservable();
 
    public count(){
     this.freelancer=this.http.get(`${this.url}/${this.conuntUrl}`);
@@ -41,7 +42,7 @@ export class FreelancerService {
    return this.subjectBe.asObservable();
    }
 
-   fetchPaginatedFreelancers(page: number = 1): void {
+    public fetchPaginatedFreelancers(page: number = 1): void {
     const params = new HttpParams().set('page', page.toString());
     this.http.get<PaginatedResponse<Freelancer>>(`${this.url}/freelancerPagination`, { params })
       .pipe(shareReplay(1))
@@ -51,7 +52,7 @@ export class FreelancerService {
         complete: () => console.log('Fetched paginated freelancers data')
       });
   }
-  freelancers$ = this.subjectBe.asObservable();
+  
 
 
     public store(data:any):Observable<Freelancer>{
@@ -69,7 +70,7 @@ export class FreelancerService {
     return this.freelancer
    }
 
-   register(
+   public register(
     data:any
   ): Observable<any> {
 
@@ -77,13 +78,19 @@ export class FreelancerService {
     return this.http.post(`${this.url}/${Constant.FREELANCERS}`, data);
   }
 
-
-  show(id:any):Observable<Freelancer>{
-    this.freelancer=this.http.get(`${this.url}/${Constant.FREELANCERS}/${id}`);
-    return this.freelancer;
+  //get 
+  public show(id:any){
+    this.freelancer=this.http.get(`${this.url}/${Constant.FREELANCERS}/${id}`).subscribe({
+      next:(data: any)=>{this.subjectBe.next(data)
+      console.log(data);
+        
+       },
+      error:(error)=>console.log(error),
+      complete:()=>console.log('end operation')
+    }).add(console.log('subjetc contract'));
   }
 
-  updateFreelancerData(data: Freelancer) {
+  public  updateFreelancerData(data: Freelancer) {
     this.freelancerData = data;
   }
 

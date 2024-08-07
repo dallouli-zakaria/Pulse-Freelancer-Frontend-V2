@@ -23,14 +23,15 @@ export class FreelancerContractsComponent {
   ngOnInit(): void {
     this.fetchData();
     this.contractService.index()
-    this.subject = this.contractService.contractData;
+    this.subject = this.contractService.contractData$;
     this.showContract();
 
 
   }
 
   fetchData() {
-    this.contractService.contractData.subscribe({
+    this.contractService.index()
+    this.contractService.contractData$.subscribe({
       next: (contracts: any) => {
         this.contract = contracts;
         this.contract.forEach(contract => {
@@ -51,8 +52,9 @@ export class FreelancerContractsComponent {
     console.log(clientId);
     
     if (!this.clientMap[clientId]) {
-      this.clientService.show(clientId).subscribe({
-        next: (freelancer: Client) => {
+      this.clientService.show(clientId)
+      this.clientService.getData$.subscribe({
+        next: (freelancer:any) => {
           this.clientMap[clientId] = freelancer;
         },
         error: (error) => {
@@ -71,7 +73,7 @@ export class FreelancerContractsComponent {
   }
   errorhandling:any
   showContract() {
-    this.contractService.contractData.subscribe({
+    this.contractService.contractData$.subscribe({
       next: (data: any) => { this.contract = data; },
       error: (error:any) => {
         console.error(error);

@@ -41,7 +41,7 @@ export class ContractAddComponent implements OnInit {
     this.freelancerIndex()
       this.freelnacerSubject=this.freelancerService.getdata
       // client
-      this.clientsubject=this.clientservices.getData
+      this.clientsubject=this.clientservices.getData$
       this.clientIndex()
       //form builderContract
      this.form=this.fb.group({
@@ -63,11 +63,11 @@ export class ContractAddComponent implements OnInit {
       console.log(this.form.value);
       
      this.contractService.store(this.form.value).subscribe({
-      next:(data)=>{console.log(data);
+      next:(data:any)=>{console.log(data);
         this.contractService.index();
         this.close()
       },
-      error:(error)=>{console.log(error);
+      error:(error:any)=>{console.log(error);
         if ( error.error.errors) {
           this.errorhandling = Object.values(error.error.errors).flat();
         } else {
@@ -81,7 +81,7 @@ export class ContractAddComponent implements OnInit {
   }
   clientIndex(){
     this.clientservices.index()
-    this.clientservices.getData.subscribe({
+    this.clientservices.getData$.subscribe({
     next:(data:any)=>{this.client=data;console.log(data);
     },
     error:(error)=>console.log(error),

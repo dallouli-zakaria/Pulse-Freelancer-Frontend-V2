@@ -32,9 +32,13 @@ export class ClientPostsComponent implements OnInit {
   getposts() {
     this.postservice.showbclient(this.clientid).subscribe({
       next: (data: any) => {
-        this.allPosts = data;
-        this.categorizePosts();
-        this.filterAndPaginatePosts();
+        if (Array.isArray(data)) {
+          this.allPosts = data;
+          this.categorizePosts();
+          this.filterAndPaginatePosts();
+        } else {
+          console.error('Data received is not an array', data);
+        }
         this.isLoading = false;
       },
       error: (error: any) => {
