@@ -11,10 +11,21 @@
       </div>
       
       <!-- perdio -->
-     <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label"> Period</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" formControlName="period" aria-describedby="emailHelp">
+      <div class="row">
+        <div class="col-6">
+          <label for="startDate">Date début</label>
+          <input class="form-control" type="date" id="startDate" formControlName="startDate">
+        </div>
+        <div class="col-6">
+          <label for="endDate">Date fin</label>
+          <input class="form-control" type="date" id="endDate" formControlName="endDate">
+        </div>
       </div>
+      
+          <!-- Error message for date range -->
+          <div *ngIf="form.errors?.['dateRangeInvalid']" class="alert alert-danger">
+            La date de fin ne peut pas être antérieure à la date de début.
+          </div>
      
       
        <!-- buget -->
