@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Client } from '../../../../core/models/Client';
 import { AuthService } from '../../../../core/services/auth.service';
 import { ClientService } from '../../../../core/services/client.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-client-update-personal-infos',
@@ -43,6 +44,12 @@ export class ClientUpdatePersonalInfosComponent implements OnInit,OnChanges{
 
     this.clients.update(this.clientId, this.form.value).subscribe({
       next: (data: any) => {
+        Swal.fire({
+          icon: "success",
+          title: "Modifié avec succès",
+          showConfirmButton: false,
+          timer: 1500
+        });
         this.clients.show(this.clientId);
       },
       error: (error: any) => {
