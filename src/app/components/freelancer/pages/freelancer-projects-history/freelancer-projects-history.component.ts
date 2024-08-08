@@ -21,6 +21,7 @@ export class FreelancerProjectsHistoryComponent implements OnInit {
   postId!:number;
   offerStartDate!:any;
   offerEndDate!:any;
+  errorhandling:any
   constructor(private authservice: AuthService, private postservice: PostsService, private clientservice: ClientService,private offerservice:OffersService) {}
 
   ngOnInit(): void {
@@ -29,7 +30,8 @@ export class FreelancerProjectsHistoryComponent implements OnInit {
   }
 
   getClosedPostsByFreelancerId() {
-    this.postservice.getClosedPostsByFreelancerId(this.freelancerId).subscribe((res: any[]) => {
+    this.postservice.getClosedPostsByFreelancerId(this.freelancerId).subscribe({
+      next:(res: any[]) => {
       console.log(res);
       this.postdata = res;
       
@@ -48,7 +50,18 @@ export class FreelancerProjectsHistoryComponent implements OnInit {
       });
 
      
-    });
+    },error: (error:any) => {
+      if (error.error.errors) {
+        this.errorhandling = Object.values(error.error.errors).flat();
+        console.log(this.errorhandling);
+        
+      } else {
+        this.errorhandling = [error.message || 'An error occurred'];
+        console.log(this.errorhandling);
+      }
+    },
+
+  });
 
   }
 }

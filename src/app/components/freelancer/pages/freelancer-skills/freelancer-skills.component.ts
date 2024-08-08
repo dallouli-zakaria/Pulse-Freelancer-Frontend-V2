@@ -48,16 +48,23 @@ export class FreelancerSkillsComponent implements OnInit {
     });
     
   }
-
+  errorhandling:any;
   public index(): void {
     this.skillService.showbyfreelancerid(this.freelancerId).subscribe({
       next: (data: any) => {
         this.freelancerSkillsData = data;
         console.log(data);
       },
-      error: (error: any) => {
-        console.log(error);
-      }
+      error: (error) => {
+        if (error.error.errors) {
+          this.errorhandling = Object.values(error.error.errors).flat();
+          console.log(this.errorhandling);
+          
+        } else {
+          this.errorhandling = [error.message || 'An error occurred'];
+          console.log(this.errorhandling);
+        }
+      },
     });
   }
 

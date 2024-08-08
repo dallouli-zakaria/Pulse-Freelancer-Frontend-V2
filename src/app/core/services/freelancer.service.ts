@@ -83,7 +83,6 @@ export class FreelancerService {
     this.freelancer=this.http.get(`${this.url}/${Constant.FREELANCERS}/${id}`).subscribe({
       next:(data: any)=>{this.subjectBe.next(data)
       console.log(data);
-        
        },
       error:(error)=>console.log(error),
       complete:()=>console.log('end operation')

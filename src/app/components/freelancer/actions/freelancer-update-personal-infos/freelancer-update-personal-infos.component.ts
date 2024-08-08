@@ -11,7 +11,7 @@ import { FreelancerService } from '../../../../core/services/freelancer.service'
 export class FreelancerUpdatePersonalInfosComponent {
 
   @Input() freelancerID!:number
-  @Input() freelancerData?:Freelancer;
+  @Input() freelancerData?:any;
    moroccanCities = ['Casablanca', 'Rabat', 'Marrakech', 'Fès', 'Tanger', 'Agadir', 'Essaouira', 'Meknès', 'Autre'];
    availability=['disponible','sous préavis']
    freelancer:Freelancer[]=[]
@@ -47,13 +47,16 @@ updated(){
     next:(data:any)=>{
       console.log(data);
       this.close();
-       this.frelancerservices.index()},
+       this.frelancerservices.show(this.freelancerID)},
        error:(error)=>{console.log(error);
        
          if ( error.error.errors) {
         this.errorhandling = Object.values(error.error.errors).flat();
+        console.log(this.errorhandling);
+        
       } else {
         this.errorhandling = [error.message || 'An error occurred'];
+        console.log(this.errorhandling);
       }
        
          }, 

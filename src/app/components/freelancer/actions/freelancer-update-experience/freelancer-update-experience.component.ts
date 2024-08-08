@@ -100,7 +100,6 @@ export class FreelancerUpdateExperienceComponent implements OnInit{
       const updatedExperience: Experience = {
         ...this.updateForm.value
       };
-
       this.experienceService.update(this.experienceToUpdate.id, updatedExperience).subscribe({
         next: () => {
           this.isSubmitting=false;

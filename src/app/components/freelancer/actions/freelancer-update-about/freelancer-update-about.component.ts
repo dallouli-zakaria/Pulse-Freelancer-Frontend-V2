@@ -48,7 +48,7 @@ export class FreelancerUpdateAboutComponent implements OnInit, OnChanges {
         next: (data: any) => {
           console.log(data);
           this.close();
-          this.freelancerService.index();
+          this.freelancerService.show(this.freelancerID);
         },
         error: (error) => {
           if (error.error.errors) {
