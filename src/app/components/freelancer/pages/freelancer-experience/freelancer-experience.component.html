@@ -63,7 +63,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="onCloseHandledAdd()"></button>
         </div>
         <div class="modal-body">
-          <app-freelancer-add-experience (experienceAdded)="onExperienceAdded()"></app-freelancer-add-experience>
+          <app-freelancer-add-experience (experienceAdded)="onExperienceAdded()" [freelancerIdC]="freelancerId"  ></app-freelancer-add-experience>
         </div>
       </div>
     </div>

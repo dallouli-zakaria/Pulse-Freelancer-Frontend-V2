@@ -63,7 +63,7 @@ export class ExperienceService {
   }
 
   public showByFreelancer(id:any){
-    this.freelancer=this.http.get(`${this.url}/${Constant.FREELANCERS}/${id}`).subscribe({
+    this.freelancer=this.http.get(`${this.url}/getByFreelancerId/${id}`).subscribe({
       next:(data: any)=>{this.subject.next(data)
       console.log(data);
         

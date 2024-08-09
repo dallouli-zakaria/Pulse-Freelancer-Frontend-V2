@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Experience } from '../../../../core/models/experience';
 import { AuthService } from '../../../../core/services/auth.service';
@@ -12,6 +12,8 @@ import { dateRangeValidator } from '../../../../core/validators/date-range.valid
 })
 export class FreelancerAddExperienceComponent implements OnInit {
   @Output() experienceAdded = new EventEmitter<void>();
+  @Input() freelancerIdC !:number
+
 
   freelancerId: number = this.authService.parseID();
   form: FormGroup;
@@ -78,7 +80,7 @@ export class FreelancerAddExperienceComponent implements OnInit {
         next: (res) => {
           console.log('Experience added successfully', res);
           this.experienceAdded.emit();
-          this.experienceService.index();
+          this.experienceService.showByFreelancer(this.freelancerId);
           this.form.reset({
             freelancer_id: this.freelancerId
           });
