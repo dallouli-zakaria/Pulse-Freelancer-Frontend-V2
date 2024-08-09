@@ -47,8 +47,8 @@ export class ContractAddComponent implements OnInit {
      this.form=this.fb.group({
     
       title: ['', [Validators.required, Validators.maxLength(255)]],
-      period: [''],
-      budget: [null, [Validators.min(0)]],
+      startDate: ['', Validators.required],
+      endDate: ['', Validators.required],
       project_description: ['', Validators.required],
       client_id: [this.freelancerid],
       freelancer_id: [this.clientid]
@@ -57,7 +57,6 @@ export class ContractAddComponent implements OnInit {
 
   add(){
 
-    console.log('clickeddddd -------------------');
     
     // if(this.form.valid){
       console.log(this.form.value);

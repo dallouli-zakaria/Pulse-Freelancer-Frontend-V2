@@ -296,7 +296,7 @@ export class ClientPostDetailsComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         // If confirmed, proceed with the offer update
-        this.disabledbutton2 = true;
+        this.disabledbutton2 = false;
         this.disqualifiedFreelancer.add(index);
         
         this.offerservice.getOffersByPostAndFreelancer(offerId, singlefreelancerid).subscribe((res:any) => {
