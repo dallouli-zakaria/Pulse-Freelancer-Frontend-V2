@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, inject, input } from '@angular/core';
 import { Freelancer } from '../../../../core/models/Freelancer';
 import { FreelancerService } from '../../../../core/services/freelancer.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { PaginatedResponse } from '../../../../core/models/PaginatedResponse';
 
 @Component({
@@ -13,11 +13,11 @@ export class FreelancerTableComponent implements OnInit{
   slecteID!: number;
   selectedData?: Freelancer;
   freelancers: Freelancer[] = [];
-  filteredFreelancersVariable?: Freelancer[] ;
+  filteredFreelancersVariable: Freelancer[] = [];
   currentPage = 1;
   totalPages = 1;
   isLoading = true;
-  searchTerm: string = '';
+  searchTerm: string = ''; private searchSubscription: Subscription | null = null;
 
   constructor(private freelancerService: FreelancerService) {}
 
@@ -45,22 +45,32 @@ export class FreelancerTableComponent implements OnInit{
   }
 
   filterFreelancers(): void {
-    if (this.searchTerm) {
-      this.freelancerService.searchFreelancers(this.searchTerm).subscribe({
-        next: (freelancer: Freelancer[]) => {
-          this. filteredFreelancersVariable = freelancer;
-          console.log(this. filteredFreelancersVariable)
-          
-        },
-        error: (error: any) => {
-          console.error(error);
-        }
-      });
-    } else {
-      this. filteredFreelancersVariable= this.freelancers;
+    // Annuler l'abonnement précédent, s'il existe
+    if (this.searchSubscription) {
+      this.searchSubscription.unsubscribe();
     }
+
+    if (!this.searchTerm || this.searchTerm.trim() === '') {
+      // Si le champ de recherche est vide, afficher tous les freelancers avec un léger délai
+      setTimeout(() => {
+        this.filteredFreelancersVariable = this.freelancers;
+      }, 100); // 100ms de délai pour s'assurer que l'UI a le temps de se mettre à jour
+      return;
+    }
+
+    // Sinon, effectuer la recherche avec le terme fourni
+    this.searchSubscription = this.freelancerService.searchFreelancers(this.searchTerm).subscribe({
+      next: (freelancer: Freelancer[]) => {
+        this.filteredFreelancersVariable = freelancer;
+      },
+      error: (error: any) => {
+        console.error(error);
+      }
+    });
   }
 
+  
+  
   trackFreelancer(user: any, id: number): void {
     this.slecteID = id;
     this.selectedData = user;

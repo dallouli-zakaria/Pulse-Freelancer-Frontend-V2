@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ClientService } from '../../../../core/services/client.service';
 import { Client } from '../../../../core/models/Client';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { PaginatedResponse } from '../../../../core/models/PaginatedResponse';
 
 @Component({
@@ -17,6 +17,7 @@ export class ClientTableComponent implements OnInit {
   totalPages = 5;
   isLoading = true;
   searchTerm: string = '';
+  private searchSubscription: Subscription | null = null;
 
  
 
@@ -65,23 +66,31 @@ export class ClientTableComponent implements OnInit {
     }
     
 
-    
-  filterClient(): void {
-    if (this.searchTerm) {
-      this.clientSe.searchClient(this.searchTerm).subscribe({
+    filterClient(): void {
+      // Annuler l'abonnement précédent, s'il existe
+      if (this.searchSubscription) {
+        this.searchSubscription.unsubscribe();
+      }
+  
+      if (!this.searchTerm || this.searchTerm.trim() === '') {
+        // Si le champ de recherche est vide, afficher tous les clients avec un léger délai
+        setTimeout(() => {
+          this.filteredCleint = this.clients;
+        }, 100); // 100ms de délai pour s'assurer que l'UI a le temps de se mettre à jour
+        return;
+      }
+  
+      // Sinon, effectuer la recherche avec le terme fourni
+      this.searchSubscription = this.clientSe.searchClient(this.searchTerm).subscribe({
         next: (client: Client[]) => {
-          this.filteredCleint= client;
-          console.log(this.filteredCleint)
-          
+          this.filteredCleint = client;
+          console.log(this.filteredCleint);
         },
         error: (error: any) => {
           console.error(error);
         }
       });
-    } else {
-      this.filteredCleint= this.clients;
     }
-  }
 
     
   //manage page edite delete and details for assingnig 
