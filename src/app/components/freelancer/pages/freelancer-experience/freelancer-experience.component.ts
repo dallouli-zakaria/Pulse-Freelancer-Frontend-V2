@@ -104,7 +104,7 @@ export class FreelancerExperienceComponent implements OnInit,OnChanges{
           
       
           this.onCloseHandledDelete();
-          this.experienceService.index();
+          this.experienceService.showByFreelancer(this.freelancerId);
           this.isSubmitting = false;  
           this.getData();
         
