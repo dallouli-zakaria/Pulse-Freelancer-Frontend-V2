@@ -57,7 +57,7 @@
               </div>
             </div>
             <div class="col-md-6 mb-3">
-              <label for="skills">Compétences requis</label>
+              <label for="skills">Compétences requises</label>
               <app-skillchips (skillsSelected)="onSkillsSelected2($event)"></app-skillchips>
               <div *ngIf="selectedSkills.length" class="mt-2">
                 <span class="badge badge-primary mr-1" *ngFor="let skill of selectedSkills" >{{ skill }}</span>
@@ -113,6 +113,17 @@
               <label for="definedBudget">La montant de votre budget</label>
               <input type="number" class="form-control" id="definedBudget" placeholder="Entrer la montant en MAD" formControlName="budgetvalue" min="0">
             </div>
+
+
+            <p>Avez-vous changé d'avis? 
+              <a class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" 
+                 (click)="deleteOffer()"  
+                 data-bs-dismiss="modal" 
+                 style="cursor: pointer;">
+                 Supprimer l'offre !
+              </a>
+          </p>
+          
   
   
   
@@ -120,10 +131,14 @@
   
   
           <hr class="mb-4">
-          <button class="btn btn-outline-danger btn-lg btn-block mb-4" type="submit" [disabled]="isSubmitting">
+          <button class="btn btn-outline-danger btn-lg btn-block mb-4" type="submit" [disabled]="isSubmitting" data-bs-dismiss="modal">
             {{ isSubmitting ? 'Modification...' : 'Modifier !' }}
-          </button>
+        </button>
+          
         </form>
+        
+
+        
   
   
       </div>

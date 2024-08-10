@@ -7,19 +7,22 @@
          Details de l'offre
 
       </h4>
-      <button *ngIf="roles == 'Client' " class="btn btn-danger col-lg-2"  data-bs-toggle="modal" data-bs-target="#exampleModal"  (click)="trackdata(post)" [disabled]="disabledbutton">Modifier l'offre</button>
-  
 
+      <div class="btn-group col-lg-2" role="group" aria-label="Basic example">
+
+      <button *ngIf="roles == 'Client' || roles == 'superadmin_role'"  type="button" class="btn btn-danger "  data-bs-toggle="modal" data-bs-target="#exampleModal"  (click)="trackdata(post)" [disabled]="disabledbutton">Modifier</button>
+  
+      &nbsp;  
 
 
 
 
       <button *ngIf="roles == 'superadmin_role' && post?.status == 'open'"
-      class="btn btn-primary col-lg-2"
+      class="btn btn-primary " type="button"
       [disabled]="!isCloseOfferEnabled() || isLoading"
       (click)="ValidateOffer()">
       <ng-container *ngIf="!isLoading; else loadingTemplate">
-        {{ isOfferClosed ? 'Valider l\'offre' : 'Offre Validé' }}
+        {{ isOfferClosed ? 'Valider' : 'Validé' }}
       </ng-container>
       <ng-template #loadingTemplate>
         <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
@@ -27,23 +30,25 @@
       </ng-template>
     </button>
     
-      
+
+    <button *ngIf="roles == 'superadmin_role' && post?.status =='closed'"  type="button" class="btn btn-primary btn-sm" (click)="onAdd()">
+      <i class="fas fa-download fa-sm text-white-50"></i>contract
+      </button>
+      </div>
+    <div *ngIf="show2" class="modal-backdrop fade show"></div>
+    <!-- add -->
+    <div  *ngIf="showadd" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
+     <div class="modal-dialog modal-m"><div class="modal-content">
+       <app-contract-add (closeModal)="onCloseModal2()"></app-contract-add>
+     </div>
+    </div>
+  </div>
 
 
        
-<div *ngIf="roles == 'superadmin_role' && post?.status =='closed'"  class="container col-lg-2">
-  <button type="button" class="btn btn-primary btn-sm" (click)="onAdd()">
-   <i class="fas fa-download fa-sm text-white-50"></i>  Add contract
-   </button>
-   </div>
- <div *ngIf="show2" class="modal-backdrop fade show"></div>
- <!-- add -->
- <div  *ngIf="showadd" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
-  <div class="modal-dialog modal-m"><div class="modal-content">
-    <app-contract-add (closeModal)="onCloseModal2()"></app-contract-add>
-  </div>
- </div>
-</div>
+
+
+
 
 
       <!-- <button *ngIf="roles == 'superadmin_role' && post?.status =='waiting'  " 
@@ -117,7 +122,7 @@
         </div>
         <hr>
         <div class="row">
-          <h5 class="col-lg-4">Compétences requis :</h5>
+          <h5 class="col-lg-4">Compétences requises :</h5>
           <h5 class="col-lg-8 text-muted" >
             <span *ngFor="let skill of post.skills" class="badge bg-soft-secondary fs-14 mt-1">
               {{skill.title}}   
@@ -332,7 +337,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel">modifier</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" aria-label="Close" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body">
             <app-client-update-post [parentdata]="postdetails"></app-client-update-post>

@@ -83,7 +83,7 @@ export class ClientPostDetailsComponent implements OnInit {
 
   
   verifyFreelancerPosts(){   
-    this.isLoadingClose = true;
+    // this.isLoadingClose = true;
     let freelancerId=this.authService.parseID();
       this.postService.verifyFreelancerPost(freelancerId,this.postId).subscribe((res)=>{
         if(!res && this.roles == 'Freelancer'){        
@@ -94,7 +94,7 @@ export class ClientPostDetailsComponent implements OnInit {
 
 
   verifyClientPosts(){   
-    this.isLoadingClose = true;
+    // this.isLoadingClose = true;
     let clientId=this.authService.parseID();
       this.postService.verifyClientPost(clientId,this.postId).subscribe((res)=>{
         if(!res && this.roles == 'Client'){        
@@ -396,7 +396,6 @@ export class ClientPostDetailsComponent implements OnInit {
         console.log('Offer updated successfully:', updatedPost);
         this.refreshTableData();
         this.initializeData();
-        this.isLoadingClose = false;
         Swal.fire({
           title: 'Success!',
           text: 'Votre offre a été clôturée avec succès. Nous passerons à l\'évaluation des contrats et nous reviendrons vers vous par mail dans les plus brefs délais !',
@@ -410,7 +409,6 @@ export class ClientPostDetailsComponent implements OnInit {
       },
       (error) => {
         console.error('Error updating offer:', error);
-        this.isLoadingClose = false;
       }
     );
   }
