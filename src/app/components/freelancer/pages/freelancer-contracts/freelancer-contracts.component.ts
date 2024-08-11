@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Client } from './../../../../core/models/Client';
 import { ClientService } from '../../../../core/services/client.service';
 import { ContractService } from '../../../../core/services/contract.service';
+import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-freelancer-contracts',
@@ -13,56 +14,39 @@ import { ContractService } from '../../../../core/services/contract.service';
 export class FreelancerContractsComponent {
   isModalOpen = false;
   contract: Contract[] = [];
+  paginatedContracts: Contract[] = [];
   isLoading = true;
   data: any[] = [];
   subject!: Observable<Contract[]>;
-  clientMap: { [key: number]: Client } = {};
-
-  constructor(private contractService: ContractService, private clientService: ClientService) { }
+  freelancer_id!:number;
+  searchTerm = '';
+  currentPage = 1;
+  totalPages = 1;
+  contractsPerPage = 5;
+  constructor(private contractService: ContractService, private clientService: ClientService,private authservice:AuthService) { }
 
   ngOnInit(): void {
     this.fetchData();
-    this.contractService.index()
-    this.subject = this.contractService.contractData$;
-    this.showContract();
-
-
   }
 
   fetchData() {
-    this.contractService.index()
-    this.contractService.contractData$.subscribe({
-      next: (contracts: any) => {
+    this.freelancer_id = this.authservice.parseID();
+    this.contractService.showbyfreelancer(this.freelancer_id).subscribe(
+      (contracts:any) => {
         this.contract = contracts;
-        this.contract.forEach(contract => {
-          if (contract.freelancer_id !== undefined) {
-            this.loadFreelancer(contract.client_id)
-          }
-        });
+        this.totalPages = Math.ceil(this.contract.length / this.contractsPerPage);
+        this.applyPagination();
         this.isLoading = false;
       },
-      error: (error:any) => {
+      (error: any) => {
         console.error(error);
         this.isLoading = false;
       }
-    });
-  }
+    );
+}
 
-  loadFreelancer(clientId:any) {
-    console.log(clientId);
-    
-    if (!this.clientMap[clientId]) {
-      this.clientService.show(clientId)
-      this.clientService.getData$.subscribe({
-        next: (freelancer:any) => {
-          this.clientMap[clientId] = freelancer;
-        },
-        error: (error) => {
-          console.error(`Failed to load freelancer with id ${clientId}`, error);
-        }
-      });
-    }
-  }
+
+
 
   openModal() {
     this.isModalOpen = true;
@@ -71,19 +55,31 @@ export class FreelancerContractsComponent {
   closeModal() {
     this.isModalOpen = false;
   }
-  errorhandling:any
-  showContract() {
-    this.contractService.contractData$.subscribe({
-      next: (data: any) => { this.contract = data; },
-      error: (error:any) => {
-        console.error(error);
-        if (error.error.errors) {
-          this.errorhandling = Object.values(error.error.errors).flat();
-        } else {
-          this.errorhandling = [error.message || 'An error occurred'];
-        }
-      },
-      complete: () => { console.log('end operation'); }
-    });
+
+  onSearch() {
+    this.currentPage = 1;
+    this.applyPagination();
   }
+
+  applyPagination() {
+    const filteredContracts = this.contract.filter(contract =>
+      contract.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+    this.totalPages = Math.ceil(filteredContracts.length / this.contractsPerPage);
+    const start = (this.currentPage - 1) * this.contractsPerPage;
+    const end = start + this.contractsPerPage;
+    this.paginatedContracts = filteredContracts.slice(start, end);
+  }
+
+  onPageChange(page: number) {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.applyPagination();
+    }
+  }
+
+  getPageNumbers(): number[] {
+    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  }
+
 }

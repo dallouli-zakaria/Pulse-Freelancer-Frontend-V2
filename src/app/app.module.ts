@@ -122,6 +122,7 @@ import { WishlistComponent } from './components/client/pages/wishlist/wishlist.c
 import { LoadingPageComponent } from './components/commun/loading/loading-page/loading-page.component';
 import { PostRegiterComponent } from './components/commun/auth/post-regiter/post-regiter.component';
 import { tokenInterceptor } from './core/interceptors/token.interceptor';
+import { FreelancerContractsComponent } from './components/freelancer/pages/freelancer-contracts/freelancer-contracts.component';
 ;
 
 @NgModule({
@@ -191,6 +192,7 @@ import { tokenInterceptor } from './core/interceptors/token.interceptor';
     FreelancerUpdatePersonalInfosComponent,
     FreelancerViewPostDetailsComponent,
     FreelancerViewPostsComponent,
+    FreelancerContractsComponent,
     HeaderComponent,
     IndexComponent,
     LandingPageComponent,

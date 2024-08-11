@@ -5,6 +5,7 @@ import { AuthService } from '../../../../core/services/auth.service';
 import { ExperienceService } from '../../../../core/services/experience.service';
 import { FreelancerAddExperienceComponent } from '../../actions/freelancer-add-experience/freelancer-add-experience.component';
 import { FreelancerUpdateExperienceComponent } from '../../actions/freelancer-update-experience/freelancer-update-experience.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-freelancer-experience',
@@ -96,26 +97,34 @@ export class FreelancerExperienceComponent implements OnInit,OnChanges{
   }
 
   confirmDeleteExperience() {
+    if (this.experienceData.length === 1) {
+      Swal.fire({
+        icon: "error",
+        title: "Vous devez au moins avoir une experience !",
+        showConfirmButton: false,
+        timer: 1500
+      });
+      return;
+    }
+  
     this.isSubmitting = true;
     if (this.experienceToDeleteId) {
       this.experienceService.delete(this.experienceToDeleteId).subscribe({
-        next: (data:any) => {
+        next: (data: any) => {
           console.log(data);
-          
-      
           this.onCloseHandledDelete();
           this.experienceService.showByFreelancer(this.freelancerId);
           this.isSubmitting = false;  
           this.getData();
-        
         },
         error: (error) => {
-          // console.error('Error deleting experience:', error);
+          console.error('Error deleting experience:', error);
           this.onCloseHandledDelete();
-          // this.isSubmitting = false;
+          this.isSubmitting = false;
         }
       });
     }
   }
+  
   
 }
