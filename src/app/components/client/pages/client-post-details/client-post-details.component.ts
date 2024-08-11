@@ -431,7 +431,15 @@ export class ClientPostDetailsComponent implements OnInit {
     this.postService.checkIfOfferExists(postid).subscribe(
       (response:any )=> {
         this.offerExists = response;
-        if (this.offerExists && this.status=='open') {
+        if(this.status=='closed' && this.roles =='superadmin_role'){
+          this.disabledbutton=false;
+
+        } else if(this.offerExists && this.status=='open' && this.roles =='superadmin_role'){
+          this.disabledbutton=false;
+          this.progress = 50;
+          this.progressText = 'en cours';
+        }
+        else if (this.offerExists && this.status=='open') {
           this.disabledbutton=true;
           this.progress = 50;
           this.progressText = 'en cours';
