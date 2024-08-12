@@ -39,33 +39,36 @@ export class FreelancerUpdatePersonalInfosComponent {
   })
 }
 
-updated(){
-  if(this.freelancerID!==null){
+updated() {
+  if (this.form.invalid) {
+    this.errorhandling = 'Veuillez remplir tous les champs.';
+    return;
+  }
+
+  if (this.freelancerID !== null) {
     console.log(this.freelancerID);
-    
-     this.frelancerservices.update(this.freelancerID,this.form.value).subscribe({
-    next:(data:any)=>{
-      console.log(data);
-      this.close();
-       this.frelancerservices.show(this.freelancerID)},
-       error:(error)=>{console.log(error);
-       
-         if ( error.error.errors) {
-        this.errorhandling = Object.values(error.error.errors).flat();
-        console.log(this.errorhandling);
-        
-      } else {
-        this.errorhandling = [error.message || 'An error occurred'];
-        console.log(this.errorhandling);
-      }
-       
-         }, 
-       
-  })}else{
+    this.frelancerservices.update(this.freelancerID, this.form.value).subscribe({
+      next: (data: any) => {
+        console.log(data);
+        this.close();
+        this.frelancerservices.show(this.freelancerID);
+      },
+      error: (error) => {
+        console.log(error);
+        if (error.error.errors) {
+          this.errorhandling = Object.values(error.error.errors).flat();
+          console.log(this.errorhandling);
+        } else {
+          this.errorhandling = [error.message || 'An error occurred'];
+          console.log(this.errorhandling);
+        }
+      },
+    });
+  } else {
     console.log('null id of freelancer');
-    
-    }
-  } 
+  }
+}
+
 
 ngOnChanges(): void {
   this.form=this.fb.group({

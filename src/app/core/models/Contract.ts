@@ -4,7 +4,7 @@ export interface Contract{
     period?: string;
     budget?: number;
     project_description: string;
-    client_id?:number;
+    client_id:number;
     freelancer_id: number;
     created_at?:Date
 

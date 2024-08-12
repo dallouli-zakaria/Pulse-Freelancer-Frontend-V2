@@ -58,4 +58,16 @@ export class ContractService {
      return this.contract
     }
 
+    //show by client_id
+    public showbyclient(client_id:number):Observable<Contract>{
+      this.contract=this.http.get(`${this.url}/${Constant.CONTARCTS}/client/${client_id}`);
+      return this.contract
+     }
+    //show by freelancer_id
+    public showbyfreelancer(freelancer_id:number):Observable<Contract>{
+      this.contract=this.http.get(`${this.url}/${Constant.CONTARCTS}/freelancer/${freelancer_id}`);
+      return this.contract
+     }
+
+
 }

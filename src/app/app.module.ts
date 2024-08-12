@@ -122,7 +122,9 @@ import { WishlistComponent } from './components/client/pages/wishlist/wishlist.c
 import { LoadingPageComponent } from './components/commun/loading/loading-page/loading-page.component';
 import { PostRegiterComponent } from './components/commun/auth/post-regiter/post-regiter.component';
 import { tokenInterceptor } from './core/interceptors/token.interceptor';
-import { FreelancerDeleteExperinceComponent } from './components/freelancer/actions/freelancer-delete-experince/freelancer-delete-experince.component';
+import { FreelancerContractsComponent } from './components/freelancer/pages/freelancer-contracts/freelancer-contracts.component';
+import { ResetPasswordComponentComponent } from './components/commun/auth/reset-password-component/reset-password-component.component';
+import { ForgetPAsswordComponent } from './components/commun/auth/forget-password/forget-password.component';
 ;
 
 @NgModule({
@@ -192,6 +194,7 @@ import { FreelancerDeleteExperinceComponent } from './components/freelancer/acti
     FreelancerUpdatePersonalInfosComponent,
     FreelancerViewPostDetailsComponent,
     FreelancerViewPostsComponent,
+    FreelancerContractsComponent,
     HeaderComponent,
     IndexComponent,
     LandingPageComponent,
@@ -243,7 +246,8 @@ import { FreelancerDeleteExperinceComponent } from './components/freelancer/acti
     WishlistComponent,
     LoadingPageComponent,
     PostRegiterComponent,
-    FreelancerDeleteExperinceComponent
+    ResetPasswordComponentComponent,
+    ForgetPAsswordComponent,
     
   ],
   imports: [

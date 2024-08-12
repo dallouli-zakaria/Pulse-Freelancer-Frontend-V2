@@ -40,6 +40,8 @@ import { ConnectedLandingPageComponent } from './components/commun/connected-lan
 import { EmailVerifyComponent } from './components/commun/auth/email-verify/email-verify.component';
 import { WishlistComponent } from './components/client/pages/wishlist/wishlist.component';
 import { PostRegiterComponent } from './components/commun/auth/post-regiter/post-regiter.component';
+import { ResetPasswordComponentComponent } from './components/commun/auth/reset-password-component/reset-password-component.component';
+import { ForgetPAsswordComponent } from './components/commun/auth/forget-password/forget-password.component';
 
 
 const routes: Routes = [
@@ -69,9 +71,15 @@ const routes: Routes = [
       { path: '**', redirectTo: 'dashboard', pathMatch: 'full' } 
     ]
   },
-  
+  {
+    path: 'reset-password',
+    component: ResetPasswordComponentComponent
+  },
 
-
+  {
+    path: 'forget-password',
+    component:ForgetPAsswordComponent
+  },
   
   {
     path: 'pulse',

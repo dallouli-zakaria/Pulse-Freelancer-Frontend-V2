@@ -18,7 +18,6 @@
 
       <!-- Skeleton loader -->
       <div *ngIf="isLoading" class="container mb-3">
-        <p class="text-danger">Ajoutez de l'experience !</p>
         <div class="pb-0 px-3 skeleton-card" *ngFor="let i of [1,2,3,4,5]">
           <div class="card-body">
             <div class="skeleton-title"></div>
@@ -28,7 +27,7 @@
         </div>
       </div>
 
-      <ul class="list-unstyled timeline-sm" *ngIf="!isLoading && experienceData.length > 0">
+      <ul class="list-unstyled timeline-sm" *ngIf="!isLoading && experienceData!.length > 0">
         <li class="timeline-sm-item" *ngFor="let item of experienceData">
           <span class="timeline-sm-date">{{ getYear(item.startDate) }} - {{ getYear(item.endDate) }}</span>
           <h5 class="mt-0 mb-1">
@@ -63,7 +62,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="onCloseHandledAdd()"></button>
         </div>
         <div class="modal-body">
-          <app-freelancer-add-experience (experienceAdded)="onExperienceAdded()" [freelancerIdC]="freelancerId"  ></app-freelancer-add-experience>
+          <app-freelancer-add-experience (experienceAdded)="onExperienceAdded()"></app-freelancer-add-experience>
         </div>
       </div>
     </div>

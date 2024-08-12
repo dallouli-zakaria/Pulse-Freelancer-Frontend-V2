@@ -8,14 +8,20 @@
           <a routerLink="../post-waiting"
           [ngClass]="{'text-primary': dataStatus === 'waiting'}">Offres en attente</a> / 
           <a routerLink="../post-closed"
-          [ngClass]="{'text-primary': dataStatus === 'closed'}">Offres terminés</a>
+          [ngClass]="{'text-primary': dataStatus === 'closed'}">Offres fermées</a>
         </span>
       </h5>
+
+      <!-- Search input -->
+      <div class="mb-3">
+        <input type="text" class="form-control" [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Rechercher des offres...">
+      </div>
+
       <div *ngIf="isLoading; else dataLoaded">
         <app-skeleton-loading></app-skeleton-loading>
       </div>
       <ng-template #dataLoaded>
-        <div *ngIf="post.length === 0; else postList">
+        <div *ngIf="displayedPosts.length === 0; else postList">
           <div class="container mb-3">
             <div class="card pb-0 px-3">
               <div class="card-body">
@@ -30,91 +36,62 @@
         </div>
 
         <!-- begin -->
-        <ng-template  #postList>
-          <span *ngIf="dataStatus === 'open'">
-            <div  class="container mb-3"  *ngFor="let posts of post">
-              <span *ngIf="posts.status ==='open'">
-                <a [routerLink]="['../client-offer', posts.id]" >
+        <ng-template #postList>
+          <div class="container mb-3" *ngFor="let posts of displayedPosts">
+            <a [routerLink]="['../client-offer', posts.id]">
               <div class="card pb-0 px-3">
                 <div class="card-body">
                   <div class="row">
                     <div class="col-12">
                       <h5 class="card-title">
-                        {{ posts.title }}   <small> <span class="badge rounded-pill text-bg-success " role="alert" >  ouvert</span></small>
+                        {{ posts.title }} 
+                        <small>
+                          <span class="badge rounded-pill"
+                            [ngClass]="{
+                              'text-bg-success': posts.status === 'open',
+                              'text-bg-warning': posts.status === 'waiting',
+                              'text-bg-secondary': posts.status === 'closed'
+                            }"
+                            role="alert">
+                            {{ posts.status === 'open' ? 'ouvert' : posts.status === 'waiting' ? 'en attente' : 'terminé' }}
+                          </span>
+                        </small>
                       </h5>
                     </div>
                     <div class="col">
                       <h6 class="card-subtitle mb-2">
                         <p class="text-muted">{{ posts.description }}</p>
-                        <p class="card-text text-muted">Crée il y a {{ posts.created_at | timeAgo }}  </p>
+                        <p class="card-text text-muted">Crée il y a {{ posts.created_at | timeAgo }}</p>
                       </h6>
                     </div>
                   </div>
                 </div>
               </div>
             </a>
-            </span>
-            </div>
-          </span>
+          </div>
 
-
-
-          <span *ngIf="dataStatus === 'waiting'">
-            <div  class="container mb-3"  *ngFor="let posts of post">
-              <span *ngIf="posts.status ==='waiting'">
-                <a [routerLink]="['../client-offer', posts.id]">
-              <div class="card pb-0 px-3">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-12">
-                      <h5 class="card-title">
-                        {{ posts.title }} <small> <span class="badge rounded-pill text-bg-warning " role="alert" > en attente</span></small>
-                      </h5>
-                    </div>
-                    <div class="col">
-                      <h6 class="card-subtitle mb-2">
-                        <p class="text-muted">{{ posts.description }}</p>
-                        <p class="card-text text-muted">Crée il y a {{ posts.created_at | timeAgo }}</p>
-                      </h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </a> 
-            </span>
-            </div>
-          </span>
-
-
-
-
-          <span *ngIf="dataStatus === 'closed'">
-            <div  class="container mb-3"  *ngFor="let posts of post">
-              <span *ngIf="posts.status ==='closed'">
-              <div class="card pb-0 px-3">
-                <a [routerLink]="['../client-offer', posts.id]">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-12">
-                      <h5 class="card-title">
-                        {{ posts.title }} <small> <span class="badge rounded-pill text-bg-secondary " role="alert" > terminé</span></small>
-                      </h5>
-                    </div>
-                    <div class="col">
-                      <h6 class="card-subtitle mb-2">
-                        <p class="text-muted">{{ posts.description }}</p>
-                        <p class="card-text text-muted">Crée il y a {{ posts.created_at | timeAgo }}</p>
-                      </h6>
-                    </div>
-                  </div>
-                </div>
-              </a>
-              </div>
-            </span>
-            </div>
-          </span>
-
-
+          <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+              <li class="page-item" [class.disabled]="currentPage === 1">
+                <a class="page-link" aria-label="Previous"
+                  (click)="onPageChange(currentPage - 1)" tabindex="-1">
+                  <span aria-hidden="true">&laquo;</span>
+                  <span class="sr-only">Previous</span>  
+                </a>
+              </li>
+              <li class="page-item" *ngFor="let page of getPageNumbers()"
+                  [class.active]="currentPage === page">
+                <a class="page-link" (click)="onPageChange(page)">{{page}}</a>
+              </li>
+              <li class="page-item" [class.disabled]="currentPage === totalPages">
+                <a class="page-link" aria-label="Next"
+                  (click)="onPageChange(currentPage + 1)">
+                  <span aria-hidden="true">&raquo;</span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
         </ng-template>
         <!-- end -->
       </ng-template>

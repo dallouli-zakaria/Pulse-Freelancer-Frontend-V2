@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Post } from '../../../../core/models/post';
 import { AuthService } from '../../../../core/services/auth.service';
 import { PostsService } from '../../../../core/services/posts.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-client-update-post',
@@ -17,7 +18,7 @@ export class ClientUpdatePostComponent implements OnChanges{
   selectedSkillIds: number[] = [];
   selectedSkills: string[] = [];
 
-
+  roles!:string;
   selectedBudget!:string;
   selectedPeriod!:string;
   clientId!:number;
@@ -45,6 +46,14 @@ export class ClientUpdatePostComponent implements OnChanges{
     });
   }
   ngOnChanges(): void {
+   
+    this.authservice.getUserRole().subscribe((res) => {
+      this.roles = res;
+
+
+    });
+
+
     this.form = this.fb.group({
       title: [this.parentdata?.title, Validators.required],
       location: [this.parentdata?.location, Validators.required],
@@ -76,6 +85,12 @@ export class ClientUpdatePostComponent implements OnChanges{
       this.isSubmitting = true;
       this.postsservice.update(this.parentdata.id,this.form.value).subscribe(
         (res) => {
+          Swal.fire({
+            icon: "success",
+            title: "Offre modifié avec succès !",
+            showConfirmButton: false,
+            timer: 1500
+          });
           console.log(res);
           
         },
@@ -92,4 +107,22 @@ export class ClientUpdatePostComponent implements OnChanges{
     this.selectedSkillIds = skillIds;
     this.form.patchValue({ skills_required: this.selectedSkillIds });
   }
+
+  deleteOffer(){
+    this.postsservice.delete(this.parentdata.id).subscribe((res)=>{
+      Swal.fire({
+        icon: "success",
+        title: "Offre supprimé avec succès !",
+        showConfirmButton: false,
+        timer: 1500
+      });
+      if(this.roles == 'Client'){
+        this.router.navigate(['../pulse/client-profile/client-offers-open'])
+      } else if(this.roles == 'superadmin_role'){
+        this.router.navigate(['../admin/post-open'])
+      } 
+    })
+  }
+
+
 }

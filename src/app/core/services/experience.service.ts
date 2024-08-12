@@ -21,8 +21,19 @@ export class ExperienceService {
     return this.http.get<number>(`${this.url}/experienceCount`);
   }
 
+  // Get data from database ByFreelancerId
+  public index(id:any): void {
+    this.http.get<Experience[]>(`${this.url}/getByFreelancerId/${id}`)
+      .pipe(
+        shareReplay(1),
+        tap(data => this.subject.next(data)),
+        catchError(this.handleError('index', []))
+      )
+      .subscribe();
+  }
+
   // Get data from database
-  public index(): void {
+  public index2(): void {
     this.http.get<Experience[]>(`${this.url}/${Constant.EXPERIENCE}`)
       .pipe(
         shareReplay(1),
@@ -31,6 +42,7 @@ export class ExperienceService {
       )
       .subscribe();
   }
+
 
   // Add function
   public store(data: Experience): Observable<Experience[]> {
@@ -80,5 +92,6 @@ export class ExperienceService {
       return new Observable<T>(); // Return an empty result or handle appropriately
     };
   }
+  
 
 }

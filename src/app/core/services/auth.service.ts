@@ -3,6 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, catchError, retry, tap, throwError } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
+import { Constant } from './../Constant';
 @Injectable({
   providedIn: 'root'
 })
@@ -141,6 +142,13 @@ export class AuthService {
     return this.http.get(`http://localhost:8000/api/email/verify/${id}/${hash}`);
   }
 
+  resetPassword(data: any): Observable<any> {
+    return this.http.post(`${Constant.API_ENDPOINT}/reset-password`, data);
+  }
+
+  forgetPassword(data:any): Observable<any> {
+    return this.http.post(`${Constant.API_ENDPOINT}/forgot-password`, data);
+  }
 
 
 }

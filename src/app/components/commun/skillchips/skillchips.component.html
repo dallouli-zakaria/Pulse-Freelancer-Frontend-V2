@@ -11,7 +11,7 @@
         {{ skill.title }}
       </li>
     </ul>
-    <span *ngIf="roles != 'client_role'">
+    <span *ngIf="roles == 'freelancer_role'">
       <button type="submit" class="btn btn-primary mt-3">Ajouter</button>
     </span>
   </form>
