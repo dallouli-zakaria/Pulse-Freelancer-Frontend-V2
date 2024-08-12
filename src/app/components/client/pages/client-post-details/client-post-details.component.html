@@ -1,16 +1,69 @@
 <div class="container card-box mt-4">
     <div class="row">
       <h4 class="col-lg-10">
-        <span><a routerLink="../../client-profile/client-offers"> <i class="fas fa-arrow-left"></i> </a></span> Details de l'offre
+        <span *ngIf="roles == 'Client'"><a routerLink="../../client-profile/client-offers-open"> <i class="fas fa-arrow-left"></i> </a></span> 
+        <span *ngIf="roles == 'superadmin_role'" ><a routerLink="../../post-open"> <i class="fas fa-arrow-left"></i> </a></span>
+        <span *ngIf="roles == 'Freelancer'"><a routerLink="../../freelancer-dashboard/freelancer-offers-open"> <i class="fas fa-arrow-left"></i> </a></span> 
+         Details de l'offre
+
       </h4>
-      <button *ngIf="roles == 'client_role'" class="btn btn-danger col-lg-2" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="trackdata(post)">Modifier l'offre</button>
+
+      <div class="btn-group col-lg-2" role="group" aria-label="Basic example">
+
+      <button *ngIf="roles == 'Client' || roles == 'superadmin_role'"  type="button" class="btn btn-danger "  data-bs-toggle="modal" data-bs-target="#exampleModal"  (click)="trackdata(post)" [disabled]="disabledbutton">Modifier</button>
   
-      <button *ngIf="roles == 'superadmin_role'" 
-              class="btn btn-primary col-lg-2" 
-              [disabled]="isOfferClosed"
-              (click)="closeOffer()">
-        {{ isOfferClosed ? 'offre cloturé' : 'Cloturer l\'offre' }}
+      &nbsp;  
+
+
+
+
+      <button *ngIf="roles == 'superadmin_role' && post?.status == 'open'"
+      class="btn btn-primary " type="button"
+      [disabled]="!isCloseOfferEnabled() || isLoading"
+      (click)="ValidateOffer()">
+      <ng-container *ngIf="!isLoading; else loadingTemplate">
+        {{ isOfferClosed ? 'Valider' : 'Validé' }}
+      </ng-container>
+      <ng-template #loadingTemplate>
+        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+        Chargement...
+      </ng-template>
+    </button>
+    
+
+    <button *ngIf="roles == 'superadmin_role' && post?.status =='closed'"  type="button" class="btn btn-primary btn-sm" (click)="onAdd()">
+      <i class="fas fa-download fa-sm text-white-50"></i>contract
       </button>
+      </div>
+    <div *ngIf="show2" class="modal-backdrop fade show"></div>
+    <!-- add -->
+    <div  *ngIf="showadd" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
+     <div class="modal-dialog modal-m"><div class="modal-content">
+       <app-contract-add (closeModal)="onCloseModal2()"></app-contract-add>
+     </div>
+    </div>
+  </div>
+
+
+       
+
+
+
+
+
+      <!-- <button *ngIf="roles == 'superadmin_role' && post?.status =='waiting'  " 
+      class="btn btn-primary col-lg-2" 
+      (click)="CloseOffer()">
+      {{ isOfferClosed ? 'Cloturer l\'offre' : 'Offre cloturé' }}
+      </button> -->
+
+      <div *ngIf="!isCloseOfferEnabled() && post?.status =='open' && roles == 'superadmin_role'" class="alert alert-danger" role="alert">
+        Veuillez choisir le nombre de freelancers correcte  ({{ freelancertrue!.length }}/{{ post!.freelancers_number }})
+      </div>
+
+
+
+
       </div>
   
     <div *ngIf="isLoading" class="loading-skeleton">
@@ -22,11 +75,33 @@
       <div class="skeleton-row"></div>
     </div>
   
-    <div *ngIf="!isLoading && post">
+    <div *ngIf="!isLoading && post " class="mt-4">
+
+
+
+      
+      <!-- <div class="d-flex justify-content-center mt-4 "><h5>Progrès</h5></div> -->
+      <div  class="progress-bar-container mb-2 ">
+        <div class="progress-bar" [style.width.%]="progress">
+          <span class="progress-text">{{ progressText }}</span>
+        </div>
+        <div class="steps">
+          <div class="step" *ngFor="let step of steps" [class.completed]="progress >= step.progress">
+            {{ step.label }}
+          </div>
+        </div>
+      </div>
+
+
+
+      
+      <br>
+      
+      
       <div class="container mt-5 mb-3">
         <div class="row">
           <h5 class="col-lg-4">Entreprise </h5>
-          <h5 class="col-lg-8 text-muted" >&#64; Maroc Telecom</h5>
+          <h5 *ngIf="client" class="col-lg-8 text-muted text-uppercase" >&#64; {{client!.company_name}}</h5>
         </div>
         <hr>
         <div class="row">
@@ -36,7 +111,7 @@
         <hr>
         <div class="row">
           <h5 class="col-lg-4">Nombre de freelancers:</h5>
-          <h5 class="col-lg-8 text-muted">{{post.freelancers_number}} freelancers</h5>
+          <h5 class="col-lg-8 text-muted">{{freelancertrue.length}} / {{post.freelancers_number}} freelancers</h5>
         </div>
         <hr>
         <div class="row">
@@ -47,9 +122,9 @@
         </div>
         <hr>
         <div class="row">
-          <h5 class="col-lg-4">Compétences requis :</h5>
+          <h5 class="col-lg-4">Compétences requises :</h5>
           <h5 class="col-lg-8 text-muted" >
-            <span *ngFor="let skill of post.skills" class="badge rounded-pill text-bg-secondary" role="alert">
+            <span *ngFor="let skill of post.skills" class="badge bg-soft-secondary fs-14 mt-1">
               {{skill.title}}   
             </span> 
            
@@ -71,13 +146,13 @@
         <div class="row">
           <h5 class="col-lg-4">Période :</h5>
           <h5 class="col-lg-8 text-muted">
-            {{ post.period === 'undefined' ? 'pas encore défini' : (post.period === 'month' ? post.periodvalue + ' mois' : (post.period === 'day' ? post.periodvalue + ' jour' : post.periodvalue)) }}
+            {{ post.period === 'undefined' ? 'pas encore défini' : (post.period === 'month' ? post.periodvalue + ' mois' : (post.period === 'day' ? post.periodvalue + ' jours' : post.periodvalue)) }}
           </h5>
         </div>
         <hr>
         <div class="row">
           <h5 class="col-lg-4">date de création :</h5>
-          <h5 class="col-lg-8 text-muted">{{ post.created_at | timeAgo }} le {{ post.created_at | date: 'dd-MM-yyyy' }}</h5>
+          <h5 class="col-lg-8 text-muted">{{ post.created_at ? (post.created_at | timeAgo) : 'Date not available' }} le {{ post.created_at | date: 'dd-MM-yyyy' }}</h5>
         </div>
         <hr>
         <h5 *ngIf="roles == 'superadmin_role'" class="mb-3 mt-4">
@@ -93,28 +168,30 @@
                 <th>Email</th>
                 <th>availability</th>
                 <th>Tjm</th>
-                <th>Atcion</th>
+                <th>Offer status</th>
+                <th>Score</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of freelancers ; let i = index">
+              <tr *ngFor="let item of freelancerfalse ; let i = index">
                 <td>{{i+1}}</td>
                 <td>{{item.user.name}}</td>
                 <td>{{item.title}}</td>
                 <td>{{item.user.email}}</td>
                 <td>{{item.availability}}</td>
-                <td>{{item.TJM}} Mad / J
-                   <span *ngIf="validatedFreelancers.has(i)" ><span class="badge rounded-pill text-bg-success text-muted" role="alert">validé</span></span>
-                  </td>
+                <td>{{item.TJM}} Mad / J </td>
+                  <td class="badge rounded-pill text-bg-warning text-muted " role="alert">En attente</td>
+                  <td><app-circular-progressbar *ngIf="item && post" [itemId]="item.id" [postId2]="post.id"></app-circular-progressbar></td>
                 <td>
                   <div class="btn-group dropstart">
                     <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                       <i class="bi bi-three-dots-vertical"></i>
                     </button>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" (click)="onEdited()"><i class="bi bi-eye"></i> View</a></li>
-                      <li><a class="dropdown-item"routerLink="../../mailing" ><i class="bi bi-envelope-arrow-up"></i> Send</a></li>
-                      <li><a class="dropdown-item" (click)="validateFreelancer(i)"><i class="bi bi-check-all"></i> Valider</a></li>
+                      <li><a class="dropdown-item" (click)="onEdited(item.id)"><i class="bi bi-eye"></i> View</a></li>
+                      <li *ngIf="roles == 'superadmin_role'"><a class="dropdown-item"routerLink="../../mailing" ><i class="bi bi-envelope-arrow-up"></i> Send</a></li>
+                      <li *ngIf="post?.status =='open' && roles == 'superadmin_role'"><a class="dropdown-item" (click)="validateFreelancer(i,post.id,item.id)"><i class="bi bi-check-all"></i> Valider</a></li>
   
                     </ul>
                   </div>
@@ -125,8 +202,134 @@
               </tr>
             </tbody>
           </table>
+          <hr>
         </div>
+
+        <h5 *ngIf="roles == 'superadmin_role' || (roles == 'Client' && status=='waiting' || status=='closed') " class="mb-3 mt-4">
+          <i class="mdi mdi-cards-variant mr-1"></i> Selected Freelancers
+        </h5>
+        <div *ngIf="roles == 'superadmin_role' || (roles == 'Client' && status=='waiting' || status=='closed') " class="table-responsive">
+          <table class="table table-borderless mb-0">
+            <thead class="thead-light">
+              <tr>
+                <th>#</th>
+                <th>nom</th>
+                <th>Profession</th>
+                <th>Email</th>
+                <th>availability</th>
+                <th>Tjm</th>
+                <th>Offer status</th>
+                <th>Score</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of freelancertrue ; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{item.user.name}}</td>
+                <td>{{item.title}}</td>
+                <td>{{item.user.email}}</td>
+                <td>{{item.availability}}</td>
+                <td>{{item.TJM}} Mad / J 
+                  </td>
+                  <td class="badge rounded-pill text-bg-success text-muted" role="alert" >Validé</td>
+                  <td><app-circular-progressbar *ngIf="item && post" [itemId]="item.id" [postId2]="post.id"></app-circular-progressbar></td>
+                <td >
+                  <div class="btn-group dropstart">
+                    <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" (click)="onEdited(item.id)"><i class="bi bi-eye"></i> View</a></li>
+                      <li *ngIf="roles == 'superadmin_role'"><a class="dropdown-item"routerLink="../../mailing" ><i class="bi bi-envelope-arrow-up"></i> Send</a></li>
+                      <li *ngIf="post?.status =='open' && roles == 'superadmin_role'"><a class="dropdown-item" (click)="disqualifyFreelancer(i,post.id,item.id)"><i class="bi bi-x"></i> Disqualifier</a></li>
+                      <li *ngIf="post?.status =='waiting' && roles == 'Client'"><a class="dropdown-item" (click)="declineFreelancer(i,post.id,item.id)" ><i class="bi bi-x"></i> Disqualifier</a></li>
+
+  
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+              <tr *ngIf="freelancers.length === 0">
+                <td colspan="7">No freelancers found.</td>
+              </tr>
+            </tbody>
+          </table>
+          <hr>
+        </div>
+
+
+
+        <h5 *ngIf="roles == 'superadmin_role' " class="mb-3 mt-4">
+          <i class="mdi mdi-cards-variant mr-1"></i> Freelancers Refusé
+        </h5>
+        <div *ngIf="roles == 'superadmin_role'  " class="table-responsive">
+          <table class="table table-borderless mb-0">
+            <thead class="thead-light">
+              <tr>
+                <th>#</th>
+                <th>nom</th>
+                <th>Profession</th>
+                <th>Email</th>
+                <th>availability</th>
+                <th>Tjm</th>
+                <th>Offer status</th>
+                <th>Score</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of freelancerDeclined ; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{item.user.name}}</td>
+                <td>{{item.title}}</td>
+                <td>{{item.user.email}}</td>
+                <td>{{item.availability}}</td>
+                <td>{{item.TJM}} Mad / J 
+                  </td>
+                  <td class="badge rounded-pill text-bg-danger text-muted" role="alert" >Refusé</td>
+                  <td><app-circular-progressbar *ngIf="item && post" [itemId]="item.id" [postId2]="post.id"></app-circular-progressbar></td>
+                <td >
+                  <div class="btn-group dropstart">
+                    <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" (click)="onEdited(item.id)"><i class="bi bi-eye"></i> View</a></li>
+                      <li *ngIf="roles == 'superadmin_role'"><a class="dropdown-item"routerLink="../../mailing" ><i class="bi bi-envelope-arrow-up"></i> Send</a></li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+              <tr *ngIf="freelancers.length === 0">
+                <td colspan="7">No freelancers found.</td>
+              </tr>
+            </tbody>
+          </table>
+          <hr>
+        </div>
+
+
+
+
+
+
       </div>
+
+      <div class="d-flex justify-content-end">
+      <div *ngIf="roles == 'Client' && post!.status=='waiting'" >
+        <button type="button" class="btn btn-success" (click)="CloseOffer()" [disabled]="disabledbutton2 || isLoadingClose">
+          <ng-container *ngIf="!isLoadingClose; else loadingTemplateClose">
+            Valider
+          </ng-container>
+          <ng-template #loadingTemplateClose>
+            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+            Chargement...
+          </ng-template>
+        </button>&nbsp;&nbsp;
+        <!-- <button type="button" class="btn btn-danger" (click)="declineOffer()">Refuser</button> -->
+      </div>
+    </div>
     </div>
   
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -134,7 +337,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel">modifier</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" aria-label="Close" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body">
             <app-client-update-post [parentdata]="postdetails"></app-client-update-post>
@@ -156,7 +359,7 @@
           <button type="button" class="btn-close" (click)="onCloseModal()" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <app-client-view-freelancer-details></app-client-view-freelancer-details>
+          <app-client-view-freelancer-details [freelancerid]="selectedFreelancerId"></app-client-view-freelancer-details>
         </div>
       </div>
     </div>

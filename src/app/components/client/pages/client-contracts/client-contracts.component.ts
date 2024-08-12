@@ -1,56 +1,62 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ContractService } from '../../../../core/services/contract.service';
-import { Contract } from '../../../../core/models/Contract';
-import { Observable } from 'rxjs';
 import { FreelancerService } from '../../../../core/services/freelancer.service';
+import { Contract } from '../../../../core/models/Contract';
 import { Freelancer } from '../../../../core/models/Freelancer';
+import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-client-contracts',
   templateUrl: './client-contracts.component.html',
-  styleUrl: './client-contracts.component.css'
+  styleUrls: ['./client-contracts.component.css']
 })
-export class ClientContractsComponent {
+export class ClientContractsComponent implements OnInit {
   isModalOpen = false;
   contract: Contract[] = [];
-  isLoading = true;
-  data: any[] = [];
-  subject!: Observable<Contract[]>;
+  paginatedContracts: Contract[] = [];
   freelancerMap: { [key: number]: Freelancer } = {};
+  isLoading = true;
+  searchTerm = '';
+  currentPage = 1;
+  totalPages = 1;
+  contractsPerPage = 5;
+  client_id!:number;
 
-  constructor(private contractService: ContractService, private freelancerService: FreelancerService) { }
+  constructor(private contractService: ContractService, private freelancerService: FreelancerService,private authsevice:AuthService) {}
 
   ngOnInit(): void {
     this.fetchData();
-    this.contractService.index()
-    this.subject = this.contractService.contractData;
-    this.showContract();
-
   }
 
   fetchData() {
-    this.contractService.contractData.subscribe({
-      next: (contracts: any) => {
+    this.client_id = this.authsevice.parseID();
+    this.contractService.showbyclient(this.client_id).subscribe(
+      (contracts:any) => {
         this.contract = contracts;
+        this.totalPages = Math.ceil(this.contract.length / this.contractsPerPage);
+        this.applyPagination();
         this.contract.forEach(contract => {
           if (contract.freelancer_id !== undefined) {
-            this.loadFreelancer(contract.freelancer_id)
+            this.loadFreelancer(contract.freelancer_id);
           }
         });
         this.isLoading = false;
       },
-      error: (error:any) => {
+      (error: any) => {
         console.error(error);
         this.isLoading = false;
       }
-    });
-  }
+    );
+}
+
 
   loadFreelancer(freelancerId: any) {
     if (!this.freelancerMap[freelancerId]) {
-      this.freelancerService.show(freelancerId).subscribe({
-        next: (freelancer: Freelancer) => {
+      this.freelancerService.show(freelancerId)
+      this.freelancerService.freelancers$.subscribe({
+        next: (freelancer: any) => {
           this.freelancerMap[freelancerId] = freelancer;
+          this.isLoading = false;
         },
         error: (error) => {
           console.error(`Failed to load freelancer with id ${freelancerId}`, error);
@@ -66,19 +72,30 @@ export class ClientContractsComponent {
   closeModal() {
     this.isModalOpen = false;
   }
-  errorhandling:any
-  showContract() {
-    this.contractService.contractData.subscribe({
-      next: (data: any) => { this.contract = data; },
-      error: (error) => {
-        console.error(error);
-        if (error.error.errors) {
-          this.errorhandling = Object.values(error.error.errors).flat();
-        } else {
-          this.errorhandling = [error.message || 'An error occurred'];
-        }
-      },
-      complete: () => { console.log('end operation'); }
-    });
+
+  onSearch() {
+    this.currentPage = 1;
+    this.applyPagination();
+  }
+
+  applyPagination() {
+    const filteredContracts = this.contract.filter(contract =>
+      contract.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+    this.totalPages = Math.ceil(filteredContracts.length / this.contractsPerPage);
+    const start = (this.currentPage - 1) * this.contractsPerPage;
+    const end = start + this.contractsPerPage;
+    this.paginatedContracts = filteredContracts.slice(start, end);
+  }
+
+  onPageChange(page: number) {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.applyPagination();
+    }
+  }
+
+  getPageNumbers(): number[] {
+    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
 }

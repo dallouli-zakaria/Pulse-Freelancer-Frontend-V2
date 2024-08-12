@@ -3,34 +3,69 @@
         <!-- Brand -->
         <a class="navbar-brand" routerLink="/">
             <span class="text-1000 fs-1 ms-2 fw-medium">
-                <span class="fw-bold text-danger">PULSE.</span>freelancer
+                <span class="fw-bold main-logo">PULSE.</span>freelancer
             </span>
         </a>
         
-        <!-- Toggler for mobile view -->
-        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+
+        
+
         
         <!-- Navbar content -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mx-auto pt-2 pt-lg-0">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+            <ul class="navbar-nav mx-auto pt-2 pt-lg-0" *ngIf="!authService.isLoggedIn()">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" routerLink="">Acceuil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#nosvaleurs">Nos valeurs</a>
+                    <a class="nav-link" [routerLink]="['/']" fragment="nosvaleurs">Nos valeurs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#nospacks">Nos packs</a>
+                    <a class="nav-link" [routerLink]="['/']" fragment="nospacks">Nos packs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#avisclient">Avis client</a>
+                    <a class="nav-link" [routerLink]="['/']" fragment="avisclient">Avis client</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#contact">Contact</a>
+                    <a class="nav-link" [routerLink]="['/']" fragment="contact">Contact</a>
                 </li>
             </ul>
+
+            <ul class="navbar-nav mx-auto pt-2 pt-lg-0" *ngIf="authService.isLoggedIn() && roles == 'client_role'">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" routerLink="">Acceuil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="../pulse/client-profile/client-offers-open" >Mes offres</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"  routerLink="../pulse/client-profile/client-contracts">Mes contracts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="../pulse/client-profile/client-wishlist">Mes favoris</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="../pulse/view-freelancers">Prestataires</a>
+                </li>
+            </ul>
+
+
+            <ul class="navbar-nav mx-auto pt-2 pt-lg-0" *ngIf="authService.isLoggedIn() && roles == 'freelancer_role'">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" routerLink="">Acceuil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="../pulse/freelancer-dashboard/freelancer-profile" >Mes informations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"  routerLink="../pulse/freelancer-dashboard/freelancer-offers-open">Mes offres</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="../pulse/freelancer-dashboard/freelancer-contracts">Mes contracts</a>
+                </li>
+            </ul>
+
+            
 
             <!-- Authentication buttons (visible when not logged in) -->
             <span class="d-flex py-3 py-lg-0" *ngIf="!authService.isLoggedIn()">
@@ -39,33 +74,41 @@
             </span>
             
             <!-- Logged in user information -->
-            <div class="text-uppercase fw-medium"><strong>{{username}}</strong></div>
+            <div class="text-uppercase fw-medium"><strong>{{username}}</strong></div>&nbsp;&nbsp;
             
-            <!-- Dropdown for client role -->
-            <span *ngIf="roles=='client_role'">
-                <div class="dropdown" *ngIf="authService.isLoggedIn()">
-                    <img src="assets/img/gallery/user-profile-client-1.png" alt="Dropdown Toggle" (click)="toggleDropdown()" class="dropdown-toggle-img rounded-circle">
-                    <div class="dropdown-menu" [class.show]="dropdownOpen" aria-labelledby="dropdownMenuButton">
-                        <span class="dropdown-item text-muted">{{role}}</span>
-                        <a class="dropdown-item" href="pulse/client-profile" (click)="selectOption('profile')">Profile</a>
-                        <a class="dropdown-item" href="" (click)="selectOption('dashboard')">Dashboard</a>
-                        <a class="dropdown-item" (click)="authService.logout()">Deconnecter</a>
-                    </div>
-                </div>
-            </span>
-            
-            <!-- Dropdown for freelancer role -->
-            <span *ngIf="roles=='freelancer_role'">
-                <div class="dropdown" *ngIf="authService.isLoggedIn()">
-                    <img src="assets/img/gallery/user-profile-3.png" alt="Dropdown Toggle" (click)="toggleDropdown()" class="dropdown-toggle-img rounded-circle">
-                    <div class="dropdown-menu" [class.show]="dropdownOpen" aria-labelledby="dropdownMenuButton">
-                        <span class="dropdown-item text-muted">{{role}}</span>
-                        <a class="dropdown-item" href="pulse/freelancer-dashboard/freelancer-profile" (click)="selectOption('profile')">Profile</a>
-                        <a class="dropdown-item" href="" (click)="selectOption('dashboard')">Dashboard</a>
-                        <a class="dropdown-item" (click)="authService.logout()">Deconnecter</a>
-                    </div>
-                </div>
-            </span>
+
+
+
+
+
+
+
         </div>
+        
+<!-- Dropdown for client role -->
+<span *ngIf="roles=='client_role'">
+    <div class="dropdown" *ngIf="authService.isLoggedIn()">
+        <img src="assets/img/gallery/user-profile-client-1.png" alt="Dropdown Toggle" (click)="toggleDropdown()" class="dropdown-toggle-img rounded-circle">
+        <div class="small-text dropdown-menu" [class.show]="dropdownOpen" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item custom-link custom-button" routerLink="../pulse/add-offer" (click)="selectOption('add-offer')"><i class="bi bi-plus-lg"></i>&nbsp;Nouveau projet</a>
+            <a class="dropdown-item custom-link" routerLink="../pulse/client-profile" (click)="selectOption('profile')">Profile</a>
+            <a class="dropdown-item custom-link" routerLink="../home/contact" (click)="selectOption('dashboard')">Contactez nous</a><hr>
+            <a class="dropdown-item custom-link text-danger" (click)="authService.logout()" style="cursor: pointer;"><i class="bi bi-box-arrow-left"></i> Se déconnecter</a>
+        </div>
+    </div>
+</span>
+
+<!-- Dropdown for freelancer role -->
+<span *ngIf="roles=='freelancer_role'">
+    <div class="dropdown" *ngIf="authService.isLoggedIn()">
+        <img src="assets/img/gallery/user-profile-3.png" alt="Dropdown Toggle" (click)="toggleDropdown()" class="dropdown-toggle-img rounded-circle">
+        <div class="small-text dropdown-menu" [class.show]="dropdownOpen" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item custom-link" routerLink="../pulse/offers" (click)="selectOption('profile')">Découvrir des offres</a>
+            <a class="dropdown-item custom-link" routerLink="../pulse/freelancer-dashboard/freelancer-profile" (click)="selectOption('profile')">Profile</a>
+            <a class="dropdown-item custom-link" routerLink="../home/contact" (click)="selectOption('dashboard')">Contactez nous</a><hr>
+            <a class="dropdown-item custom-link text-danger" (click)="authService.logout()" style="cursor: pointer;"><i class="bi bi-box-arrow-left"></i> Se déconnecter</a>
+        </div>
+    </div>
+</span>
     </div>
 </nav>

@@ -31,7 +31,7 @@ constructor(private fb:FormBuilder,private userService:UserService){}
   ngOnInit(): void {
    console.log(this.user);
     this.index()
-    this.getdata=this.userService.getData;
+    this.getdata=this.userService.getdata$;
     // this.form=this.fb.group(
     //   {
     //     role:[this.roleName],  
@@ -44,7 +44,7 @@ constructor(private fb:FormBuilder,private userService:UserService){}
 
     public  index(){
        this.userService.index();
-       this.userService.getData.subscribe({
+       this.userService.getdata$.subscribe({
         next:(data:any)=>{
         this.user=data;
         console.log(this.user);

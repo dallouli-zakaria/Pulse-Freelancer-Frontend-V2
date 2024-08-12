@@ -19,15 +19,13 @@ export class PostCartComponent {
   }
    count(){
     this.postservice.count().subscribe({
-    next:(data:any)=>{
-      this.post=data;
-      this.datapost.emit(this.post)
-    },
-    error:(error:any)=>{
-  console.log(error);
-  
-    },
-    complet:()=>console.log('end operation')
+      next:(data:any)=>{this.post=data
+        this.datapost.emit(this.post)
+      },
+      error:(error:any)=>console.log(error),
+      complete:()=>console.log('cpmplet')
+      
+      
     })
    }
 }

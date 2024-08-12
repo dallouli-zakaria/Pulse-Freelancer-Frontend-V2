@@ -3,6 +3,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Client } from '../../../../core/models/Client';
 import { AuthService } from '../../../../core/services/auth.service';
 import { ClientService } from '../../../../core/services/client.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-client-update-company-infos',
@@ -48,7 +49,13 @@ export class ClientUpdateCompanyInfosComponent implements OnInit,OnChanges{
 
     this.clients.update(this.clientId, this.form.value).subscribe({
       next: (data: any) => {
-        this.clients.index();
+        this.clients.show(this.clientId);
+        Swal.fire({
+          icon: "success",
+          title: "Modifié avec succès",
+          showConfirmButton: false,
+          timer: 1500
+        });
       },
       error: (error: any) => {
         console.log(error);
@@ -59,7 +66,8 @@ export class ClientUpdateCompanyInfosComponent implements OnInit,OnChanges{
     });
   }
   getdata(){
-    this.clients.show(this.clientId).subscribe(
+    this.clients.show(this.clientId)
+    this.clients.getData$.subscribe(
       (res:any)=>{this.clientdetails=res;
 
         

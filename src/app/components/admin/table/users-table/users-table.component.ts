@@ -4,6 +4,7 @@ import { UserService } from '../../../../core/services/user.service';
 import { Observable } from 'rxjs';
 
 import { id } from 'date-fns/locale';
+import { PaginatedResponse } from '../../../../core/models/PaginatedResponse';
 
 @Component({
   selector: 'app-users-table',
@@ -11,42 +12,51 @@ import { id } from 'date-fns/locale';
   styleUrl: './users-table.component.css'
 })
 export class UsersTableComponent implements OnInit{
-  user:User[]=[];
+  users:User[]=[];
  
   constructor(private userService:UserService){}
     subject!:Observable<User[]>
    selectUser:any
    selectedId!:number
+   filteredUser: User[] = [];
+   currentPage = 1;
+   totalPages = 5;
+   isLoading = true;
+   searchTerm: string = '';
    
   ngOnInit(): void {
-
+    this.loadFreelancers(this.currentPage);
   
     
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    this.index()
-    this.subject=this.userService.getData 
+
+    this.subject=this.userService.getdata$
   
   }
   
-
-  index(){
-    this.userService.index();
-  this.userService.getData.subscribe({
-    next:(data:any)=>{
-      // this.userService.verify(this.selectedID).subscribe({
-      //   next:(data:any)=>{
-      //     console.log(data); 
-      //     this.user[3].role=data},
-      //   error:(error:any)=>console.log(error)
-      // })
-      this.user=data
-    },
-    error:(error)=>console.log(error),
-    
-    complete:()=>console.log('end Operation')
-    
-  })
+  loadFreelancers(page: number): void {
+    this.isLoading = true;
+    this.userService.fetchPaginatedUser(page)
+    this.userService.getdata$.subscribe({
+      next: (response: any) => {
+        this.users = response.data;
+        this.filteredUser = this.users; // Initialize filtered list
+        this.totalPages = response.last_page;
+        this.currentPage = response.current_page;
+        this.isLoading = false;
+      },
+      error: (error: any) => {
+        console.error(error);
+        this.isLoading = false;
+      },
+      complete: () => console.log('End operation get data')
+    });
+  }
+  onPageChange(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.loadFreelancers(page);
+    }
   }
 
 

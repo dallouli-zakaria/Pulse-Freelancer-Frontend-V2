@@ -1,20 +1,19 @@
 <div class="card-box">
   <div class="tab-content">
     <div class="tab-pane show active" id="about-me">
-      <div class="row mb-4">
-        <span class="col-lg-11 col-sm-6 col-md-6">
+      <div class="row align-items-center mb-4">
+        <span class="col-6 col-md-6 d-flex justify-content-start">
           <h5 class="text-uppercase">Experience</h5>
         </span>
-        <span class="col-lg-1 col-sm-6 col-md-6">
-          <div class="row">
+        <span class="col-6 col-md-6 d-flex justify-content-end">
             <h4>
               <a (click)="openModalAdd()" class="text-danger" style="cursor: pointer;">
                 <i class="bi bi-plus-circle"></i>
               </a>
             </h4>
-          </div>
         </span>
       </div>
+
 
       <!-- Skeleton loader -->
       <div *ngIf="isLoading" class="container mb-3">
@@ -32,10 +31,10 @@
           <span class="timeline-sm-date">{{ getYear(item.startDate) }} - {{ getYear(item.endDate) }}</span>
           <h5 class="mt-0 mb-1">
             <span class="row">
-              <span class="col-lg-10 col-sm-6 col-md-6 text-uppercase">
+              <span class="col-6 col-md-6 d-flex justify-content-start">
                 {{item.title}}
               </span>
-              <span class="col-lg-2 col-sm-6 col-md-6">
+              <span class="col-6 col-md-6 d-flex justify-content-end">
                 <a (click)="openModalEdit(item)" class="text-danger" style="cursor: pointer;">
                   <i class="bi bi-pencil-square"></i>
                 </a>

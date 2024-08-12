@@ -1,132 +1,106 @@
-
 <div class="card-box">
-    <div class="tab-content">
-      <div class="tab-pane show active" id="about-me">
-        <h5 class="mb-4 text-uppercase">
-            <span class="link-texts"
-            ><a routerLink="../client-offers"  class="text-danger">Mes offres</a> /
-            <a routerLink="../client-contracts" >Mes contracts</a></span
-          >
-        </h5>
-        <div *ngIf="isLoading; else dataLoaded">
-          <app-skeleton-loading></app-skeleton-loading>
-        </div>
-        <ng-template #dataLoaded>
-      
-          <div *ngIf="post.length === 0; else postList">
-            <div class="container mb-3 ">
-              <div class="card pb-0 px-3 ">
-                <div class="card-body ">
-                  <div class="row ">
-                    <div class="col-12">
-                      <h4 class="card-title"><a >Vous n'avez aucun offre!</a> </h4>
-                    </div>
-  
+  <div class="tab-content">
+    <div class="tab-pane show active" id="about-me">
+      <h5 class="mb-4 text-uppercase">
+        <span class="link-texts">
+          <a routerLink="../client-offers-open" 
+          [ngClass]="{'text-danger': dataStatus === 'open'}">Mes offres</a> /
+          <a routerLink="../client-offers-waiting"
+          [ngClass]="{'text-danger': dataStatus === 'waiting'}">Offres en attente</a> / 
+          <a routerLink="../client-offers-closed"
+          [ngClass]="{'text-danger': dataStatus === 'closed'}">Offres fermées</a>
+        </span>
+      </h5>
+
+      <!-- Search input -->
+      <div class="mb-3">
+        <input type="text" class="form-control" [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Rechercher des offres...">
+      </div>
+
+      <div *ngIf="isLoading; else dataLoaded">
+        <app-skeleton-loading></app-skeleton-loading>
+      </div>
+
+      <ng-template #dataLoaded>
+        <div *ngIf="displayedPosts.length === 0; else postList">
+          <div class="container mb-3">
+            <div class="card pb-0 px-3">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12">
+                    <h5 class="card-title"><a>Vous n'avez aucune offre!</a></h5>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-       
-        <!-- begin -->
-        <ng-template #postList>
-        <div class="container mb-3 " *ngFor="let posts of post" >
-          <div class="card pb-0 px-3 ">
-            <div class="card-body ">
-              <div class="row ">
-                <div class="col-12">
-                  <h4 class="card-title"><a  [routerLink]="['../../client-offer', posts.id]">{{posts.title}}</a> </h4>
-                </div>
-                <div class="col">
-                  <h6 class="card-subtitle mb-2">
-                      <p class="text-muted">{{posts.description}}</p>
-                      <p class="card-text text-muted ">Crée il y a {{ posts.created_at | timeAgo }}</p>
-                  </h6>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-      </ng-template>
-        <!-- end -->
-        <!-- begin -->
-        <!-- <div class="container mb-3 ">
-          <div class="card pb-0 px-3 ">
-            <div class="card-body ">
-              <div class="row ">
-                <div class="col-12">
-                  <h4 class="card-title"><a routerLink="../../client-offer">Application Mobile Innovante</a> </h4>
-                </div>
-                <div class="col">
-                  <h6 class="card-subtitle mb-2">
-                      <p class="text-muted">Nous recherchons un développeur mobile talentueux pour un projet freelance. Votre mission sera de créer une application mobile intuitive et performante, avec une attention particulière à l'expérience utilisateur et à l'intégration de fonctionnalités avancées. </p>
-                      <p class="card-text text-muted ">Crée le 15/03/2024</p>
-                  </h6>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
-        <!-- end -->
-           <!-- begin -->
-        <!-- <div class="container mb-3">
-          <div class="card pb-0 px-3">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-12">
-                  <h4 class="card-title"><a routerLink="../home">Refonte de Site Web Corporatif</a></h4>
-                </div>
-                <div class="col">
-                  <h6 class="card-subtitle mb-2">
-                      <p class="text-muted">Nous avons besoin d'un développeur web créatif pour refondre notre site web corporatif en freelance. Le projet implique une refonte complète du design, l'intégration de nouvelles fonctionnalités et l'optimisation pour la vitesse et la sécurité.</p>
-                      <p class="card-text text-muted ">Crée le 03/02/2024</p>
-                  </h6>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
-        <!-- end -->
-           <!-- begin -->
-        <!-- <div class="container mb-3">
-          <div class="card pb-0 px-3">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-12">
-                  <h4 class="card-title"><a routerLink="../home">Site web Ecommerce</a></h4>
-                </div>
-                <div class="col">
-                  <h6 class="card-subtitle mb-2">
-                      <p class="text-muted">Nous cherchons un developpeur web passionné pour une mission freelancer, le project consiste a réaliser un site web ecommerce avec l'implementation du SEO </p>
-                      <p class="card-text text-muted ">Crée le 21/10/2024</p>
-                  </h6>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
-        <!-- end -->
-                          <!-- begin -->
-        <!-- <div class="container mb-3">
-          <div class="card pb-0 px-3">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-12">
-                  <h4 class="card-title"><a routerLink="../home">Acheter un pack pour poster des offres !</a></h4>
-                </div>
-                <div class="col">
-                  <h6 class="card-subtitle mb-2">
 
-                  </h6>
+        <ng-template #postList>
+          <div class="container mb-3" *ngFor="let posts of displayedPosts">
+            <a [routerLink]="['../../client-offer', posts.id]">
+              <div class="card pb-0 px-3">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-12">
+                      <h5 class="card-title">
+                        {{ posts.title }}
+                        <small>
+                          <span class="badge rounded-pill" 
+                                [ngClass]="{
+                                  'text-bg-success': posts.status === 'open',
+                                  'text-bg-warning': posts.status === 'waiting',
+                                  'text-bg-secondary': posts.status === 'closed'
+                                }" 
+                                role="alert">
+                            {{ posts.status === 'open' ? 'ouvert' : 
+                               posts.status === 'waiting' ? 'en attente' : 'terminé' }}
+                          </span>
+                        </small>
+                      </h5>
+                    </div>
+                    <div class="col">
+                      <h6 class="card-subtitle mb-2">
+                        <p class="text-muted">{{ posts.description }}</p>
+                        <p class="card-text text-muted">Crée il y a {{ posts.created_at | timeAgo }}</p>
+                      </h6>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </a>
           </div>
-        </div> -->
-        <!-- end -->
-         
+
+          <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+              <li class="page-item" [class.disabled]="currentPage === 1">
+                <a class="page-link" aria-label="Previous"
+                  [ngClass]="{'text-danger': currentPage !== 1}"
+                  (click)="onPageChange(currentPage - 1)" 
+                  tabindex="-1">
+                  <span aria-hidden="true">&laquo;</span>
+                  <span class="sr-only">Previous</span>  
+                </a>
+              </li>
+              <li class="page-item" *ngFor="let page of getPageNumbers()"
+                  [class.active]="currentPage === page">
+                <a class="page-link" 
+                  [ngClass]="{'text-danger': currentPage === page}"
+                  (click)="onPageChange(page)">{{page}}</a>
+              </li>
+              <li class="page-item" [class.disabled]="currentPage === totalPages">
+                <a class="page-link" aria-label="Next"
+                  [ngClass]="{'text-danger': currentPage !== totalPages}"
+                  (click)="onPageChange(currentPage + 1)">
+                  <span aria-hidden="true">&raquo;</span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+          
+        </ng-template>
       </ng-template>
-      </div>
     </div>
   </div>
-
+</div>

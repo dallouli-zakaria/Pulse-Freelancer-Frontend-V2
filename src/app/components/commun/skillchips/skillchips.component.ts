@@ -2,6 +2,9 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
 import { SkillService } from '../../../core/services/skill.service';
+import { IndexComponent } from './../index/index.component';
+import { Observable } from 'rxjs';
+import { Skill } from '../../../core/models/skill';
 
 @Component({
   selector: 'app-skillchips',
@@ -23,12 +26,13 @@ export class SkillchipsComponent implements OnInit {
   freelancerId: number = this.authService.parseID();
   
   constructor(private fb: FormBuilder, private skillservice: SkillService, public authService: AuthService) { }
-  
+   subject!:Observable<Skill[]>
   ngOnInit(): void {
     this.form = this.fb.group({
       skillInput: ['']
     });
-  
+    
+     this.skillservice.skillData
     this.form.get('skillInput')?.valueChanges.subscribe(value => {
       if (value && value.length >= 2) {
         this.filteredSkills = this.filterSkills(value);
@@ -56,7 +60,8 @@ export class SkillchipsComponent implements OnInit {
   }
   
   loadSkills(): void {
-    this.skillservice.index().subscribe((res) => {
+    this.skillservice.index()
+    this.skillservice.skillData.subscribe((res) => {
       this.skills = res;
     });
   }

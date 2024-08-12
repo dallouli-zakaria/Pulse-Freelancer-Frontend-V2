@@ -24,7 +24,7 @@ constructor(private userservice:UserService,
 ngOnInit(): void {
   //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
   //Add 'implements OnInit' to the class.
-  this.observablesubjct=this.userservice.getData
+  this.observablesubjct=this.userservice.getdata$
   this.indexUser();
 
 this.from=this.fb.group({
@@ -49,7 +49,7 @@ let user = this.users?.filter(x => x.email== $event.target.value)[0];
 
 indexUser(){
   this.userservice.index()
-  this.userservice.getData.subscribe({
+  this.userservice.getdata$.subscribe({
     next:(data:any)=>{this.users=data},
     error:(error)=>console.log(error),
     complete:()=>console.log('')

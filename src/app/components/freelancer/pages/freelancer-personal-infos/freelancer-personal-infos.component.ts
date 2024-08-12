@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Freelancer } from '../../../../core/models/Freelancer';
 import { AuthService } from '../../../../core/services/auth.service';
 import { FreelancerService } from '../../../../core/services/freelancer.service';
@@ -8,45 +8,58 @@ import { FreelancerService } from '../../../../core/services/freelancer.service'
   templateUrl: './freelancer-personal-infos.component.html',
   styleUrl: './freelancer-personal-infos.component.css'
 })
-export class FreelancerPersonalInfosComponent {
+export class FreelancerPersonalInfosComponent implements OnInit{
   freelancername!:string;
   isLoading = false; 
   freelancerId!: number;
   freelancerdata?:Freelancer;
   displayEdit = "none";
+  errorhandling:any
 
   constructor(
     private freelancerService: FreelancerService,
-    private authService: AuthService,
-   
-  ) {
+    private authService: AuthService, ) {}
+ ngOnInit(): void {
     this.getFreelancer();
-  }
+
+  
+ }
   getFreelancer() {
     this.isLoading = true; 
     this.freelancerId = this.authService.parseID();
-    this.freelancerService.show(this.freelancerId).subscribe({
-      next: (data) => {
+    this.freelancerService.show(this.freelancerId)
+    this.freelancerService.freelancers$.subscribe({
+      next: (data:any) => {
         this.freelancerdata = data;
-        
+      console.log(this.freelancerdata);
+    
         this.isLoading = false; 
       },
-      error: (error: any) => console.log(error),
+      error: (error:any) => {
+        if (error.error.errors) {
+          this.errorhandling = Object.values(error.error.errors).flat();
+          console.log(this.errorhandling);
+          
+        } else {
+          this.errorhandling = [error.message || 'An error occurred'];
+          console.log(this.errorhandling);
+        }
+      },
+    
       complete: () => console.log("get freelancer done")
     }); 
   }
 
 
 
-  ngOnInit(): void {
-    
-  }
+  
 selectedData:any
 selectedID!:any
   openModalEdit(freelancer:any,id:any) {
     this.selectedData=freelancer;
     this.selectedID=id
     this.displayEdit = "block";
+
   }
 
  

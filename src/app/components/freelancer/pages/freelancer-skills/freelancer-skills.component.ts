@@ -1,75 +1,81 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SkillWithProgress } from '../../../../core/models/skillWithProgress';
 import { SkillService } from '../../../../core/services/skill.service';
 import { AuthService } from '../../../../core/services/auth.service';
 import { Skill } from '../../../../core/models/skill';
+import { FreelanceSkillsService } from '../../../../core/services/freelance-skills.service';
 
 @Component({
   selector: 'app-freelancer-skills',
   templateUrl: './freelancer-skills.component.html',
-  styleUrl: './freelancer-skills.component.css'
+  styleUrls: ['./freelancer-skills.component.css']
 })
-export class FreelancerSkillsComponent {
+export class FreelancerSkillsComponent implements OnInit {
   submittedSkills: SkillWithProgress[] = [];
   displayEdit = "none";
   freelancerId: number = this.authService.parseID();
-  freelancerSkillsData:Skill[]=[]
-  constructor(private skillService:SkillService,private  authService:AuthService){}
+  freelancerSkillsData: Skill[] = [];
+
+  constructor(
+    private skillService: SkillService,
+    private authService: AuthService,
+    private freelancerskillservice: FreelanceSkillsService
+  ) {}
+
+  ngOnInit(): void {
+    this.index();
+  }
+
   onSkillsSubmitted(skills: string[]): void {
+   
     const newSkills = skills.map(skill => ({
-      id: 0, 
+      id: 0,
       freelancer_id: 0,
       skill_id: 0,
       title: skill,
       level: 20
     }));
     this.submittedSkills = [...this.submittedSkills, ...newSkills];
-  }
 
- ngOnInit(): void {
-  //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-  //Add 'implements OnInit' to the class.
-  this.index()
- }
-  public index(){
-    this.skillService.showbyfreelancerid(this.freelancerId).subscribe({
-      next:(data:any)=>{
-        this.freelancerSkillsData=data
-      
-        
+
+    this.skillService.store(newSkills).subscribe({
+      next: () => {
+        this.index();
       },
-      error:(error:any)=>{
-        console.log(error) 
+      error: (error: any) => {
+        console.log(error);
       }
-    })
+    });
+    
+  }
+  errorhandling:any;
+  public index(): void {
+    this.skillService.showbyfreelancerid(this.freelancerId).subscribe({
+      next: (data: any) => {
+        this.freelancerSkillsData = data;
+        console.log(data);
+      },
+      error: (error) => {
+        if (error.error.errors) {
+          this.errorhandling = Object.values(error.error.errors).flat();
+          console.log(this.errorhandling);
+          
+        } else {
+          this.errorhandling = [error.message || 'An error occurred'];
+          console.log(this.errorhandling);
+        }
+      },
+    });
   }
 
-
-
-
-
-
-
-
-  displayAdd = "none";
-
-  openModalAdd() {
-      this.displayAdd = "block";
-    }
-  onCloseHandledAdd() {
-    this.displayAdd = "none";
+  removeSkill(freelancerId: number, skillId: number): void {
+    this.freelancerskillservice.deleteSkillbyfreelancerId(freelancerId, skillId).subscribe({
+      next: () => {
+        this.index();
+      },
+      error: (error: any) => {
+        console.log(error);
+      }
+    });
   }
-
-  
-
- 
-
-  openModalEdit() {
-      this.displayEdit = "block";
-    }
-  onCloseHandledEdit() {
-    this.displayEdit = "none";
-  }
-
-   
 }

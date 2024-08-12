@@ -1,7 +1,10 @@
+import { ExperienceService } from './../../../../core/services/experience.service';
 import { Component, OnInit } from '@angular/core';
 import { Freelancer } from '../../../../core/models/Freelancer';
 import { AuthService } from '../../../../core/services/auth.service';
 import { FreelancerService } from '../../../../core/services/freelancer.service';
+import { Experience } from '../../../../core/models/experience';
+import { SkillService } from '../../../../core/services/skill.service';
 
 @Component({
   selector: 'app-freelancer-sideprofile',
@@ -10,23 +13,28 @@ import { FreelancerService } from '../../../../core/services/freelancer.service'
 })
 export class FreelancerSideprofileComponent implements OnInit{
   freelancername!:string;
-
+  experienceData: Experience[] = [];
   freelancerId!: number;
   freelancerdata?:Freelancer;
+  freelancerSkillsData: any[] = [];
   displayEdit = "none";
   isLoading = true;
+  errorhandling:any ;
 
   constructor(
     private freelancerService: FreelancerService,
     private authService: AuthService,
+    private experienceService:ExperienceService,
+    private skillService:SkillService
    
   ) {
     this.getFreelancer();
   }
   getFreelancer() {
     this.freelancerId = this.authService.parseID();
-    this.freelancerService.show(this.freelancerId).subscribe({
-      next: (data) => {
+    this.freelancerService.show(this.freelancerId)
+    this.freelancerService.freelancers$.subscribe({
+      next: (data:any) => {
         this.freelancerdata = data;
         this.isLoading = false;
         console.log(this.freelancerdata);
@@ -34,6 +42,38 @@ export class FreelancerSideprofileComponent implements OnInit{
       error: (error: any) => console.log(error),
       complete: () => console.log("get freelancer done")
     }); 
+
+    this.experienceService.showByFreelancer(this.freelancerId)
+    this.experienceService.experienceData$.subscribe({
+      next: (res) => {
+        this.experienceData = res;
+        console.log(res);
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error fetching experiences:', error);
+        this.isLoading = false;
+      }
+    });
+
+
+    this.skillService.showbyfreelancerid(this.freelancerId).subscribe({
+      next: (data: any) => {
+        this.freelancerSkillsData = data;
+        console.log(data);
+      },
+      error: (error) => {
+        if (error.error.errors) {
+          this.errorhandling = Object.values(error.error.errors).flat();
+          console.log(this.errorhandling);
+          
+        } else {
+          this.errorhandling = [error.message || 'An error occurred'];
+          console.log(this.errorhandling);
+        }
+      },
+    });
+
   }
 
 
@@ -91,7 +131,9 @@ selectedID!:any
         this.freelancerdata?.availability !== null &&
         this.freelancerdata?.adress !== null &&
         this.freelancerdata?.phone !== null &&
-        this.freelancerdata?.portfolio_Url !== null 
+        this.freelancerdata?.portfolio_Url !== null &&
+        this.experienceData.length > 0 &&
+        this.freelancerSkillsData.length > 0
       );
     }
 }

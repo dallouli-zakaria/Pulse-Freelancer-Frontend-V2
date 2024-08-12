@@ -4,6 +4,8 @@ body {
 
 }
 
+
+
 .card-box {
     border: none;
     border-radius: 10px;
@@ -45,4 +47,72 @@ a:hover{
   }
 
   
+
+  
+.progress-bar-container {
+  position: relative;
+  width: 100%;
+  background-color: #f3f3f3;
+  border-radius: 25px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  margin: 20px 0;
+  height: 30px;
+}
+
+.progress-bar-container {
+  position: relative;
+  width: 100%;
+  background-color: #f3f3f3;
+  border-radius: 25px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  margin: 20px 0;
+  height: 30px;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #4caf50;
+  border-radius: 25px;
+  text-align: center;
+  line-height: 30px; /* same as container height */
+  color: white;
+  font-weight: bold;
+  transition: width 0.5s ease; /* Add transition for smooth animation */
+  position: relative;
+}
+
+.progress-text {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+}
+
+.steps {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: 35px; /* position below the progress bar */
+  width: 100%;
+}
+
+.step {
+  flex: 1;
+  text-align: center;
+  color: #555;
+}
+
+.step.completed {
+  font-weight: bold;
+  color: #4caf50;
+}
+
+
+.bg-soft-secondary {
+  background-color: rgba(116, 120, 141, 0.15) !important;
+  color: #74788d !important;
+  margin-left: 2px;
+}
+
+
+
   

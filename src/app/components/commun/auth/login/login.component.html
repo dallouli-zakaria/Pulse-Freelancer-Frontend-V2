@@ -12,15 +12,9 @@
           </div>
           <form [formGroup]="applyForm" (ngSubmit)="submitApplication($event)">
             <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-              <p class="lead fw-normal mb-0 me-3">Se connecter avec</p>
-              <button type="button" class="btn btn-danger btn-floating mx-1">
-                <i class="fab fa-facebook-f"></i>
-              </button>
+              <p class="lead fw-normal mb-0 me-3">Se connecter avec :</p>
               <button type="button" class="btn btn-danger btn-floating mx-1">
                 <i class="fab fa-google"></i>
-              </button>
-              <button type="button" class="btn btn-danger btn-floating mx-1">
-                <i class="fab fa-linkedin-in"></i>
               </button>
             </div>
             <div class="divider d-flex align-items-center my-4">
@@ -52,7 +46,7 @@
                   Se souvenir de moi
                 </label>
               </div>
-              <a href="#!" class="text-body">Mot de passe oublié?</a>
+              <a routerLink="/forget-password" class="text-body">Mot de passe oublié?</a>
             </div>
             <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
               {{ errorMessage }}

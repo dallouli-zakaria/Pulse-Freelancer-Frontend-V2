@@ -3,6 +3,11 @@ body {
     font-family: "Rubik", "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   }
   
+  .card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+  }
   
   .avatar-md {
     height: 5rem;
@@ -64,5 +69,22 @@ body {
   
   .mt-1 {
     margin-top: 0.25rem !important;
+  }
+  
+
+  .favorite-icon{
+    cursor: pointer;
+  }
+
+  
+  .smaller-popup {
+    font-size: 10px; /* Adjust the font size */
+    width: 400px; /* Width of the popup */
+    padding: 1em; /* Padding inside the popup */
+  }
+  
+  .heart-icon {
+    color: red; /* Color of the heart icon */
+    font-size: 20px; /* Size of the heart icon */
   }
   

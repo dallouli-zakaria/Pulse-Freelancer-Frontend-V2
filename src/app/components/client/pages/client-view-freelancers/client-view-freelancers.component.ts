@@ -1,46 +1,106 @@
 import { Component, OnInit } from '@angular/core';
 import { FreelancerService } from '../../../../core/services/freelancer.service';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { Freelancer } from '../../../../core/models/Freelancer';
+import { AuthService } from '../../../../core/services/auth.service';
+import { WishListService } from '../../../../core/services/wish-list.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-client-view-freelancers',
   templateUrl: './client-view-freelancers.component.html',
-  styleUrl: './client-view-freelancers.component.css'
+  styleUrls: ['./client-view-freelancers.component.css']
 })
-export class ClientViewFreelancersComponent implements OnInit{
-
+export class ClientViewFreelancersComponent implements OnInit {
   isLoading = true;
-  freelancerList!:Observable<Freelancer[]>;
-  freelancers:Freelancer[]=[]
+  freelancerList!: Observable<Freelancer[]>;
+  freelancers: Freelancer[] = [];
+  favoriteFreelancers: Set<number> = new Set<number>();
+  clientId:number=this.authservice.parseID();
+  constructor(private freelancerService: FreelancerService,private authservice:AuthService,private wishListservice:WishListService) {}
 
-  constructor(private freelancerService:FreelancerService){}
   ngOnInit(): void {
     this.index();
-this.freelancerList=this.freelancerService.getdata
   }
 
-
-
-  index(){
-  
+  index() {
     this.freelancerService.index();
-
     this.freelancerService.verifiedfreelancer().subscribe({
-      
-      next:(data:any)=>{
-        this.freelancers=data;
-        this.isLoading=false;
+      next: (data: any) => {
+        this.freelancers = data;
+        this.isLoading = false;
         console.log(data);
       },
-      error:(error:any)=>{console.log(error);
+      error: (error: any) => {
+        console.log(error);
       },
-      complete:()=>console.log('end operation get data')
-      
-    })
+      complete: () => console.log('end operation get data')
+    });
+    
+    // Load favorite freelancers
+    this.wishListservice.getFavoriteFreelancers(this.clientId).subscribe({
+      next: (data: any) => {
+        this.favoriteFreelancers = new Set(data.map((item: any) => item.freelancer_id));
+        console.log(this.favoriteFreelancers);
+        
+      }
+    });
   }
-  
 
+  toggleFavorite(freelancerId: number) {
+    if (this.favoriteFreelancers.has(freelancerId)) {
+      this.wishListservice.removeFromWishlist(this.clientId,freelancerId).subscribe(() => {
+        this.favoriteFreelancers.delete(freelancerId);
+        Swal.fire({
+          position: 'top-end',
+          iconHtml: '<i class="fas fa-heart"></i>', // Use Font Awesome heart icon
+          title: 'Retiré des favoris',
+          customClass: {
+            popup: 'smaller-popup',
+            icon: 'heart-icon'
+          },
+          showConfirmButton: false,
+          timer: 1500,
+          backdrop: false, // Disable background overlay
+          width: '400px', // Adjust the width to make it smaller
+          padding: '1em', // Adjust padding to make it smaller
+        })
+        
+        
+      });
+    } else {
+      this.wishListservice.addToWishlist(this.clientId,freelancerId).subscribe(() => {
+        this.favoriteFreelancers.add(freelancerId);
 
+        Swal.fire({
+          position: 'top-end',
+          iconHtml: '<i class="fas fa-heart"></i>', // Use Font Awesome heart icon
+          title: 'Ajouté au favoris',
+          customClass: {
+            popup: 'smaller-popup',
+            icon: 'heart-icon'
+          },
+          showConfirmButton: false,
+          timer: 1500,
+          backdrop: false, // Disable background overlay
+          width: '400px', // Adjust the width to make it smaller
+          padding: '1em', // Adjust padding to make it smaller
+        })
+        
+        
+      });
+    }
+  }
 
+  isFavorite(freelancerId: number): boolean {
+    return this.favoriteFreelancers.has(freelancerId);
+  }
+
+  getFirstName(fullName: string | undefined): string {
+    if (!fullName) {
+      return '';
+    }
+    const nameParts = fullName.split(' ');
+    return nameParts.length > 1 ? nameParts[1] : fullName;
+  }
 }

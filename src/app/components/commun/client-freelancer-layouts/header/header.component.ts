@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AuthService } from '../../../../core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +17,7 @@ export class HeaderComponent {
   role!:string;
   roles!:string;
   isAuthenticated: boolean = false;
-
+  router = inject(Router);
 
   constructor(public authService: AuthService) { }
 
@@ -32,7 +33,9 @@ export class HeaderComponent {
     }
     else if(res.roles=='freelancer_role'){
       this.role = 'Freelancer';
-    }
+    } else if(res.roles=='superadmin_role'){  
+      this.router.navigate(['/admin']);  
+    } 
     });
   }
 

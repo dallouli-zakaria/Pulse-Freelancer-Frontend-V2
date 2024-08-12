@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Constant } from '../Constant';
 import { BehaviorSubject, catchError, Observable, Observer, shareReplay } from 'rxjs';
 import { Freelancer } from '../models/Freelancer';
+import { PaginatedResponse } from '../models/PaginatedResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +11,13 @@ import { Freelancer } from '../models/Freelancer';
 export class FreelancerService {
   private freelancerData!: Freelancer;
   freelancer:any
+  score!:any;
   url=Constant.API_ENDPOINT
   conuntUrl:string='freelancerCount'
   private readonly subjectBe:BehaviorSubject<Freelancer[]>=new BehaviorSubject<Freelancer[]>([])
   constructor(private http:HttpClient) { }
 
+   freelancers$ = this.subjectBe.asObservable();
 
    public count(){
     this.freelancer=this.http.get(`${this.url}/${this.conuntUrl}`);
@@ -39,7 +42,17 @@ export class FreelancerService {
    return this.subjectBe.asObservable();
    }
 
-
+    public fetchPaginatedFreelancers(page: number = 1): void {
+    const params = new HttpParams().set('page', page.toString());
+    this.http.get<PaginatedResponse<Freelancer>>(`${this.url}/freelancerPagination`, { params })
+      .pipe(shareReplay(1))
+      .subscribe({
+        next: (data:any) => this.subjectBe.next(data),
+        error: (error: any) => console.error(error),
+        complete: () => console.log('Fetched paginated freelancers data')
+      });
+  }
+  
 
 
     public store(data:any):Observable<Freelancer>{
@@ -57,7 +70,7 @@ export class FreelancerService {
     return this.freelancer
    }
 
-   register(
+   public register(
     data:any
   ): Observable<any> {
 
@@ -65,13 +78,18 @@ export class FreelancerService {
     return this.http.post(`${this.url}/${Constant.FREELANCERS}`, data);
   }
 
-
-  show(id:any):Observable<Freelancer>{
-    this.freelancer=this.http.get(`${this.url}/${Constant.FREELANCERS}/${id}`);
-    return this.freelancer;
+  //get 
+  public show(id:any){
+    this.freelancer=this.http.get(`${this.url}/${Constant.FREELANCERS}/${id}`).subscribe({
+      next:(data: any)=>{this.subjectBe.next(data)
+      console.log(data);
+       },
+      error:(error)=>console.log(error),
+      complete:()=>console.log('end operation')
+    }).add(console.log('subjetc contract'));
   }
 
-  updateFreelancerData(data: Freelancer) {
+  public  updateFreelancerData(data: Freelancer) {
     this.freelancerData = data;
   }
 
@@ -105,6 +123,18 @@ export class FreelancerService {
       console.error('An error occurred:', error);
       throw error; // Rethrow error to be handled by the caller
     }
+
+    
+   public getScore(freelancerId: number,postId:number): Observable<any>{
+      this.score=this.http.get<any>(`${this.url}/${Constant.FREELANCERS}/${freelancerId}/posts/${postId}/skills-match-score`);
+      return this.score;
+
+    }
+    searchFreelancers(searchTerm: string): Observable<Freelancer[]> {
+      let params = new HttpParams().set('query', searchTerm);
+      return this.http.get<Freelancer[]>(`${this.url}/searchBar`, { params });
+    }
+
 
 
 }

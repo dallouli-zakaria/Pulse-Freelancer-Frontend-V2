@@ -7,6 +7,7 @@ import { ClientService } from '../../../../core/services/client.service';
 import { FreelancerService } from '../../../../core/services/freelancer.service';
 import { OffersService } from '../../../../core/services/offers.service';
 import { PostsService } from '../../../../core/services/posts.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-freelancer-view-post-details',
@@ -49,7 +50,7 @@ export class FreelancerViewPostDetailsComponent implements OnInit,OnChanges{
 
   getposts() {
     if (this.postId !== null) {
-      this.postservice.show(this.postId).subscribe((res) => {
+      this.postservice.show(this.postId).subscribe((res:any) => {
         console.log(res);
         
         this.postdata = res;
@@ -61,7 +62,8 @@ export class FreelancerViewPostDetailsComponent implements OnInit,OnChanges{
   }
 
   getclient(clientId: number) {
-    this.clientservice.show(clientId).subscribe((res) => {
+    this.clientservice.show(clientId)
+    this.clientservice.getData$.subscribe((res:any) => {
       this.company_name = res.company_name;
       this.isLoading = false;
       console.log(res);
@@ -71,7 +73,7 @@ export class FreelancerViewPostDetailsComponent implements OnInit,OnChanges{
   postuler() {
     this.isButtonDisabled = true; 
     let data = {
-      selected: this.company_name,
+      selected: 'false',
       freelancer_id: this.freelancerId,
       post_id: this.postId
     };
@@ -82,9 +84,13 @@ export class FreelancerViewPostDetailsComponent implements OnInit,OnChanges{
       this.isButtonDisabled = false; 
       // this.router.navigate(['../pulse/freelancer-dashboard/freelancer-offers']);
     });
-    setTimeout(() => {
-      this.successMessage = '';
-    }, 5000);
+    Swal.fire({
+      icon: "success",
+      title: "Vous avez polstuler avec succès",
+      showConfirmButton: false,
+      timer: 1500
+    });
+
   }
 
   truefalse(postId: any) {
@@ -96,7 +102,8 @@ export class FreelancerViewPostDetailsComponent implements OnInit,OnChanges{
   }
 
   getfreelancer() {
-    this.freelancerservice.show(this.freelancerId).subscribe((res) => {
+    this.freelancerservice.show(this.freelancerId)
+    this.freelancerservice.freelancers$.subscribe((res:any) => {
       this.freelancerstatus = res.status;
     });
   }

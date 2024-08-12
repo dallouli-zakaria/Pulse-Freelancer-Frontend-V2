@@ -1,7 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ClientService } from '../../../../core/services/client.service';
 import { Client } from '../../../../core/models/Client';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { PaginatedResponse } from '../../../../core/models/PaginatedResponse';
 
 @Component({
   selector: 'app-client-table',
@@ -11,6 +12,12 @@ import { Observable } from 'rxjs';
 export class ClientTableComponent implements OnInit {
 
   clients: Client[] = [];
+  filteredCleint: Client[] = [];
+  currentPage = 1;
+  totalPages = 5;
+  isLoading = true;
+  searchTerm: string = '';
+  private searchSubscription: Subscription | null = null;
 
  
 
@@ -22,8 +29,8 @@ export class ClientTableComponent implements OnInit {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class. 
-   this.index();
-   this.listClient=this.clientSe.getData;
+
+   this.loadClient(this.currentPage);
    
   }
     selecteID!:number;
@@ -35,19 +42,55 @@ export class ClientTableComponent implements OnInit {
        this.selecteID=id
     }
 
-    index(){
-      this.clientSe.index()
-      this.clientSe.getData.subscribe({
-      next:(data)=>{
-        this.clients=data; 
-      },
-      error:(error:any)=>{
-        console.log(error);  
-      }
-      })
-
+    loadClient(page: number): void {
+      this.isLoading = true;
+      this.clientSe.fetchPaginatedClient(page).subscribe({
+        next: (response: PaginatedResponse<Client>) => {
+          this.clients = response.data;
+          this.filteredCleint = this.clients; // Initialize filtered list
+          this.totalPages = response.last_page;
+          this.currentPage = response.current_page;
+          this.isLoading = false;
+        },
+        error: (error: any) => {
+          console.error(error);
+          this.isLoading = false;
+        },
+        complete: () => console.log('End operation get data')
+      });
     }
- 
+    onPageChange(page: number): void {
+      if (page >= 1 && page <= this.totalPages) {
+        this.loadClient(page);
+      }
+    }
+    
+
+    filterClient(): void {
+      // Annuler l'abonnement précédent, s'il existe
+      if (this.searchSubscription) {
+        this.searchSubscription.unsubscribe();
+      }
+  
+      if (!this.searchTerm || this.searchTerm.trim() === '') {
+        // Si le champ de recherche est vide, afficher tous les clients avec un léger délai
+        setTimeout(() => {
+          this.filteredCleint = this.clients;
+        }, 100); // 100ms de délai pour s'assurer que l'UI a le temps de se mettre à jour
+        return;
+      }
+  
+      // Sinon, effectuer la recherche avec le terme fourni
+      this.searchSubscription = this.clientSe.searchClient(this.searchTerm).subscribe({
+        next: (client: Client[]) => {
+          this.filteredCleint = client;
+          console.log(this.filteredCleint);
+        },
+        error: (error: any) => {
+          console.error(error);
+        }
+      });
+    }
 
     
   //manage page edite delete and details for assingnig 
@@ -80,5 +123,7 @@ this.showedelete = false;
 }
 //end manage pages
 
-
+onSearchTermChange(): void {
+  this.filterClient();
+}
 }

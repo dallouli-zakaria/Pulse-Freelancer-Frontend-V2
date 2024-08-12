@@ -25,7 +25,8 @@ export class ClientIndexComponent implements OnInit{
     this.isAuthenticated = this.authService.isLoggedIn();
     if (this.isAuthenticated) {
 
-      this.clientservice.show(this.userId).subscribe((res)=>
+      this.clientservice.show(this.userId)
+      this.clientservice.getData$.subscribe((res)=>
         {
           this.userdetails=res;
         

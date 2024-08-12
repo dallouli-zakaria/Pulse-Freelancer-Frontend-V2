@@ -28,7 +28,7 @@ export class DashboardComponent {
       }, {
         type: 'line',
         label: 'Line Dataset',
-        data: [10, 10, 10, 10], // Données statiques
+        data: [], // Données statiques
       }],
       labels: ['Clients', 'freelancers', 'Contarcts', 'Posts']
     },
@@ -46,6 +46,7 @@ export class DashboardComponent {
   // Méthode pour mettre à jour les données et redessiner le graphique
   updateChart(): void {
     this.chart.data.datasets[0].data = [this.clientCount,this.freelancerCount,this.contractCount,this.postCount]; // Mise à jour des données
+    this.chart.data.datasets[1].data = [this.clientCount,this.freelancerCount,this.contractCount,this.postCount]; 
     this.chart.update(); // Redessiner le graphique
   }
 

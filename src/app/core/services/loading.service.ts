@@ -1,19 +1,25 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { EventEmitter, Injectable, NgZone } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoadingService {
 
-  private loadingSubject = new BehaviorSubject<boolean>(false);
-  loading$ = this.loadingSubject.asObservable();
+  private loading: boolean = false;
+  isLoadingChanged = new EventEmitter<boolean>();
 
   show() {
-    this.loadingSubject.next(true);
+    this.loading = true;
+    this.isLoadingChanged.emit(this.loading);
   }
 
   hide() {
-    this.loadingSubject.next(false);
+    this.loading = false;
+    this.isLoadingChanged.emit(this.loading);
+  }
+
+  isLoading(): boolean {
+    return this.loading;
   }
 }

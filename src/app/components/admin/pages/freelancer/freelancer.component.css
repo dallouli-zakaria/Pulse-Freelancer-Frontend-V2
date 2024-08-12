@@ -3,4 +3,8 @@ button{
     left: 88%;
     top: 60px;
  }
- 
+ .search{
+    position: relative; 
+    left:30%;
+    top: 85px; 
+ }

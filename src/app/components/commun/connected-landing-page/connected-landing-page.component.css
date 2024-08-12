@@ -102,7 +102,7 @@
     margin-left: 3px;
     text-indent: -999px;
     cursor: pointer;
-    background-color: #F53838;
+    background-color: #dc3545;
     background-clip: padding-box;
     border: 0;
     border-top: 0 solid transparent;
@@ -130,4 +130,40 @@
   a {
     color: black; 
   }
+
+
+  .button-wrapper {
+    display: flex;
+    justify-content: center; /* Centers the button horizontally */
+}
+
+.centered-button {
+    padding: 10px 20px; /* Adjust the padding as needed */
+    width: fit-content; /* Shrinks the button to fit its content */
+}
+.responsive-margin {
+  margin-top: -200px;
+}
+
+@media (max-width: 769px) {
+  .responsive-margin {
+    margin-top: -100px;
+  }
+}
+
+@media (max-width: 576px) {
+  .responsive-margin {
+    margin-top: -50px;
+  }
+}
+
+.accordion-button:focus, .accordion-button:not(.collapsed) {
+  box-shadow: none;
+}
+.accordion-button:not(.collapsed) {
+  background-color: #e9ecef;
+  color: #000;
+}
+
+
   

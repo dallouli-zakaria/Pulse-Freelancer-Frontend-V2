@@ -11,8 +11,9 @@ import { FreelancerService } from '../../../../core/services/freelancer.service'
 export class FreelancerUpdatePersonalInfosComponent {
 
   @Input() freelancerID!:number
-  @Input() freelancerData?:Freelancer;
-  
+  @Input() freelancerData?:any;
+   moroccanCities = ['Casablanca', 'Rabat', 'Marrakech', 'Fès', 'Tanger', 'Agadir', 'Essaouira', 'Meknès', 'Autre'];
+   availability=['disponible','sous préavis']
    freelancer:Freelancer[]=[]
    form!:FormGroup
    errorhandling:any
@@ -22,9 +23,9 @@ export class FreelancerUpdatePersonalInfosComponent {
 
  ngOnInit(): void {
   this.form=this.fb.group({
-    name: [this.freelancerData?.user.name, Validators.required],
+    name: [this.freelancerData?.user?.name, Validators.required],
     email: [this.freelancerData?.user?.email, [Validators.required, Validators.email]],
-    password: [this.freelancerData?.user.password],
+    password: [this.freelancerData?.user?.password],
     title: [this.freelancerData?.title, Validators.required],
     dateOfBirth: [this.freelancerData?.dateOfBirth, Validators.required],
     city: [this.freelancerData?.city, Validators.required],
@@ -38,36 +39,42 @@ export class FreelancerUpdatePersonalInfosComponent {
   })
 }
 
-updated(){
-  if(this.freelancerID!==null){
+updated() {
+  if (this.form.invalid) {
+    this.errorhandling = 'Veuillez remplir tous les champs.';
+    return;
+  }
+
+  if (this.freelancerID !== null) {
     console.log(this.freelancerID);
-    
-     this.frelancerservices.update(this.freelancerID,this.form.value).subscribe({
-    next:(data:any)=>{
-      console.log(data);
-      this.close();
-       this.frelancerservices.index()},
-       error:(error)=>{console.log(error);
-       
-         if ( error.error.errors) {
-        this.errorhandling = Object.values(error.error.errors).flat();
-      } else {
-        this.errorhandling = [error.message || 'An error occurred'];
-      }
-       
-         }, 
-       
-  })}else{
+    this.frelancerservices.update(this.freelancerID, this.form.value).subscribe({
+      next: (data: any) => {
+        console.log(data);
+        this.close();
+        this.frelancerservices.show(this.freelancerID);
+      },
+      error: (error) => {
+        console.log(error);
+        if (error.error.errors) {
+          this.errorhandling = Object.values(error.error.errors).flat();
+          console.log(this.errorhandling);
+        } else {
+          this.errorhandling = [error.message || 'An error occurred'];
+          console.log(this.errorhandling);
+        }
+      },
+    });
+  } else {
     console.log('null id of freelancer');
-    
-    }
-  } 
+  }
+}
+
 
 ngOnChanges(): void {
   this.form=this.fb.group({
     name: [this.freelancerData?.user?.name, Validators.required],
     email: [this.freelancerData?.user?.email, [Validators.required, Validators.email]],
-    password: [this.freelancerData?.user.password],
+    password: [this.freelancerData?.user?.password],
     title: [this.freelancerData?.title, Validators.required],
     dateOfBirth: [this.freelancerData?.dateOfBirth, Validators.required],
     city: [this.freelancerData?.city, Validators.required],

@@ -4,6 +4,7 @@ import { Experience } from '../../../../core/models/experience';
 import { AuthService } from '../../../../core/services/auth.service';
 import { ExperienceService } from '../../../../core/services/experience.service';
 import {  FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { dateRangeValidator } from '../../../../core/validators/date-range.validator';
 
 @Component({
   selector: 'app-freelancer-update-experience',
@@ -13,11 +14,25 @@ import {  FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class FreelancerUpdateExperienceComponent implements OnInit{
   @Output() experienceUpdated = new EventEmitter<void>();
   
+  countries = [
+    'Maroc','Afrique du Sud', 'Allemagne', 'Algérie', 'Arabie Saoudite', 
+    'Autriche', 'Bahreïn', 'Belgique', 'Danemark', 'Égypte', 
+    'Émirats Arabes Unis', 'Espagne', 'Finlande', 'France', 'Ghana', 'Grèce', 'Italie',
+     'Jordanie', 'Kenya', 'Koweït', 'Liban',  'Nigeria', 'Norvège', 'Oman', 'Pays-Bas',
+      'Portugal', 'Qatar', 'Royaume-Uni', 'Suède', 'Suisse', 'Turquie', 'Tunisie', 'Autre'
+    
+      ];
+      
+  moroccanCities = ['Casablanca', 'Rabat', 'Marrakech', 'Fès', 'Tanger', 'Agadir', 'Essaouira', 'Meknès', 'Autre'];
+  isMorocco = false;
+  selectedCity = '';
   
+
   isSubmitting = false;
   updateForm!: FormGroup;
   freelancerId: number = this.authService.parseID();
   experienceToUpdate?: Experience;
+  
   
 
 
@@ -39,12 +54,29 @@ export class FreelancerUpdateExperienceComponent implements OnInit{
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
       description: ['', Validators.required]
-    });
+    } ,{ validators: dateRangeValidator() });
   }
 
 
-  getdata(){
 
+  onCountryChange(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    const country = selectElement.value;
+    this.isMorocco = country === 'Maroc';
+    if (!this.isMorocco) {
+      this.updateForm.get('city')?.setValue('');
+    }
+  }
+
+  onCityChange(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    const city = selectElement.value;
+    this.selectedCity = city;
+    if (city !== 'Autre') {
+      this.updateForm.get('city')?.setValue(city);
+    } else {
+      this.updateForm.get('city')?.setValue('');
+    }
   }
 
 
@@ -68,7 +100,6 @@ export class FreelancerUpdateExperienceComponent implements OnInit{
       const updatedExperience: Experience = {
         ...this.updateForm.value
       };
-
       this.experienceService.update(this.experienceToUpdate.id, updatedExperience).subscribe({
         next: () => {
           this.isSubmitting=false;
