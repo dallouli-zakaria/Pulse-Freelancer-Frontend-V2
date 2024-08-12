@@ -75,7 +75,7 @@ export class ExperienceService {
   }
 
   public showByFreelancer(id:any){
-    this.freelancer=this.http.get(`${this.url}/getByFreelancerId/${id}`).subscribe({
+    this.freelancer=this.http.get(`${this.url}/getByFreelancerId/${id}`).pipe(shareReplay(1)).subscribe({
       next:(data: any)=>{this.subject.next(data)
       console.log(data);
         
@@ -92,5 +92,6 @@ export class ExperienceService {
       return new Observable<T>(); // Return an empty result or handle appropriately
     };
   }
+  
 
 }

@@ -124,6 +124,8 @@ import { PostRegiterComponent } from './components/commun/auth/post-regiter/post
 import { tokenInterceptor } from './core/interceptors/token.interceptor';
 import { FreelancerContractsComponent } from './components/freelancer/pages/freelancer-contracts/freelancer-contracts.component';
 import { ClientPayementComponent } from './components/client/pages/client-payement/client-payement.component';
+import { ResetPasswordComponentComponent } from './components/commun/auth/reset-password-component/reset-password-component.component';
+import { ForgetPAsswordComponent } from './components/commun/auth/forget-password/forget-password.component';
 ;
 
 @NgModule({
@@ -245,6 +247,8 @@ import { ClientPayementComponent } from './components/client/pages/client-payeme
     WishlistComponent,
     LoadingPageComponent,
     PostRegiterComponent,
+    ResetPasswordComponentComponent,
+    ForgetPAsswordComponent,,
     ClientPayementComponent
     
   ],
