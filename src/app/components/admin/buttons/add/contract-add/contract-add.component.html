@@ -6,7 +6,7 @@
      <div class="modal-body">
           <!-- title -->
       <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Title</label>
+        <label for="exampleInputEmail1" class="form-label">titre</label>
         <input type="text" class="form-control" id="exampleInputEmail1" formControlName="title" aria-describedby="emailHelp">
       </div>
       
@@ -30,7 +30,7 @@
       
        <!-- description -->
        <div class="mb-3 ">
-        <label for="exampleInputEmail1" class="form-label">Porject description</label>
+        <label for="exampleInputEmail1" class="form-label">Description</label>
         <textarea class="form-control" id="exampleInputEmail1" formControlName="project_description" aria-describedby="emailHelp"></textarea>
       </div>
      
@@ -38,14 +38,14 @@
     
 
        <!-- client -->
+       <label for="Client">Client</label>
       <select class="form-select form-select-m mb-3" aria-label="Small select example" formControlName="client_id" (change)="eventlistclient($event)" >
-        <option selected >Client</option>
         <option value="1" *ngFor="let cli of client" [value]="cli.id">{{cli.user.name}}</option>
-       
       </select>
+
       <!-- freelancer -->
+      <label for="Freelancer">Freelancer</label>
       <select class="form-select form-select-m mb-2" aria-label="Small select example" formControlName="freelancer_id" (change)="eventlistFreelancer($event)">
-        <option selected>Freelancer</option>
         <option value="1" *ngFor="let item of freelancer" [value]="item.id">{{item.user.name}}</option>
     
       </select>
@@ -54,7 +54,7 @@
        
       <h5 style="color: red; margin-left: 10px;">{{errorhandling}} </h5> 
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
-        <button type="submit" class="btn btn-success">Save changes</button>
+        <button type="button" class="btn btn-secondary" (click)="close()">Fermer</button>
+        <button type="submit" class="btn btn-outline-success">Ajouter</button>
        </div>
     </form>

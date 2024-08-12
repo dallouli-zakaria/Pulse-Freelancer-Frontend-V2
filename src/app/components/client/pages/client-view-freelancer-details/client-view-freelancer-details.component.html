@@ -115,7 +115,10 @@
                     <td>{{item.title}}</td>
                     <td>{{clientData[item.client_id]}}</td>
                     <td>{{item.periodvalue}} {{item.period}}</td>
-                    <td>{{item.type}}</td>
+                    <td>
+                      {{ item.type === 'fulltime' ? 'temps plein' : 'temps partiel' }}
+                    </td>
+                    
                   </tr>
                 </tbody>
               </table>

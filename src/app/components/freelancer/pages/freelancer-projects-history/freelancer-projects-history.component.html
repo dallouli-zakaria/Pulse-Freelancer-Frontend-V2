@@ -29,8 +29,8 @@
           <td>{{i + 1}}</td> 
           <td>{{item.title}}</td>
           <td>{{clientData[item.client_id]}}</td> 
-          <td>{{item.periodvalue}} {{item.period}}</td>
-          <td>{{item.type}}</td>
+          <td>{{ item.period === 'undefined' ? 'pas encore défini' : (item.period === 'month' ? item.periodvalue + ' mois' : (item.period === 'day' ? item.periodvalue + ' jours' : item.periodvalue)) }}</td>
+          <td>{{ item.type === 'fulltime' ? 'temps plein' : 'temps partiel' }}</td>
           </tr>
         </tbody>
       </table>

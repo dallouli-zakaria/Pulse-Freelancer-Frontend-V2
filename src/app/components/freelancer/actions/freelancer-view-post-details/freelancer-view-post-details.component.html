@@ -91,7 +91,7 @@
         <h5 class="col-lg-8 text-muted">{{ postdata?.created_at | date: 'dd-MM-yyyy' }}</h5>
       </div>
       <hr>
-      <h5 class="d-flex justify-content-center">Score</h5>
+      <h5 class="d-flex justify-content-center">Score &nbsp;<i class="bi bi-question-circle" data-toggle="tooltip" data-placement="right" title="Le score de compétences de l'offre qui correspond à votre profil"></i></h5>
       <div class="d-flex justify-content-center"><app-circular-progressbar *ngIf="freelancerId && postId" [itemId]="freelancerId" [postId2]="postId"></app-circular-progressbar></div>
     </div>
 

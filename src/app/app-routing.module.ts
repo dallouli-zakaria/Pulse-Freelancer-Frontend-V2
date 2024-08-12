@@ -112,8 +112,7 @@ const routes: Routes = [
           {path:'freelancer-offers-closed',component:FreelancerOffersComponent,canActivate:[authGuard],data: { roles: ['Freelancer'] }},
           {path:'freelancer-contracts',component:FreelancerContractsComponent,canActivate:[authGuard],data: { roles: ['Freelancer'] } },
           { path: 'freelancer-profile', component: FreelancerIndexComponent ,canActivate:[authGuard],data: { roles: ['Freelancer'] } },
-
-          { path: '', redirectTo: 'freelancer-offers', pathMatch: 'full' },
+          { path: '', redirectTo: 'freelancer-profile', pathMatch: 'full' }
           
         ]
       },
