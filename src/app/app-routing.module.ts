@@ -40,6 +40,7 @@ import { ConnectedLandingPageComponent } from './components/commun/connected-lan
 import { EmailVerifyComponent } from './components/commun/auth/email-verify/email-verify.component';
 import { WishlistComponent } from './components/client/pages/wishlist/wishlist.component';
 import { PostRegiterComponent } from './components/commun/auth/post-regiter/post-regiter.component';
+import { ClientPayementComponent } from './components/client/pages/client-payement/client-payement.component';
 
 
 const routes: Routes = [
@@ -81,6 +82,7 @@ const routes: Routes = [
       { path: 'view-freelancers', component: ClientViewFreelancersComponent,canActivate:[authGuard],data: { roles: ['Client'] } },
       { path: 'add-offer', component: AddPostComponent,canActivate:[authGuard],data: { roles: ['Client'] } },
       { path: 'client-dashboard', component: ClientIndexComponent,canActivate:[authGuard],data: { roles: ['Client'] } },
+      { path: 'payement', component: ClientPayementComponent,canActivate:[authGuard],data: { roles: ['Client'] } },
       // { path: 'client-profile', component: UserProfileComponent },
       { path: 'client-profile', component: ClientProfileComponent,
         children:

@@ -123,6 +123,7 @@ import { LoadingPageComponent } from './components/commun/loading/loading-page/l
 import { PostRegiterComponent } from './components/commun/auth/post-regiter/post-regiter.component';
 import { tokenInterceptor } from './core/interceptors/token.interceptor';
 import { FreelancerContractsComponent } from './components/freelancer/pages/freelancer-contracts/freelancer-contracts.component';
+import { ClientPayementComponent } from './components/client/pages/client-payement/client-payement.component';
 ;
 
 @NgModule({
@@ -243,7 +244,8 @@ import { FreelancerContractsComponent } from './components/freelancer/pages/free
     CircularProgressbarComponent,
     WishlistComponent,
     LoadingPageComponent,
-    PostRegiterComponent
+    PostRegiterComponent,
+    ClientPayementComponent
     
   ],
   imports: [
