@@ -122,6 +122,7 @@ import { WishlistComponent } from './components/client/pages/wishlist/wishlist.c
 import { LoadingPageComponent } from './components/commun/loading/loading-page/loading-page.component';
 import { PostRegiterComponent } from './components/commun/auth/post-regiter/post-regiter.component';
 import { tokenInterceptor } from './core/interceptors/token.interceptor';
+import { FreelancerDeleteExperinceComponent } from './components/freelancer/actions/freelancer-delete-experince/freelancer-delete-experince.component';
 ;
 
 @NgModule({
@@ -241,7 +242,8 @@ import { tokenInterceptor } from './core/interceptors/token.interceptor';
     CircularProgressbarComponent,
     WishlistComponent,
     LoadingPageComponent,
-    PostRegiterComponent
+    PostRegiterComponent,
+    FreelancerDeleteExperinceComponent
     
   ],
   imports: [
