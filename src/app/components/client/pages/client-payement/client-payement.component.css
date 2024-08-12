@@ -530,7 +530,6 @@
 	 box-shadow: 0px 10px 20px -13px rgba(32, 56, 117, 0.35);
 }
  .card-input__input.-select {
-	 -webkit-appearance: none;
 	 background-size: 12px;
 	 background-position: 90% center;
 	 background-repeat: no-repeat;

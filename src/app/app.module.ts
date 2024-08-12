@@ -115,7 +115,6 @@ import { PackTableComponent } from './components/admin/table/pack-table/pack-tab
 import { PackAddComponent } from './components/admin/buttons/add/pack-add/pack-add.component';
 import { PackDeleteComponent } from './components/admin/buttons/delete/pack-delete/pack-delete.component';
 import { PackEditComponent } from './components/admin/buttons/edit/pack-edit/pack-edit.component';
-import { EmailVerifyComponent } from './components/commun/auth/email-verify/email-verify.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CircularProgressbarComponent } from './components/commun/client-freelancer-layouts/circular-progressbar/circular-progressbar.component';
 import { WishlistComponent } from './components/client/pages/wishlist/wishlist.component';
@@ -126,6 +125,7 @@ import { FreelancerContractsComponent } from './components/freelancer/pages/free
 import { ClientPayementComponent } from './components/client/pages/client-payement/client-payement.component';
 import { ResetPasswordComponentComponent } from './components/commun/auth/reset-password-component/reset-password-component.component';
 import { ForgetPAsswordComponent } from './components/commun/auth/forget-password/forget-password.component';
+import { EmailVerifyComponent } from './components/commun/auth/email-verify/email-verify.component';
 ;
 
 @NgModule({
@@ -242,13 +242,12 @@ import { ForgetPAsswordComponent } from './components/commun/auth/forget-passwor
     PackDeleteComponent,
     PackEditComponent,
     EmailVerifyComponent,
-   
     CircularProgressbarComponent,
     WishlistComponent,
     LoadingPageComponent,
     PostRegiterComponent,
     ResetPasswordComponentComponent,
-    ForgetPAsswordComponent,,
+    ForgetPAsswordComponent,
     ClientPayementComponent
     
   ],
