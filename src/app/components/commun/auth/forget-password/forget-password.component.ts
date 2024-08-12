@@ -33,7 +33,7 @@ export class ForgetPAsswordComponent {
 
       this.authService.forgetPassword(this.forgetPasswordForm.value).subscribe({
         next:(data:any)=>{console.log(data);
-          this.notifiy=data
+          this.notifiy=data.message
         },
         error:(errro)=>console.log(errro)
         
