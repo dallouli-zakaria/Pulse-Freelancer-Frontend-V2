@@ -1,16 +1,18 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { ClientService } from './../../../../core/services/client.service';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../core/services/auth.service';
 import { PostsService } from '../../../../core/services/posts.service';
 import Swal from 'sweetalert2';
+import { LoadingService } from '../../../../core/services/loading.service';
 
 @Component({
   selector: 'app-add-post',
   templateUrl: './add-post.component.html',
   styleUrl: './add-post.component.css'
 })
-export class AddPostComponent {
+export class AddPostComponent implements OnInit{
 
   @Output() skillsSubmitted = new EventEmitter<string[]>();
 
@@ -24,7 +26,7 @@ export class AddPostComponent {
 
 
   selectedSkillIds: number[] = [];
-
+  clientdetails!:any;
   selectedBudget!:string;
   selectedPeriod!:string;
   clientId!:number;
@@ -34,7 +36,7 @@ export class AddPostComponent {
   userid:any=this.authservice.parseID();
   cities: string[] = ['Casablanca', 'Rabat', 'Fes', 'Marrakech', 'Tangier', 'Agadir', 'Meknes', 'Oujda', 'Kenitra', 'Tetouan','Autre'];
 
-  constructor(  private fb:FormBuilder,private postsservice:PostsService,private router: Router,private authservice:AuthService){
+  constructor(  private fb:FormBuilder,private postsservice:PostsService,private router: Router,private authservice:AuthService, private clientservice: ClientService,private loadingservice:LoadingService){
 
     this.form = this.fb.group({
       title: ['', Validators.required],
@@ -49,6 +51,9 @@ export class AddPostComponent {
       budgetvalue: [0,Validators.required],
       client_id:[this.userid]
     });
+  }
+  ngOnInit(): void {
+    this.accessAddOffer();
   }
 
   onBudgetChange(event: any) {
@@ -166,6 +171,31 @@ export class AddPostComponent {
       this.skillsSubmitted.emit(this.selectedSkills);
       this.selectedSkills = [];
     }
+  }
+
+  accessAddOffer(){
+    this.loadingservice.show();
+    this.isAuthenticated = this.authservice.isLoggedIn();
+    if (this.isAuthenticated) {
+      
+      this.clientservice.show(this.userid)
+      this.clientservice.getData$.subscribe((res)=>
+        {
+          this.clientdetails=res;
+          if(this.clientdetails.profession == null || this.clientdetails.company_name == null ){
+            
+            this.router.navigate(['/pulse/client-profile/client-infos']);  
+             
+          }else{
+            this.loadingservice.hide();
+          }
+          
+        
+          
+        }
+    )
+
+    }; 
   }
 
 

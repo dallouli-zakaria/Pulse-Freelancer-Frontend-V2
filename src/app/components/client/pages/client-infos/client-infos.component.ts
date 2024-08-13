@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Client } from '../../../../core/models/Client';
 import { AuthService } from '../../../../core/services/auth.service';
 import { ClientService } from '../../../../core/services/client.service';
+import { LoadingService } from '../../../../core/services/loading.service';
 
 @Component({
   selector: 'app-client-infos',
@@ -20,7 +21,7 @@ export class ClientInfosComponent {
   client?:Client;
   clientid!:number;
 
-  constructor(private clientservice:ClientService,private authservice:AuthService){}
+  constructor(private clientservice:ClientService,private authservice:AuthService,private loadingservice:LoadingService){}
 
   openModal(client:any) {
     this.clientdetails=client
@@ -52,12 +53,13 @@ export class ClientInfosComponent {
 
 
   getclient(){
-   
+    this.loadingservice.hide();
     this.clientid=this.authservice.parseID();
     this.clientservice.show(this.clientid)
     this.clientservice.getData$.subscribe({
       next:(data:any)=>{this.client=data;
         this.isLoading = false;
+        
       },
       error:(error:any)=>console.log(error),
       complete:()=>console.log("get client done")})

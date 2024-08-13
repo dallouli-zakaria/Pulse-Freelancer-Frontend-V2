@@ -43,6 +43,7 @@ import { PostRegiterComponent } from './components/commun/auth/post-regiter/post
 import { ClientPayementComponent } from './components/client/pages/client-payement/client-payement.component';
 import { ResetPasswordComponentComponent } from './components/commun/auth/reset-password-component/reset-password-component.component';
 import { ForgetPAsswordComponent } from './components/commun/auth/forget-password/forget-password.component';
+import { ClientPayementVerificationComponent } from './components/client/pages/client-payement-verification/client-payement-verification.component';
 
 
 const routes: Routes = [
@@ -78,7 +79,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'forget-password',
+    path: 'forgot-password',
     component:ForgetPAsswordComponent
   },
   
@@ -91,6 +92,7 @@ const routes: Routes = [
       { path: 'add-offer', component: AddPostComponent,canActivate:[authGuard],data: { roles: ['Client'] } },
       { path: 'client-dashboard', component: ClientIndexComponent,canActivate:[authGuard],data: { roles: ['Client'] } },
       { path: 'payement', component: ClientPayementComponent,canActivate:[authGuard],data: { roles: ['Client'] } },
+      { path: 'payement-verification', component: ClientPayementVerificationComponent,canActivate:[authGuard],data: { roles: ['Client'] } },
       // { path: 'client-profile', component: UserProfileComponent },
       { path: 'client-profile', component: ClientProfileComponent,
         children:

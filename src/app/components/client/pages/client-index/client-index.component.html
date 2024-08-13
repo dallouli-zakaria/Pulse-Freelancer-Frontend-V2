@@ -15,11 +15,8 @@
      <div class="container mt-5 mb-3 ">
          <div class="row ">
              <p class="col-lg-6 display-6">Poster un offre d'emploi.</p>
-             <p *ngIf="userdetails?.company_name !== null" class="col-lg-6">
+             <p class="col-lg-6">
                 <button class="btn btn-danger" routerLink="../add-offer">Poster un offre !</button>
-              </p>
-              <p *ngIf="userdetails?.company_name === null" class="col-lg-6">
-                <button class="btn btn-danger" routerLink="../client-profile">Poster un offre !</button>
               </p>
          </div>
      </div>

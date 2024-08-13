@@ -268,7 +268,8 @@
                   <div class="text-center pt-5"><img class="img-fluid" src="assets/img/icons/pricing.png" alt="" />
                     <h5 class="my-4">{{pack.title}}</h5>
                   </div>
-                  <ul class="list-unstyled">
+
+                  <ul *ngIf="pack.title == 'Gratuit' " class="list-unstyled">
                     <li class="mb-3"><span class="me-2">
                       <i class="bi bi-check-lg text-success"></i></span>Frais de service : 5 % du coût du projet
                     </li>
@@ -283,10 +284,56 @@
                       <i class="bi bi-check-lg text-success"></i></span>Support par email
                     </li>
                   </ul>
+
+
+                  <ul *ngIf="pack.title == 'Premium' " class="list-unstyled">
+                    <li class="mb-3"><span class="me-2">
+                      <i class="bi bi-check-lg text-success"></i></span>Frais de service : 3 % du coût du projet
+                     </li>
+                     <li class="mb-3"><span class="me-2">
+                      <i class="bi bi-check-lg text-success"></i></span>Publication de projet : 5 projets
+                     </li>
+                     <li class="mb-3"><span class="me-2">
+                      <i class="bi bi-check-lg text-success"></i></span>Système de messagerie intégré
+                     </li>
+                     <li class="mb-3"><span class="me-2">
+                      <i class="bi bi-check-lg text-success"></i></span>Outils de suivi de projet de base
+                     </li>
+                     <li class="mb-3"><span class="me-2">
+                      <i class="bi bi-check-lg text-success"></i></span>Support prioritaire par email
+                     </li>
+                  </ul>
+
+
+                  <ul *ngIf="pack.title == 'Entreprise' " class="list-unstyled">
+                    <li class="mb-3"><span class="me-2">
+                      <i class="bi bi-check-lg text-success"></i></span>Frais de service : gratuit
+                     </li>
+                     <li class="mb-3"><span class="me-2">
+                      <i class="bi bi-check-lg text-success"></i></span>Publication de projet : Projets illimités
+                     </li>
+                     <li class="mb-3"><span class="me-2">
+                      <i class="bi bi-check-lg text-success"></i></span>Système de messagerie intégré 
+                     </li>
+                     <li class="mb-3"><span class="me-2">
+                      <i class="bi bi-check-lg text-success"></i></span>Outils de suivi et de gestion de projet avancés
+                     </li>
+                     <li class="mb-3"><span class="me-2">
+                      <i class="bi bi-check-lg text-success"></i></span>Accès aux freelances les mieux notés 
+                     </li>
+                     <li class="mb-3"><span class="me-2">
+                      <i class="bi bi-check-lg text-success"></i></span>Manager le recrutement des freelanceurs
+                     </li>
+                  </ul>
+
+
                   <div class="text-center my-5">
-                    <h2 class="mb-3">{{pack.price}} mad / an
+                    <h2 class="mb-3">{{ pack.price === 0 ? 'Gratuit' : pack.price + ' MAD / an' }}
+
                     </h2>
-                    <button class="btn btn-outline-danger rounded-pill" type="submit">Choisir </button>
+                    <button *ngIf="pack.title == 'Gratuit' " class="btn btn-outline-danger rounded-pill" disabled="true">Choisir </button>
+
+                    <button *ngIf="pack.title != 'Gratuit' " class="btn btn-outline-danger rounded-pill" routerLink="../../pulse/payement">Choisir </button>
                   </div>
                 </div>
               </div>
