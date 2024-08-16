@@ -48,6 +48,7 @@ export class FreelancerViewPostDetailsComponent implements OnInit,OnChanges{
 
   ngOnInit(): void {}
 
+  //show selected post
   getposts() {
     if (this.postId !== null) {
       this.postservice.show(this.postId).subscribe((res:any) => {
@@ -61,6 +62,7 @@ export class FreelancerViewPostDetailsComponent implements OnInit,OnChanges{
     }
   }
 
+  //get client related to post
   getclient(clientId: number) {
     this.clientservice.show(clientId)
     this.clientservice.getData$.subscribe((res:any) => {
@@ -70,6 +72,7 @@ export class FreelancerViewPostDetailsComponent implements OnInit,OnChanges{
     });
   }
 
+  //assign to offer function from freelancer
   postuler() {
     this.isButtonDisabled = true; 
     let data = {
@@ -93,6 +96,7 @@ export class FreelancerViewPostDetailsComponent implements OnInit,OnChanges{
 
   }
 
+  //check if freelancer is already assigned to offer
   truefalse(postId: any) {
     this.postservice.checkFreelancerOffer(postId, this.freelancerId).subscribe(response => {
       this.offerExists = response.offer_exists;
@@ -101,6 +105,7 @@ export class FreelancerViewPostDetailsComponent implements OnInit,OnChanges{
     });
   }
 
+  //get freelancer status
   getfreelancer() {
     this.freelancerservice.show(this.freelancerId)
     this.freelancerservice.freelancers$.subscribe((res:any) => {

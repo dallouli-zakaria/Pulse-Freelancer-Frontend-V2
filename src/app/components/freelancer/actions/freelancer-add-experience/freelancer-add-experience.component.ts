@@ -8,27 +8,63 @@ import { dateRangeValidator } from '../../../../core/validators/date-range.valid
 @Component({
   selector: 'app-freelancer-add-experience',
   templateUrl: './freelancer-add-experience.component.html',
-  styleUrls: ['./freelancer-add-experience.component.css']
+  styleUrls: ['./freelancer-add-experience.component.css'],
 })
 export class FreelancerAddExperienceComponent implements OnInit {
   @Output() experienceAdded = new EventEmitter<void>();
-  @Input() freelancerIdC !:number
-
+  @Input() freelancerIdC!: number;
 
   freelancerId: number = this.authService.parseID();
   form: FormGroup;
   isSubmitting = false;
 
   countries = [
-'Maroc','Afrique du Sud', 'Allemagne', 'Algérie', 'Arabie Saoudite', 
-'Autriche', 'Bahreïn', 'Belgique', 'Danemark', 'Égypte', 
-'Émirats Arabes Unis', 'Espagne', 'Finlande', 'France', 'Ghana', 'Grèce', 'Italie',
- 'Jordanie', 'Kenya', 'Koweït', 'Liban',  'Nigeria', 'Norvège', 'Oman', 'Pays-Bas',
-  'Portugal', 'Qatar', 'Royaume-Uni', 'Suède', 'Suisse', 'Turquie', 'Tunisie', 'Autre'
-
+    'Maroc',
+    'Afrique du Sud',
+    'Allemagne',
+    'Algérie',
+    'Arabie Saoudite',
+    'Autriche',
+    'Bahreïn',
+    'Belgique',
+    'Danemark',
+    'Égypte',
+    'Émirats Arabes Unis',
+    'Espagne',
+    'Finlande',
+    'France',
+    'Ghana',
+    'Grèce',
+    'Italie',
+    'Jordanie',
+    'Kenya',
+    'Koweït',
+    'Liban',
+    'Nigeria',
+    'Norvège',
+    'Oman',
+    'Pays-Bas',
+    'Portugal',
+    'Qatar',
+    'Royaume-Uni',
+    'Suède',
+    'Suisse',
+    'Turquie',
+    'Tunisie',
+    'Autre',
   ];
-  
-  moroccanCities = ['Casablanca', 'Rabat', 'Marrakech', 'Fès', 'Tanger', 'Agadir', 'Essaouira', 'Meknès', 'Autre'];
+
+  moroccanCities = [
+    'Casablanca',
+    'Rabat',
+    'Marrakech',
+    'Fès',
+    'Tanger',
+    'Agadir',
+    'Essaouira',
+    'Meknès',
+    'Autre',
+  ];
   isMorocco = false;
   selectedCity = '';
 
@@ -37,19 +73,22 @@ export class FreelancerAddExperienceComponent implements OnInit {
     private authService: AuthService,
     private fb: FormBuilder
   ) {
-    this.form = this.fb.group({
-      title: ['', Validators.required],
-      companyName: ['', Validators.required],
-      country: ['', Validators.required],
-      city: ['', Validators.required],
-      startDate: ['', Validators.required],
-      endDate: ['', Validators.required],
-      description: ['', Validators.required],
-      freelancer_id: [this.freelancerId]
-    },{ validators: dateRangeValidator() });
+    this.form = this.fb.group(
+      {
+        title: ['', Validators.required],
+        companyName: ['', Validators.required],
+        country: ['', Validators.required],
+        city: ['', Validators.required],
+        startDate: ['', Validators.required],
+        endDate: ['', Validators.required],
+        description: ['', Validators.required],
+        freelancer_id: [this.freelancerId],
+      },
+      { validators: dateRangeValidator() }
+    );
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   onCountryChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
@@ -82,14 +121,14 @@ export class FreelancerAddExperienceComponent implements OnInit {
           this.experienceAdded.emit();
           this.experienceService.showByFreelancer(this.freelancerId);
           this.form.reset({
-            freelancer_id: this.freelancerId
+            freelancer_id: this.freelancerId,
           });
           this.isSubmitting = false;
         },
         error: (error) => {
           console.error('Error adding experience:', error);
           this.isSubmitting = false;
-        }
+        },
       });
     }
   }

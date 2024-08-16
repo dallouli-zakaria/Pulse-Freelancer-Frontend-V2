@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-forget-password',
   templateUrl: './forget-password.component.html',
-  styleUrl: './forget-password.component.css'
+  styleUrl: './forget-password.component.css',
 })
 export class ForgetPAsswordComponent {
   forgetPasswordForm!: FormGroup;
@@ -40,8 +40,8 @@ export class ForgetPAsswordComponent {
           this.isloading = false;
           this.router.navigate(['../login']);
           Swal.fire({
-            icon: "success",
-            title: "Nous avons envoyé un mail pour changer votre mot de passe!",
+            icon: 'success',
+            title: 'Nous avons envoyé un mail pour changer votre mot de passe!',
             showConfirmButton: true,
           });
         },

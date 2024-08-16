@@ -9,15 +9,19 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-client-view-freelancers',
   templateUrl: './client-view-freelancers.component.html',
-  styleUrls: ['./client-view-freelancers.component.css']
+  styleUrls: ['./client-view-freelancers.component.css'],
 })
 export class ClientViewFreelancersComponent implements OnInit {
   isLoading = true;
   freelancerList!: Observable<Freelancer[]>;
   freelancers: Freelancer[] = [];
   favoriteFreelancers: Set<number> = new Set<number>();
-  clientId:number=this.authservice.parseID();
-  constructor(private freelancerService: FreelancerService,private authservice:AuthService,private wishListservice:WishListService) {}
+  clientId: number = this.authservice.parseID();
+  constructor(
+    private freelancerService: FreelancerService,
+    private authservice: AuthService,
+    private wishListservice: WishListService
+  ) {}
 
   ngOnInit(): void {
     this.index();
@@ -34,61 +38,64 @@ export class ClientViewFreelancersComponent implements OnInit {
       error: (error: any) => {
         console.log(error);
       },
-      complete: () => console.log('end operation get data')
+      complete: () => console.log('end operation get data'),
     });
-    
+
     // Load favorite freelancers
     this.wishListservice.getFavoriteFreelancers(this.clientId).subscribe({
       next: (data: any) => {
-        this.favoriteFreelancers = new Set(data.map((item: any) => item.freelancer_id));
+        this.favoriteFreelancers = new Set(
+          data.map((item: any) => item.freelancer_id)
+        );
         console.log(this.favoriteFreelancers);
-        
-      }
+      },
     });
   }
 
+
+  //add or delete from wishlist
   toggleFavorite(freelancerId: number) {
     if (this.favoriteFreelancers.has(freelancerId)) {
-      this.wishListservice.removeFromWishlist(this.clientId,freelancerId).subscribe(() => {
-        this.favoriteFreelancers.delete(freelancerId);
-        Swal.fire({
-          position: 'top-end',
-          iconHtml: '<i class="fas fa-heart"></i>', // Use Font Awesome heart icon
-          title: 'Retiré des favoris',
-          customClass: {
-            popup: 'smaller-popup',
-            icon: 'heart-icon'
-          },
-          showConfirmButton: false,
-          timer: 1500,
-          backdrop: false, // Disable background overlay
-          width: '400px', // Adjust the width to make it smaller
-          padding: '1em', // Adjust padding to make it smaller
-        })
-        
-        
-      });
+      this.wishListservice
+        .removeFromWishlist(this.clientId, freelancerId)
+        .subscribe(() => {
+          this.favoriteFreelancers.delete(freelancerId);
+          Swal.fire({
+            position: 'top-end',
+            iconHtml: '<i class="fas fa-heart"></i>', // Use Font Awesome heart icon
+            title: 'Retiré des favoris',
+            customClass: {
+              popup: 'smaller-popup',
+              icon: 'heart-icon',
+            },
+            showConfirmButton: false,
+            timer: 1500,
+            backdrop: false, // Disable background overlay
+            width: '400px', // Adjust the width to make it smaller
+            padding: '1em', // Adjust padding to make it smaller
+          });
+        });
     } else {
-      this.wishListservice.addToWishlist(this.clientId,freelancerId).subscribe(() => {
-        this.favoriteFreelancers.add(freelancerId);
+      this.wishListservice
+        .addToWishlist(this.clientId, freelancerId)
+        .subscribe(() => {
+          this.favoriteFreelancers.add(freelancerId);
 
-        Swal.fire({
-          position: 'top-end',
-          iconHtml: '<i class="fas fa-heart"></i>', // Use Font Awesome heart icon
-          title: 'Ajouté au favoris',
-          customClass: {
-            popup: 'smaller-popup',
-            icon: 'heart-icon'
-          },
-          showConfirmButton: false,
-          timer: 1500,
-          backdrop: false, // Disable background overlay
-          width: '400px', // Adjust the width to make it smaller
-          padding: '1em', // Adjust padding to make it smaller
-        })
-        
-        
-      });
+          Swal.fire({
+            position: 'top-end',
+            iconHtml: '<i class="fas fa-heart"></i>', // Use Font Awesome heart icon
+            title: 'Ajouté au favoris',
+            customClass: {
+              popup: 'smaller-popup',
+              icon: 'heart-icon',
+            },
+            showConfirmButton: false,
+            timer: 1500,
+            backdrop: false, // Disable background overlay
+            width: '400px', // Adjust the width to make it smaller
+            padding: '1em', // Adjust padding to make it smaller
+          });
+        });
     }
   }
 
@@ -96,6 +103,8 @@ export class ClientViewFreelancersComponent implements OnInit {
     return this.favoriteFreelancers.has(freelancerId);
   }
 
+
+  //Get first name only
   getFirstName(fullName: string | undefined): string {
     if (!fullName) {
       return '';

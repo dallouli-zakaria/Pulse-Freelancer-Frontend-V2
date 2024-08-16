@@ -9,7 +9,7 @@ import { AuthService } from '../../../../core/services/auth.service';
 @Component({
   selector: 'app-freelancer-contracts',
   templateUrl: './freelancer-contracts.component.html',
-  styleUrl: './freelancer-contracts.component.css'
+  styleUrl: './freelancer-contracts.component.css',
 })
 export class FreelancerContractsComponent {
   isModalOpen = false;
@@ -18,12 +18,16 @@ export class FreelancerContractsComponent {
   isLoading = true;
   data: any[] = [];
   subject!: Observable<Contract[]>;
-  freelancer_id!:number;
+  freelancer_id!: number;
   searchTerm = '';
   currentPage = 1;
   totalPages = 1;
   contractsPerPage = 5;
-  constructor(private contractService: ContractService, private clientService: ClientService,private authservice:AuthService) { }
+  constructor(
+    private contractService: ContractService,
+    private clientService: ClientService,
+    private authservice: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.fetchData();
@@ -32,9 +36,11 @@ export class FreelancerContractsComponent {
   fetchData() {
     this.freelancer_id = this.authservice.parseID();
     this.contractService.showbyfreelancer(this.freelancer_id).subscribe(
-      (contracts:any) => {
+      (contracts: any) => {
         this.contract = contracts;
-        this.totalPages = Math.ceil(this.contract.length / this.contractsPerPage);
+        this.totalPages = Math.ceil(
+          this.contract.length / this.contractsPerPage
+        );
         this.applyPagination();
         this.isLoading = false;
       },
@@ -43,10 +49,7 @@ export class FreelancerContractsComponent {
         this.isLoading = false;
       }
     );
-}
-
-
-
+  }
 
   openModal() {
     this.isModalOpen = true;
@@ -62,10 +65,12 @@ export class FreelancerContractsComponent {
   }
 
   applyPagination() {
-    const filteredContracts = this.contract.filter(contract =>
+    const filteredContracts = this.contract.filter((contract) =>
       contract.title.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
-    this.totalPages = Math.ceil(filteredContracts.length / this.contractsPerPage);
+    this.totalPages = Math.ceil(
+      filteredContracts.length / this.contractsPerPage
+    );
     const start = (this.currentPage - 1) * this.contractsPerPage;
     const end = start + this.contractsPerPage;
     this.paginatedContracts = filteredContracts.slice(start, end);
@@ -81,5 +86,4 @@ export class FreelancerContractsComponent {
   getPageNumbers(): number[] {
     return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
-
 }

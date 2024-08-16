@@ -9,41 +9,42 @@ import { SkillService } from '../../../../core/services/skill.service';
 @Component({
   selector: 'app-freelancer-sideprofile',
   templateUrl: './freelancer-sideprofile.component.html',
-  styleUrl: './freelancer-sideprofile.component.css'
+  styleUrl: './freelancer-sideprofile.component.css',
 })
-export class FreelancerSideprofileComponent implements OnInit{
-  freelancername!:string;
+export class FreelancerSideprofileComponent implements OnInit {
+  freelancername!: string;
   experienceData: Experience[] = [];
   freelancerId!: number;
-  freelancerdata?:Freelancer;
+  freelancerdata?: Freelancer;
   freelancerSkillsData: any[] = [];
-  displayEdit = "none";
+  displayEdit = 'none';
   isLoading = true;
-  errorhandling:any ;
+  errorhandling: any;
 
   constructor(
     private freelancerService: FreelancerService,
     private authService: AuthService,
-    private experienceService:ExperienceService,
-    private skillService:SkillService
-   
+    private experienceService: ExperienceService,
+    private skillService: SkillService
   ) {
     this.getFreelancer();
   }
+
+  //get freelancer details
   getFreelancer() {
     this.freelancerId = this.authService.parseID();
-    this.freelancerService.show(this.freelancerId)
+    this.freelancerService.show(this.freelancerId);
     this.freelancerService.freelancers$.subscribe({
-      next: (data:any) => {
+      next: (data: any) => {
         this.freelancerdata = data;
         this.isLoading = false;
         console.log(this.freelancerdata);
       },
       error: (error: any) => console.log(error),
-      complete: () => console.log("get freelancer done")
-    }); 
+      complete: () => console.log('get freelancer done'),
+    });
 
-    this.experienceService.showByFreelancer(this.freelancerId)
+    this.experienceService.showByFreelancer(this.freelancerId);
     this.experienceService.experienceData$.subscribe({
       next: (res) => {
         this.experienceData = res;
@@ -53,9 +54,8 @@ export class FreelancerSideprofileComponent implements OnInit{
       error: (error) => {
         console.error('Error fetching experiences:', error);
         this.isLoading = false;
-      }
+      },
     });
-
 
     this.skillService.showbyfreelancerid(this.freelancerId).subscribe({
       next: (data: any) => {
@@ -66,74 +66,77 @@ export class FreelancerSideprofileComponent implements OnInit{
         if (error.error.errors) {
           this.errorhandling = Object.values(error.error.errors).flat();
           console.log(this.errorhandling);
-          
         } else {
           this.errorhandling = [error.message || 'An error occurred'];
           console.log(this.errorhandling);
         }
       },
     });
-
   }
 
-
-
-  ngOnInit(): void {
-    
-  }
-selectedData:any
-selectedID!:any
-  openModalEdit(freelancer:any,id:any) {
-    this.selectedData=freelancer;
-    this.selectedID=id
-    this.displayEdit = "block";
+  ngOnInit(): void {}
+  selectedData: any;
+  selectedID!: any;
+  openModalEdit(freelancer: any, id: any) {
+    this.selectedData = freelancer;
+    this.selectedID = id;
+    this.displayEdit = 'block';
   }
 
   onCloseHandledEdit() {
-    this.displayEdit = "none";
+    this.displayEdit = 'none';
   }
 
 
-
-    
-    
-
-
-
-    getStatusMessage(): string {
-      if (this.isAllFieldsFilled() && this.freelancerdata?.status === 'verified') {
-        return  'verified';
-      } else if (this.isAllFieldsFilled() && this.freelancerdata?.status === 'not verified') {
-        return 'en cours de vérification';
-      } else {
-        return 'Veuilez remplir toutes vos informations ';
-      }
+  //get status
+  getStatusMessage(): string {
+    if (
+      this.isAllFieldsFilled() &&
+      this.freelancerdata?.status === 'verified'
+    ) {
+      return 'verified';
+    } else if (
+      this.isAllFieldsFilled() &&
+      this.freelancerdata?.status === 'not verified'
+    ) {
+      return 'en cours de vérification';
+    } else {
+      return 'Veuilez remplir toutes vos informations ';
     }
+  }
 
-    getStatus(): { cssClass: string } {
-      if (this.isAllFieldsFilled() && this.freelancerdata?.status === 'verified') {
-        return { cssClass: 'status-connected' };
-      } else if (this.isAllFieldsFilled() && this.freelancerdata?.status === 'not verified') {
-        return { cssClass: 'status-away' };
-      } else {
-        return {cssClass: 'status-disconnected' };
-      }
+  getStatus(): { cssClass: string } {
+    if (
+      this.isAllFieldsFilled() &&
+      this.freelancerdata?.status === 'verified'
+    ) {
+      return { cssClass: 'status-connected' };
+    } else if (
+      this.isAllFieldsFilled() &&
+      this.freelancerdata?.status === 'not verified'
+    ) {
+      return { cssClass: 'status-away' };
+    } else {
+      return { cssClass: 'status-disconnected' };
     }
+  }
 
-    private isAllFieldsFilled(): boolean {
-      // Check all required fields are not null or undefined
-      return (
-        this.freelancerdata?.title !== null &&
-        this.freelancerdata?.dateOfBirth !== null &&
-        this.freelancerdata?.city !== null &&
-        this.freelancerdata?.TJM !== null &&
-        this.freelancerdata?.summary !== null &&
-        this.freelancerdata?.availability !== null &&
-        this.freelancerdata?.adress !== null &&
-        this.freelancerdata?.phone !== null &&
-        this.freelancerdata?.portfolio_Url !== null &&
-        this.experienceData.length > 0 &&
-        this.freelancerSkillsData.length > 0
-      );
-    }
+
+  
+  private isAllFieldsFilled(): boolean {
+    // Check all required fields are not null or undefined
+    return (
+      this.freelancerdata?.title !== null &&
+      this.freelancerdata?.dateOfBirth !== null &&
+      this.freelancerdata?.city !== null &&
+      this.freelancerdata?.TJM !== null &&
+      this.freelancerdata?.summary !== null &&
+      this.freelancerdata?.availability !== null &&
+      this.freelancerdata?.adress !== null &&
+      this.freelancerdata?.phone !== null &&
+      this.freelancerdata?.portfolio_Url !== null &&
+      this.experienceData.length > 0 &&
+      this.freelancerSkillsData.length > 0
+    );
+  }
 }

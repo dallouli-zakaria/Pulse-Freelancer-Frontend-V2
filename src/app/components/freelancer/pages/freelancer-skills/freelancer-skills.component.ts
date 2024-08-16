@@ -8,11 +8,11 @@ import { FreelanceSkillsService } from '../../../../core/services/freelance-skil
 @Component({
   selector: 'app-freelancer-skills',
   templateUrl: './freelancer-skills.component.html',
-  styleUrls: ['./freelancer-skills.component.css']
+  styleUrls: ['./freelancer-skills.component.css'],
 })
 export class FreelancerSkillsComponent implements OnInit {
   submittedSkills: SkillWithProgress[] = [];
-  displayEdit = "none";
+  displayEdit = 'none';
   freelancerId: number = this.authService.parseID();
   freelancerSkillsData: Skill[] = [];
 
@@ -26,17 +26,17 @@ export class FreelancerSkillsComponent implements OnInit {
     this.index();
   }
 
+
+  //add skill
   onSkillsSubmitted(skills: string[]): void {
-   
-    const newSkills = skills.map(skill => ({
+    const newSkills = skills.map((skill) => ({
       id: 0,
       freelancer_id: 0,
       skill_id: 0,
       title: skill,
-      level: 20
+      level: 20,
     }));
     this.submittedSkills = [...this.submittedSkills, ...newSkills];
-
 
     this.skillService.store(newSkills).subscribe({
       next: () => {
@@ -44,11 +44,10 @@ export class FreelancerSkillsComponent implements OnInit {
       },
       error: (error: any) => {
         console.log(error);
-      }
+      },
     });
-    
   }
-  errorhandling:any;
+  errorhandling: any;
   public index(): void {
     this.skillService.showbyfreelancerid(this.freelancerId).subscribe({
       next: (data: any) => {
@@ -59,7 +58,6 @@ export class FreelancerSkillsComponent implements OnInit {
         if (error.error.errors) {
           this.errorhandling = Object.values(error.error.errors).flat();
           console.log(this.errorhandling);
-          
         } else {
           this.errorhandling = [error.message || 'An error occurred'];
           console.log(this.errorhandling);
@@ -68,14 +66,18 @@ export class FreelancerSkillsComponent implements OnInit {
     });
   }
 
+
+  //delete skill
   removeSkill(freelancerId: number, skillId: number): void {
-    this.freelancerskillservice.deleteSkillbyfreelancerId(freelancerId, skillId).subscribe({
-      next: () => {
-        this.index();
-      },
-      error: (error: any) => {
-        console.log(error);
-      }
-    });
+    this.freelancerskillservice
+      .deleteSkillbyfreelancerId(freelancerId, skillId)
+      .subscribe({
+        next: () => {
+          this.index();
+        },
+        error: (error: any) => {
+          console.log(error);
+        },
+      });
   }
 }

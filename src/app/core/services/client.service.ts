@@ -17,8 +17,8 @@ export class ClientService {
 
   constructor(private http:HttpClient) {}
 
-   //
-    getData$=this.dataSubject.asObservable()
+   
+  getData$=this.dataSubject.asObservable()
 
   //counte function 
    public count():Observable<Client>{
