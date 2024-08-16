@@ -39,7 +39,7 @@ export class ContractService {
    // pagination contract
     public fetchPaginatedContracts(page: number = 1): Observable<PaginatedResponse<Contract>> {
      const params = new HttpParams().set('page', page.toString());
-     return this.http.get<PaginatedResponse<Contract>>(`${this.url}/freelancerPagination`, { params });
+     return this.http.get<PaginatedResponse<Contract>>(`${this.url}/contractPagination`, { params });
      }
     // get contracts by id
     public store(data:any):Observable<Contract>{

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Contract } from '../../../../core/models/Contract';
 import { ContractService } from '../../../../core/services/contract.service';
 import { PaginatedResponse } from '../../../../core/models/PaginatedResponse';
@@ -8,7 +8,7 @@ import { PaginatedResponse } from '../../../../core/models/PaginatedResponse';
   templateUrl: './contract-table.component.html',
   styleUrl: './contract-table.component.css'
 })
-export class ContractTableComponent {
+export class ContractTableComponent implements OnInit{
    contract:Contract[]=[];
    filteredCleint: Contract[] = [];
    currentPage = 1;
@@ -20,6 +20,9 @@ export class ContractTableComponent {
     selectedDataContarct:any
   constructor(private contractServices:ContractService){
 
+  }
+  ngOnInit(): void {
+    this. loadFreelancers(this.currentPage)
   }
 
   //manage page edite delete and details for assingnig 

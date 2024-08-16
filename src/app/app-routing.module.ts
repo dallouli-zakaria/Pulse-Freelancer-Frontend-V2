@@ -45,13 +45,12 @@ import { ResetPasswordComponentComponent } from './components/commun/auth/reset-
 import { ForgetPAsswordComponent } from './components/commun/auth/forget-password/forget-password.component';
 import { ClientPayementVerificationComponent } from './components/client/pages/client-payement-verification/client-payement-verification.component';
 
-
 const routes: Routes = [
-
   {
     path: 'admin',
     component: AdminDashboardComponent,
-    canActivate:[authGuard],data: { roles: ['superadmin_role'] },
+    canActivate: [authGuard],
+    data: { roles: ['superadmin_role'] },
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
@@ -64,78 +63,167 @@ const routes: Routes = [
       { path: 'client', component: ClientComponent },
       { path: 'users', component: UsersComponent },
       { path: 'contract', component: ContractComponent },
-      { path: 'post-open',component:PostComponent},
-      { path: 'post-waiting',component:PostComponent},
-      { path: 'post-closed',component:PostComponent},
+      { path: 'post-open', component: PostComponent },
+      { path: 'post-waiting', component: PostComponent },
+      { path: 'post-closed', component: PostComponent },
       { path: 'client-offer/:postId', component: ClientPostDetailsComponent },
-      { path: 'viewPost/:itemId',component:PostViewComponent},
-      { path: 'pack', component:PackComponent},
-      { path: '**', redirectTo: 'dashboard', pathMatch: 'full' } 
-    ]
-  },
-  {
-    path: 'reset-password',
-    component: ResetPasswordComponentComponent
+      { path: 'viewPost/:itemId', component: PostViewComponent },
+      { path: 'pack', component: PackComponent },
+      { path: '**', redirectTo: 'dashboard', pathMatch: 'full' },
+    ],
   },
 
-  {
-    path: 'forgot-password',
-    component:ForgetPAsswordComponent
-  },
-  
   {
     path: 'pulse',
     component: IndexComponent,
-    
+
     children: [
-      { path: 'view-freelancers', component: ClientViewFreelancersComponent,canActivate:[authGuard],data: { roles: ['Client'] } },
-      { path: 'add-offer', component: AddPostComponent,canActivate:[authGuard],data: { roles: ['Client'] } },
-      { path: 'client-dashboard', component: ClientIndexComponent,canActivate:[authGuard],data: { roles: ['Client'] } },
-      { path: 'payement', component: ClientPayementComponent,canActivate:[authGuard],data: { roles: ['Client'] } },
-      { path: 'payement-verification', component: ClientPayementVerificationComponent,canActivate:[authGuard],data: { roles: ['Client'] } },
-      // { path: 'client-profile', component: UserProfileComponent },
-      { path: 'client-profile', component: ClientProfileComponent,
-        children:
-        [
-
-          {path:'client-infos',component:ClientInfosComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
-          {path:'client-wishlist',component:WishlistComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
-          {path:'client-offers-open',component:ClientPostsComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
-          {path:'client-offers-waiting',component:ClientPostsComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
-          {path:'client-offers-closed',component:ClientPostsComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
-
-          {path:'client-contracts',component:ClientContractsComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
-          {path:'client-subscription',component:ClientSubscriptionsComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
-          { path: '', redirectTo: 'client-infos', pathMatch: 'full' },
-          
-        ]
-       },
-      { path: 'client-offer/:postId', component: ClientPostDetailsComponent,canActivate:[authGuard],data: { roles: ['Client','Freelancer'] } },
-      { path: 'offers', component: FreelancerViewPostsComponent,canActivate:[authGuard],data: { roles: ['Freelancer'] } },
-      { path: 'contact', component: ContactUsComponent,canActivate:[authGuard] },
-      {path:'view-freelancerprofile/:freelancerId',component:ClientViewFreelancerDetailsComponent,canActivate:[authGuard],data: { roles: ['Client'] }},
-      {path:'freelancer-dashboard',component:FreelancerProfileComponent,
-        children:
-        [
-
-          //{path:'freelancer-offers',component:FreelancerOffersComponent,canActivate:[authGuard],data: { roles: ['Freelancer'] } },
-          {path:'freelancer-offers-open',component:FreelancerOffersComponent,canActivate:[authGuard],data: { roles: ['Freelancer'] }},
-          {path:'freelancer-offers-waiting',component:FreelancerOffersComponent,canActivate:[authGuard],data: { roles: ['Freelancer'] }},
-          {path:'freelancer-offers-closed',component:FreelancerOffersComponent,canActivate:[authGuard],data: { roles: ['Freelancer'] }},
-          {path:'freelancer-contracts',component:FreelancerContractsComponent,canActivate:[authGuard],data: { roles: ['Freelancer'] } },
-          { path: 'freelancer-profile', component: FreelancerIndexComponent ,canActivate:[authGuard],data: { roles: ['Freelancer'] } },
-          { path: '', redirectTo: 'freelancer-profile', pathMatch: 'full' }
-          
-        ]
+      {
+        path: 'view-freelancers',
+        component: ClientViewFreelancersComponent,
+        canActivate: [authGuard],
+        data: { roles: ['Client'] },
       },
-      { path: '**', redirectTo: '/', pathMatch: 'full' } ,
-    
-    ]
+      {
+        path: 'add-offer',
+        component: AddPostComponent,
+        canActivate: [authGuard],
+        data: { roles: ['Client'] },
+      },
+      {
+        path: 'client-dashboard',
+        component: ClientIndexComponent,
+        canActivate: [authGuard],
+        data: { roles: ['Client'] },
+      },
+      {
+        path: 'payement',
+        component: ClientPayementComponent,
+        canActivate: [authGuard],
+        data: { roles: ['Client'] },
+      },
+      {
+        path: 'payement-verification',
+        component: ClientPayementVerificationComponent,
+        canActivate: [authGuard],
+        data: { roles: ['Client'] },
+      },
+      // { path: 'client-profile', component: UserProfileComponent },
+      {
+        path: 'client-profile',
+        component: ClientProfileComponent,
+        children: [
+          {
+            path: 'client-infos',
+            component: ClientInfosComponent,
+            canActivate: [authGuard],
+            data: { roles: ['Client'] },
+          },
+          {
+            path: 'client-wishlist',
+            component: WishlistComponent,
+            canActivate: [authGuard],
+            data: { roles: ['Client'] },
+          },
+          {
+            path: 'client-offers-open',
+            component: ClientPostsComponent,
+            canActivate: [authGuard],
+            data: { roles: ['Client'] },
+          },
+          {
+            path: 'client-offers-waiting',
+            component: ClientPostsComponent,
+            canActivate: [authGuard],
+            data: { roles: ['Client'] },
+          },
+          {
+            path: 'client-offers-closed',
+            component: ClientPostsComponent,
+            canActivate: [authGuard],
+            data: { roles: ['Client'] },
+          },
+
+          {
+            path: 'client-contracts',
+            component: ClientContractsComponent,
+            canActivate: [authGuard],
+            data: { roles: ['Client'] },
+          },
+          {
+            path: 'client-subscription',
+            component: ClientSubscriptionsComponent,
+            canActivate: [authGuard],
+            data: { roles: ['Client'] },
+          },
+          { path: '', redirectTo: 'client-infos', pathMatch: 'full' },
+        ],
+      },
+      {
+        path: 'client-offer/:postId',
+        component: ClientPostDetailsComponent,
+        canActivate: [authGuard],
+        data: { roles: ['Client', 'Freelancer'] },
+      },
+      {
+        path: 'offers',
+        component: FreelancerViewPostsComponent,
+        canActivate: [authGuard],
+        data: { roles: ['Freelancer'] },
+      },
+      {
+        path: 'contact',
+        component: ContactUsComponent,
+        canActivate: [authGuard],
+      },
+      {
+        path: 'view-freelancerprofile/:freelancerId',
+        component: ClientViewFreelancerDetailsComponent,
+        canActivate: [authGuard],
+        data: { roles: ['Client'] },
+      },
+      {
+        path: 'freelancer-dashboard',
+        component: FreelancerProfileComponent,
+        children: [
+          {
+            path: 'freelancer-offers-open',
+            component: FreelancerOffersComponent,
+            canActivate: [authGuard],
+            data: { roles: ['Freelancer'] },
+          },
+          {
+            path: 'freelancer-offers-waiting',
+            component: FreelancerOffersComponent,
+            canActivate: [authGuard],
+            data: { roles: ['Freelancer'] },
+          },
+          {
+            path: 'freelancer-offers-closed',
+            component: FreelancerOffersComponent,
+            canActivate: [authGuard],
+            data: { roles: ['Freelancer'] },
+          },
+          {
+            path: 'freelancer-contracts',
+            component: FreelancerContractsComponent,
+            canActivate: [authGuard],
+            data: { roles: ['Freelancer'] },
+          },
+          {
+            path: 'freelancer-profile',
+            component: FreelancerIndexComponent,
+            canActivate: [authGuard],
+            data: { roles: ['Freelancer'] },
+          },
+          { path: '', redirectTo: 'freelancer-profile', pathMatch: 'full' },
+        ],
+      },
+      { path: '**', redirectTo: '/', pathMatch: 'full' },
+    ],
   },
 
   
-
-  //TO REVISITE
   {
     path: 'home',
     component: IndexComponent,
@@ -143,25 +231,25 @@ const routes: Routes = [
       { path: '', redirectTo: 'pulse', pathMatch: 'full' },
       { path: 'pulse', component: ConnectedLandingPageComponent },
       { path: 'contact', component: ContactUsComponent },
-    ]
+    ],
   },
 
+  { path: 'reset-password',component: ResetPasswordComponentComponent},
+  { path: 'forgot-password',component: ForgetPAsswordComponent},
   { path: 'register', component: PostRegiterComponent },
   { path: 'register/client', component: AuthentificationComponent },
   { path: 'register/freelancer', component: AuthentificationComponent },
-  { path: 'email',component:EmailVerifyComponent},
+  { path: 'email', component: EmailVerifyComponent },
   { path: 'login', component: LoginComponent },
   { path: 'page-notfound', component: Error404Component },
   { path: 'server-error', component: Error500Component },
   { path: '', redirectTo: 'home/pulse', pathMatch: 'full' },
   { path: '**', redirectTo: 'page-notfound', pathMatch: 'full' },
-
-  
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
- 
-exports: [RouterModule]
+
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
