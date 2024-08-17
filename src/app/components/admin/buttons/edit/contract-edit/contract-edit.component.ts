@@ -20,8 +20,8 @@ export class ContractEditComponent implements OnInit,OnChanges {
     this.form=this.fb.group({
     
       title: [this.conatracData.title, [Validators.required, Validators.maxLength(255)]],
-      period: [this.conatracData.period],
-      budget: [this.conatracData.budget, [Validators.min(0)]],
+      startDate: [this.conatracData.start_date, Validators.required],
+      endDate: [this.conatracData.end_date, Validators.required],
       project_description: [this.conatracData.project_description, Validators.required]
      })
    }
@@ -29,8 +29,8 @@ export class ContractEditComponent implements OnInit,OnChanges {
     this.form=this.fb.group({
     
       title: [this.conatracData.title, [Validators.required, Validators.maxLength(255)]],
-      period: [this.conatracData.period],
-      budget: [this.conatracData.budget, [Validators.min(0)]],
+      startDate: [this.conatracData.start_date, Validators.required],
+      endDate: [this.conatracData.end_date, Validators.required],
       project_description: [this.conatracData.project_description, Validators.required]
      })
    }
