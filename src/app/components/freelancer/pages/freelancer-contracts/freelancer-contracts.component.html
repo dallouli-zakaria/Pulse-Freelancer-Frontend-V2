@@ -40,8 +40,8 @@
                 </div>
                 <div class="col">
                   <h6 class="row card-subtitle mb-2">
-                    <span> Budget: {{ item.budget }} MDH</span>
-                    <span> Period: {{ item.period }} jour</span>
+                    <span> Budget: {{ item.start_date | date:'dd/MM/yyyy' }}</span>
+                    <span> Period: {{ item.end_date | date:'dd/MM/yyyy' }}</span>
                     <p class="card-text text-muted">
                       <strong>La date de creation:</strong>
                       {{ item.created_at | date }}

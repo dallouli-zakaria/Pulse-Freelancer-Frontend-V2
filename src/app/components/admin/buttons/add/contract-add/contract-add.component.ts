@@ -63,7 +63,7 @@ export class ContractAddComponent implements OnInit {
       
      this.contractService.store(this.form.value).subscribe({
       next:(data:any)=>{console.log(data);
-        this.contractService.index();
+      
         this.close()
       },
       error:(error:any)=>{console.log(error);
