@@ -10,24 +10,22 @@ import { OffersService } from '../../../../core/services/offers.service';
 @Component({
   selector: 'app-freelancer-view-posts',
   templateUrl: './freelancer-view-posts.component.html',
-  styleUrl: './freelancer-view-posts.component.css'
+  styleUrl: './freelancer-view-posts.component.css',
 })
 export class FreelancerViewPostsComponent {
-  
-
-  isLoading:boolean=true;
-  posts:Post[]=[];
-  freelancerid:number=this.authservice.parseID();
+  isLoading: boolean = true;
+  posts: Post[] = [];
+  freelancerid: number = this.authservice.parseID();
   company_name!: string;
-  clientId!:number;
+  clientId!: number;
 
-
-  constructor(private postsService:PostsService,private authservice:AuthService,private clientservice:ClientService){
+  constructor(
+    private postsService: PostsService,
+    private authservice: AuthService,
+    private clientservice: ClientService
+  ) {
     this.getposts();
   }
-
-
-
 
   selectedPostId: number | null = null;
 
@@ -35,20 +33,20 @@ export class FreelancerViewPostsComponent {
     this.selectedPostId = postId;
   }
 
-  getposts(){
 
-
-
-
-    this.postsService.showOpenPosts().subscribe((res:any)=>{
-      this.posts=res;
-      this.isLoading=false;
-    })
+  //get all open offers
+  getposts() {
+    this.postsService.showOpenPosts().subscribe((res: any) => {
+      this.posts = res;
+      this.isLoading = false;
+    });
   }
 
+
+  //get clients related to each posts
   getclient(clientId: number) {
-    this.clientservice.show(clientId)
-    this.clientservice.getData$.subscribe((res:any) => {
+    this.clientservice.show(clientId);
+    this.clientservice.getData$.subscribe((res: any) => {
       this.company_name = res.company_name;
       console.log(res);
     });

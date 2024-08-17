@@ -1,19 +1,36 @@
 <div class="modal-header">
   <h4 class="modal-title">Mes informations</h4>
-  <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="close()"></button>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="modal"
+    (click)="close()"
+  ></button>
 </div>
 <div class="modal-body">
   <form [formGroup]="form" (ngSubmit)="updated()">
     <div class="form-group">
       <label for="summary">Concernant</label>
-      <textarea id="summary" formControlName="summary" class="form-control" (input)="onSummaryInput()"></textarea>
-      <small class="text-muted">{{characterCount}}/30 caractères</small>
+      <textarea
+        id="summary"
+        formControlName="summary"
+        class="form-control"
+        (input)="onSummaryInput()"
+      ></textarea>
+      <small class="text-muted">{{ characterCount }}/30 caractères</small>
     </div>
 
-    <h5 style="color: red; margin-left: 10px;">{{errorhandling}}</h5>
-    
+    <h5 style="color: red; margin-left: 10px">{{ errorhandling }}</h5>
+
     <div class="modal-footer">
-      <button type="submit" class="btn btn-outline-danger" data-bs-dismiss="modal" [disabled]="characterCount < 30">Modifier</button>
+      <button
+        type="submit"
+        class="btn btn-outline-danger"
+        data-bs-dismiss="modal"
+        [disabled]="characterCount < 30"
+      >
+        Modifier
+      </button>
     </div>
   </form>
 </div>

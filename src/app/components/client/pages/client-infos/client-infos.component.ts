@@ -7,71 +7,62 @@ import { LoadingService } from '../../../../core/services/loading.service';
 @Component({
   selector: 'app-client-infos',
   templateUrl: './client-infos.component.html',
-  styleUrl: './client-infos.component.css'
+  styleUrl: './client-infos.component.css',
 })
 export class ClientInfosComponent {
-  clientdetails!:Client;
-  clientdetails2!:Client;
-  isLoading = true;
-  selectedata:any;
+  // Client data
+  client?: Client;
+  clientId!: number;
 
+  // UI control
+  isLoading = true;
   isModalOpen = false;
   isModalOpen2 = false;
 
-  client?:Client;
-  clientid!:number;
+  // Selected client details for modals
+  clientdetails!: Client;
 
-  constructor(private clientservice:ClientService,private authservice:AuthService,private loadingservice:LoadingService){}
+  constructor(
+    private clientservice: ClientService,
+    private authservice: AuthService,
+    private loadingservice: LoadingService
+  ) {}
 
-  openModal(client:any) {
-    this.clientdetails=client
+  openModal(client: any) {
+    this.clientdetails = client;
     this.isModalOpen = true;
   }
 
   closeModal() {
     this.isModalOpen = false;
   }
-  
-  openModal2(client:any) {
-    this.clientdetails=client
+
+  openModal2(client: any) {
+    this.clientdetails = client;
     this.isModalOpen2 = true;
   }
   closeModal2() {
     this.isModalOpen2 = false;
   }
 
-
-  
-
   ngOnInit(): void {
- 
     this.getclient();
-
-    
   }
 
 
-
-  getclient(){
+  // Fetch client data
+  
+  getclient() {
     this.loadingservice.hide();
-    this.clientid=this.authservice.parseID();
-    this.clientservice.show(this.clientid)
+    this.clientId = this.authservice.parseID();
+    this.clientservice.show(this.clientId);
     this.clientservice.getData$.subscribe({
-      next:(data:any)=>{this.client=data;
+      next: (data: any) => {
+        this.client = data;
         this.isLoading = false;
-        
       },
-      error:(error:any)=>console.log(error),
-      complete:()=>console.log("get client done")})
+      error: (error: any) => console.log(error),
+      complete: () => console.log('get client done'),
+    });
   }
-
-
-
-  
-    
- 
-  
-
-  
-    
 }

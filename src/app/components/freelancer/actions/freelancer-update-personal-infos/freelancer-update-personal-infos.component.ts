@@ -6,87 +6,98 @@ import { FreelancerService } from '../../../../core/services/freelancer.service'
 @Component({
   selector: 'app-freelancer-update-personal-infos',
   templateUrl: './freelancer-update-personal-infos.component.html',
-  styleUrl: './freelancer-update-personal-infos.component.css'
+  styleUrl: './freelancer-update-personal-infos.component.css',
 })
 export class FreelancerUpdatePersonalInfosComponent {
+  @Input() freelancerID!: number;
+  @Input() freelancerData?: any;
+  moroccanCities = [
+    'Casablanca',
+    'Rabat',
+    'Marrakech',
+    'Fès',
+    'Tanger',
+    'Agadir',
+    'Essaouira',
+    'Meknès',
+    'Autre',
+  ];
+  availability = ['disponible', 'sous préavis'];
+  freelancer: Freelancer[] = [];
+  form!: FormGroup;
+  errorhandling: any;
+  private fb: FormBuilder = inject(FormBuilder);
+  private frelancerservices: FreelancerService = inject(FreelancerService);
 
-  @Input() freelancerID!:number
-  @Input() freelancerData?:any;
-   moroccanCities = ['Casablanca', 'Rabat', 'Marrakech', 'Fès', 'Tanger', 'Agadir', 'Essaouira', 'Meknès', 'Autre'];
-   availability=['disponible','sous préavis']
-   freelancer:Freelancer[]=[]
-   form!:FormGroup
-   errorhandling:any
-   private fb:FormBuilder=inject(FormBuilder)
-   private frelancerservices:FreelancerService=inject(FreelancerService)
-
-
- ngOnInit(): void {
-  this.form=this.fb.group({
-    name: [this.freelancerData?.user?.name, Validators.required],
-    email: [this.freelancerData?.user?.email, [Validators.required, Validators.email]],
-    password: [this.freelancerData?.user?.password],
-    title: [this.freelancerData?.title, Validators.required],
-    dateOfBirth: [this.freelancerData?.dateOfBirth, Validators.required],
-    city: [this.freelancerData?.city, Validators.required],
-    TJM: [this.freelancerData?.TJM, [Validators.required, Validators.min(0)]],
-    availability: [this.freelancerData?.availability, Validators.required],
-    adress: [this.freelancerData?.adress, Validators.required],
-    phone: [this.freelancerData?.phone, Validators.required],
-    portfolio_Url: [this.freelancerData?.portfolio_Url],
-    // status:['completed']
-
-  })
-}
-
-updated() {
-  if (this.form.invalid) {
-    this.errorhandling = 'Veuillez remplir tous les champs.';
-    return;
-  }
-
-  if (this.freelancerID !== null) {
-    console.log(this.freelancerID);
-    this.frelancerservices.update(this.freelancerID, this.form.value).subscribe({
-      next: (data: any) => {
-        console.log(data);
-        this.close();
-        this.frelancerservices.show(this.freelancerID);
-      },
-      error: (error) => {
-        console.log(error);
-        if (error.error.errors) {
-          this.errorhandling = Object.values(error.error.errors).flat();
-          console.log(this.errorhandling);
-        } else {
-          this.errorhandling = [error.message || 'An error occurred'];
-          console.log(this.errorhandling);
-        }
-      },
+  ngOnInit(): void {
+    this.form = this.fb.group({
+      name: [this.freelancerData?.user?.name, Validators.required],
+      email: [
+        this.freelancerData?.user?.email,
+        [Validators.required, Validators.email],
+      ],
+      password: [this.freelancerData?.user?.password],
+      title: [this.freelancerData?.title, Validators.required],
+      dateOfBirth: [this.freelancerData?.dateOfBirth, Validators.required],
+      city: [this.freelancerData?.city, Validators.required],
+      TJM: [this.freelancerData?.TJM, [Validators.required, Validators.min(0)]],
+      availability: [this.freelancerData?.availability, Validators.required],
+      adress: [this.freelancerData?.adress, Validators.required],
+      phone: [this.freelancerData?.phone, Validators.required],
+      portfolio_Url: [this.freelancerData?.portfolio_Url],
     });
-  } else {
-    console.log('null id of freelancer');
   }
-}
 
+  updated() {
+    if (this.form.invalid) {
+      this.errorhandling = 'Veuillez remplir tous les champs.';
+      return;
+    }
 
-ngOnChanges(): void {
-  this.form=this.fb.group({
-    name: [this.freelancerData?.user?.name, Validators.required],
-    email: [this.freelancerData?.user?.email, [Validators.required, Validators.email]],
-    password: [this.freelancerData?.user?.password],
-    title: [this.freelancerData?.title, Validators.required],
-    dateOfBirth: [this.freelancerData?.dateOfBirth, Validators.required],
-    city: [this.freelancerData?.city, Validators.required],
-    TJM: [this.freelancerData?.TJM, [Validators.required, Validators.min(0)]],
-    availability: [this.freelancerData?.availability, Validators.required],
-    adress: [this.freelancerData?.adress, Validators.required],
-    phone: [this.freelancerData?.phone, Validators.required],
-    portfolio_Url: [this.freelancerData?.portfolio_Url],
-  })
-}
+    if (this.freelancerID !== null) {
+      console.log(this.freelancerID);
+      this.frelancerservices
+        .update(this.freelancerID, this.form.value)
+        .subscribe({
+          next: (data: any) => {
+            console.log(data);
+            this.close();
+            this.frelancerservices.show(this.freelancerID);
+          },
+          error: (error) => {
+            console.log(error);
+            if (error.error.errors) {
+              this.errorhandling = Object.values(error.error.errors).flat();
+              console.log(this.errorhandling);
+            } else {
+              this.errorhandling = [error.message || 'An error occurred'];
+              console.log(this.errorhandling);
+            }
+          },
+        });
+    } else {
+      console.log('null id of freelancer');
+    }
+  }
 
-
+  ngOnChanges(): void {
+    this.form = this.fb.group({
+      name: [this.freelancerData?.user?.name, Validators.required],
+      email: [
+        this.freelancerData?.user?.email,
+        [Validators.required, Validators.email],
+      ],
+      password: [this.freelancerData?.user?.password],
+      title: [this.freelancerData?.title, Validators.required],
+      dateOfBirth: [this.freelancerData?.dateOfBirth, Validators.required],
+      city: [this.freelancerData?.city, Validators.required],
+      TJM: [this.freelancerData?.TJM, [Validators.required, Validators.min(0)]],
+      availability: [this.freelancerData?.availability, Validators.required],
+      adress: [this.freelancerData?.adress, Validators.required],
+      phone: [this.freelancerData?.phone, Validators.required],
+      portfolio_Url: [this.freelancerData?.portfolio_Url],
+    });
+  }
 
   @Output() closeModal = new EventEmitter<void>();
 

@@ -10,7 +10,7 @@ import { passwordStrengthValidator } from '../../../../core/validators/password-
 @Component({
   selector: 'app-authentification',
   templateUrl: './authentification.component.html',
-  styleUrls: ['./authentification.component.css']
+  styleUrls: ['./authentification.component.css'],
 })
 export class AuthentificationComponent implements OnInit {
   applyForm: FormGroup;
@@ -21,17 +21,27 @@ export class AuthentificationComponent implements OnInit {
   dataStatus!: string;
 
   constructor(
-    public formBuilder: FormBuilder, 
-    private clientService: ClientService, 
+    public formBuilder: FormBuilder,
+    private clientService: ClientService,
     private freelancerService: FreelancerService
   ) {
-    this.applyForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6), passwordStrengthValidator()]],
-      password_confirmation: ['', Validators.required],
-      status: ['not verified'],
-    }, { validators: passwordMatchValidator() });
+    this.applyForm = this.formBuilder.group(
+      {
+        name: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(6),
+            passwordStrengthValidator(),
+          ],
+        ],
+        password_confirmation: ['', Validators.required],
+        status: ['not verified'],
+      },
+      { validators: passwordMatchValidator() }
+    );
   }
 
   ngOnInit(): void {
@@ -48,33 +58,35 @@ export class AuthentificationComponent implements OnInit {
     const formValue = this.applyForm.getRawValue();
 
     if (this.dataStatus === 'client') {
-      this.clientService.register(formValue)
-        .subscribe(
-          (res) => {
-            console.log(res);
-            this.navigateToLoginWithSuccessMessage('Votre compte client a été créé avec succès!');
-          },
-          (error) => {
-            this.handleErrorResponse(error);
-          }
-        );
+      this.clientService.register(formValue).subscribe(
+        (res) => {
+          console.log(res);
+          this.navigateToLoginWithSuccessMessage(
+            'Votre compte client a été créé avec succès!'
+          );
+        },
+        (error) => {
+          this.handleErrorResponse(error);
+        }
+      );
     } else if (this.dataStatus === 'freelancer') {
-      this.freelancerService.register(formValue)
-        .subscribe(
-          (res) => {
-            console.log(res);
-            this.navigateToLoginWithSuccessMessage('Votre compte freelancer a été créé avec succès!');
-          },
-          (error) => {
-            this.handleErrorResponse(error);
-          }
-        );
+      this.freelancerService.register(formValue).subscribe(
+        (res) => {
+          console.log(res);
+          this.navigateToLoginWithSuccessMessage(
+            'Votre compte freelancer a été créé avec succès!'
+          );
+        },
+        (error) => {
+          this.handleErrorResponse(error);
+        }
+      );
     }
   }
 
   private navigateToLoginWithSuccessMessage(message: string) {
     const navigationExtras: NavigationExtras = {
-      queryParams: { message }
+      queryParams: { message },
     };
     this.router.navigate(['/email'], navigationExtras);
   }
@@ -96,6 +108,6 @@ export class AuthentificationComponent implements OnInit {
       this.dataStatus = 'client';
     } else if (currentUrl.includes('register/freelancer')) {
       this.dataStatus = 'freelancer';
-    } 
+    }
   }
 }

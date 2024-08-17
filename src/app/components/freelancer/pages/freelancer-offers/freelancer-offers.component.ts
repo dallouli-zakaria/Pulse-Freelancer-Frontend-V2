@@ -10,9 +10,9 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-freelancer-offers',
   templateUrl: './freelancer-offers.component.html',
-  styleUrl: './freelancer-offers.component.css'
+  styleUrl: './freelancer-offers.component.css',
 })
-export class FreelancerOffersComponent implements OnInit{
+export class FreelancerOffersComponent implements OnInit {
   freelancerId: number = this.authservice.parseID();
   allPosts: Post[] = [];
   openPosts: Post[] = [];
@@ -25,14 +25,18 @@ export class FreelancerOffersComponent implements OnInit{
   currentPage: number = 1;
   postsPerPage: number = 5;
 
-  constructor(private postservice: PostsService, private router: Router, private authservice: AuthService) {}
-
+  constructor(
+    private postservice: PostsService,
+    private router: Router,
+    private authservice: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.getposts();
     this.getdata();
   }
 
+  //get all related posts
   getposts() {
     this.postservice.showbfreelancer(this.freelancerId).subscribe({
       next: (data: any) => {
@@ -43,27 +47,39 @@ export class FreelancerOffersComponent implements OnInit{
       },
       error: (error: any) => {
         console.log(error);
-      }
+      },
     });
   }
 
+
+  //get post status from url
   getdata() {
     const currentUrl = this.router.url;
-    if (currentUrl === '/pulse/freelancer-dashboard/freelancer-offers-waiting') {
+    if (
+      currentUrl === '/pulse/freelancer-dashboard/freelancer-offers-waiting'
+    ) {
       this.dataStatus = 'waiting';
-    } else if(currentUrl === '/pulse/freelancer-dashboard/freelancer-offers-closed'){
+    } else if (
+      currentUrl === '/pulse/freelancer-dashboard/freelancer-offers-closed'
+    ) {
       this.dataStatus = 'closed';
-    } else if(currentUrl === '/pulse/freelancer-dashboard/freelancer-offers-open'){
+    } else if (
+      currentUrl === '/pulse/freelancer-dashboard/freelancer-offers-open'
+    ) {
       this.dataStatus = 'open';
     }
   }
 
+  //search function
   categorizePosts() {
-    this.openPosts = this.allPosts.filter(post => post.status === 'open');
-    this.waitingPosts = this.allPosts.filter(post => post.status === 'waiting');
-    this.closedPosts = this.allPosts.filter(post => post.status === 'closed');
+    this.openPosts = this.allPosts.filter((post) => post.status === 'open');
+    this.waitingPosts = this.allPosts.filter(
+      (post) => post.status === 'waiting'
+    );
+    this.closedPosts = this.allPosts.filter((post) => post.status === 'closed');
   }
 
+  //pagination
   filterAndPaginatePosts() {
     let filteredPosts: Post[];
     switch (this.dataStatus) {
@@ -80,13 +96,17 @@ export class FreelancerOffersComponent implements OnInit{
         filteredPosts = this.allPosts;
     }
 
-    filteredPosts = filteredPosts.filter(post => 
-      post.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-      post.description.toLowerCase().includes(this.searchTerm.toLowerCase())
+    filteredPosts = filteredPosts.filter(
+      (post) =>
+        post.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        post.description.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
 
     const startIndex = (this.currentPage - 1) * this.postsPerPage;
-    this.displayedPosts = filteredPosts.slice(startIndex, startIndex + this.postsPerPage);
+    this.displayedPosts = filteredPosts.slice(
+      startIndex,
+      startIndex + this.postsPerPage
+    );
   }
 
   onSearch() {
@@ -122,14 +142,14 @@ export class FreelancerOffersComponent implements OnInit{
     if (totalPages <= 5) {
       return Array.from({ length: totalPages }, (_, i) => i + 1);
     }
-    
+
     let start = Math.max(this.currentPage - 2, 1);
     let end = Math.min(start + 4, totalPages);
-    
+
     if (end - start < 4) {
       start = Math.max(end - 4, 1);
     }
-    
+
     return Array.from({ length: end - start + 1 }, (_, i) => start + i);
   }
 }

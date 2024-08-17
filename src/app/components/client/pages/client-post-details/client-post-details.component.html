@@ -14,9 +14,6 @@
   
       &nbsp;  
 
-
-
-
       <button *ngIf="roles == 'superadmin_role' && post?.status == 'open'"
       class="btn btn-primary " type="button"
       [disabled]="!isCloseOfferEnabled() || isLoading"

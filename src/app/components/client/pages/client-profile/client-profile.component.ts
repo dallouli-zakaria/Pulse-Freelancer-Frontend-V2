@@ -3,11 +3,11 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-client-profile',
   templateUrl: './client-profile.component.html',
-  styleUrl: './client-profile.component.css'
+  styleUrl: './client-profile.component.css',
 })
 export class ClientProfileComponent {
   isModalOpen = false;
- 
+
   openModal() {
     this.isModalOpen = true;
   }
@@ -15,7 +15,6 @@ export class ClientProfileComponent {
   closeModal() {
     this.isModalOpen = false;
     console.log('closed');
-    
   }
 
   items = [
@@ -23,26 +22,14 @@ export class ClientProfileComponent {
     'Mes Offres',
     'Mes contracts',
     'Mes abonnements',
-  
   ];
-  urls=[
-    'info',
-    'offers'
-  ]
-  
+  urls = ['info', 'offers'];
+
   selectedItemIndex: number | null = null;
 
   selectItem(index: number): void {
     this.selectedItemIndex = index;
   }
 
-
-  
-
-
-  ngOnInit() {
- 
-  }
-
- 
+  ngOnInit() {}
 }

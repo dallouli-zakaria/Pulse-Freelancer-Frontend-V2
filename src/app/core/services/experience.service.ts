@@ -74,6 +74,7 @@ export class ExperienceService {
       .subscribe();
   }
 
+  //show experience by freelancer_id
   public showByFreelancer(id:any){
     this.freelancer=this.http.get(`${this.url}/getByFreelancerId/${id}`).pipe(shareReplay(1)).subscribe({
       next:(data: any)=>{this.subject.next(data)

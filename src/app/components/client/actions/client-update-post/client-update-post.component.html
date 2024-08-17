@@ -1,147 +1,132 @@
 <!-- offer-form.component.html -->
 
 <div class="container card mt-4">
-    <div class="py-5 text-center">
-      <h2>Modifier votre offre !</h2>
-    </div>
-  
-    <div class="row justify-content-center">
-      <div class="col-md-8 order-md-1">
-        <h4 class="mb-3">Détails de l'offre</h4>
-  
-        <form class="needs-validation" [formGroup]="form" (ngSubmit)="updateoffer()">
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label for="firstName">Titre</label>
-              <input type="text" class="form-control" id="firstName" placeholder="" formControlName="title" required >
-  
-              <div class="invalid-feedback">
-                Saisissez le titre !
-              </div>
-            </div>
-            <div class="col-md-6 mb-3"></div>
-          </div>
-  
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label for="location">Localisation</label>
-              <select class="form-control" id="location" formControlName="location">
-      
-                <option *ngFor="let city of cities" [value]="city">{{city}}</option>
-              </select>
-              <div class="invalid-feedback">
-                choisir votre localisation !
-              </div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label for="type">Type</label>
-              <select class="form-control" id="type" formControlName="type">
+  <div class="py-5 text-center">
+    <h2>Modifier votre offre !</h2>
+  </div>
 
-                <option value="fulltime">Plein temps</option>
-                <option value="partime">Temps partiel</option>
-              </select>
-              <div class="invalid-feedback">
-                choisissez une type !
-              </div>
-            </div>
-          </div>
-  
-  
-          
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label for="nbrf">Nombre de freelancers </label>
-              <input type="number" class="form-control" id="nbrf" placeholder="" formControlName="freelancers_number" min="1" required>
-              <div class="invalid-feedback">
-                remplir le nombre des freelancers !
-              </div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label for="skills">Compétences requises</label>
-              <app-skillchips (skillsSelected)="onSkillsSelected2($event)"></app-skillchips>
-              <div *ngIf="selectedSkills.length" class="mt-2">
-                <span class="badge badge-primary mr-1" *ngFor="let skill of selectedSkills" >{{ skill }}</span>
-              </div>
-            </div>
-          </div>
-  
-  
-  
-          <div class="mb-3">
-            <label for="desc">Description</label>
-            <div class="form-group">
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="description"></textarea>
-            </div>
-          </div>
-          
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label for="period">Periode</label>
-              <select class="form-control" id="period" (change)="onSelectChange($event)" formControlName="period">
-                <option value="undefined" selected>Indéfini</option>
-                <option value="day">Par jour</option>
-                <option value="month">Par Mois</option>
-        
-              </select>
-              <div class="invalid-feedback" >
-                Periode est obligatoire !
-              </div>
-            </div>
-                 <!-- Hidden div periode -->
-                 <div *ngIf="selectedPeriod === 'day' || selectedPeriod === 'month'" class="mb-3 col-6">
-                  <label for="definedBudget">Durée de votre periode</label>
-                  <input type="number" class="form-control" id="definedperiode" placeholder="Entrer votre durée" formControlName="periodvalue" min="0">
-                </div>
-          </div>
-  
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label for="budget">Budget</label>
-              <select class="form-control" id="budget" (change)="onBudgetChange($event)" formControlName="budget">
-                <option value="undefined" selected>Indéfini</option>
-                <option value="day">Par jour</option>
-                <option value="month">Par Mois</option>
-  
-              </select>
-              <div class="invalid-feedback">
-                Budget est obligatoire !
-              </div>
-            </div>
-   
-            <!-- Hidden div budget -->
-            <div *ngIf="selectedBudget === 'day' || selectedBudget === 'month'" class="mb-3 col-6">
-              <label for="definedBudget">La montant de votre budget</label>
-              <input type="number" class="form-control" id="definedBudget" placeholder="Entrer la montant en MAD" formControlName="budgetvalue" min="0">
-            </div>
+  <div class="row justify-content-center">
+    <div class="col-md-8 order-md-1">
+      <h4 class="mb-3">Détails de l'offre</h4>
 
-
-            <p>J'ai changé d'avis,  
-              <a class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" 
-                 (click)="deleteOffer()"  
-                 data-bs-dismiss="modal" 
-                 style="cursor: pointer;">
-                 Supprimer l'offre !
-              </a>
-          </p>
-          
-  
-  
-  
+      <form class="needs-validation" [formGroup]="form" (ngSubmit)="updateoffer()">
+        <!-- Title -->
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="firstName">Titre</label>
+            <input type="text" class="form-control" id="firstName" placeholder="" formControlName="title" required>
+            <div class="invalid-feedback">
+              Saisissez le titre !
+            </div>
           </div>
-  
-  
-          <hr class="mb-4">
-          <button class="btn btn-outline-danger btn-lg btn-block mb-4" type="submit" [disabled]="isSubmitting" data-bs-dismiss="modal">
-            {{ isSubmitting ? 'Modification...' : 'Modifier !' }}
+          <div class="col-md-6 mb-3"></div>
+        </div>
+
+        <!-- Location and Type -->
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="location">Localisation</label>
+            <select class="form-control" id="location" formControlName="location">
+              <option *ngFor="let city of cities" [value]="city">{{city}}</option>
+            </select>
+            <div class="invalid-feedback">
+              choisir votre localisation !
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="type">Type</label>
+            <select class="form-control" id="type" formControlName="type">
+              <option value="fulltime">Plein temps</option>
+              <option value="partime">Temps partiel</option>
+            </select>
+            <div class="invalid-feedback">
+              choisissez une type !
+            </div>
+          </div>
+        </div>
+
+        <!-- Number of Freelancers and Skills -->
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="nbrf">Nombre de freelancers</label>
+            <input type="number" class="form-control" id="nbrf" placeholder="" formControlName="freelancers_number" min="1" required>
+            <div class="invalid-feedback">
+              remplir le nombre des freelancers !
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="skills">Compétences requises</label>
+            <app-skillchips (skillsSelected)="onSkillsSelected2($event)"></app-skillchips>
+            <div *ngIf="selectedSkills.length" class="mt-2">
+              <span class="badge badge-primary mr-1" *ngFor="let skill of selectedSkills">{{ skill }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="mb-3">
+          <label for="desc">Description</label>
+          <div class="form-group">
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="description"></textarea>
+          </div>
+        </div>
+
+        <!-- Period -->
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="period">Periode</label>
+            <select class="form-control" id="period" (change)="onSelectChange($event)" formControlName="period">
+              <option value="undefined" selected>Indéfini</option>
+              <option value="day">Par jour</option>
+              <option value="month">Par Mois</option>
+            </select>
+            <div class="invalid-feedback">
+              Periode est obligatoire !
+            </div>
+          </div>
+          <!-- Hidden div periode -->
+          <div *ngIf="selectedPeriod === 'day' || selectedPeriod === 'month'" class="mb-3 col-6">
+            <label for="definedBudget">Durée de votre periode</label>
+            <input type="number" class="form-control" id="definedperiode" placeholder="Entrer votre durée" formControlName="periodvalue" min="0">
+          </div>
+        </div>
+
+        <!-- Budget -->
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="budget">Budget</label>
+            <select class="form-control" id="budget" (change)="onBudgetChange($event)" formControlName="budget">
+              <option value="undefined" selected>Indéfini</option>
+              <option value="day">Par jour</option>
+              <option value="month">Par Mois</option>
+            </select>
+            <div class="invalid-feedback">
+              Budget est obligatoire !
+            </div>
+          </div>
+          <!-- Hidden div budget -->
+          <div *ngIf="selectedBudget === 'day' || selectedBudget === 'month'" class="mb-3 col-6">
+            <label for="definedBudget">La montant de votre budget</label>
+            <input type="number" class="form-control" id="definedBudget" placeholder="Entrer la montant en MAD" formControlName="budgetvalue" min="0">
+          </div>
+        </div>
+
+        <!-- Delete offer link -->
+        <p>J'ai changé d'avis,  
+          <a class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" 
+             (click)="deleteOffer()"  
+             data-bs-dismiss="modal" 
+             style="cursor: pointer;">
+             Supprimer l'offre !
+          </a>
+        </p>
+
+        <hr class="mb-4">
+        <!-- Submit button -->
+        <button class="btn btn-outline-danger btn-lg btn-block mb-4" type="submit" [disabled]="isSubmitting" data-bs-dismiss="modal">
+          {{ isSubmitting ? 'Modification...' : 'Modifier !' }}
         </button>
-          
-        </form>
-        
-
-        
-  
-  
-      </div>
+      </form>
     </div>
   </div>
-  
+</div>
