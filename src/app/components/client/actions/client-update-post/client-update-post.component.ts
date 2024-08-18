@@ -11,39 +11,26 @@ import Swal from 'sweetalert2';
   templateUrl: './client-update-post.component.html',
   styleUrl: './client-update-post.component.css'
 })
-export class ClientUpdatePostComponent implements OnChanges {
-  @Input() parentdata!: Post;
+export class ClientUpdatePostComponent implements OnChanges{
+  @Input() parentdata!:Post;
   @Output() skillsSubmitted = new EventEmitter<string[]>();
 
-  // Form and data properties
-  form!: FormGroup;
   selectedSkillIds: number[] = [];
   selectedSkills: string[] = [];
-  roles!: string;
-  selectedBudget!: string;
-  selectedPeriod!: string;
+
+  roles!:string;
+  selectedBudget!:string;
+  selectedPeriod!:string;
+  clientId!:number;
+  form!:FormGroup;
   isSubmitting: boolean = false;
-  userid: any = this.authservice.parseID();
+  tokenn!: any;
+  userid:any=this.authservice.parseID();
+  cities: string[] = ['Casablanca', 'Rabat', 'Fes', 'Marrakech', 'Tangier', 'Agadir', 'Meknes', 'Oujda', 'Kenitra', 'Tetouan','Autre'];
 
-  // List of cities
-  cities: string[] = ['Casablanca', 'Rabat', 'Fes', 'Marrakech', 'Tangier', 'Agadir', 'Meknes', 'Oujda', 'Kenitra', 'Tetouan', 'Autre'];
 
-  constructor(
-    private fb: FormBuilder,
-    private postsservice: PostsService,
-    private router: Router,
-    private authservice: AuthService
-  ) {
-    this.initForm();
-  }
+  constructor(  private fb:FormBuilder,private postsservice:PostsService,private router: Router,private authservice:AuthService){
 
-  ngOnChanges(): void {
-    this.getUserRole();
-    this.initForm();
-  }
-
-  // Initialize the form
-  private initForm(): void {
     this.form = this.fb.group({
       title: [this.parentdata?.title, Validators.required],
       location: [this.parentdata?.location, Validators.required],
@@ -52,35 +39,51 @@ export class ClientUpdatePostComponent implements OnChanges {
       freelancers_number: [this.parentdata?.freelancers_number, Validators.required],
       skills_required: [[]],
       period: [this.parentdata?.period, Validators.required],
-      periodvalue: [this.parentdata?.periodvalue, Validators.required],
+      periodvalue:[0,Validators.required],
       budget: [this.parentdata?.budget, Validators.required],
-      budgetvalue: [this.parentdata?.budgetvalue, Validators.required],
-      client_id: [this.userid]
+      budgetvalue: [0,Validators.required],
+      client_id:[this.userid]
     });
   }
-
-  // Get user role
-  private getUserRole(): void {
+  ngOnChanges(): void {
+   
     this.authservice.getUserRole().subscribe((res) => {
       this.roles = res;
+
+
     });
+
+
+    this.form = this.fb.group({
+      title: [this.parentdata?.title, Validators.required],
+      location: [this.parentdata?.location, Validators.required],
+      type: [this.parentdata?.type, Validators.required],
+      description: [this.parentdata?.description, Validators.required],
+      freelancers_number: [this.parentdata?.freelancers_number, Validators.required],
+      skills_required: [[]],
+      period: [this.parentdata?.period, Validators.required],
+      periodvalue:[this.parentdata?.periodvalue,Validators.required],
+      budget: [this.parentdata?.budget, Validators.required],
+      budgetvalue: [this.parentdata?.budgetvalue,Validators.required],
+      client_id:[this.userid]
+    });
+
   }
 
-  // Handle budget change
-  onBudgetChange(event: any): void {
+  onBudgetChange(event: any) {
     this.selectedBudget = event.target.value;
+    
   }
-
-  // Handle period change
-  onSelectChange(event: any): void {
+  onSelectChange(event: any) {
     this.selectedPeriod = event.target.value;
+    
   }
 
-  // Update offer
-  updateoffer(): void {
+
+  updateoffer() {
     if (this.form.valid) {
       this.isSubmitting = true;
-      this.postsservice.update(this.parentdata.id, this.form.value).subscribe(
+      this.postsservice.update(this.parentdata.id,this.form.value).subscribe(
         (res) => {
           Swal.fire({
             icon: "success",
@@ -88,9 +91,11 @@ export class ClientUpdatePostComponent implements OnChanges {
             showConfirmButton: false,
             timer: 1500
           });
+          console.log(res);
+          
         },
         (err) => {
-          console.error('Error updating offer:', err);
+          console.log(err);
         }
       );
     } else {
@@ -98,31 +103,26 @@ export class ClientUpdatePostComponent implements OnChanges {
     }
   }
 
-  // Handle skill selection
-  onSkillsSelected2(skillIds: number[]): void {
+  onSkillsSelected2(skillIds: number[]) {
     this.selectedSkillIds = skillIds;
     this.form.patchValue({ skills_required: this.selectedSkillIds });
   }
 
-  // Delete offer
-  deleteOffer(): void {
-    this.postsservice.delete(this.parentdata.id).subscribe((res) => {
+  deleteOffer(){
+    this.postsservice.delete(this.parentdata.id).subscribe((res)=>{
       Swal.fire({
         icon: "success",
         title: "Offre supprimé avec succès !",
         showConfirmButton: false,
         timer: 1500
       });
-      this.navigateAfterDelete();
-    });
+      if(this.roles == 'Client'){
+        this.router.navigate(['../pulse/client-profile/client-offers-open'])
+      } else if(this.roles == 'superadmin_role'){
+        this.router.navigate(['../admin/post-open'])
+      } 
+    })
   }
 
-  // Navigate after delete based on user role
-  private navigateAfterDelete(): void {
-    if (this.roles === 'Client') {
-      this.router.navigate(['../pulse/client-profile/client-offers-open']);
-    } else if (this.roles === 'superadmin_role') {
-      this.router.navigate(['../admin/post-open']);
-    }
-  }
+
 }
