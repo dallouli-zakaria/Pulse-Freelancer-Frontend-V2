@@ -6,25 +6,25 @@
      <div class="modal-body">
           <!-- title -->
       <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">titre</label>
+        <label for="exampleInputEmail1" class="form-label">title</label>
         <input type="text" class="form-control" id="exampleInputEmail1" formControlName="title" aria-describedby="emailHelp">
       </div>
       
       <!-- perdio -->
       <div class="row">
         <div class="col-6">
-          <label for="startDate">Date début</label>
+          <label for="startDate">Start Date </label>
           <input class="form-control" type="date" id="startDate" formControlName="startDate">
         </div>
         <div class="col-6">
-          <label for="endDate">Date fin</label>
+          <label for="endDate">End Date </label>
           <input class="form-control" type="date" id="endDate" formControlName="endDate">
         </div>
       </div>
       
           <!-- Error message for date range -->
           <div *ngIf="form.errors?.['dateRangeInvalid']" class="alert alert-danger">
-            La date de fin ne peut pas être antérieure à la date de début.
+            The end date cannot be earlier than the start date.
           </div>
      
       

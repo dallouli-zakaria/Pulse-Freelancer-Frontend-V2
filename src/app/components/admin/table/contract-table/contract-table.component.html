@@ -4,8 +4,8 @@
       <tr>
         <th scope="col">ID</th>
         <th scope="col">title</th>
-        <th scope="col">period</th>
-        <th scope="col">buget</th>
+        <th scope="col">start_date</th>
+        <th scope="col">end_date</th>
         <th scope="col">description</th>
         <th scope="col">client</th>
         <th scope="col">freelancer</th>
@@ -16,8 +16,8 @@
       <tr *ngFor="let item of contract">
         <th scope="row">{{item.id}} </th>
         <td>{{item.title}}</td>
-        <td>{{item.period}}</td>
-        <td>{{item.budget}}</td>
+        <td>{{item.start_date | date:'dd/MM/yyyy' }}</td>
+        <td>{{item.end_date | date:'dd/MM/yyyy'}}</td>
         <td>{{item.project_description}}</td>
         <td>{{item.client_id}} </td>
         <td>{{item.freelancer_id}}</td>

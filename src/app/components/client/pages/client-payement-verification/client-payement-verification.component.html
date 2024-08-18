@@ -1,1 +1,21 @@
-<p>client-payement-verification works!</p>
+<span class="card-box">
+<div class="confirmation-container">
+    <h2>Enter Confirmation Code</h2>
+    
+    <form [formGroup]="confirmationForm" (ngSubmit)="onSubmit()">
+      <div class="digit-group">
+        <input type="text" maxlength="1" formControlName="digit1" (input)="onInput($event, 1)" />
+        <input type="text" maxlength="1" formControlName="digit2" (input)="onInput($event, 2)" />
+        <input type="text" maxlength="1" formControlName="digit3" (input)="onInput($event, 3)" />
+        <input type="text" maxlength="1" formControlName="digit4" (input)="onInput($event, 4)" />
+        <input type="text" maxlength="1" formControlName="digit5" (input)="onInput($event, 5)" />
+        <input type="text" maxlength="1" formControlName="digit6" (input)="onInput($event, 6)" />
+      </div>
+      
+      <button class="btn btn-outline-danger" type="submit" [disabled]="confirmationForm.invalid">Confirm</button>
+    </form>
+    
+    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+    <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
+  </div>
+</span>

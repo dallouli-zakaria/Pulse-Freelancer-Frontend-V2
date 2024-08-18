@@ -28,8 +28,8 @@
                 <div class="col">
                   <h6 class="row card-subtitle mb-2">
                     <span *ngIf="freelancerMap[item.freelancer_id]"> Freelancer: {{freelancerMap[item.freelancer_id].user.name}}</span>
-                    <span> Budget: {{item.budget}} MDH</span>
-                    <span> Period: {{item.period}} jour</span>
+                    <span> date début: {{item.start_date | date:'dd/MM/yyyy'}} </span>
+                    <span> date fin : {{item.end_date | date:'dd/MM/yyyy'}} </span>
                     <p class="card-text text-muted"><strong>La date de creation:</strong> {{item.created_at | date}}</p>
                   </h6>
                 </div>
