@@ -10,6 +10,7 @@ import {
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Freelancer } from '../../../../core/models/Freelancer';
 import { FreelancerService } from '../../../../core/services/freelancer.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-freelancer-update-about',
@@ -59,6 +60,12 @@ export class FreelancerUpdateAboutComponent implements OnInit, OnChanges {
         .update(this.freelancerID, this.form.value)
         .subscribe({
           next: (data: any) => {
+            Swal.fire({
+              icon: "success",
+              title: "Modifié avec succès",
+              showConfirmButton: false,
+              timer: 1500
+            });
             console.log(data);
             this.close();
             this.freelancerService.show(this.freelancerID);

@@ -2,6 +2,7 @@ import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Freelancer } from '../../../../core/models/Freelancer';
 import { FreelancerService } from '../../../../core/services/freelancer.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-freelancer-update-personal-infos',
@@ -60,7 +61,12 @@ export class FreelancerUpdatePersonalInfosComponent {
         .update(this.freelancerID, this.form.value)
         .subscribe({
           next: (data: any) => {
-            console.log(data);
+            Swal.fire({
+              icon: "success",
+              title: "Modifié avec succès",
+              showConfirmButton: false,
+              timer: 1500
+            });
             this.close();
             this.frelancerservices.show(this.freelancerID);
           },

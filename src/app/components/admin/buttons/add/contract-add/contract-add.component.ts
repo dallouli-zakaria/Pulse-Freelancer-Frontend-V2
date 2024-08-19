@@ -8,6 +8,7 @@ import { FreelancerService } from '../../../../../core/services/freelancer.servi
 import { Freelancer } from '../../../../../core/models/Freelancer';
 import { Observable } from 'rxjs';
 import { PostsService } from '../../../../../core/services/posts.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -62,8 +63,13 @@ export class ContractAddComponent implements OnInit {
       console.log(this.form.value);
       
      this.contractService.store(this.form.value).subscribe({
-      next:(data:any)=>{console.log(data);
-      
+      next:(data:any)=>{
+        Swal.fire({
+          icon: "success",
+          title: "Contract créer avec succès",
+          showConfirmButton: false,
+          timer: 1500
+        });
         this.close()
       },
       error:(error:any)=>{console.log(error);

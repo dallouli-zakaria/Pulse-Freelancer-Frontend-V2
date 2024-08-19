@@ -5,6 +5,7 @@ import { AuthService } from '../../../../core/services/auth.service';
 import { ExperienceService } from '../../../../core/services/experience.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { dateRangeValidator } from '../../../../core/validators/date-range.validator';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-freelancer-update-experience',
@@ -137,6 +138,12 @@ export class FreelancerUpdateExperienceComponent implements OnInit {
         .update(this.experienceToUpdate.id, updatedExperience)
         .subscribe({
           next: () => {
+            Swal.fire({
+              icon: "success",
+              title: "Modifié avec succès",
+              showConfirmButton: false,
+              timer: 1500
+            });
             this.isSubmitting = false;
             this.experienceUpdated.emit();
           },
