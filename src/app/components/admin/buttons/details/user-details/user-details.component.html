@@ -1,6 +1,6 @@
 
    <div class="modal-header">
-    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Role to user </h1>
+    <h2 class="modal-title fs-5" id="exampleModalLabel">Affecter un role au utilisateurs</h2>
     <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="close()"></button>
 </div>
 
@@ -9,14 +9,14 @@
        <h3>Roles</h3>
  
        <div class="form-group">
-        <label for="roleSelect">Select Role</label>
+        <label for="roleSelect">Selectionner un role</label>
         <select class="form-control" id="roleSelect" (change)="eventlist($event)">
           <option *ngFor="let item of role" >{{item.name}}</option>
         </select>
       </div>
        <hr>
       
-       <h3>user</h3>
+       <h3>utilisateurs</h3>
   
        <div class="form-group">
        <input type="text"  [value]="user?.name">
@@ -25,7 +25,7 @@
       </div>
       <h5 style="color: red; margin-left: 10px;">{{errorhandling}} </h5> 
       <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
-      <button type="submit" class="btn btn-success" (click)="gratroleToUser()">Save changes</button>
+      <button type="button" class="btn btn-outline-primary" (click)="close()">Fermer</button>
+      <button type="submit" class="btn btn-primary" (click)="gratroleToUser()">Ajouter</button>
      </div>
   

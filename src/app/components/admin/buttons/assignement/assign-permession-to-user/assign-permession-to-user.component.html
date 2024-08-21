@@ -1,6 +1,6 @@
 
 <div class="modal-header">
-    <h1 class="modal-title fs-5" id="exampleModalLabel">grant permession to user </h1>
+    <h2 class="modal-title fs-5" id="exampleModalLabel">Donner une permission au utilisateurs </h2>
     <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="close()"></button>
 </div>
 
@@ -8,7 +8,7 @@
     <div class="modal-body">
       <h3>Roles</h3>
       <div class="form-group">
-        <label for="roleSelect">Select user</label>
+        <label for="roleSelect">utilisateur</label>
         <select class="form-control" id="userSelect" (change)="eventlist($event)">
           <option *ngFor="let item of user" [value]="item.id">{{item.name}}</option>
         </select>
@@ -22,8 +22,8 @@
       <h5 style="color: red; margin-left: 10px;">{{errorhandling}}</h5>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
-      <button type="submit" class="btn btn-success">Save changes</button>
+      <button type="button" class="btn btn-outline-primary" (click)="close()">Fermer</button>
+      <button type="submit" class="btn btn-primary">Ajouter</button>
     </div>
   </form>
   

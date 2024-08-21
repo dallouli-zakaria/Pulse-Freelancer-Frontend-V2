@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Admin</h1>
+    <h2 class="modal-title fs-5" id="exampleModalLabel">Modifier admin</h2>
     <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="close()"></button>
 </div>
     <form [formGroup]="form" (ngSubmit)="updated()" >
@@ -7,15 +7,14 @@
 
       <!-- Username -->
       <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Username</label>
+        <label for="exampleInputEmail1" class="form-label">Nom complet</label>
         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="name">
       </div>
 
        <!-- email -->
       <div class="mb-3 ">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <label for="exampleInputEmail1" class="form-label">Email </label>
         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="email">
-        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
       </div>
 
       <!-- rolse -->
@@ -40,7 +39,7 @@
       </div>
       <h5 style="color: red; margin-left: 10px;">{{errorhandling}} </h5> 
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
-        <button type="submit" class="btn btn-success" >Save changes</button>
+        <button type="button" class="btn btn-outline-primary" (click)="close()">Fermer</button>
+        <button type="submit" class="btn btn-primary" >Modifier</button>
        </div>
     </form>

@@ -114,9 +114,17 @@
 
         <hr class="mb-4">
         <!-- Submit button -->
-        <button class="btn btn-outline-danger btn-lg btn-block mb-4" type="submit" [disabled]="isSubmitting">
-          {{ isSubmitting ? 'Création...' : 'Poster !' }}
-        </button>
+
+          <!-- Button when isSubmitting is true -->
+          <button *ngIf="isSubmitting" class="btn btn-danger mb-4" type="button" disabled>
+            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+            Création...
+          </button>
+
+          <!-- Button when isSubmitting is false -->
+          <button *ngIf="!isSubmitting" class="btn btn-outline-danger btn-lg btn-block mb-4" type="submit">
+            Poster !
+          </button>
       </form>
     </div>
   </div>

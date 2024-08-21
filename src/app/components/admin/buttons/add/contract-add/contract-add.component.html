@@ -1,23 +1,23 @@
 <div class="modal-header">
-    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Contract</h1>
+    <h2 class="modal-title fs-5" id="exampleModalLabel">Ajouter contract</h2>
     <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="close()"></button>
 </div>
     <form [formGroup]="form" (ngSubmit)="add()">
      <div class="modal-body">
           <!-- title -->
       <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">title</label>
+        <label for="exampleInputEmail1" class="form-label">Titre</label>
         <input type="text" class="form-control" id="exampleInputEmail1" formControlName="title" aria-describedby="emailHelp">
       </div>
       
       <!-- perdio -->
       <div class="row">
         <div class="col-6">
-          <label for="startDate">Start Date </label>
+          <label for="startDate">Date début</label>
           <input class="form-control" type="date" id="startDate" formControlName="startDate">
         </div>
         <div class="col-6">
-          <label for="endDate">End Date </label>
+          <label for="endDate">Date fin</label>
           <input class="form-control" type="date" id="endDate" formControlName="endDate">
         </div>
       </div>
@@ -54,7 +54,7 @@
        
       <h5 style="color: red; margin-left: 10px;">{{errorhandling}} </h5> 
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="close()">Fermer</button>
-        <button type="submit" class="btn btn-outline-success">Ajouter</button>
+        <button type="button" class="btn btn-outline-primary" (click)="close()">Fermer</button>
+        <button type="submit" class="btn btn-primary">Ajouter</button>
        </div>
     </form>

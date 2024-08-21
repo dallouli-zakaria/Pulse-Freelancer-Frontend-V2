@@ -9,23 +9,23 @@
 </div>
 
 <table  class="table caption-top" >
-    <caption><h1>Clients List</h1></caption>
+    <caption><h2>Liste des clients</h2></caption>
     <thead>
       <tr>
-        <th scope="col">ID</th>
-        <th scope="col">name</th>
-        <th scope="col">email</th>
+        <th scope="col">#</th>
+        <th scope="col">Nom complet</th>
+        <th scope="col">Email</th>
         <th scope="col">Profession</th>
-        <th scope="col">Company Name </th>
-        <th scope="col">Activity</th>
-        <th scope="col">Company Email</th>
-        <th scope="col"></th>
+        <th scope="col">Nom de l'entreprise</th>
+        <th scope="col">Activité de l'entreprise</th>
+        <th scope="col">Email de l'entreprise</th>
+        <th scope="col">Actions</th>
       </tr>
     </thead>
     <tbody >
        
-      <tr *ngFor="let client of filteredCleint">
-        <th scope="row">{{client.id}}</th>
+      <tr *ngFor="let client of filteredCleint ; let i = index">
+        <th scope="row">{{i + 1}}</th>
         <td>{{client.user.name}}</td>
         <td>{{client.user.email}}</td>
         <td>{{client.profession}}</td>

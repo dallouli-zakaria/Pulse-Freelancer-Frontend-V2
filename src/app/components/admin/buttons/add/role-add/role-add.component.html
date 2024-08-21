@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Role</h1>
+    <h2 class="modal-title fs-5" id="exampleModalLabel">Ajouter role</h2>
     <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="close()"></button>
 </div>
     <form [formGroup]="form" (submit)="addRole()">
@@ -20,14 +20,14 @@
        <div class="form-check">
         <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" >
         <label class="form-check-label" for="defaultCheck1">
-          Default checkbox
+          Checkbox
         </label>
        </div>
        </div>
       </div>
       <h5 style="color: red; margin-left: 10px;">{{errorhandling}} </h5> 
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
-        <button type="submit" class="btn btn-success" >Save changes</button>
+        <button type="button" class="btn btn-outline-primary" (click)="close()">Fermer</button>
+        <button type="submit" class="btn btn-primary" >Ajouter</button>
        </div>
     </form>

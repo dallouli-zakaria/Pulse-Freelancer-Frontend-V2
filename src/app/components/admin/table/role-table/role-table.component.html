@@ -1,16 +1,15 @@
 <table class="table caption-top">
-    <caption><h1>Roles List</h1></caption>
+    <caption><h2>Liste des roles</h2></caption>
     <thead>
       <tr>
-        <th scope="col">ID</th>
-        <th scope="col">name</th>
-       
-        <th scope="col"></th>
+        <th scope="col">#</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of role">
-        <th scope="row">{{item.id}}</th>
+      <tr *ngFor="let item of role; let i = index">
+        <th scope="row">{{i + 1}}</th>
         <td>{{item.name}}</td>
        
         <td>
@@ -18,7 +17,7 @@
               <i class="fas fa-pen"></i> </button> 
            <button class="btn btn-danger btn-sm" style="margin-right: 5px;" (click)="ondeleted(item.id, item)">
               <i class="fas fa-trash"></i></button>
-           <button class="btn btn-secondary btn-sm" style="margin-right: 5px;" (click)="ondetails(item.id, item)">
+           <button class="btn btn-primary btn-sm" style="margin-right: 5px;" (click)="ondetails(item.id, item)">
              <i class="bi bi-file-plus"></i></button>
           </td>
       </tr>

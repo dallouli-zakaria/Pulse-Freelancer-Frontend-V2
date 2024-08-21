@@ -1,17 +1,17 @@
 <table class="table caption-top">
-    <caption><h1>Pack List</h1></caption>
+    <caption><h2>Liste des packs</h2></caption>
     <thead>
       <tr>
-        <th scope="col">ID</th>
-        <th scope="col">title</th>
+        <th scope="col">#</th>
+        <th scope="col">Titre</th>
         <th scope="col">Description</th>
-        <th scope="col">Price</th>
-        <th scope="col"></th>
+        <th scope="col">Prix</th>
+        <th scope="col">Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of pack">
-        <td>{{[item.id]}}</td>
+      <tr *ngFor="let item of pack;let i = index">
+        <td>{{i + 1}}</td>
         <td  >{{item.title}}</td>
         <td>{{item.description}}</td>
         <td>{{item.price}} </td>

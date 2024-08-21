@@ -8,24 +8,24 @@
     (ngModelChange)="onSearchTermChange()">
 </div>
 <table class="table caption-top">
-  <caption><h1>Freelancers List</h1></caption>
+  <caption><h2>Liste des freelancers</h2></caption>
   <thead>
     <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">Title</th>
+      <th scope="col">#</th>
+      <th scope="col">Nom complet</th>
+      <th scope="col">Titre</th>
       <th scope="col">Email</th>
       <th scope="col">TJM</th>
-      <th scope="col">Availability</th>
-      <th scope="col">Phone</th>
-      <th scope="col">Account</th>
+      <th scope="col">Disponibilité</th>
+      <th scope="col">Téléphone</th>
+      <th scope="col">Compte</th>
       <th scope="col">Status</th>
-      <th scope="col"></th>
+      <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let freelancer of  filteredFreelancersVariable">
-      <th scope="row">{{ freelancer.id }}</th>
+    <tr *ngFor="let freelancer of  filteredFreelancersVariable; let i=index">
+      <th scope="row">{{ i + 1}}</th>
       <td>{{ freelancer?.user?.name }}</td> 
       <td>{{ freelancer.title }}</td>
       <td>{{ freelancer?.user?.email }}</td> 

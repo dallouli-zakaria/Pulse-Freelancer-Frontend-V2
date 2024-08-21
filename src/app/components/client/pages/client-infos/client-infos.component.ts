@@ -16,8 +16,6 @@ export class ClientInfosComponent {
 
   // UI control
   isLoading = true;
-  isModalOpen = false;
-  isModalOpen2 = false;
 
   // Selected client details for modals
   clientdetails!: Client;
@@ -28,22 +26,6 @@ export class ClientInfosComponent {
     private loadingservice: LoadingService
   ) {}
 
-  openModal(client: any) {
-    this.clientdetails = client;
-    this.isModalOpen = true;
-  }
-
-  closeModal() {
-    this.isModalOpen = false;
-  }
-
-  openModal2(client: any) {
-    this.clientdetails = client;
-    this.isModalOpen2 = true;
-  }
-  closeModal2() {
-    this.isModalOpen2 = false;
-  }
 
   ngOnInit(): void {
     this.getclient();
@@ -65,4 +47,30 @@ export class ClientInfosComponent {
       complete: () => console.log('get client done'),
     });
   }
+
+  //Edit client details modal
+  showedit:boolean=false;
+
+  openModal(client: any) {
+    this.clientdetails = client;
+    this.showedit = true;
+  }
+
+  closeModal() {
+    this.showedit = false;
+  }
+
+  //Edit Company details modal
+  showedit2:boolean=false;
+
+  openModal2(client: any) {
+    this.clientdetails = client;
+    this.showedit2 = true;
+  }
+
+  closeModal2() {
+    // this.isModalOpen = false;
+    this.showedit2 = false;
+  }
+  
 }

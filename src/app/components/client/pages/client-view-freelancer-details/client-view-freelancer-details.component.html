@@ -42,7 +42,7 @@
             </h4>
             <p class="text-muted">
               {{ freelancer.title }}<br />
-              <span> 50 MAD / H</span>
+              <span> {{ freelancer.TJM }} Mad / H</span>
             </p>
 
             <div class="text-left mt-3">
@@ -117,13 +117,19 @@
                     <th scope="row">{{ i + 1 }}</th>
                     <td>{{ item.title }}</td>
                     <td>{{ clientData[item.client_id] }}</td>
-                    <td>{{ item.periodvalue }} {{ item.period }}</td>
                     <td>
                       {{
-                        item.type === "fulltime"
-                          ? "temps plein"
-                          : "temps partiel"
+                        item.period === "undefined"
+                          ? "pas encore défini"
+                          : item.period === "month"
+                          ? item.periodvalue + " mois"
+                          : item.period === "day"
+                          ? item.periodvalue + " jours"
+                          : item.periodvalue
                       }}
+                    </td>
+                    <td>
+                      {{ item.type === "fulltime" ? "temps plein" : "temps partiel" }}
                     </td>
                   </tr>
                 </tbody>
