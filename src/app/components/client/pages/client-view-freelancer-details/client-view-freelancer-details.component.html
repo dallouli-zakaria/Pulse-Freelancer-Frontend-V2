@@ -97,7 +97,7 @@
           </div>
 
           <!-- projects table -->
-          <div class="card-box">
+          <div *ngIf="postdata.length!=0" class="card-box">
             <h5 class="mb-3 mt-4 text-uppercase">
               <i class="mdi mdi-cards-variant mr-1"></i> Projets Pulse
             </h5>
@@ -112,6 +112,7 @@
                     <th scope="col">Type</th>
                   </tr>
                 </thead>
+
                 <tbody>
                   <tr *ngFor="let item of postdata; let i = index">
                     <th scope="row">{{ i + 1 }}</th>

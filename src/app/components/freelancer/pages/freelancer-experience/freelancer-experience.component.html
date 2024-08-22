@@ -148,13 +148,21 @@
         </div>
         <div class="modal-footer">
           <button
+          *ngIf="!isSubmitting"
             type="button"
             class="btn btn-danger"
             (click)="confirmDeleteExperience()"
-            [disabled]="isSubmitting"
           >
-            {{ isSubmitting ? "Suppression..." : "Supprimer" }}
+            Supprimer
           </button>
+
+          <button *ngIf="isSubmitting" class="btn btn-danger " type="button" disabled>
+            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+            Suppression...
+          </button>
+
+
+
         </div>
       </div>
     </div>

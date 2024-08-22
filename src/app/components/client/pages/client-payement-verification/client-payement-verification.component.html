@@ -1,6 +1,6 @@
 <span class="card-box">
 <div class="confirmation-container">
-    <h2>Enter Confirmation Code</h2>
+    <h2>Entrer le code de confirmation </h2>
     
     <form [formGroup]="confirmationForm" (ngSubmit)="onSubmit()">
       <div class="digit-group">
@@ -12,7 +12,7 @@
         <input type="text" maxlength="1" formControlName="digit6" (input)="onInput($event, 6)" />
       </div>
       
-      <button class="btn btn-outline-danger" type="submit" [disabled]="confirmationForm.invalid">Confirm</button>
+      <button class="btn btn-outline-danger" type="submit" [disabled]="confirmationForm.invalid">Confirmer</button>
     </form>
     
     <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>

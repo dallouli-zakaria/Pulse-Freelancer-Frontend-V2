@@ -87,10 +87,18 @@
   </div>
   <br />
   <button
+  *ngIf="!isSubmitting"
     type="submit"
     class="btn btn-outline-danger"
-    [disabled]="!updateForm.valid || isSubmitting"
+    [disabled]="!updateForm.valid"
   >
-    {{ isSubmitting ? "Envoi..." : "Modifier" }}
+    Modifier
   </button>
+
+  <button *ngIf="isSubmitting" class="btn btn-danger " type="button" disabled>
+    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+    Modification...
+  </button>
+
+
 </form>

@@ -11,6 +11,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Freelancer } from '../../../../core/models/Freelancer';
 import { FreelancerService } from '../../../../core/services/freelancer.service';
 import Swal from 'sweetalert2';
+import { tr } from 'date-fns/locale';
 
 @Component({
   selector: 'app-freelancer-update-about',
@@ -25,7 +26,7 @@ export class FreelancerUpdateAboutComponent implements OnInit, OnChanges {
   form!: FormGroup;
   errorhandling: any;
   characterCount: number = 0;
-
+  isSubmitting:boolean=false;
   private fb: FormBuilder = inject(FormBuilder);
   private freelancerService: FreelancerService = inject(FreelancerService);
 
@@ -56,6 +57,7 @@ export class FreelancerUpdateAboutComponent implements OnInit, OnChanges {
 
   updated(): void {
     if (this.form.valid && this.freelancerID !== null) {
+      this.isSubmitting=true;
       this.freelancerService
         .update(this.freelancerID, this.form.value)
         .subscribe({
@@ -69,12 +71,15 @@ export class FreelancerUpdateAboutComponent implements OnInit, OnChanges {
             console.log(data);
             this.close();
             this.freelancerService.show(this.freelancerID);
+            this.isSubmitting=false;
           },
           error: (error) => {
             if (error.error.errors) {
               this.errorhandling = Object.values(error.error.errors).flat();
+              this.isSubmitting=false;
             } else {
               this.errorhandling = [error.message || 'An error occurred'];
+              this.isSubmitting=false;
             }
           },
         });

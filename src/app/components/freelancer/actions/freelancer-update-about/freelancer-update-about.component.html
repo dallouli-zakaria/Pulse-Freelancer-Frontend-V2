@@ -24,6 +24,7 @@
 
     <div class="modal-footer">
       <button
+      *ngIf="!isSubmitting"
         type="submit"
         class="btn btn-outline-danger"
         data-bs-dismiss="modal"
@@ -31,6 +32,14 @@
       >
         Modifier
       </button>
+
+      <button *ngIf="isSubmitting" class="btn btn-danger" type="button" disabled>
+        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+        Modification...
+      </button>
+
+
+
     </div>
   </form>
 </div>

@@ -16,6 +16,7 @@ export class ClientUpdatePersonalInfosComponent implements OnInit,OnChanges{
   clientdetails!:Client;
   clientId = this.authservice.parseID();
   form!: FormGroup;
+  isSubmitting:boolean=false;
   private fb: FormBuilder = inject(FormBuilder);
 
   
@@ -41,9 +42,10 @@ export class ClientUpdatePersonalInfosComponent implements OnInit,OnChanges{
     if (this.form.invalid) {
       return; // Prevent submission if the form is invalid
     }
-
+    this.isSubmitting=true;
     this.clients.update(this.clientId, this.form.value).subscribe({
       next: (data: any) => {
+        this.isSubmitting=false;
         Swal.fire({
           icon: "success",
           title: "Modifié avec succès",

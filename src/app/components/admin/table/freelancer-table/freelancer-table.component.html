@@ -35,7 +35,7 @@
       <td [ngClass]="{'text-success': (freelancer?.phone && freelancer?.summary), 'text-danger': !(freelancer?.phone && freelancer?.summary)}">
         {{ (freelancer?.phone && freelancer?.summary) ? 'Complet' : 'Incomplet' }}
       </td>
-      <td>{{freelancer?.status}}</td>
+      <td>{{(freelancer?.status) == 'verified'?'vérifié' : 'non vérifié'}}</td>
       <td>
         <button class="btn btn-primary btn-sm" style="margin-right: 5px;" (click)="onEdited(freelancer.id, freelancer)">
           <i class="fas fa-pen"></i>

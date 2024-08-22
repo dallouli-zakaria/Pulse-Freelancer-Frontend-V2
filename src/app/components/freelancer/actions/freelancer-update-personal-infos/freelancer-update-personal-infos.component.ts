@@ -27,6 +27,7 @@ export class FreelancerUpdatePersonalInfosComponent {
   freelancer: Freelancer[] = [];
   form!: FormGroup;
   errorhandling: any;
+  isSubmitting:boolean=false;
   private fb: FormBuilder = inject(FormBuilder);
   private frelancerservices: FreelancerService = inject(FreelancerService);
 
@@ -54,9 +55,9 @@ export class FreelancerUpdatePersonalInfosComponent {
       this.errorhandling = 'Veuillez remplir tous les champs.';
       return;
     }
-
+   
     if (this.freelancerID !== null) {
-      console.log(this.freelancerID);
+      this.isSubmitting=true;
       this.frelancerservices
         .update(this.freelancerID, this.form.value)
         .subscribe({
@@ -69,9 +70,10 @@ export class FreelancerUpdatePersonalInfosComponent {
             });
             this.close();
             this.frelancerservices.show(this.freelancerID);
+            this.isSubmitting=false;
           },
           error: (error) => {
-            console.log(error);
+            this.isSubmitting=false;
             if (error.error.errors) {
               this.errorhandling = Object.values(error.error.errors).flat();
               console.log(this.errorhandling);

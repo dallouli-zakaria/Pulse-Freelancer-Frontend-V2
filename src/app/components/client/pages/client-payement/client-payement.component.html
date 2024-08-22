@@ -35,7 +35,7 @@
 
             <div class="card-item__content">
               <label for="cardName" class="card-item__info">
-                <div class="card-item__holder">Card Holder</div>
+                <div class="card-item__holder">Nom complet</div>
                 <ng-container *ngIf="cardName.length; else emptyName">
                   <div class="card-item__name">
                     <ng-container
@@ -46,12 +46,12 @@
                   </div>
                 </ng-container>
                 <ng-template #emptyName>
-                  <div class="card-item__name">Full Name</div>
+                  <div class="card-item__name">Nom Complet</div>
                 </ng-template>
               </label>
               <div class="card-item__date">
                 <label for="cardMonth" class="card-item__dateTitle"
-                  >Expires</label
+                  >Expire le</label
                 >
                 <label for="cardMonth" class="card-item__dateItem">
                   <span *ngIf="cardMonth">{{ cardMonth }}</span>
@@ -62,7 +62,7 @@
                   <span *ngIf="cardYear">{{
                     cardYear.toString().slice(2)
                   }}</span>
-                  <span *ngIf="!cardYear">YY</span>
+                  <span *ngIf="!cardYear">AA</span>
                 </label>
               </div>
             </div>
@@ -89,7 +89,7 @@
 
     <div class="card-form__inner">
       <div class="card-input">
-        <label for="cardName" class="card-input__label">Card Name</label>
+        <label for="cardName" class="card-input__label">Nom sur la carte</label>
         <input
           type="text"
           id="cardName"
@@ -102,7 +102,7 @@
       </div>
 
       <div class="card-input">
-        <label for="cardNumber" class="card-input__label">Card Number</label>
+        <label for="cardNumber" class="card-input__label">Numero de carte</label>
         <input
           type="text"
           id="cardNumber"
@@ -120,7 +120,7 @@
         <div class="card-form__col">
           <div class="card-form__group">
             <label for="cardMonth" class="card-input__label"
-              >Expiration Date</label
+              >Date d'éxpiration</label
             >
             <select
               class="card-input__input -select"
@@ -129,7 +129,7 @@
               (focus)="focusInput()"
               (blur)="blurInput()"
             >
-              <option value="" disabled selected>Month</option>
+              <option value="" disabled selected>Mois</option>
               <option
                 *ngFor="let month of months"
                 [value]="month < 10 ? '0' + month : month"
@@ -145,7 +145,7 @@
               (focus)="focusInput()"
               (blur)="blurInput()"
             >
-              <option value="" disabled selected>Year</option>
+              <option value="" disabled selected>Annee</option>
               <option *ngFor="let year of years" [value]="year">
                 {{ year }}
               </option>
@@ -170,7 +170,7 @@
         </div>
       </div>
 
-      <button class="card-form__button" (click)="submitForm()">Submit</button>
+      <button class="card-form__button" (click)="submitForm()">Payer</button>
     </div>
   </div>
 </div>
