@@ -6,7 +6,7 @@ import { AuthService } from '../../../../core/services/auth.service';
 @Component({
   selector: 'app-reset-password-component',
   templateUrl: './reset-password-component.component.html',
-  styleUrl: './reset-password-component.component.css'
+  styleUrl: './reset-password-component.component.css',
 })
 export class ResetPasswordComponentComponent {
   resetPasswordForm!: FormGroup;
@@ -16,7 +16,7 @@ export class ResetPasswordComponentComponent {
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private authService: AuthService, 
+    private authService: AuthService,
     private router: Router
   ) {}
 
@@ -26,7 +26,7 @@ export class ResetPasswordComponentComponent {
 
     this.resetPasswordForm = this.fb.group({
       password: ['', [Validators.required, Validators.minLength(8)]],
-      password_confirmation: ['', [Validators.required]]
+      password_confirmation: ['', [Validators.required]],
     });
   }
 
@@ -36,10 +36,11 @@ export class ResetPasswordComponentComponent {
         token: this.token,
         email: this.email,
         password: this.resetPasswordForm.value.password,
-        password_confirmation: this.resetPasswordForm.value.password_confirmation
+        password_confirmation:
+          this.resetPasswordForm.value.password_confirmation,
       };
 
-      this.authService.resetPassword(formData).subscribe(response => {
+      this.authService.resetPassword(formData).subscribe((response) => {
         // Gérez la réponse et redirigez l'utilisateur
         this.router.navigate(['/login']);
       });

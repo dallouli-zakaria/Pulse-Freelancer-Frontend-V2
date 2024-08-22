@@ -6,7 +6,7 @@ import { AuthService } from '../../../../core/services/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   errorMessage: string | null = null;
@@ -20,9 +20,9 @@ export class LoginComponent {
   constructor(private route: ActivatedRoute) {
     this.applyForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
+      password: ['', [Validators.required]],
     });
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       this.successMessage = params['message'] || null;
     });
   }
@@ -49,24 +49,27 @@ export class LoginComponent {
     this.authService.login(loginData).subscribe({
       next: (response) => {
         //console.log(response);
-        if (loginData.email === 'admin@pulse.com') {
-          this.router.navigate(['/admin']);
-        } else {
+
           this.router.navigate(['/']);
-        }
+        
         this.isSubmitting = false;
       },
       error: (err) => {
         this.isSubmitting = false;
         this.isSubmitting = false;
         console.log(err);
-        
-        if (err.status === 403 && err.error.message === 'Please verify your email') {
-            this.errorMessage = 'Échec de la connexion. Veuillez vérifier votre email.';
+
+        if (
+          err.status === 403 &&
+          err.error.message === 'Please verify your email'
+        ) {
+          this.errorMessage =
+            'Échec de la connexion. Veuillez vérifier votre email.';
         } else {
-            this.errorMessage = 'Échec de la connexion. Veuillez vérifier vos identifiants.';
+          this.errorMessage =
+            'Échec de la connexion. Veuillez vérifier vos identifiants.';
         }
-      }
+      },
     });
   }
 }

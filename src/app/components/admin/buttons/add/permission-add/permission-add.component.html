@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Permission </h1>
+    <h2 class="modal-title fs-5" id="exampleModalLabel">Ajouter permission </h2>
     <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="close()"></button>
 </div>
     <form [formGroup]="form" (submit)="add()">
@@ -15,7 +15,7 @@
       </div>
       <h5 style="color: red; margin-left: 10px;">{{errorhandling}} </h5> 
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="close()">Close</button>
         <button type="submit" class="btn btn-success"  >Save changes</button>
        </div>
     </form>

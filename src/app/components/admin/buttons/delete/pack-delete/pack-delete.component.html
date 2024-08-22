@@ -1,16 +1,16 @@
 <div class="modal-header">
-    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Pack</h1>
+    <h2 class="modal-title fs-5" id="exampleModalLabel">Supprimer pack</h2>
     <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="close()"></button>
 </div>
    
      <div class="modal-body">
 
-      <h3>Are you sure you want to delete this Offer {{packData?.title}} </h3>
+      <h3>Êtes-vous sûr de vouloir supprimer pack : {{packData?.title}} ?</h3>
        
     
       </div>
       <h5 style="color: red; margin-left: 10px;">{{errorhandling}} </h5> 
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
-        <button type="submit" class="btn btn-success" data-bs-dismiss="modal" (click)="deleted()">valide</button>
+        <button type="button" class="btn btn-outline-danger" (click)="close()">Fermer</button>
+        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleted()">Supprimer</button>
        </div>

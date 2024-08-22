@@ -1,10 +1,12 @@
-<div class="card-box">
+<div *ngIf="postdata.length!=0" class="card-box">
   <div class="row mt-4 mb-4">
-    <span class="col-lg-11 col-sm-6 col-md-6"><h5 class="text-uppercase">Projets Pulse</h5></span>
+    <span class="col-lg-11 col-sm-6 col-md-6"
+      ><h5 class="text-uppercase">Projets Pulse</h5></span
+    >
   </div>
 
   <div *ngIf="isLoading" class="container mb-3">
-    <div class="pb-0 px-3 skeleton-card" *ngFor="let i of [1,2,3,4,5]">
+    <div class="pb-0 px-3 skeleton-card" *ngFor="let i of [1, 2, 3, 4, 5]">
       <div class="card-body">
         <div class="skeleton-title"></div>
         <div class="skeleton-description"></div>
@@ -21,27 +23,29 @@
           <th>Entreprise</th>
           <th>Période</th>
           <th>type</th>
-    
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of postdata ; let i = index">
-          <td>{{i + 1}}</td> 
-          <td>{{item.title}}</td>
-          <td>{{clientData[item.client_id]}}</td> 
-          <td>{{ item.period === 'undefined' ? 'pas encore défini' : (item.period === 'month' ? item.periodvalue + ' mois' : (item.period === 'day' ? item.periodvalue + ' jours' : item.periodvalue)) }}</td>
-          <td>{{ item.type === 'fulltime' ? 'temps plein' : 'temps partiel' }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-
-
-
-
-
-
-
-
+        <tr *ngFor="let item of postdata; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ item.title }}</td>
+          <td>{{ clientData[item.client_id] }}</td>
+          <td>
+            {{
+              item.period === "undefined"
+                ? "pas encore défini"
+                : item.period === "month"
+                ? item.periodvalue + " mois"
+                : item.period === "day"
+                ? item.periodvalue + " jours"
+                : item.periodvalue
+            }}
+          </td>
+          <td>
+            {{ item.type === "fulltime" ? "temps plein" : "temps partiel" }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+</div>

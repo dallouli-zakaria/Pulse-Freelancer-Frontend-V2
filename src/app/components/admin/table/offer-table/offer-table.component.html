@@ -1,17 +1,17 @@
 <table class="table caption-top">
-    <caption><h1>Offers List</h1></caption>
+    <caption><h2>Liste des offres</h2></caption>
     <thead>
       <tr>
-        <th scope="col">ID</th>
-        <th scope="col">title</th>
-        <th scope="col">post ID</th>
-        <th scope="col">Freelancer ID</th>
-        <th scope="col"></th>
+        <th scope="col">#</th>
+        <th scope="col">Titre</th>
+        <th scope="col">Id post</th>
+        <th scope="col">Id freelancer</th>
+        <th scope="col">Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let offer of offers">
-        <th scope="row" >{{offer.id}}</th>
+      <tr *ngFor="let offer of offers; let i = index">
+        <th scope="row" >{{i + 1}}</th>
         <td>{{offer.selected}}</td>
         <td>{{offer.post_id}} </td>
         <td>{{[offer.freelancer_id]}}</td>

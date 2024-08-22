@@ -6,46 +6,46 @@ import { LoadingService } from '../../../core/services/loading.service';
 @Component({
   selector: 'app-connected-landing-page',
   templateUrl: './connected-landing-page.component.html',
-  styleUrl: './connected-landing-page.component.css'
+  styleUrl: './connected-landing-page.component.css',
 })
-export class ConnectedLandingPageComponent implements OnInit{
-  userId!:number;
-  role!:string[];
+export class ConnectedLandingPageComponent implements OnInit {
+  userId!: number;
+  role!: string[];
   isAuthenticated: boolean = false;
-  packs!:any;
-  constructor(private authService:AuthService,private packService:PackService,private loadingService: LoadingService,) {}
+  packs!: any;
+  constructor(
+    private authService: AuthService,
+    private packService: PackService,
+    private loadingService: LoadingService
+  ) {}
 
   ngOnInit(): void {
-  
     this.index();
     // console.log(this.authService.verifyrole());
-   
-    
-    //geting user details with roles 
+
+    //geting user details with roles
     this.isAuthenticated = this.authService.isLoggedIn();
     if (this.isAuthenticated) {
       this.loadingService.show();
-    const sub = this.authService.parseID(); 
-    this.authService.getuserdetails(sub).subscribe((res) => {
-      this.loadingService.hide();
-      this.userId = res.user.id;
-      this.role=res.roles;
+      const sub = this.authService.parseID();
+      this.authService.getuserdetails(sub).subscribe((res) => {
+        this.loadingService.hide();
+        this.userId = res.user.id;
+        this.role = res.roles;
 
-      console.log(this.userId,this.role); 
-
-    }); 
+        console.log(this.userId, this.role);
+      });
     }
   }
 
-  index(){
-
-    this.packService.index()
+  index() {
+    this.packService.index();
     this.packService.getData.subscribe({
-      next:(data:any)=>{this.packs=data;
-        },
-      error: (error)=>console.log(error),
-      complete:()=>console.log('end desplay data')
-    })
+      next: (data: any) => {
+        this.packs = data;
+      },
+      error: (error) => console.log(error),
+      complete: () => console.log('end desplay data'),
+    });
   }
-
 }

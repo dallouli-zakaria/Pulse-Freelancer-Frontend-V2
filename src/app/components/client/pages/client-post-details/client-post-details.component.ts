@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-client-post-details',
   templateUrl: './client-post-details.component.html',
-  styleUrls: ['./client-post-details.component.css']
+  styleUrls: ['./client-post-details.component.css'],
 })
 export class ClientPostDetailsComponent implements OnInit {
   isOfferClosed: boolean = true;
@@ -25,7 +25,7 @@ export class ClientPostDetailsComponent implements OnInit {
   roles!: string;
   freelancers: any[] = [];
   isAuthenticated: boolean = false;
-  client!: Client; 
+  client!: Client;
   offer!: any;
   freelancertrue: any[] = [];
   freelancerfalse: any[] = [];
@@ -35,88 +35,72 @@ export class ClientPostDetailsComponent implements OnInit {
   progress: number = 25;
   progressText: string = '';
   offerExists: boolean | null = null;
-  disabledbutton:boolean=true;
-  disabledbutton2:boolean=false;
+  disabledbutton: boolean = true;
+  disabledbutton2: boolean = false;
   isLoadingClose = false;
   steps = [
     { label: 'Ouvert', progress: 25 },
     { label: 'En cours', progress: 50 },
     { label: 'En attente', progress: 75 },
-    { label: 'Terminé', progress: 100 }
+    { label: 'Terminé', progress: 100 },
   ];
 
   constructor(
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
     private postService: PostsService,
     private authService: AuthService,
-    private offerservice: OffersService,
+    private offerservice: OffersService
   ) {}
 
   ngOnInit(): void {
-
     this.isAuthenticated = this.authService.isLoggedIn();
     if (this.isAuthenticated) {
       this.authService.getUserRole().subscribe((res) => {
         this.roles = res;
-
-
-        
       });
     }
-
-
 
     const postIdParam = this.route.snapshot.paramMap.get('postId');
     if (postIdParam !== null) {
       this.postId = +postIdParam;
       this.initializeData();
     } else {
-      console.log("error");
+      console.log('error');
     }
-
-
-
-
-
-
   }
 
-  
-  verifyFreelancerPosts(){   
+  verifyFreelancerPosts() {
     // this.isLoadingClose = true;
-    let freelancerId=this.authService.parseID();
-      this.postService.verifyFreelancerPost(freelancerId,this.postId).subscribe((res)=>{
-        if(!res && this.roles == 'Freelancer'){        
-          this.router.navigate(['/']);     
-        }      
-      })
+    let freelancerId = this.authService.parseID();
+    this.postService
+      .verifyFreelancerPost(freelancerId, this.postId)
+      .subscribe((res) => {
+        if (!res && this.roles == 'Freelancer') {
+          this.router.navigate(['/']);
+        }
+      });
   }
 
-
-  verifyClientPosts(){   
+  verifyClientPosts() {
     // this.isLoadingClose = true;
-    let clientId=this.authService.parseID();
-      this.postService.verifyClientPost(clientId,this.postId).subscribe((res)=>{
-        if(!res && this.roles == 'Client'){        
-          this.router.navigate(['/']);     
-        }      
-      })
+    let clientId = this.authService.parseID();
+    this.postService
+      .verifyClientPost(clientId, this.postId)
+      .subscribe((res) => {
+        if (!res && this.roles == 'Client') {
+          this.router.navigate(['/']);
+        }
+      });
   }
 
-  verifyProperty(){
+  verifyProperty() {
     const postIdParam = this.route.snapshot.paramMap.get('postId');
     if (postIdParam !== null) {
       this.postId = +postIdParam;
-
     } else {
-      console.log("error");
+      console.log('error');
     }
-
-
   }
-
-
-
 
   initializeData(): void {
     this.verifyFreelancerPosts();
@@ -124,7 +108,6 @@ export class ClientPostDetailsComponent implements OnInit {
     this.fetchOfferDetails(this.postId);
     this.getFreelancers(this.postId);
     this.getclientdetails(this.postId);
-    // this.getofferdetails(this.postId);
     this.getFreelancerFalse(this.postId);
     this.getFreelancerDeclined(this.postId);
     this.getFreelancerTrue(this.postId);
@@ -137,7 +120,7 @@ export class ClientPostDetailsComponent implements OnInit {
 
   fetchOfferDetails(postId: number): void {
     this.postService.show(postId).subscribe(
-     (data:any) => {
+      (data: any) => {
         this.post = data;
         this.isLoading = false;
         this.status = data.status;
@@ -190,9 +173,9 @@ export class ClientPostDetailsComponent implements OnInit {
 
   getclientdetails(postId: number): void {
     this.postService.getClientDetailsByPostId(postId).subscribe(
-      (data:any) => {
+      (data: any) => {
         this.client = data;
-        console.log(this.client); 
+        console.log(this.client);
       },
       (error) => {
         console.error('Failed to fetch clients:', error);
@@ -200,24 +183,13 @@ export class ClientPostDetailsComponent implements OnInit {
     );
   }
 
-  // getofferdetails(postId: number): void {
-  //   this.offerservice.getOffersByPostId(postId).subscribe(
-  //     (data) => {
-  //       this.offer = data;
-  //       console.log(this.offer); 
-  //     },
-  //     (error) => {
-  //       console.error('Failed to fetch offer details:', error);
-  //     }
-  //   );
-  // }
 
   show: boolean = false;
   showedit: boolean = false;
 
   onEdited(freelancerId: number): void {
     this.show = true;
-    this.showedit = true; 
+    this.showedit = true;
     this.selectedFreelancerId = freelancerId;
   }
 
@@ -226,131 +198,155 @@ export class ClientPostDetailsComponent implements OnInit {
     this.showedit = false;
   }
 
-  validateFreelancer(index: number, offerId: number, singlefreelancerid: number): void {
+  validateFreelancer(
+    index: number,
+    offerId: number,
+    singlefreelancerid: number
+  ): void {
     this.validatedFreelancers.add(index);
-    this.offerservice.getOffersByPostAndFreelancer(offerId, singlefreelancerid).subscribe((res:any) => {
-      const updateValue = { selected: 'true' };
-      this.offerservice.update(res.id, updateValue).subscribe(
-        (updatedOffer: Offer) => {
-          console.log('Offer updated successfully:', updatedOffer);
-          this.refreshTableData();
-        },
-        (error) => {
-          console.error('Error updating offer:', error);
-        }
-      );
-    });
+    this.offerservice
+      .getOffersByPostAndFreelancer(offerId, singlefreelancerid)
+      .subscribe((res: any) => {
+        const updateValue = { selected: 'true' };
+        this.offerservice.update(res.id, updateValue).subscribe(
+          (updatedOffer: Offer) => {
+            console.log('Offer updated successfully:', updatedOffer);
+            this.refreshTableData();
+          },
+          (error) => {
+            console.error('Error updating offer:', error);
+          }
+        );
+      });
 
     Swal.fire({
-      icon: "success",
-      title: "freelancer validé !",
+      icon: 'success',
+      title: 'freelancer validé !',
       showConfirmButton: false,
-      timer: 1500
+      timer: 1500,
     });
   }
 
-  disqualifyFreelancer(index: number, offerId: number, singlefreelancerid: number): void {
+  disqualifyFreelancer(
+    index: number,
+    offerId: number,
+    singlefreelancerid: number
+  ): void {
     this.disqualifiedFreelancer.add(index);
-    this.offerservice.getOffersByPostAndFreelancer(offerId, singlefreelancerid).subscribe((res:any) => {
-      const updateValue = { selected: 'false' };
-      this.offerservice.update(res.id, updateValue).subscribe(
-        (updatedOffer: Offer) => {
-          console.log('Offer updated successfully:', updatedOffer);
-          this.refreshTableData();
-        },
-        (error) => {
-          console.error('Error updating offer:', error);
-        }
-      );
-    });
+    this.offerservice
+      .getOffersByPostAndFreelancer(offerId, singlefreelancerid)
+      .subscribe((res: any) => {
+        const updateValue = { selected: 'false' };
+        this.offerservice.update(res.id, updateValue).subscribe(
+          (updatedOffer: Offer) => {
+            console.log('Offer updated successfully:', updatedOffer);
+            this.refreshTableData();
+          },
+          (error) => {
+            console.error('Error updating offer:', error);
+          }
+        );
+      });
 
-    
     Swal.fire({
-      icon: "error",
-      title: "freelancer disqualifié !",
+      icon: 'error',
+      title: 'freelancer disqualifié !',
       showConfirmButton: false,
-      timer: 1500
+      timer: 1500,
     });
   }
 
-
-  declineFreelancer(index: number, offerId: number, singlefreelancerid: number): void {
+  declineFreelancer(
+    index: number,
+    offerId: number,
+    singlefreelancerid: number
+  ): void {
     // Create the Swal mixin with custom classes
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
-        cancelButton: 'btn btn-danger'
+        cancelButton: 'btn btn-danger',
       },
-      buttonsStyling: false
+      buttonsStyling: false,
     });
-  
+
     // Show the confirmation popup
-    swalWithBootstrapButtons.fire({
-      title: 'êtes-vous sûr?',
-      text: "vous ne pouvez pas confirmer un freelancer après disqualification !",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Accepter!',
-      cancelButtonText: 'Retour!',
-      reverseButtons: true
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // If confirmed, proceed with the offer update
-        this.disabledbutton2 = false;
-        this.disqualifiedFreelancer.add(index);
-        
-        this.offerservice.getOffersByPostAndFreelancer(offerId, singlefreelancerid).subscribe((res:any) => {
-          const updateValue = { selected: 'declined' };
-          this.offerservice.update(res.id, updateValue).subscribe(
-            (updatedOffer: Offer) => {
-              console.log('Offer updated successfully:', updatedOffer);
-              this.declineOffer();
-              this.progress = 50;
-              this.progressText = 'en cours';
-              this.refreshTableData();
-              // Show success popup
-              swalWithBootstrapButtons.fire({
-                title: 'Réfusé!',
-                text: 'Le freelancer est refusé. Notre équipe se chargera du processus de recrutement une autre fois. Vous serez notifié par mail :) ! ',
-                icon: 'success'
-              });
-            },
-            (error) => {
-              console.error('Error updating offer:', error);
-              this.disabledbutton2 = false; // Reset the disabled state if there's an error
-            }
-          );
-        });
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        // If cancelled, show the cancelled popup
-        swalWithBootstrapButtons.fire({
-          title: 'Annulé',
-          text: 'le freelancer est en attente de validation de l\'offre ',
-          icon: 'error'
-        });
-      }
-    });
+    swalWithBootstrapButtons
+      .fire({
+        title: 'êtes-vous sûr?',
+        text: 'vous ne pouvez pas confirmer un freelancer après disqualification !',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Accepter!',
+        cancelButtonText: 'Retour!',
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          // If confirmed, proceed with the offer update
+          this.disabledbutton2 = false;
+          this.disqualifiedFreelancer.add(index);
+
+          this.offerservice
+            .getOffersByPostAndFreelancer(offerId, singlefreelancerid)
+            .subscribe((res: any) => {
+              const updateValue = { selected: 'declined' };
+              this.offerservice.update(res.id, updateValue).subscribe(
+                (updatedOffer: Offer) => {
+                  console.log('Offer updated successfully:', updatedOffer);
+                  this.declineOffer();
+                  this.progress = 50;
+                  this.progressText = 'en cours';
+                  this.refreshTableData();
+                  // Show success popup
+                  swalWithBootstrapButtons.fire({
+                    title: 'Réfusé!',
+                    text: 'Le freelancer est refusé. Notre équipe se chargera du processus de recrutement une autre fois. Vous serez notifié par mail :) ! ',
+                    icon: 'success',
+                  });
+                },
+                (error) => {
+                  console.error('Error updating offer:', error);
+                  this.disabledbutton2 = false; // Reset the disabled state if there's an error
+                }
+              );
+            });
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          // If cancelled, show the cancelled popup
+          swalWithBootstrapButtons.fire({
+            title: 'Annulé',
+            text: "le freelancer est en attente de validation de l'offre ",
+            icon: 'error',
+          });
+        }
+      });
   }
-  
+
   getFreelancerTrue(postid: number): void {
-    this.offerservice.getFreelancerDetailsByPostIdTrue(postid).subscribe((res: any[]) => {
-      this.freelancertrue = res;
-      console.log(res);
-    });  
+    this.offerservice
+      .getFreelancerDetailsByPostIdTrue(postid)
+      .subscribe((res: any[]) => {
+        this.freelancertrue = res;
+        console.log(res);
+      });
   }
 
   getFreelancerFalse(postid: number): void {
-    this.offerservice.getFreelancerDetailsByPostIdFalse(postid).subscribe((res:any) => {
-      this.freelancerfalse = res;
-      console.log(res);
-    });  
+    this.offerservice
+      .getFreelancerDetailsByPostIdFalse(postid)
+      .subscribe((res: any) => {
+        this.freelancerfalse = res;
+        console.log(res);
+      });
   }
 
   getFreelancerDeclined(postid: number): void {
-    this.offerservice.getFreelancerDetailsByPostIdDeclined(postid).subscribe((res: any[]) => {
-      this.freelancerDeclined = res;
-      console.log(res);
-    });  
+    this.offerservice
+      .getFreelancerDetailsByPostIdDeclined(postid)
+      .subscribe((res: any[]) => {
+        this.freelancerDeclined = res;
+        console.log(res);
+      });
   }
 
   refreshTableData(): void {
@@ -374,10 +370,10 @@ export class ClientPostDetailsComponent implements OnInit {
         this.initializeData();
         this.isLoading = false;
         Swal.fire({
-          icon: "success",
-          title: "Offre validé",
+          icon: 'success',
+          title: 'Offre validé',
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
         });
       },
       (error) => {
@@ -387,7 +383,7 @@ export class ClientPostDetailsComponent implements OnInit {
     );
   }
 
-   CloseOffer(): void {
+  CloseOffer(): void {
     this.isLoadingClose = true;
     const updateValue = { status: 'closed' };
 
@@ -398,13 +394,13 @@ export class ClientPostDetailsComponent implements OnInit {
         this.initializeData();
         Swal.fire({
           title: 'Success!',
-          text: 'Votre offre a été clôturée avec succès. Nous passerons à l\'évaluation des contrats et nous reviendrons vers vous par mail dans les plus brefs délais !',
+          text: "Votre offre a été clôturée avec succès. Nous passerons à l'évaluation des contrats et nous reviendrons vers vous par mail dans les plus brefs délais !",
           icon: 'success',
           confirmButtonText: 'OK',
           confirmButtonColor: '#28a745',
           customClass: {
-            popup: 'custom-swal-popup'
-          }
+            popup: 'custom-swal-popup',
+          },
         });
       },
       (error) => {
@@ -413,68 +409,63 @@ export class ClientPostDetailsComponent implements OnInit {
     );
   }
 
-  
-
   declineOffer() {
     const updateValue = { status: 'open' };
-    this.postService.update(this.postId, updateValue).subscribe((updatedPost: Post) => {
-      console.log('Offer updated successfully:', updatedPost);
-      this.refreshTableData();
-      this.initializeData();
-    },
-    (error) => {
-      console.error('Error updating offer:', error);
-    });
+    this.postService.update(this.postId, updateValue).subscribe(
+      (updatedPost: Post) => {
+        console.log('Offer updated successfully:', updatedPost);
+        this.refreshTableData();
+        this.initializeData();
+      },
+      (error) => {
+        console.error('Error updating offer:', error);
+      }
+    );
   }
 
   checkifExists(postid: number): void {
     this.postService.checkIfOfferExists(postid).subscribe(
-      (response:any )=> {
+      (response: any) => {
         this.offerExists = response;
-        if(this.status=='open' && this.roles =='superadmin_role'){
-                    this.disabledbutton=false;
+        if (this.status == 'open' && this.roles == 'superadmin_role') {
+          this.disabledbutton = false;
+        }
+        if (
+          this.offerExists &&
+          this.status == 'open' &&
+          this.roles == 'superadmin_role'
+        ) {
+          this.disabledbutton = false;
+          this.progress = 50;
+          this.progressText = 'en cours';
+        } else if (this.offerExists && this.status == 'open') {
+          this.disabledbutton = true;
+          this.progress = 50;
+          this.progressText = 'en cours';
 
-        }
-        if(this.offerExists && this.status=='open' && this.roles =='superadmin_role'){
-          this.disabledbutton=false;
-          this.progress = 50;
-          this.progressText = 'en cours';
-        }
-        else if (this.offerExists && this.status=='open') {
-          this.disabledbutton=true;
-          this.progress = 50;
-          this.progressText = 'en cours';
-          
           //this.updatePostStatus();
-        }else if(this.status=='open'){
-          this.disabledbutton=false;
+        } else if (this.status == 'open') {
+          this.disabledbutton = false;
         }
         console.log('Offer exists:', this.offerExists);
       },
-      error => {
+      (error) => {
         console.error('Error checking offer existence', error);
       }
     );
   }
 
+  createcontract() {}
 
+  showadd = false;
+  show2 = false;
 
-
-  createcontract(){
-
-  }
-
-  showadd=false
-  show2=false
-  
   onAdd(): void {
     this.show2 = true;
-      this.showadd = true;
+    this.showadd = true;
   }
-    onCloseModal2(): void {
-      this.show2 = false;
-      this.showadd = false;
-     
-    }
- 
+  onCloseModal2(): void {
+    this.show2 = false;
+    this.showadd = false;
+  }
 }

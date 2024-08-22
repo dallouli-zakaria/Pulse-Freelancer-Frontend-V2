@@ -268,7 +268,8 @@
                   <div class="text-center pt-5"><img class="img-fluid" src="assets/img/icons/pricing.png" alt="" />
                     <h5 class="my-4">{{pack.title}}</h5>
                   </div>
-                  <ul class="list-unstyled">
+
+                  <ul *ngIf="pack.title == 'Gratuit' " class="list-unstyled">
                     <li class="mb-3"><span class="me-2">
                       <i class="bi bi-check-lg text-success"></i></span>Frais de service : 5 % du coût du projet
                     </li>
@@ -283,10 +284,56 @@
                       <i class="bi bi-check-lg text-success"></i></span>Support par email
                     </li>
                   </ul>
+
+
+                  <ul *ngIf="pack.title == 'Premium' " class="list-unstyled">
+                    <li class="mb-3"><span class="me-2">
+                      <i class="bi bi-check-lg text-success"></i></span>Frais de service : 3 % du coût du projet
+                     </li>
+                     <li class="mb-3"><span class="me-2">
+                      <i class="bi bi-check-lg text-success"></i></span>Publication de projet : 5 projets
+                     </li>
+                     <li class="mb-3"><span class="me-2">
+                      <i class="bi bi-check-lg text-success"></i></span>Système de messagerie intégré
+                     </li>
+                     <li class="mb-3"><span class="me-2">
+                      <i class="bi bi-check-lg text-success"></i></span>Outils de suivi de projet de base
+                     </li>
+                     <li class="mb-3"><span class="me-2">
+                      <i class="bi bi-check-lg text-success"></i></span>Support prioritaire par email
+                     </li>
+                  </ul>
+
+
+                  <ul *ngIf="pack.title == 'Entreprise' " class="list-unstyled">
+                    <li class="mb-3"><span class="me-2">
+                      <i class="bi bi-check-lg text-success"></i></span>Frais de service : gratuit
+                     </li>
+                     <li class="mb-3"><span class="me-2">
+                      <i class="bi bi-check-lg text-success"></i></span>Publication de projet : Projets illimités
+                     </li>
+                     <li class="mb-3"><span class="me-2">
+                      <i class="bi bi-check-lg text-success"></i></span>Système de messagerie intégré 
+                     </li>
+                     <li class="mb-3"><span class="me-2">
+                      <i class="bi bi-check-lg text-success"></i></span>Outils de suivi et de gestion de projet avancés
+                     </li>
+                     <li class="mb-3"><span class="me-2">
+                      <i class="bi bi-check-lg text-success"></i></span>Accès aux freelances les mieux notés 
+                     </li>
+                     <li class="mb-3"><span class="me-2">
+                      <i class="bi bi-check-lg text-success"></i></span>Manager le recrutement des freelanceurs
+                     </li>
+                  </ul>
+
+
                   <div class="text-center my-5">
-                    <h2 class="mb-3">{{pack.price}} mad / an
+                    <h2 class="mb-3">{{ pack.price === 0 ? 'Gratuit' : pack.price + ' MAD / an' }}
+
                     </h2>
-                    <button class="btn btn-outline-danger rounded-pill" type="submit">Choisir </button>
+                    <button *ngIf="pack.title == 'Gratuit' " class="btn btn-outline-danger rounded-pill" disabled="true">Choisir </button>
+
+                    <button *ngIf="pack.title != 'Gratuit' " class="btn btn-outline-danger rounded-pill" routerLink="../../pulse/payement">Choisir </button>
                   </div>
                 </div>
               </div>
@@ -332,7 +379,7 @@
                   <div class="text-center my-5">
                     <h2 class="mb-3">Gratuit
                     </h2>
-                    <button class="btn btn-outline-danger rounded-pill" routerLink="/login" >Choisir </button>
+                    <button class="btn btn-outline-danger rounded-pill" routerLink="/login" disabled="true" >Choisir </button>
                   </div>
                 </div>
               </div>
@@ -361,7 +408,7 @@
                     </li>
                   </ul>
                   <div class="text-center my-5">
-                    <h2 class="mb-3">490 mad<span class="text-900">/an</span>
+                    <h2 class="mb-3">99 mad<span class="text-900">/an</span>
                     </h2>
                     <button class="btn btn-outline-danger rounded-pill" routerLink="/login">Choisir </button>
                   </div>
@@ -395,7 +442,7 @@
                     </li>
                   </ul>
                   <div class="text-center my-5">
-                    <h2 class="mb-3">990 mad<span class="text-900">/an</span>
+                    <h2 class="mb-3">399 mad<span class="text-900">/an</span>
                     </h2>
                     <button class="btn btn-danger hover-top btn-glow rounded-pill border-0" routerLink="/login">Choisir</button>
                   </div>
@@ -464,7 +511,7 @@
                     <div class="card h-100">
                       <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
-                          <div class="d-flex align-items-center"><img class="img-fluid" src="assets/img/gallery/user-1.png" alt="" />
+                          <div class="d-flex align-items-center"><img class="img-fluid small-rounded-image" src="assets/img/gallery/user-11.jpg" alt="" />
                             <div class="flex-1 ms-3">
                               <h6 class="mb-0 fs--1 text-1000 fw-medium">Amine ghali</h6>
                               <p>Maroc Telecom</p>
@@ -482,7 +529,7 @@
                     <div class="card h-100">
                       <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
-                          <div class="d-flex align-items-center"><img class="img-fluid" src="assets/img/gallery/user-2.png" alt="" />
+                          <div class="d-flex align-items-center"><img class="img-fluid small-rounded-image" src="assets/img/gallery/user-13.jpg" alt="" />
                             <div class="flex-1 ms-3">
                               <h6 class="mb-0 fs--1 text-1000 fw-medium">Karima Alaoui</h6>
                               <p class="fs--2 fw-normal mb-0">2M </p>
@@ -500,7 +547,7 @@
                     <div class="card h-100">
                       <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
-                          <div class="d-flex align-items-center"><img class="img-fluid" src="assets/img/gallery/user-3.png" alt="" />
+                          <div class="d-flex align-items-center"><img class="img-fluid small-rounded-image" src="assets/img/gallery/user-12.jpg" alt="" />
                             <div class="flex-1 ms-3">
                               <h6 class="mb-0 fs--1 text-1000 fw-medium">Omar Armas</h6>
                               <p class="fs--2 fw-normal mb-0">Orange</p>

@@ -12,33 +12,28 @@ import Swal from 'sweetalert2';
 })
 export class ClientUpdateCompanyInfosComponent implements OnInit,OnChanges{
   @Input() clientData!:Client
-
   clientId = this.authservice.parseID();
   form!: FormGroup;
   clientdetails!:Client;
-  @Output() closeModal = new EventEmitter<void>();
-  close(): void {
-    this.closeModal.emit();
-  }
+
   constructor(private clients: ClientService, private authservice: AuthService) {}
   ngOnChanges(): void {
   
      
     this.form = this.fb.group({
-      company_name: this.fb.control(this.clientdetails?.company_name, [Validators.required, Validators.minLength(3)]),
-      company_activity: this.fb.control(this.clientdetails?.company_activity, [Validators.required]),
-      company_email: this.fb.control(this.clientdetails?.company_email, [Validators.required, Validators.email])
+      company_name: this.fb.control(this.clientData?.company_name, [Validators.required, Validators.minLength(3)]),
+      company_activity: this.fb.control(this.clientData?.company_activity, [Validators.required]),
+      company_email: this.fb.control(this.clientData?.company_email, [Validators.required, Validators.email])
     });
   }
   private fb: FormBuilder = inject(FormBuilder);
 
   ngOnInit(): void {
 
-    this.getdata();
     this.form = this.fb.group({
-      company_name: this.fb.control('', [Validators.required, Validators.minLength(3)]),
-      company_activity: this.fb.control('', [Validators.required]),
-      company_email: this.fb.control('', [Validators.required, Validators.email])
+      company_name: this.fb.control(this.clientData?.company_name, [Validators.required, Validators.minLength(3)]),
+      company_activity: this.fb.control(this.clientData?.company_activity,[Validators.required]),
+      company_email: this.fb.control(this.clientData?.company_email, [Validators.required, Validators.email])
     });
   }
 
@@ -65,12 +60,5 @@ export class ClientUpdateCompanyInfosComponent implements OnInit,OnChanges{
       }
     });
   }
-  getdata(){
-    this.clients.show(this.clientId)
-    this.clients.getData$.subscribe(
-      (res:any)=>{this.clientdetails=res;
-
-        
-      })
-  }
+  
 }

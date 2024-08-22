@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h1 class="modal-title fs-5" id="exampleModalLabel">EDIT POST</h1>
+    <h2 class="modal-title fs-5" id="exampleModalLabel">Ajouter post</h2>
     <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="close()"></button>
 </div>
 <form [formGroup]="form" (ngSubmit)="add()">
@@ -9,7 +9,7 @@
   
 
   <div class="form-group">
-    <label for="title">Title</label>
+    <label for="title">Titre</label>
     <input id="title" formControlName="title" class="form-control" type="text" />
     <!-- <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched" class="text-danger">
       Valid email is required
@@ -17,7 +17,7 @@
   </div>
 
   <div class="form-group">
-    <label for="location">Location</label>
+    <label for="location">Localisation</label>
     <input id="location" formControlName="location" class="form-control" type="text" />
     <!-- <div *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched" class="text-danger">
       Password is required and must be at least 6 characters
@@ -41,7 +41,7 @@
   </div>
 
   <div class="form-group">
-    <label for="period">Period</label>
+    <label for="period">Période</label>
     <input id="period" formControlName="period" class="form-control" />
     <!-- <div *ngIf="userForm.get('city')?.invalid && userForm.get('city')?.touched" class="text-danger">
       City is required and must be less than 255 characters
@@ -49,7 +49,7 @@
   </div>
 
   <div class="form-group">
-    <label for="periodvalue">Periodvalue</label>
+    <label for="periodvalue">Valeur période </label>
     <input id="periodvalue" formControlName="Periodvalue" class="form-control" type="number" />
     <!-- <div *ngIf="userForm.get('TJM')?.invalid && userForm.get('TJM')?.touched" class="text-danger">
       TJM is required and must be a number
@@ -65,7 +65,7 @@
   </div>
 
   <div class="form-group">
-    <label for="budgetvalue">Budgetvalue</label>
+    <label for="budgetvalue">Valeur budget</label>
     <input id="budgetvalue" formControlName="Budgetvalue" class="form-control" />
     <!-- <div *ngIf="userForm.get('availability')?.invalid && userForm.get('availability')?.touched" class="text-danger">
       Availability is required
@@ -73,7 +73,7 @@
   </div>
 
   <div class="form-group">
-    <label for="clientid">Client id</label>
+    <label for="clientid">Id client</label>
     <input id="clientid" formControlName="client_id" class="form-control" />
     <!-- <div *ngIf="userForm.get('address')?.invalid && userForm.get('address')?.touched" class="text-danger">
       Address is required and must be less than 255 characters
@@ -81,7 +81,7 @@
   </div>
 
   <div class="form-group">
-    <label for="created_at">Created At</label>
+    <label for="created_at">Date de création</label>
     <input id="created_at"  class="form-control" />
     <!-- <div *ngIf="userForm.get('phone')?.invalid && userForm.get('phone')?.touched" class="text-danger">
       Phone is required and must be less than 20 characters
@@ -90,8 +90,8 @@
 </div></div>
 <h5 style="color: red; margin-left: 10px;">{{errorhandling}} </h5> 
   <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
-    <button type="submit" class="btn btn-success" >Save changes</button>
+    <button type="button" class="btn btn-outline-primary" (click)="close()">Fermer</button>
+    <button type="submit" class="btn btn-primary" >Ajouter</button>
    </div>
 </form>
 

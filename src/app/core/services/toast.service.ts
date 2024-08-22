@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ToastService {
   private toasts: any[] = [];
@@ -20,7 +20,7 @@ export class ToastService {
   }
 
   remove(toast: any) {
-    this.toasts = this.toasts.filter(t => t !== toast);
+    this.toasts = this.toasts.filter((t) => t !== toast);
   }
 
   getToasts() {

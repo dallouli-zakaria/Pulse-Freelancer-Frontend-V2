@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-payement',
@@ -24,6 +25,9 @@ export class ClientPayementComponent implements OnInit{
   cardMonth: string = '';
   cardType: string = '';
   cardNumberPattern: string = '';
+
+
+  constructor(private router:Router){}
 
   ngOnInit(): void {
     this.updateCardBackground();
@@ -139,6 +143,7 @@ export class ClientPayementComponent implements OnInit{
       cardYear: this.cardYear,
       cardCvv: this.cardCvv
     });
+    this.router.navigate(['../pulse/payement-verification'])
   }
 
   getFormattedCardName(): string[] {

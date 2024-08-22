@@ -1,100 +1,103 @@
 <body>
-
-    <div class="container p-4">
-      <nav aria-label="breadcrumb " >
-        <ol class="breadcrumb" *ngIf="roles == 'client_role'">
-          <li class="breadcrumb-item text-danger "><a routerLink="../../home">Acceuil</a></li>
-          <li class="breadcrumb-item text-danger "><a routerLink="../../client-dashboard">Client</a></li>
-          <li class="breadcrumb-item text-danger "><a routerLink="../../view-freelancers">Voir liste freelancers</a></li>
-          <li class="breadcrumb-item active " aria-current="page">Voir freelancer </li>
-        </ol>
-      </nav>     
-      <span>
-
-        <h3 class="mt-3 mb-3">Profile Freelanceur</h3>
+  <div class="container p-4">
+    <nav aria-label="breadcrumb ">
+      <ol class="breadcrumb" *ngIf="roles == 'client_role'">
+        <li class="breadcrumb-item text-danger">
+          <a routerLink="../../home">Accueil</a>
+        </li>
+        <li class="breadcrumb-item text-danger">
+          <a routerLink="../../client-dashboard">Client</a>
+        </li>
+        <li class="breadcrumb-item text-danger">
+          <a routerLink="../../view-freelancers">Voir liste freelancers</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+          Voir freelancer
+        </li>
+      </ol>
+    </nav>
+    <span>
+      <h3 class="mt-3 mb-3">Profile Freelanceur</h3>
+    </span>
+    <div *ngIf="isLoading; else dataLoaded" class="row">
+      <span class="col-lg-4">
+        <app-skeleton-loading></app-skeleton-loading>
       </span>
-      <div *ngIf="isLoading; else dataLoaded" class="row"> 
-          <span class="col-lg-4">
-            <app-skeleton-loading></app-skeleton-loading>
 
-          </span>
-
-          <span class="col-lg-8">
-            <app-skeleton-loading></app-skeleton-loading>
-
-          </span>
-
-      </div>
-      <ng-template #dataLoaded>
-       
+      <span class="col-lg-8">
+        <app-skeleton-loading></app-skeleton-loading>
+      </span>
+    </div>
+    <ng-template #dataLoaded>
       <div class="row">
-
-        
         <div *ngIf="freelancer?.user" class="col-lg-4 col-xl-4">
           <div class="card-box text-center">
             <img
-              src="assets/img/gallery/user-profile-3.png"
+              src="assets/img/gallery/images.png"
               class="rounded-circle avatar-xl img-thumbnail"
               alt="profile-image"
             />
-            <h4  class="mb-0" name="name">{{getFirstName(freelancer.user.name)}}</h4>
-            <p class="text-muted">{{freelancer.title}}<br> <span> 50 MAD / H</span></p>
-            
+            <h4 class="mb-0" name="name">
+              {{ getFirstName(freelancer.user.name) }}
+            </h4>
+            <p class="text-muted">
+              {{ freelancer.title }}<br />
+              <span> {{ freelancer.TJM }} Mad / H</span>
+            </p>
 
-
-          
-          
             <div class="text-left mt-3">
               <h6 class="font-13 text-uppercase">Concernant :</h6>
               <p class="text-muted font-13 mb-3">
-                {{freelancer.summary}}
+                {{ freelancer.summary }}
               </p>
             </div>
-              
-           
           </div>
+
+          <!-- Compétences -->
           <div class="card-box">
             <h5 class="header-title">Compétences</h5>
 
             <div class="pt-1 mt-4">
-              <span *ngFor="let skill of freelancer.skills" class="badge bg-soft-secondary fs-14 mt-1">
-                {{skill.title}}   
-              </span> 
+              <span
+                *ngFor="let skill of freelancer.skills"
+                class="badge bg-soft-secondary fs-14 mt-1"
+              >
+                {{ skill.title }}
+              </span>
             </div>
-         
           </div>
         </div>
 
-        
-        
-
+        <!-- listes d'expériences -->
         <div class="col-lg-8 col-xl-8">
-            
           <div class="card-box">
-  
             <div class="tab-content">
               <div class="tab-pane show active" id="about-me">
                 <h5 class="mb-4 text-uppercase">
                   <i class="mdi mdi-briefcase mr-1"></i> Experience
                 </h5>
                 <ul class="list-unstyled timeline-sm">
-                  <li class="timeline-sm-item"*ngFor="let experience of experienceData" > 
-                    <span class="timeline-sm-date">{{ getYear(experience.startDate) }} - {{ getYear(experience.endDate) }}</span>
-                    <h5 class="mt-0 mb-1">{{experience.title}}</h5>
-                    <p>{{experience.companyName}}</p>
+                  <li
+                    class="timeline-sm-item"
+                    *ngFor="let experience of experienceData"
+                  >
+                    <span class="timeline-sm-date"
+                      >{{ getYear(experience.startDate) }} -
+                      {{ getYear(experience.endDate) }}</span
+                    >
+                    <h5 class="mt-0 mb-1">{{ experience.title }}</h5>
+                    <p>{{ experience.companyName }}</p>
                     <p class="text-muted mt-2">
-                      {{experience.description}}
+                      {{ experience.description }}
                     </p>
                   </li>
-                 
                 </ul>
-                
               </div>
             </div>
           </div>
 
           <!-- projects table -->
-          <div class="card-box">
+          <div *ngIf="postdata.length!=0" class="card-box">
             <h5 class="mb-3 mt-4 text-uppercase">
               <i class="mdi mdi-cards-variant mr-1"></i> Projets Pulse
             </h5>
@@ -109,26 +112,34 @@
                     <th scope="col">Type</th>
                   </tr>
                 </thead>
+
                 <tbody>
                   <tr *ngFor="let item of postdata; let i = index">
-                    <th scope="row">{{i + 1}}</th>
-                    <td>{{item.title}}</td>
-                    <td>{{clientData[item.client_id]}}</td>
-                    <td>{{item.periodvalue}} {{item.period}}</td>
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>{{ item.title }}</td>
+                    <td>{{ clientData[item.client_id] }}</td>
                     <td>
-                      {{ item.type === 'fulltime' ? 'temps plein' : 'temps partiel' }}
+                      {{
+                        item.period === "undefined"
+                          ? "pas encore défini"
+                          : item.period === "month"
+                          ? item.periodvalue + " mois"
+                          : item.period === "day"
+                          ? item.periodvalue + " jours"
+                          : item.periodvalue
+                      }}
                     </td>
-                    
+                    <td>
+                      {{ item.type === "fulltime" ? "temps plein" : "temps partiel" }}
+                    </td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
-<!-- end projects table -->
-          
+          <!-- end projects table -->
         </div>
       </div>
     </ng-template>
-    </div>
-  </body>
-  
+  </div>
+</body>

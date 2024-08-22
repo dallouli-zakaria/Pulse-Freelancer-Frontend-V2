@@ -1,31 +1,30 @@
 <div class="modal-header">
-  <h1 class="modal-title fs-5" id="exampleModalLabel">Add Contract</h1>
+  <h2 class="modal-title fs-5" id="exampleModalLabel">Modifier contrat</h2>
   <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="close()"></button>
 </div>
   <form [formGroup]="form" (ngSubmit)="updated()">
    <div class="modal-body">
         <!-- title -->
     <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Title</label>
+      <label for="exampleInputEmail1" class="form-label">Titre du contrat</label>
       <input type="text" class="form-control" id="exampleInputEmail1" formControlName="title" aria-describedby="emailHelp">
     </div>
     
     <!-- perdio -->
-   <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label"> Period</label>
-      <input type="text" class="form-control" id="exampleInputEmail1" formControlName="period" aria-describedby="emailHelp">
-    </div>
-   
-    
-     <!-- buget -->
-    <div class="mb-3 ">
-      <label for="exampleInputEmail1" class="form-label">budget</label>
-      <input type="number" class="form-control" id="exampleInputEmail1" formControlName="budget" aria-describedby="emailHelp">
-      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+     <!-- perdio -->
+     <div class="row">
+      <div class="col-6">
+        <label for="startDate">Date début</label>
+        <input class="form-control" type="date" id="startDate" formControlName="startDate">
+      </div>
+      <div class="col-6">
+        <label for="endDate">Date fin</label>
+        <input class="form-control" type="date" id="endDate" formControlName="endDate">
+      </div>
     </div>
      <!-- description -->
      <div class="mb-3 ">
-      <label for="exampleInputEmail1" class="form-label">Porject description</label>
+      <label for="exampleInputEmail1" class="form-label">Description</label>
       <textarea class="form-control" id="exampleInputEmail1" formControlName="project_description" aria-describedby="emailHelp"></textarea>
     </div>
    
@@ -49,7 +48,7 @@
      
     <h5 style="color: red; margin-left: 10px;">{{errorhandling}} </h5> 
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
-      <button type="submit" class="btn btn-success">Save changes</button>
+      <button type="button" class="btn btn-outline-primary" (click)="close()">Fermer</button>
+      <button type="submit" class="btn btn-primary">Modifier</button>
      </div>
   </form>

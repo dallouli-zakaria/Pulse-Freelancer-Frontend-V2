@@ -1,117 +1,155 @@
 <div *ngIf="isLoading; else dataLoaded" class="card-box">
-    <app-skeleton-loading></app-skeleton-loading>
-  </div>
-  <ng-template #dataLoaded>
-<div class="card-box">
-    <span *ngIf=" client?.profession==null">
-        <div class="alert alert-warning" role="alert">
-            Veuillez completer votre profile pour poster des offres ! 
-          </div>
+  <app-skeleton-loading></app-skeleton-loading>
+</div>
+<ng-template #dataLoaded>
+  <div class="card-box">
+    <span *ngIf="client?.profession == null">
+      <div class="alert alert-warning" role="alert">
+        Veuillez completer votre profile pour poster des offres !
+      </div>
     </span>
 
-
-    <div class="row mt-4 mb-4" >
-        
-        <span class="col-6  d-flex justify-content-start"><h5>Informations personnelles</h5></span>
-        <span class="col-6  d-flex justify-content-end">
-            <h5><a (click)="openModal(client)" class="text-danger" style="cursor: pointer;"><i class="bi bi-pencil-square"></i></a></h5>
-          </span>
-          
+    <div class="row mt-4 mb-4">
+      <span class="col-6 d-flex justify-content-start"
+        ><h5>Informations personnelles</h5></span
+      >
+      <span class="col-6 d-flex justify-content-end">
+        <h5>
+          <a
+            (click)="openModal(client)"
+            class="text-danger"
+            style="cursor: pointer"
+            ><i class="bi bi-pencil-square"></i
+          ></a>
+        </h5>
+      </span>
     </div>
 
+    <!--Client informations  -->
     <div class="row">
-
-        <div class="col-lg-3 col-sm-6 ">
-            <img src="assets/img/gallery/user-profile-client-1.png" alt=""  class="rounded-circle avatar-xl img-thumbnail" />
+      <div class="col-lg-3 col-sm-6">
+        <img
+          src="assets/img/gallery/client-template.png"
+          alt=""
+          class="rounded-circle avatar-xl img-thumbnail"
+        />
+      </div>
+      <div class="col-lg-7 col-sm-6">
+        <div class="row" *ngIf="client">
+          <span><strong> Nom :</strong></span>
+          <span>{{ client.user.name }}</span>
+          <span><strong>Profession :</strong></span>
+          <span>{{ client.profession }}</span>
+          <span *ngIf="client?.profession == null"> Inconnu </span>
+          <span><strong>Email :</strong></span>
+          <span>{{ client.user!.email }}</span>
         </div>
-        <div class="col-lg-7 col-sm-6 ">
+      </div>
+    </div>
+  </div>
 
-            <div class="row" *ngIf="client" >
-                
-                <span><strong> Nom :</strong></span>
-                <span>{{client.user.name}}</span>
-                <span><strong *ngIf="client">Profession :</strong></span>
-                <span >{{client.profession}}</span>
-                <span *ngIf="client?.profession==null">
-                    Inconnu
-                </span>
-                <span><strong>Email :</strong></span>
-                <span>{{client.user!.email}}</span> 
-            </div>
-   
+  <div class="card-box">
+    <div class="row mt-4 mb-4">
+      <span *ngIf="client?.company_name == null">
+        <div class="alert alert-warning" role="alert">
+          Veuillez remplir les informations de votre entreprise!
         </div>
-
-    
+      </span>
+      <span class="col-6 d-flex justify-content-start"
+        ><h5>Informations de l'entreprise</h5></span
+      >
+      <span class="col-6 d-flex justify-content-end"
+        ><h5>
+          <a
+            (click)="openModal2(client)"
+            class="text-danger"
+            style="cursor: pointer"
+            ><i class="bi bi-pencil-square"></i
+          ></a>
+        </h5>
+      </span>
     </div>
-
-</div>
-
-<div class="card-box">
-    <div class="row mt-4 mb-4" >
-        <span *ngIf="client?.company_name==null ">
-            <div class="alert alert-warning" role="alert">
-                Veuillez remplir les informations de votre entreprise! 
-              </div>
-        </span>
-        <span class="col-6  d-flex justify-content-start"><h5>Informations de l'entreprise</h5></span>
-        <span class="col-6  d-flex justify-content-end" ><h5 > <a (click)="openModal2(client)"class="text-danger" style="cursor: pointer;"><i class="bi bi-pencil-square"></i></a></h5>    
-        </span>
-        
-    </div>
+    <!-- Company informations  -->
     <div class="row">
-        <div class="col-lg-3 col-sm-6 ">
-            <img src="assets/img/gallery/company-image.jpg" alt=""  class="rounded-circle avatar-xl img-thumbnail" />
+      <div class="col-lg-3 col-sm-6">
+        <img
+          src="assets/img/gallery/company-image.jpg"
+          alt=""
+          class="rounded-circle avatar-xl img-thumbnail"
+        />
+      </div>
+      <div class="col-lg-7 col-sm-6" *ngIf="client">
+        <div class="row">
+          <span><strong> Nom de l'entreprise :</strong></span>
+          <span>{{ client.company_name }}</span>
+          <span *ngIf="client.company_name == null"> Inconnu </span>
+          <span><strong>Domaine d'activité de l'entreprise :</strong></span>
+          <span>{{ client.company_activity }}</span>
+          <span *ngIf="client.company_activity == null"> Inconnu </span>
+          <span><strong>Email de l'entreprise :</strong></span>
+          <span>{{ client.company_email }}</span>
+          <span *ngIf="client.company_email == null"> Inconnu </span>
         </div>
-        <div class="col-lg-7 col-sm-6 "*ngIf="client" >
-            <div class="row">
-                <span><strong> Nom de l'entreprise :</strong></span>
-                <span>{{client.company_name}}</span>
-                <span *ngIf="client.company_name==null">
-                    Inconnu
-                </span>
-                <span><strong>Domaine d'activité de l'entreprise :</strong></span>
-                <span>{{client.company_activity}}</span>
-                <span *ngIf="client.company_activity==null">
-                    Inconnu
-                </span>
-                <span><strong>Email de l'entreprise :</strong></span>
-                <span>{{client.company_email}}</span> 
-                <span *ngIf="client.company_email==null">
-                    Inconnu
-                </span>
-            </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- Edit client informations modal -->
+    <div
+    *ngIf="showedit"
+    class="modal fade show"
+    tabindex="-1"
+    style="display: block"
+    aria-labelledby="exampleModalLabel"
+    aria-modal="true"
+    role="dialog"
+  >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" >Modifier informations personelles</h1>
+            <button type="button" class="btn-close" (click)="closeModal()"></button>
+          </div>
+          <div class="modal-body">
+          <app-client-update-personal-infos
+          [clientData]="clientdetails"
+          (closeModel)="closeModal()"
+        ></app-client-update-personal-infos>  
+          </div>
         </div>
-        
-                  <!-- Modal -->
-                  <div id="myModal" class="modal" [ngClass]="{'show': isModalOpen}">
-                    <div class="modal-content">
-                     <div class="row">
-                      <span class="col-10"></span>
-                      <span class="close col-2" (click)="closeModal()" >&times;</span>
-                     </div>
-                      
-                      <app-client-update-personal-infos [clientData]="clientdetails" (closeModel)="closeModal()"></app-client-update-personal-infos>
-                    </div>
-                  </div>
+      </div>
+    </div>
 
-
-                    <!-- Modal -->
-                    <div id="myModal" class="modal" [ngClass]="{'show': isModalOpen2}">
-                        <div class="modal-content">
-                            <div class="row">
-                            <span class="col-10"></span>
-                            <span class="close col-2" (click)="closeModal2()" >&times;</span>
-                            </div>
-                            
-                            <app-client-update-company-infos [clientData]="clientdetails" ></app-client-update-company-infos>
-                        </div>
-                        </div>
-
-                 
+    <!-- Edit company inforrmations modal -->
+    <div
+    *ngIf="showedit2"
+    class="modal fade show"
+    tabindex="-1"
+    style="display: block"
+    aria-labelledby="exampleModalLabel"
+    aria-modal="true"
+    role="dialog"
+    >
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" >Modifier informations entreprise</h1>
+            <button type="button" class="btn-close" (click)="closeModal2()"></button>
+          </div>
+          <div class="modal-body">
+            <app-client-update-company-infos
+            [clientData]="clientdetails"
+          ></app-client-update-company-infos> 
+          </div>
+        </div>
+      </div>
     </div>
 
 
-</div>
+
+
+
 
 </ng-template>
-
