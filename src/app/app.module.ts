@@ -109,7 +109,6 @@ import { FreelancerProfileComponent } from './components/freelancer/pages/freela
 import { FreelancerProjectsHistoryComponent } from './components/freelancer/pages/freelancer-projects-history/freelancer-projects-history.component';
 import { FreelancerSideprofileComponent } from './components/freelancer/pages/freelancer-sideprofile/freelancer-sideprofile.component';
 import { FreelancerSkillsComponent } from './components/freelancer/pages/freelancer-skills/freelancer-skills.component';
-import { FreelancerViewPostsComponent } from './components/freelancer/pages/freelancer-view-posts/freelancer-view-posts.component';
 import { PackComponent } from './components/admin/pages/pack/pack.component';
 import { PackTableComponent } from './components/admin/table/pack-table/pack-table.component';
 import { PackAddComponent } from './components/admin/buttons/add/pack-add/pack-add.component';
@@ -127,6 +126,7 @@ import { ResetPasswordComponentComponent } from './components/commun/auth/reset-
 import { ForgetPAsswordComponent } from './components/commun/auth/forget-password/forget-password.component';
 import { EmailVerifyComponent } from './components/commun/auth/email-verify/email-verify.component';
 import { ClientPayementVerificationComponent } from './components/client/pages/client-payement-verification/client-payement-verification.component';
+import { FreelancerViewPostsComponent } from './components/freelancer/pages/freelancer-view-posts/freelancer-view-posts.component';
 ;
 
 @NgModule({
