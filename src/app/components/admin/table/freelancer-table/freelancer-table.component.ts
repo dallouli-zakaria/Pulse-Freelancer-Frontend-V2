@@ -76,14 +76,6 @@ export class FreelancerTableComponent implements OnInit{
     this.selectedData = user;
   }
 
-  valueStatuse: any;
-  status(): void {
-    if (this.selectedData?.status == null) {
-      this.valueStatuse = 'Completed';
-    } else {
-      this.valueStatuse = 'Not Completed';
-    }
-  }
 
   // Manage page edit, delete, and details for assigning
   show = false;
