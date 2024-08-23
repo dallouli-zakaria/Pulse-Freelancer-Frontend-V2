@@ -14,7 +14,7 @@
 
       <!-- Search input -->
       <div class="mb-3">
-        <input type="text" class="form-control" [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Rechercher des offres...">
+        <input type="text" class="form-control" [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Rechercher dans offres...">
       </div>
 
       <div *ngIf="isLoading; else dataLoaded">
@@ -50,7 +50,7 @@
                             [ngClass]="{
                               'text-bg-success': posts.status === 'open',
                               'text-bg-warning': posts.status === 'waiting',
-                              'text-bg-secondary': posts.status === 'closed'
+                              'text-bg-primary': posts.status === 'closed'
                             }"
                             role="alert">
                             {{ posts.status === 'open' ? 'ouvert' : posts.status === 'waiting' ? 'en attente' : 'terminé' }}

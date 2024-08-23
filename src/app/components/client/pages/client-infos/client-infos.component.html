@@ -25,10 +25,11 @@
       </span>
     </div>
 
+    <!--Client informations  -->
     <div class="row">
       <div class="col-lg-3 col-sm-6">
         <img
-          src="assets/img/gallery/user-profile-client-1.png"
+          src="assets/img/gallery/client-template.png"
           alt=""
           class="rounded-circle avatar-xl img-thumbnail"
         />
@@ -68,6 +69,7 @@
         </h5>
       </span>
     </div>
+    <!-- Company informations  -->
     <div class="row">
       <div class="col-lg-3 col-sm-6">
         <img
@@ -90,34 +92,64 @@
         </div>
       </div>
 
-      <!-- Modal -->
-      <div id="myModal" class="modal" [ngClass]="{ show: isModalOpen }">
-        <div class="modal-content">
-          <div class="row">
-            <span class="col-10"></span>
-            <span class="close col-2" (click)="closeModal()">&times;</span>
-          </div>
+    </div>
+  </div>
 
+
+  <!-- Edit client informations modal -->
+    <div
+    *ngIf="showedit"
+    class="modal fade show"
+    tabindex="-1"
+    style="display: block"
+    aria-labelledby="exampleModalLabel"
+    aria-modal="true"
+    role="dialog"
+  >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" >Modifier informations personelles</h1>
+            <button type="button" class="btn-close" (click)="closeModal()"></button>
+          </div>
+          <div class="modal-body">
           <app-client-update-personal-infos
-            [clientData]="clientdetails"
-            (closeModel)="closeModal()"
-          ></app-client-update-personal-infos>
-        </div>
-      </div>
-
-      <!-- Modal -->
-      <div id="myModal" class="modal" [ngClass]="{ show: isModalOpen2 }">
-        <div class="modal-content">
-          <div class="row">
-            <span class="col-10"></span>
-            <span class="close col-2" (click)="closeModal2()">&times;</span>
+          [clientData]="clientdetails"
+          (closeModel)="closeModal()"
+        ></app-client-update-personal-infos>  
           </div>
-
-          <app-client-update-company-infos
-            [clientData]="clientdetails"
-          ></app-client-update-company-infos>
         </div>
       </div>
     </div>
-  </div>
+
+    <!-- Edit company inforrmations modal -->
+    <div
+    *ngIf="showedit2"
+    class="modal fade show"
+    tabindex="-1"
+    style="display: block"
+    aria-labelledby="exampleModalLabel"
+    aria-modal="true"
+    role="dialog"
+    >
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" >Modifier informations entreprise</h1>
+            <button type="button" class="btn-close" (click)="closeModal2()"></button>
+          </div>
+          <div class="modal-body">
+            <app-client-update-company-infos
+            [clientData]="clientdetails"
+          ></app-client-update-company-infos> 
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
 </ng-template>

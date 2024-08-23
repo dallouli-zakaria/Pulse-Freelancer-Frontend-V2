@@ -49,11 +49,9 @@ export class LoginComponent {
     this.authService.login(loginData).subscribe({
       next: (response) => {
         //console.log(response);
-        if (loginData.email === 'admin@pulse.com') {
-          this.router.navigate(['/admin']);
-        } else {
+
           this.router.navigate(['/']);
-        }
+        
         this.isSubmitting = false;
       },
       error: (err) => {

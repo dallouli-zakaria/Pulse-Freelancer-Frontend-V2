@@ -20,7 +20,7 @@
       (click)="ValidateOffer()">
       <ng-container *ngIf="!isLoading; else loadingTemplate">
         {{ isOfferClosed ? 'Valider' : 'Validé' }}
-      </ng-container>
+      </ng-container>git
       <ng-template #loadingTemplate>
         <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
         Chargement...
@@ -29,7 +29,7 @@
     
 
     <button *ngIf="roles == 'superadmin_role' && post?.status =='closed'"  type="button" class="btn btn-primary btn-sm" (click)="onAdd()">
-      <i class="fas fa-download fa-sm text-white-50"></i>contract
+      <i class="fas fa-download fa-sm text-white-50"></i>contrat
       </button>
       </div>
     <div *ngIf="show2" class="modal-backdrop fade show"></div>
@@ -153,7 +153,7 @@
         </div>
         <hr>
         <h5 *ngIf="roles == 'superadmin_role'" class="mb-3 mt-4">
-          <i class="mdi mdi-cards-variant mr-1"></i> Freelancers
+          <i class="mdi mdi-cards-variant mr-1"></i> Freelancers postulant
         </h5>
         <div *ngIf="roles == 'superadmin_role'" class="table-responsive">
           <table class="table table-borderless mb-0">
@@ -162,10 +162,10 @@
                 <th>#</th>
                 <th>nom</th>
                 <th>Profession</th>
-                <th>Email</th>
-                <th>availability</th>
+                
+                <th>Disponibilité</th>
                 <th>Tjm</th>
-                <th>Offer status</th>
+                <th>Status</th>
                 <th>Score</th>
                 <th>Action</th>
               </tr>
@@ -175,7 +175,7 @@
                 <td>{{i+1}}</td>
                 <td>{{item.user.name}}</td>
                 <td>{{item.title}}</td>
-                <td>{{item.user.email}}</td>
+
                 <td>{{item.availability}}</td>
                 <td>{{item.TJM}} Mad / J </td>
                   <td class="badge rounded-pill text-bg-warning text-muted " role="alert">En attente</td>
@@ -186,8 +186,8 @@
                       <i class="bi bi-three-dots-vertical"></i>
                     </button>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" (click)="onEdited(item.id)"><i class="bi bi-eye"></i> View</a></li>
-                      <li *ngIf="roles == 'superadmin_role'"><a class="dropdown-item"routerLink="../../mailing" ><i class="bi bi-envelope-arrow-up"></i> Send</a></li>
+                      <li><a class="dropdown-item" (click)="onEdited(item.id)"><i class="bi bi-eye"></i> Voir</a></li>
+                      <li *ngIf="roles == 'superadmin_role'"><a class="dropdown-item"routerLink="../../mailing" ><i class="bi bi-envelope-arrow-up"></i> Envoyer</a></li>
                       <li *ngIf="post?.status =='open' && roles == 'superadmin_role'"><a class="dropdown-item" (click)="validateFreelancer(i,post.id,item.id)"><i class="bi bi-check-all"></i> Valider</a></li>
   
                     </ul>
@@ -195,7 +195,7 @@
                 </td>
               </tr>
               <tr *ngIf="freelancers.length === 0">
-                <td colspan="7">No freelancers found.</td>
+                <td colspan="7">Freelancers introuvables.</td>
               </tr>
             </tbody>
           </table>
@@ -203,7 +203,7 @@
         </div>
 
         <h5 *ngIf="roles == 'superadmin_role' || (roles == 'Client' && status=='waiting' || status=='closed') " class="mb-3 mt-4">
-          <i class="mdi mdi-cards-variant mr-1"></i> Selected Freelancers
+          <i class="mdi mdi-cards-variant mr-1"></i>Freelancers sélectionnés
         </h5>
         <div *ngIf="roles == 'superadmin_role' || (roles == 'Client' && status=='waiting' || status=='closed') " class="table-responsive">
           <table class="table table-borderless mb-0">
@@ -212,10 +212,10 @@
                 <th>#</th>
                 <th>nom</th>
                 <th>Profession</th>
-                <th>Email</th>
-                <th>availability</th>
+                
+                <th>Disponibilité</th>
                 <th>Tjm</th>
-                <th>Offer status</th>
+                <th>Status</th>
                 <th>Score</th>
                 <th>Action</th>
               </tr>
@@ -225,7 +225,7 @@
                 <td>{{i+1}}</td>
                 <td>{{item.user.name}}</td>
                 <td>{{item.title}}</td>
-                <td>{{item.user.email}}</td>
+
                 <td>{{item.availability}}</td>
                 <td>{{item.TJM}} Mad / J 
                   </td>
@@ -237,8 +237,8 @@
                       <i class="bi bi-three-dots-vertical"></i>
                     </button>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" (click)="onEdited(item.id)"><i class="bi bi-eye"></i> View</a></li>
-                      <li *ngIf="roles == 'superadmin_role'"><a class="dropdown-item"routerLink="../../mailing" ><i class="bi bi-envelope-arrow-up"></i> Send</a></li>
+                      <li><a class="dropdown-item" (click)="onEdited(item.id)"><i class="bi bi-eye"></i> Voir</a></li>
+                      <li *ngIf="roles == 'superadmin_role'"><a class="dropdown-item"routerLink="../../mailing" ><i class="bi bi-envelope-arrow-up"></i> Envoyer</a></li>
                       <li *ngIf="post?.status =='open' && roles == 'superadmin_role'"><a class="dropdown-item" (click)="disqualifyFreelancer(i,post.id,item.id)"><i class="bi bi-x"></i> Disqualifier</a></li>
                       <li *ngIf="post?.status =='waiting' && roles == 'Client'"><a class="dropdown-item" (click)="declineFreelancer(i,post.id,item.id)" ><i class="bi bi-x"></i> Disqualifier</a></li>
 
@@ -248,7 +248,7 @@
                 </td>
               </tr>
               <tr *ngIf="freelancers.length === 0">
-                <td colspan="7">No freelancers found.</td>
+                <td colspan="7">Freelancers introuvables.</td>
               </tr>
             </tbody>
           </table>
@@ -267,10 +267,10 @@
                 <th>#</th>
                 <th>nom</th>
                 <th>Profession</th>
-                <th>Email</th>
-                <th>availability</th>
+                
+                <th>Disponibilité</th>
                 <th>Tjm</th>
-                <th>Offer status</th>
+                <th>Status</th>
                 <th>Score</th>
                 <th>Action</th>
               </tr>
@@ -280,7 +280,7 @@
                 <td>{{i+1}}</td>
                 <td>{{item.user.name}}</td>
                 <td>{{item.title}}</td>
-                <td>{{item.user.email}}</td>
+
                 <td>{{item.availability}}</td>
                 <td>{{item.TJM}} Mad / J 
                   </td>
@@ -292,14 +292,14 @@
                       <i class="bi bi-three-dots-vertical"></i>
                     </button>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" (click)="onEdited(item.id)"><i class="bi bi-eye"></i> View</a></li>
-                      <li *ngIf="roles == 'superadmin_role'"><a class="dropdown-item"routerLink="../../mailing" ><i class="bi bi-envelope-arrow-up"></i> Send</a></li>
+                      <li><a class="dropdown-item" (click)="onEdited(item.id)"><i class="bi bi-eye"></i> Voir</a></li>
+                      <li *ngIf="roles == 'superadmin_role'"><a class="dropdown-item"routerLink="../../mailing" ><i class="bi bi-envelope-arrow-up"></i> Envoyer</a></li>
                     </ul>
                   </div>
                 </td>
               </tr>
               <tr *ngIf="freelancers.length === 0">
-                <td colspan="7">No freelancers found.</td>
+                <td colspan="7">Freelancers introuvables.</td>
               </tr>
             </tbody>
           </table>

@@ -50,9 +50,14 @@ export class ClientService {
     }
 
     //pagination function 
-    fetchPaginatedClient(page: number = 1): Observable<PaginatedResponse<Client>> {
+    fetchPaginatedClient(page: number = 1) {
      const params = new HttpParams().set('page', page.toString());
-     return this.http.get<PaginatedResponse<Client>>(`${this.url}/clientPagination`, { params });
+     this.http.get<PaginatedResponse<Client>>(`${this.url}/clientPagination`, { params }).pipe(shareReplay(1))
+     .subscribe({
+       next: (data: any) => this.dataSubject.next(data),
+       error: (error: any) => console.error(error),
+       complete: () => console.log('Fetched paginated client data'),
+     });
     }
 
      //update function

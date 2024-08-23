@@ -122,26 +122,32 @@
               {{ errorMessage }}
             </div>
 
-            <div class="text-center text-lg-start mt-4 pt-2">
+            <div  class="text-center text-lg-start mt-4 pt-2">
               <button
+              
                 class="btn btn-danger btn-lg btn-block mb-4"
                 type="submit"
-                [disabled]="isSubmitting || applyForm.invalid"
-                *ngIf="dataStatus === 'client'"
+                [disabled]="applyForm.invalid"
+                *ngIf="dataStatus === 'client' && !isSubmitting"
               >
-                {{ isSubmitting ? "Création..." : "Créer un compte client !" }}
+                Créer un compte client !
               </button>
+              <button *ngIf="isSubmitting" class="btn btn-danger btn-lg btn-block mb-4" type="button" disabled>
+                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                Création...
+              </button>
+
+
 
               <button
                 class="btn btn-danger btn-lg btn-block mb-4"
                 type="submit"
-                [disabled]="isSubmitting || applyForm.invalid"
-                *ngIf="dataStatus === 'freelancer'"
+                [disabled]="applyForm.invalid"
+                *ngIf="dataStatus === 'freelancer' && !isSubmitting"
               >
-                {{
-                  isSubmitting ? "Création..." : "Créer un compte freelancer!"
-                }}
+                  Créer un compte freelancer!
               </button>
+
 
               <p class="small fw-bold mt-2 pt-1 mb-0">
                 Avez-vous déjà un compte?

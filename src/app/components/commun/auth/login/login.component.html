@@ -17,21 +17,21 @@
             <div
               class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start"
             >
-              <p class="lead fw-normal mb-0 me-3">Se connecter avec :</p>
-              <button type="button" class="btn btn-danger btn-floating mx-1">
+              <p class="lead fw-normal mb-4 me-3">Se connecter  :</p>
+              <!-- <button type="button" class="btn btn-danger btn-floating mx-1">
                 <i class="fab fa-google"></i>
-              </button>
+              </button> -->
             </div>
-            <div class="divider d-flex align-items-center my-4">
+            <!-- <div class="divider d-flex align-items-center my-4">
               <p class="text-center fw-bold mx-3 mb-0">Ou</p>
-            </div>
+            </div> -->
             <!-- Email input -->
             <div class="form-outline mb-4">
               <input
                 type="email"
                 id="form3Example3"
                 class="form-control form-control-lg"
-                placeholder="Enter a valid email address"
+                placeholder="Entrer votre adresse mail"
                 formControlName="email"
               />
               <label class="form-label" for="form3Example3">Adresse mail</label>
@@ -51,7 +51,7 @@
                 type="password"
                 id="form3Example4"
                 class="form-control form-control-lg"
-                placeholder="Enter password"
+                placeholder="Entrer votre mot de passe"
                 formControlName="password"
               />
               <label class="form-label" for="form3Example4">Mot de passe</label>
@@ -77,12 +77,20 @@
             </div>
             <div class="text-center text-lg-start mt-4 pt-2">
               <button
+              *ngIf="!isSubmitting"
                 class="btn btn-danger btn-lg btn-block mb-4"
                 type="submit"
-                [disabled]="isSubmitting || applyForm.invalid"
+                [disabled]="applyForm.invalid"
               >
-                {{ isSubmitting ? "Connexion..." : "Se connecter !" }}
+                Se connecter !
               </button>
+
+              <button *ngIf="isSubmitting" class="btn btn-danger btn-lg btn-block mb-4" type="button" disabled>
+                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                Connexion...
+              </button>
+
+
               <p class="small fw-bold mt-2 pt-1 mb-0">
                 Vous n'avez pas de compte?
                 <a class="link-danger" routerLink="../register"

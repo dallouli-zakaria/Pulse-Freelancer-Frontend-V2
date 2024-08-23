@@ -16,11 +16,34 @@
       class="form-control"
       [(ngModel)]="searchTerm"
       (input)="onSearch()"
-      placeholder="Rechercher des favoris..."
+      placeholder="Rechercher dans favoris..."
     />
   </div>
 
+  <div *ngIf="isLoading; else dataLoaded">
+    <app-skeleton-loading></app-skeleton-loading>
+  </div>
+
+  <ng-template #dataLoaded>
   <div class="candidate-list-widgets mb-4 mt-4">
+
+
+    <div *ngIf="paginatedFreelancers.length === 0; else Wishlist">
+      <div class="container mb-3">
+        <div class="card pb-0 px-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+                <h5 class="card-title"><a>Vous n'avez aucune favoris!</a></h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <ng-template #Wishlist>
     <div
       *ngFor="let freelancer of paginatedFreelancers"
       class="candidate-list-box card mt-4"
@@ -85,8 +108,9 @@
         </div>
       </div>
     </div>
+  </ng-template>
   </div>
-
+</ng-template>
   <nav>
     <ul class="pagination justify-content-center">
       <li class="page-item" [ngClass]="{ disabled: currentPage === 1 }">

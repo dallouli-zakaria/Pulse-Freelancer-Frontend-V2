@@ -2,6 +2,7 @@ import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Freelancer } from '../../../../core/models/Freelancer';
 import { FreelancerService } from '../../../../core/services/freelancer.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-freelancer-update-personal-infos',
@@ -26,6 +27,7 @@ export class FreelancerUpdatePersonalInfosComponent {
   freelancer: Freelancer[] = [];
   form!: FormGroup;
   errorhandling: any;
+  isSubmitting:boolean=false;
   private fb: FormBuilder = inject(FormBuilder);
   private frelancerservices: FreelancerService = inject(FreelancerService);
 
@@ -53,19 +55,25 @@ export class FreelancerUpdatePersonalInfosComponent {
       this.errorhandling = 'Veuillez remplir tous les champs.';
       return;
     }
-
+   
     if (this.freelancerID !== null) {
-      console.log(this.freelancerID);
+      this.isSubmitting=true;
       this.frelancerservices
         .update(this.freelancerID, this.form.value)
         .subscribe({
           next: (data: any) => {
-            console.log(data);
+            Swal.fire({
+              icon: "success",
+              title: "Modifié avec succès",
+              showConfirmButton: false,
+              timer: 1500
+            });
             this.close();
             this.frelancerservices.show(this.freelancerID);
+            this.isSubmitting=false;
           },
           error: (error) => {
-            console.log(error);
+            this.isSubmitting=false;
             if (error.error.errors) {
               this.errorhandling = Object.values(error.error.errors).flat();
               console.log(this.errorhandling);

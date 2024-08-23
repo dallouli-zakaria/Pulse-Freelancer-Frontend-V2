@@ -2,11 +2,11 @@
   <div class="tab-content">
     <div class="tab-pane show active" id="about-me">
       <h5 class="mb-4 text-uppercase">
-        <span class="link-texts">Mes contracts</span>
+        <span class="link-texts">Mes contrats</span>
       </h5>
 
       <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Search contracts..." [(ngModel)]="searchTerm" (input)="onSearch()" aria-label="Search contracts" aria-describedby="basic-addon2">
+        <input type="text" class="form-control" placeholder="Rechercher dans contrats..." [(ngModel)]="searchTerm" (input)="onSearch()" aria-label="Rechercher dans contrats" aria-describedby="basic-addon2">
         <div class="input-group-append">
         </div>
       </div>
@@ -28,9 +28,9 @@
                 <div class="col">
                   <h6 class="row card-subtitle mb-2">
                     <span *ngIf="freelancerMap[item.freelancer_id]"> Freelancer: {{freelancerMap[item.freelancer_id].user.name}}</span>
-                    <span> date début: {{item.start_date | date:'dd/MM/yyyy'}} </span>
-                    <span> date fin : {{item.end_date | date:'dd/MM/yyyy'}} </span>
-                    <p class="card-text text-muted"><strong>La date de creation:</strong> {{item.created_at | date}}</p>
+                    <span> Date début: {{item.start_date | date:'dd/MM/yyyy'}} </span>
+                    <span> Date fin : {{item.end_date | date:'dd/MM/yyyy'}} </span>
+                    <p class="card-text text-muted"><strong>Date de création:</strong> {{item.created_at | date}}</p>
                   </h6>
                 </div>
               </div>

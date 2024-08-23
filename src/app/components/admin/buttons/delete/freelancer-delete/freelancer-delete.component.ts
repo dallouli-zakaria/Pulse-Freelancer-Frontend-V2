@@ -27,7 +27,9 @@ deleted(){
   if(this.freelancerID !==null){
     this.freelnacerServices.delete(this.freelancerID).subscribe({
     next:()=>{
-     this.freelnacerServices.index()},
+      this.freelnacerServices.fetchPaginatedFreelancers();
+    this.close()
+  },
      error:(error)=>{console.log(error); if ( error.error.errors) {
       this.errorhandling = Object.values(error.error.errors).flat();
     } else {

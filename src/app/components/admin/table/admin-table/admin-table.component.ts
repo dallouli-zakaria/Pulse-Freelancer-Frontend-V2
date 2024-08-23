@@ -14,17 +14,11 @@ export class AdminTableComponent implements OnInit {
   selectedID!:number;
   selectedUser:any
 constructor(private userService:UserService ){}
-  // subject!:Observable<User[]>
-//  sowadmin!:boolean
 
 ngOnInit(): void {
-  //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-  //Add 'implements OnInit' to the class.
+
   this.adminrole(true);
- 
-  // this.role()
-  // this.index()
-  // this.subject=this.userService.getData
+
 }
 roleadmin='admin_role'
 superadmin='superadmin_role'
@@ -34,13 +28,6 @@ trackAdmin(id:number,user:User){
   this.selectedUser=user
 }
 
-  // role(){
-    
-  //     this.userService.getUserWithRole(this.superadmin).subscribe({
-  //     next:(data:any)=>{console.log(data);
-  //      this.user=data},
-  //     error:(erro)=>console.log(erro)  
-  //  })
   
     
   
@@ -53,26 +40,6 @@ trackAdmin(id:number,user:User){
    })
    }
   
-    
-  
-
-// index(){
-//   if(this.sowadmin==true){
-//   this.userService.index();
-//   this.userService.getData.subscribe({
-//   next:(data:any)=>{if(this.sowadmin=true){
-//     this.user=data
-//   }
-
-    
-//   },
-//   error:(error)=>console.log("----"+error),
-  
-//   complete:()=>console.log('end Operation')
-  
-// })
-// }
-// }
 
 
 
@@ -103,6 +70,5 @@ trackAdmin(id:number,user:User){
   this.showedit = false;
   this.showedelete = false;
   }
-  //end manage pages
   
 }

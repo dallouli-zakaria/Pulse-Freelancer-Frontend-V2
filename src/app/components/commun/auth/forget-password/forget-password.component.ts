@@ -35,7 +35,6 @@ export class ForgetPAsswordComponent {
     if (this.forgetPasswordForm.valid) {
       this.authService.forgetPassword(this.forgetPasswordForm.value).subscribe({
         next: (data: any) => {
-          console.log(data);
           this.notifiy = data.message;
           this.isloading = false;
           this.router.navigate(['../login']);
@@ -46,7 +45,11 @@ export class ForgetPAsswordComponent {
           });
         },
         error: (error) => {
-          console.log(error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Ce mail est introuvale dans notre bases de donées!',
+            showConfirmButton: true,
+          });
           this.isloading = false;
         },
       });

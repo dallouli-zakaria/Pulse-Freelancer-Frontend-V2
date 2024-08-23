@@ -1,15 +1,15 @@
 
 
 <div class="container ">
-  <h1>Send a Message</h1>
+  <h2>Envoyer un message</h2>
   <hr>
 <form [formGroup]="from" (ngSubmit)="send()" class=" justify-content-center align-item-center">
     <div class="form-group col-7">
-      <label for="exampleFormControlInput1">Email address</label>
-      <input  type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" value="{{email}}">
+      <label for="exampleFormControlInput1">Email</label>
+      <input  type="email" class="form-control" id="exampleFormControlInput1" placeholder="nom@exemple.com" value="{{email}}">
     </div>
     <div class="form-group col-7">
-      <label for="exampleFormControlSelect1">name</label>
+      <label for="exampleFormControlSelect1">Nom complet</label>
       <select class="form-control" id="exampleFormControlSelect1" (change)="eventlist($event)">
        <option *ngFor="let user of users" [value]="user.email">{{user.name}}</option>
       </select>
@@ -19,7 +19,7 @@
       <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="message"></textarea>
     </div>
     <div class="d-flex justify-content-center mt-4 ">
-      <button type="submit" class="btn btn-primary" >Send</button>
+      <button type="submit" class="btn btn-primary" >Envoyer</button>
     </div>
   </form>
 </div>

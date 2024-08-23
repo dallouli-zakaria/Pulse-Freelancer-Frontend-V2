@@ -1,15 +1,15 @@
 <table class="table caption-top">
-    <caption><h1>Permission List</h1></caption>
+    <caption><h2>Liste des permissions</h2></caption>
     <thead>
       <tr>
-        <th scope="col">ID</th>
-        <th scope="col">name</th>
-        <th scope="col"></th>
+        <th scope="col">#</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of permession">
-        <th scope="row">{{item.id}}</th>
+      <tr *ngFor="let item of permession; let i = index">
+        <th scope="row">{{i + 1}}</th>
         <td>{{item.name}}</td>
         <td>
           <button class="btn btn-primary btn-sm" style="margin-right: 5px;" (click)="onEdited(item.id,item)">
@@ -17,13 +17,13 @@
          <button class="btn btn-danger btn-sm" style="margin-right: 5px;" (click)="ondeleted(item.id, item)">
             <i class="fas fa-trash"></i></button>
       
-              <button class="btn btn-secondary btn-sm" type="button" data-bs-toggle="dropdown" >
+              <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="dropdown" >
                 <i class="bi bi-three-dots"></i> 
               </button>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" ></a></li>
-                <li><a class="dropdown-item" (click)="showAssingPermessionToRole(item.id,item)" >assign permession to role</a></li> 
-                <li><a class="dropdown-item" (click)="showAssingPermessionToUSers(item.id,item)" >assign permession to user</a></li>   
+                <li><a class="dropdown-item" (click)="showAssingPermessionToRole(item.id,item)" >Affecter permission au role</a></li> 
+                <li><a class="dropdown-item" (click)="showAssingPermessionToUSers(item.id,item)" >Affecter permession to utilisateur</a></li>   
               </ul>
             
         </td>

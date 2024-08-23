@@ -44,8 +44,9 @@ export class ClientTableComponent implements OnInit {
 
     loadClient(page: number): void {
       this.isLoading = true;
-      this.clientSe.fetchPaginatedClient(page).subscribe({
-        next: (response: PaginatedResponse<Client>) => {
+      this.clientSe.fetchPaginatedClient(page)
+      this.clientSe.getData$.subscribe({
+        next: (response:any) => {
           this.clients = response.data;
           this.filteredCleint = this.clients; // Initialize filtered list
           this.totalPages = response.last_page;

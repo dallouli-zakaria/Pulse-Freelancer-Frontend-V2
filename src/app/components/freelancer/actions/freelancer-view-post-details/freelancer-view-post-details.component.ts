@@ -87,7 +87,7 @@ export class FreelancerViewPostDetailsComponent implements OnInit,OnChanges{
       this.successMessage = 'Vous avez postulé avec succès!';
       this.offerExists = true; 
       this.isButtonDisabled = false; 
-      // this.router.navigate(['../pulse/freelancer-dashboard/freelancer-offers']);
+      
     });
     Swal.fire({
       icon: "success",

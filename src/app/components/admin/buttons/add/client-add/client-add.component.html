@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Client</h1>
+    <h2 class="modal-title fs-5" id="exampleModalLabel">Ajouter client</h2>
     <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="close()"></button>
 </div>
     <form [formGroup]="form" (ngSubmit)="inserted()" >
@@ -13,7 +13,7 @@
 
        <!-- email -->
       <div class="mb-3 ">
-        <label for="exampleInputEmail1" class="form-label">Adresse email</label>
+        <label for="exampleInputEmail1" class="form-label">Email</label>
         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="email">
       </div>
       <!-- profession -->
@@ -29,18 +29,18 @@
       </div>
         <!-- company name -->
       <div class="mb-3 ">
-        <label for="exampleInputEmail1" class="form-label">Company Name</label>
+        <label for="exampleInputEmail1" class="form-label">Nom de l'entreprise</label>
         <input type="text" class="form-control" id="Input3" aria-describedby="emailHelp"  formControlName="company_name">
     <!-- activity -->
       </div>
       <div class="mb-3 ">
-        <label for="exampleInputEmail1" class="form-label">Activity</label>
+        <label for="exampleInputEmail1" class="form-label">Activité de l'entreprise</label>
         <input type="text" class="form-control" id="Input3" aria-describedby="emailHelp"  formControlName="company_activity"> 
    
        </div>
     <!-- company Email -->
       <div class="mb-3 ">
-        <label for="exampleInputEmail1" class="form-label">Company Email</label>
+        <label for="exampleInputEmail1" class="form-label">Email de l'entreprise</label>
         <input type="email" class="form-control" id="Input3" aria-describedby="emailHelp"  formControlName="company_email"> 
       </div>
       
@@ -54,10 +54,10 @@
       </select>
        </div>
       </div>
-      <h5>ezdnzend</h5>
+      <h5>test</h5>
       <h5 style="color: red; margin-left: 10px;">{{errorhandling}} </h5> 
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
-        <button type="submit" class="btn btn-success" >Save changes</button>
+        <button type="button" class="btn btn-outline-primary" (click)="close()">fermer</button>
+        <button type="submit" class="btn btn-primary" >Ajouter</button>
        </div>
     </form>

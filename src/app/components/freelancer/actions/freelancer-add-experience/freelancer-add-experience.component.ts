@@ -4,6 +4,7 @@ import { Experience } from '../../../../core/models/experience';
 import { AuthService } from '../../../../core/services/auth.service';
 import { ExperienceService } from '../../../../core/services/experience.service';
 import { dateRangeValidator } from '../../../../core/validators/date-range.validator';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-freelancer-add-experience',
@@ -117,7 +118,12 @@ export class FreelancerAddExperienceComponent implements OnInit {
 
       this.experienceService.store(newExperience).subscribe({
         next: (res) => {
-          console.log('Experience added successfully', res);
+          Swal.fire({
+            icon: "success",
+            title: "Modifié avec succès",
+            showConfirmButton: false,
+            timer: 1500
+          });
           this.experienceAdded.emit();
           this.experienceService.showByFreelancer(this.freelancerId);
           this.form.reset({

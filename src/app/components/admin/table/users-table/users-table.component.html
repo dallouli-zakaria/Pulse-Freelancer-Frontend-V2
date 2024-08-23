@@ -1,17 +1,17 @@
 <table class="table caption-top">
-    <caption><h1>Users List</h1></caption>
+    <caption><h2>Liste des utilisateurs</h2></caption>
     <thead>
       <tr >
-        <th scope="col">ID</th>
-        <th scope="col">Name</th>
+        <th scope="col">#</th>
+        <th scope="col">Nom</th>
         <th scope="col">Email</th>
         <th scope="col">Role</th>
-        <th scope="col"></th>
+        <th scope="col">Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of users">
-        <th scope="row">{{item.id}}</th>
+      <tr *ngFor="let item of users; let i = index">
+        <th scope="row">{{i + 1}}</th>
         <td> {{item.name }} </td>
         <td>{{item.email}}</td>
         <td style="color: black;">
@@ -26,15 +26,7 @@
            <i class="bi bi-file-plus"></i></button>
         </td>
       </tr>
-      <!-- <nav aria-label="Page navigation example">
-        <ul class="pagination">
-          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item"><a class="page-link" href="#">Next</a></li>
-        </ul>
-      </nav> -->
+
     </tbody>
 </table>    
 <nav aria-label="Page navigation">

@@ -3,7 +3,7 @@
     <nav aria-label="breadcrumb ">
       <ol class="breadcrumb" *ngIf="roles == 'client_role'">
         <li class="breadcrumb-item text-danger">
-          <a routerLink="../../home">Acceuil</a>
+          <a routerLink="../../home">Accueil</a>
         </li>
         <li class="breadcrumb-item text-danger">
           <a routerLink="../../client-dashboard">Client</a>
@@ -33,7 +33,7 @@
         <div *ngIf="freelancer?.user" class="col-lg-4 col-xl-4">
           <div class="card-box text-center">
             <img
-              src="assets/img/gallery/user-profile-3.png"
+              src="assets/img/gallery/images.png"
               class="rounded-circle avatar-xl img-thumbnail"
               alt="profile-image"
             />
@@ -42,7 +42,7 @@
             </h4>
             <p class="text-muted">
               {{ freelancer.title }}<br />
-              <span> 50 MAD / H</span>
+              <span> {{ freelancer.TJM }} Mad / H</span>
             </p>
 
             <div class="text-left mt-3">
@@ -97,7 +97,7 @@
           </div>
 
           <!-- projects table -->
-          <div class="card-box">
+          <div *ngIf="postdata.length!=0" class="card-box">
             <h5 class="mb-3 mt-4 text-uppercase">
               <i class="mdi mdi-cards-variant mr-1"></i> Projets Pulse
             </h5>
@@ -112,18 +112,25 @@
                     <th scope="col">Type</th>
                   </tr>
                 </thead>
+
                 <tbody>
                   <tr *ngFor="let item of postdata; let i = index">
                     <th scope="row">{{ i + 1 }}</th>
                     <td>{{ item.title }}</td>
                     <td>{{ clientData[item.client_id] }}</td>
-                    <td>{{ item.periodvalue }} {{ item.period }}</td>
                     <td>
                       {{
-                        item.type === "fulltime"
-                          ? "temps plein"
-                          : "temps partiel"
+                        item.period === "undefined"
+                          ? "pas encore défini"
+                          : item.period === "month"
+                          ? item.periodvalue + " mois"
+                          : item.period === "day"
+                          ? item.periodvalue + " jours"
+                          : item.periodvalue
                       }}
+                    </td>
+                    <td>
+                      {{ item.type === "fulltime" ? "temps plein" : "temps partiel" }}
                     </td>
                   </tr>
                 </tbody>
