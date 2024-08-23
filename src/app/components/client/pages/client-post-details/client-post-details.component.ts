@@ -468,4 +468,23 @@ export class ClientPostDetailsComponent implements OnInit {
     this.show2 = false;
     this.showadd = false;
   }
+//mail sending with popup
+   showadMail=false
+   showedModaleDarck=false
+   selectedEmailFreelacner!:any
+   selectedNameFreelacner!:any
+   selectedIdFreelancer!:number
+
+  mailSend(id:number,email:any,name:any): void {
+   this.selectedIdFreelancer=id
+   this.selectedEmailFreelacner=email;
+   this.selectedNameFreelacner=name;
+   this.showadMail = true;
+   this.showedModaleDarck = true;
+  }
+
+  onCloseModalMail(): void {
+   this.showadMail = false;
+   this.showedModaleDarck = false;   
+  }
 }

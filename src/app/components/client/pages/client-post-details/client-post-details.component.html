@@ -10,7 +10,8 @@
 
       <div class="btn-group col-lg-2" role="group" aria-label="Basic example">
 
-      <button *ngIf="roles == 'Client' || roles == 'superadmin_role'"  type="button" class="btn btn-danger "  data-bs-toggle="modal" data-bs-target="#exampleModal"  (click)="trackdata(post)" [disabled]="disabledbutton">Modifier</button>
+      <button *ngIf="roles == 'Client' || roles == 'superadmin_role'"  type="button" class="btn btn-danger "  data-bs-toggle="modal" data-bs-target="#exampleModal"  
+      (click)="trackdata(post)" [disabled]="disabledbutton">Modifier</button>
   
       &nbsp;  
 
@@ -184,10 +185,12 @@
                   <div class="btn-group dropstart">
                     <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                       <i class="bi bi-three-dots-vertical"></i>
+
+              <!-- //popup buttons--------------------------- -->
                     </button>
                     <ul class="dropdown-menu">
                       <li><a class="dropdown-item" (click)="onEdited(item.id)"><i class="bi bi-eye"></i> Voir</a></li>
-                      <li *ngIf="roles == 'superadmin_role'"><a class="dropdown-item"routerLink="../../mailing" ><i class="bi bi-envelope-arrow-up"></i> Envoyer</a></li>
+                      <li *ngIf="roles == 'superadmin_role'"><a class="dropdown-item" (click)="mailSend(item.id,item.user.email,item.user.name)" ><i class="bi bi-envelope-arrow-up"></i> Envoyer</a></li>
                       <li *ngIf="post?.status =='open' && roles == 'superadmin_role'"><a class="dropdown-item" (click)="validateFreelancer(i,post.id,item.id)"><i class="bi bi-check-all"></i> Valider</a></li>
   
                     </ul>
@@ -236,9 +239,10 @@
                     <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                       <i class="bi bi-three-dots-vertical"></i>
                     </button>
+                    <!-- //popup buttons--------------------------- -->
                     <ul class="dropdown-menu">
                       <li><a class="dropdown-item" (click)="onEdited(item.id)"><i class="bi bi-eye"></i> Voir</a></li>
-                      <li *ngIf="roles == 'superadmin_role'"><a class="dropdown-item"routerLink="../../mailing" ><i class="bi bi-envelope-arrow-up"></i> Envoyer</a></li>
+                      <li *ngIf="roles == 'superadmin_role'"><a class="dropdown-item" (click)="mailSend(item.id,item.user.email,item.user.name)"  ><i class="bi bi-envelope-arrow-up"></i> Envoyer</a></li>
                       <li *ngIf="post?.status =='open' && roles == 'superadmin_role'"><a class="dropdown-item" (click)="disqualifyFreelancer(i,post.id,item.id)"><i class="bi bi-x"></i> Disqualifier</a></li>
                       <li *ngIf="post?.status =='waiting' && roles == 'Client'"><a class="dropdown-item" (click)="declineFreelancer(i,post.id,item.id)" ><i class="bi bi-x"></i> Disqualifier</a></li>
 
@@ -260,6 +264,7 @@
         <h5 *ngIf="roles == 'superadmin_role' " class="mb-3 mt-4">
           <i class="mdi mdi-cards-variant mr-1"></i> Freelancers Refusé
         </h5>
+        <!-- freelancer details -->
         <div *ngIf="roles == 'superadmin_role'  " class="table-responsive">
           <table class="table table-borderless mb-0">
             <thead class="thead-light">
@@ -291,9 +296,10 @@
                     <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                       <i class="bi bi-three-dots-vertical"></i>
                     </button>
+                    <!-- //popup buttons--------------------------- -->
                     <ul class="dropdown-menu">
                       <li><a class="dropdown-item" (click)="onEdited(item.id)"><i class="bi bi-eye"></i> Voir</a></li>
-                      <li *ngIf="roles == 'superadmin_role'"><a class="dropdown-item"routerLink="../../mailing" ><i class="bi bi-envelope-arrow-up"></i> Envoyer</a></li>
+                      <li *ngIf="roles == 'superadmin_role'"><a class="dropdown-item" (click)="mailSend(item.id,item.user.email,item.user.name)"  ><i class="bi bi-envelope-arrow-up"></i> Envoyer</a></li>
                     </ul>
                   </div>
                 </td>
@@ -361,4 +367,13 @@
       </div>
     </div>
   </div>
-  
+
+  <!-- modale shadow -->
+  <div *ngIf="showedModaleDarck" class="modal-backdrop fade show"></div>
+  <!-- send mail popUp-->
+  <div  *ngIf="showadMail" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-m"><div class="modal-content">
+      <app-mail-send-to-user (closeModal)="onCloseModalMail()" [freelancerName]="selectedNameFreelacner" [freelancerEmail]="selectedEmailFreelacner" [freelancerId]="selectedIdFreelancer"></app-mail-send-to-user>
+    </div>
+   </div>
+  </div>
