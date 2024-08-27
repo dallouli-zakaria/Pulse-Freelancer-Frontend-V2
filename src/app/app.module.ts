@@ -128,6 +128,8 @@ import { ForgetPAsswordComponent } from './components/commun/auth/forget-passwor
 import { EmailVerifyComponent } from './components/commun/auth/email-verify/email-verify.component';
 import { ClientPayementVerificationComponent } from './components/client/pages/client-payement-verification/client-payement-verification.component';
 import { MailSendToUserComponent } from './components/client/actions/mail-send-to-user/mail-send-to-user.component';
+import { SkillsTableComponent } from './components/admin/table/skills-table/skills-table.component';
+import { SkillsComponent } from './components/admin/pages/skills/skills.component';
 ;
 
 @NgModule({
@@ -252,7 +254,9 @@ import { MailSendToUserComponent } from './components/client/actions/mail-send-t
     ForgetPAsswordComponent,
     ClientPayementComponent,
     ClientPayementVerificationComponent,
-    MailSendToUserComponent
+    MailSendToUserComponent,
+    SkillsTableComponent,
+    SkillsComponent
     
   ],
   imports: [

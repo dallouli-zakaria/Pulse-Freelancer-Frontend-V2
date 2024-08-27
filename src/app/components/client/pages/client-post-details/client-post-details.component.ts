@@ -233,7 +233,7 @@ export class ClientPostDetailsComponent implements OnInit {
     offerId: number,
     singlefreelancerid: number
   ): void {
-    this.isTableloading=true;
+    
     this.disqualifiedFreelancer.add(index);
     this.offerservice
       .getOffersByPostAndFreelancer(offerId, singlefreelancerid)
@@ -243,7 +243,7 @@ export class ClientPostDetailsComponent implements OnInit {
           (updatedOffer: Offer) => {
             console.log('Offer updated successfully:', updatedOffer);
             this.refreshTableData();
-            this.isTableloading=false;
+            
             Swal.fire({
               icon: 'error',
               title: 'freelancer disqualifié !',
@@ -253,7 +253,7 @@ export class ClientPostDetailsComponent implements OnInit {
           },
           (error) => {
             console.error('Error updating offer:', error);
-            this.isTableloading=false;
+            
           }
         );
       });
@@ -328,28 +328,34 @@ export class ClientPostDetailsComponent implements OnInit {
   }
 
   getFreelancerTrue(postid: number): void {
+    this.isTableloading=true;
     this.offerservice
       .getFreelancerDetailsByPostIdTrue(postid)
       .subscribe((res: any[]) => {
         this.freelancertrue = res;
+        this.isTableloading=false;
         console.log(res);
       });
   }
 
   getFreelancerFalse(postid: number): void {
+    this.isTableloading=true;
     this.offerservice
       .getFreelancerDetailsByPostIdFalse(postid)
       .subscribe((res: any) => {
         this.freelancerfalse = res;
+        this.isTableloading=false;
         console.log(res);
       });
   }
 
   getFreelancerDeclined(postid: number): void {
+    this.isTableloading=true;
     this.offerservice
       .getFreelancerDetailsByPostIdDeclined(postid)
       .subscribe((res: any[]) => {
         this.freelancerDeclined = res;
+        this.isTableloading=false;
         console.log(res);
       });
   }
@@ -491,5 +497,13 @@ export class ClientPostDetailsComponent implements OnInit {
   onCloseModalMail(): void {
    this.showadMail = false;
    this.showedModaleDarck = false;   
+  }
+
+  getFirstName(fullName: string | undefined): string {
+    if (!fullName) {
+      return '';
+    }
+    const nameParts = fullName.split(' ');
+    return nameParts.length > 1 ? nameParts[0] : fullName;
   }
 }

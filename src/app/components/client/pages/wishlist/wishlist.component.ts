@@ -96,7 +96,7 @@ export class WishlistComponent implements OnInit {
       return '';
     }
     const nameParts = fullName.split(' ');
-    return nameParts.length > 1 ? nameParts[1] : fullName;
+    return nameParts.length > 1 ? nameParts[0] : fullName;
   }
 
 

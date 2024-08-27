@@ -44,6 +44,7 @@ import { ClientPayementComponent } from './components/client/pages/client-payeme
 import { ResetPasswordComponentComponent } from './components/commun/auth/reset-password-component/reset-password-component.component';
 import { ForgetPAsswordComponent } from './components/commun/auth/forget-password/forget-password.component';
 import { ClientPayementVerificationComponent } from './components/client/pages/client-payement-verification/client-payement-verification.component';
+import { SkillsComponent } from './components/admin/pages/skills/skills.component';
 
 const routes: Routes = [
   {
@@ -69,6 +70,7 @@ const routes: Routes = [
       { path: 'client-offer/:postId', component: ClientPostDetailsComponent },
       { path: 'viewPost/:itemId', component: PostViewComponent },
       { path: 'pack', component: PackComponent },
+      {path:'manageskills',component:SkillsComponent},
       { path: '**', redirectTo: 'dashboard', pathMatch: 'full' },
     ],
   },
