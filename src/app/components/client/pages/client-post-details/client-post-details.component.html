@@ -21,7 +21,7 @@
       (click)="ValidateOffer()">
       <ng-container *ngIf="!isLoading; else loadingTemplate">
         {{ isOfferClosed ? 'Valider' : 'Validé' }}
-      </ng-container>git
+      </ng-container>
       <ng-template #loadingTemplate>
         <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
         Chargement...
@@ -149,10 +149,28 @@
         </div>
         <hr>
         <div class="row">
-          <h5 class="col-lg-4">date de création :</h5>
+          <h5 class="col-lg-4">Date de création :</h5>
           <h5 class="col-lg-8 text-muted">{{ post.created_at ? (post.created_at | timeAgo) : 'Date not available' }} le {{ post.created_at | date: 'dd-MM-yyyy' }}</h5>
         </div>
         <hr>
+
+      <!-- table loading -->
+     <span *ngIf="isTableloading" >
+
+      <div class="table-spinner d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div> 
+      
+      
+
+    </span>
+
+
+      <span *ngIf="!isTableloading" class="tables">
+
+        
         <h5 *ngIf="roles == 'superadmin_role'" class="mb-3 mt-4">
           <i class="mdi mdi-cards-variant mr-1"></i> Freelancers postulant
         </h5>
@@ -262,7 +280,7 @@
 
 
         <h5 *ngIf="roles == 'superadmin_role' " class="mb-3 mt-4">
-          <i class="mdi mdi-cards-variant mr-1"></i> Freelancers Refusé
+          <i class="mdi mdi-cards-variant mr-1"></i> Freelancers refusé
         </h5>
         <!-- freelancer details -->
         <div *ngIf="roles == 'superadmin_role'  " class="table-responsive">
@@ -311,6 +329,8 @@
           </table>
           <hr>
         </div>
+
+      </span>
 
 
 

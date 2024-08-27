@@ -31,7 +31,7 @@ export class FreelancerTableComponent implements OnInit{
       this.freelancerService.freelancers$.subscribe({
       next: (response:any) => {
         this.freelancers = response.data;
-        this. filteredFreelancersVariable = this.freelancers; // Initialize filtered list
+        this.filteredFreelancersVariable = this.freelancers; // Initialize filtered list
         this.totalPages = response.last_page;
         this.currentPage = response.current_page;
         this.isLoading = false;
@@ -76,14 +76,6 @@ export class FreelancerTableComponent implements OnInit{
     this.selectedData = user;
   }
 
-  valueStatuse: any;
-  status(): void {
-    if (this.selectedData?.status == null) {
-      this.valueStatuse = 'Completed';
-    } else {
-      this.valueStatuse = 'Not Completed';
-    }
-  }
 
   // Manage page edit, delete, and details for assigning
   show = false;

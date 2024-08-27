@@ -22,6 +22,7 @@ export class ClientPostDetailsComponent implements OnInit {
   router = inject(Router);
   postdetails!: any;
   isLoading: boolean = true;
+  isTableloading:boolean=false;
   roles!: string;
   freelancers: any[] = [];
   isAuthenticated: boolean = false;
@@ -232,6 +233,7 @@ export class ClientPostDetailsComponent implements OnInit {
     offerId: number,
     singlefreelancerid: number
   ): void {
+    this.isTableloading=true;
     this.disqualifiedFreelancer.add(index);
     this.offerservice
       .getOffersByPostAndFreelancer(offerId, singlefreelancerid)
@@ -241,19 +243,22 @@ export class ClientPostDetailsComponent implements OnInit {
           (updatedOffer: Offer) => {
             console.log('Offer updated successfully:', updatedOffer);
             this.refreshTableData();
+            this.isTableloading=false;
+            Swal.fire({
+              icon: 'error',
+              title: 'freelancer disqualifié !',
+              showConfirmButton: false,
+              timer: 1500,
+            });
           },
           (error) => {
             console.error('Error updating offer:', error);
+            this.isTableloading=false;
           }
         );
       });
 
-    Swal.fire({
-      icon: 'error',
-      title: 'freelancer disqualifié !',
-      showConfirmButton: false,
-      timer: 1500,
-    });
+   
   }
 
   declineFreelancer(
