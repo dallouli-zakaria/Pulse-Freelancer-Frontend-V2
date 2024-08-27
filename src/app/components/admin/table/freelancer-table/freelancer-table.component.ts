@@ -31,7 +31,7 @@ export class FreelancerTableComponent implements OnInit{
       this.freelancerService.freelancers$.subscribe({
       next: (response:any) => {
         this.freelancers = response.data;
-        this. filteredFreelancersVariable = this.freelancers; // Initialize filtered list
+        this.filteredFreelancersVariable = this.freelancers; // Initialize filtered list
         this.totalPages = response.last_page;
         this.currentPage = response.current_page;
         this.isLoading = false;
