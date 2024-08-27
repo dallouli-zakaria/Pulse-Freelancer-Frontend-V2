@@ -37,7 +37,8 @@ ngOnInit(): void {
     this.clients.store(this.form.value)
       .subscribe({
         next:(data:any)=>{console.log(data)
-          this.clients.index();
+          this.clients.fetchPaginatedClient();
+          this.close();
         },
         erorr:(error:any)=>{
           if ( error.error.errors) {

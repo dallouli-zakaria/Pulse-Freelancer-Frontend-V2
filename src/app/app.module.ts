@@ -127,6 +127,7 @@ import { ResetPasswordComponentComponent } from './components/commun/auth/reset-
 import { ForgetPAsswordComponent } from './components/commun/auth/forget-password/forget-password.component';
 import { EmailVerifyComponent } from './components/commun/auth/email-verify/email-verify.component';
 import { ClientPayementVerificationComponent } from './components/client/pages/client-payement-verification/client-payement-verification.component';
+import { MailSendToUserComponent } from './components/client/actions/mail-send-to-user/mail-send-to-user.component';
 ;
 
 @NgModule({
@@ -250,7 +251,8 @@ import { ClientPayementVerificationComponent } from './components/client/pages/c
     ResetPasswordComponentComponent,
     ForgetPAsswordComponent,
     ClientPayementComponent,
-    ClientPayementVerificationComponent
+    ClientPayementVerificationComponent,
+    MailSendToUserComponent
     
   ],
   imports: [

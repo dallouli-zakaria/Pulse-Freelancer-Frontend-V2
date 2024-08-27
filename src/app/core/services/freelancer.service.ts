@@ -183,7 +183,7 @@ export class FreelancerService {
     return this.score;
   }
 
-  
+  //search function 
   searchFreelancers(searchTerm: string): Observable<Freelancer[]> {
     let params = new HttpParams().set('query', searchTerm);
     return this.http.get<Freelancer[]>(`${this.url}/searchBar`, { params });

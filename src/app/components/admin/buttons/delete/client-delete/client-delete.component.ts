@@ -32,7 +32,7 @@ export class ClientDeleteComponent {
         console.log(this.clientId);
         
       this.clients.deleted(this.clientId).subscribe({
-      next:()=>{ this.clients.index();
+      next:()=>{ this.clients.fetchPaginatedClient();;
         this.close();
       },
       error:(error:any)=>{console.log(error);
