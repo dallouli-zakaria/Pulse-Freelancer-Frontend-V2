@@ -20,7 +20,7 @@
           <h3 class="m-4">Découvrez nos talents !</h3>
           <div class="col-lg-12">
             <div class="candidate-list-widgets mb-4">
-              <form action="#" class>
+              <form>
                 <div class="g-2 row">
                   <div class="col-lg-3">
                     <div class="filler-job-form">
@@ -45,14 +45,37 @@
                         id="choices-single-categories"
                         aria-label="Default select example"
                       >
-                      <option value="4">--none--</option>
-                        <option value="4">Python </option>
-                        <option value="1">JavaScript </option>
-                        <option value="3">Java </option>
-                        <option value="5">Ruby </option>
+                      <option value="">--Sélectionner une compétence--</option>
+                      <option *ngFor="let skill of skills" [value]="skill.title">{{skill.title}}</option>
                       </select>
                     </div>
                   </div>
+                  <span class="col-lg-6">
+                    <div class="row">
+                    <span class="col-6 d-flex justify-content-start" style="min-width: 60px;">Filtrer par TJM &nbsp;<i
+                      class="bi bi-question-circle"
+                      data-toggle="tooltip"
+                      data-placement="right"
+                      title=" le taux journalier moyen"
+                    ></i>
+                    </span>
+                    <span class="col-6 d-flex justify-content-end">{{maxTJM | number:'1.0-0'}} Mad / J</span>
+                  </div>
+                        <input 
+                        type="range" 
+                        class="form-range" 
+                        id="maxTJM" 
+                        [min]="0" 
+                        [max]="5000" 
+                        [step]="50" 
+                        [(ngModel)]="maxTJM" 
+                        (ngModelChange)="onTJMChange()"
+                        name="maxTJM" 
+                        >
+                  </span>
+                  
+                     
+
 
                 </div>
               </form>
@@ -70,29 +93,7 @@
                   </span> Showing 1 – 8 of 11 results</h6>
                 </div>
               </div>
-              <div class="col-lg-2">
-                <div class="candidate-list-widgets">
-                  <div class="row">
-                    
-                      <div class="selection-widget">
-                        <select
-                          class="form-select"
-                          data-trigger="true"
-                          name="choices-single-filter-orderby"
-                          id="choices-single-filter-orderby"
-                          aria-label="Default select example"
-                        >
-                          <option value="df">Default</option>
-                          <option value="ne">Newest</option>
-                          <option value="od">Oldest</option>
-                          <option value="rd">Random</option>
-                        </select>
-                      </div>
-                    
-                   
-                  </div>
-                </div>
-              </div>
+              
             </div>
             <div class="candidate-list">
               <div *ngIf="isLoading; else dataLoaded" class="card-box">

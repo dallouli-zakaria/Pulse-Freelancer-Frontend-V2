@@ -87,4 +87,30 @@ body {
     color: red; /* Color of the heart icon */
     font-size: 20px; /* Size of the heart icon */
   }
+
+  .form-range::-webkit-slider-thumb {
+    background: #007bff;
+  }
+  
+  .form-range::-moz-range-thumb {
+    background: #007bff;
+  }
+  
+  .form-range::-ms-thumb {
+    background: #007bff;
+  }
+  
+  .form-range::-webkit-slider-runnable-track {
+    background: #e9ecef;
+  }
+  
+  .form-range::-moz-range-track {
+    background: #e9ecef;
+  }
+  
+  .form-range::-ms-track {
+    background: #e9ecef;
+  }
+
+  
   
