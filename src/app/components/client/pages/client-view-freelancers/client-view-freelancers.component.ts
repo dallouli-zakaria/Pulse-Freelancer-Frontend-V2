@@ -5,6 +5,8 @@ import { Freelancer } from '../../../../core/models/Freelancer';
 import { AuthService } from '../../../../core/services/auth.service';
 import { WishListService } from '../../../../core/services/wish-list.service';
 import Swal from 'sweetalert2';
+import { SkillService } from '../../../../core/services/skill.service';
+import { Skill } from '../../../../core/models/skill';
 
 @Component({
   selector: 'app-client-view-freelancers',
@@ -20,17 +22,21 @@ export class ClientViewFreelancersComponent implements OnInit, OnDestroy {
   searchTerm: string = '';
   currentPage = 1;
   totalPages = 1;
+  skills: Skill[] = [];
+  maxTJM: number = 5000; // Default max TJM
   private searchSubscription: Subscription | null = null;
 
   constructor(
     private freelancerService: FreelancerService,
     private authservice: AuthService,
-    private wishListservice: WishListService
+    private wishListservice: WishListService,
+    private skillservice: SkillService
   ) {}
 
   ngOnInit(): void {
     this.loadFreelancers(this.currentPage);
     this.loadFavoriteFreelancers();
+    this.loadSkills();
   }
 
   ngOnDestroy(): void {
@@ -40,21 +46,30 @@ export class ClientViewFreelancersComponent implements OnInit, OnDestroy {
     }
   }
 
+  // Load freelancers for the specified page
   loadFreelancers(page: number): void {
-    this.isLoading = true;
     this.freelancerService.verifiedfreelancer().subscribe({
       next: (data: Freelancer[]) => {
         this.freelancers = data;
-        this.filteredFreelancersVariable = [...this.freelancers]; // Initialize filtered list
+        this.filteredFreelancersVariable = [...this.freelancers];
         this.isLoading = false;
+        this.initMaxTJM();
+        this.filterFreelancers();
       },
-      error: (error: any) => {
-        console.error(error);
+      error: () => {
         this.isLoading = false;
       },
     });
   }
 
+  // Initialize the maximum TJM based on freelancer data
+  initMaxTJM(): void {
+    const tjmValues = this.freelancers.map(f => parseFloat(f.TJM) || 0);
+    const maxTJMInData = Math.max(...tjmValues);
+    
+  }
+
+  // Load favorite freelancers for the client
   loadFavoriteFreelancers(): void {
     this.wishListservice.getFavoriteFreelancers(this.clientId).subscribe({
       next: (data: any[]) => {
@@ -62,36 +77,38 @@ export class ClientViewFreelancersComponent implements OnInit, OnDestroy {
           data.map((item) => item.freelancer_id)
         );
       },
-      error: (error: any) => {
-        console.error(error);
+      error: () => {
+        // Handle error if necessary
       },
     });
   }
 
+  // Toggle the favorite status of a freelancer
   toggleFavorite(freelancerId: number): void {
     if (this.favoriteFreelancers.has(freelancerId)) {
       this.wishListservice.removeFromWishlist(this.clientId, freelancerId).subscribe({
         next: () => {
           this.favoriteFreelancers.delete(freelancerId);
-          this.showAlert('Retiré des favoris');
+          this.showAlert('Removed from favorites');
         },
-        error: (error: any) => {
-          console.error(error);
+        error: () => {
+          // Handle error if necessary
         },
       });
     } else {
       this.wishListservice.addToWishlist(this.clientId, freelancerId).subscribe({
         next: () => {
           this.favoriteFreelancers.add(freelancerId);
-          this.showAlert('Ajouté au favoris');
+          this.showAlert('Added to favorites');
         },
-        error: (error: any) => {
-          console.error(error);
+        error: () => {
+          // Handle error if necessary
         },
       });
     }
   }
 
+  // Display an alert message
   showAlert(message: string): void {
     Swal.fire({
       position: 'top-end',
@@ -109,37 +126,58 @@ export class ClientViewFreelancersComponent implements OnInit, OnDestroy {
     });
   }
 
+  // Check if a freelancer is in the favorites list
   isFavorite(freelancerId: number): boolean {
     return this.favoriteFreelancers.has(freelancerId);
   }
 
+  // Extract the first name from a full name
   getFirstName(fullName: string | undefined): string {
     if (!fullName) return '';
     const nameParts = fullName.split(' ');
     return nameParts[0];
   }
 
+  // Filter freelancers based on search term and max TJM
   filterFreelancers(): void {
-    // Cancel the previous subscription if it exists
     if (this.searchSubscription) {
       this.searchSubscription.unsubscribe();
     }
 
-    // Basic filter logic based on searchTerm
-    this.filteredFreelancersVariable = this.searchTerm
-      ? this.freelancers.filter(freelancer =>
-          freelancer.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-          freelancer.skills.some(skill => skill.title.toLowerCase().includes(this.searchTerm.toLowerCase()))
-        )
-      : [...this.freelancers]; // Reset to full list if searchTerm is empty
+    this.filteredFreelancersVariable = this.freelancers.filter(freelancer => {
+      const matchesSearchTerm = !this.searchTerm || 
+        freelancer.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        freelancer.skills.some(skill => skill.title.toLowerCase().includes(this.searchTerm.toLowerCase()));
+
+      const freelancerTJM = parseFloat(freelancer.TJM);
+      const matchesTJM = !isNaN(freelancerTJM) && freelancerTJM <= this.maxTJM;
+
+      return matchesSearchTerm && matchesTJM;
+    });
   }
 
+  // Handle change in max TJM value
+  onTJMChange(): void {
+    this.filterFreelancers();
+  }
+
+  // Handle change in search term
   onSearchTermChange(): void {
     this.filterFreelancers();
   }
+
+  // Handle page changes
   onPageChange(page: number): void {
     if (page >= 1 && page <= this.totalPages) {
       this.loadFreelancers(page);
     }
+  }
+
+  // Load all skills
+  loadSkills(): void {
+    this.skillservice.index();
+    this.skillservice.skillData.subscribe((res) => {
+      this.skills = res.sort((a, b) => a.title.localeCompare(b.title));
+    });
   }
 }
