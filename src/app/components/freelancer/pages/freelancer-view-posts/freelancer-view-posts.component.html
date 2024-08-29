@@ -64,10 +64,10 @@
           <div class="align-items-center row">
             <div class="col-lg-10">
               <div class="mb-3 mb-lg-0">
-                <h6 class="fs-16 mb-0">Affichage de {{ (currentPage - 1) * itemsPerPage + 1 }} à {{ getEndIndex() }} sur {{ filteredPosts.length }} resultats</h6>
+                <h6 *ngIf="filteredPosts.length != 0   " class="fs-16 mb-0">Affichage de {{ (currentPage - 1) * itemsPerPage + 1 }} à {{ getEndIndex() }} sur {{ filteredPosts.length }} resultats</h6>
               </div>
             </div>
-            <div class="col-lg-2">
+            <!-- <div class="col-lg-2">
               <div class="candidate-list-widgets">
                 <div class="selection-widget">
                   <select
@@ -83,10 +83,27 @@
                   </select>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
 
-          <div class="candidate-list">
+                    <!-- Skeletton loading -->
+                    <div class="candidate-list">
+                      <div *ngIf="isLoading; else dataLoaded" class="card-box">
+                        <app-skeleton-loading></app-skeleton-loading>
+                        <br />
+                        <app-skeleton-loading></app-skeleton-loading>
+                        <br />
+                        <app-skeleton-loading></app-skeleton-loading>
+                      </div>
+          
+                      <!-- Freelancer list -->
+                      <ng-template #dataLoaded>
+                        <div
+                *ngIf="paginatedPosts.length === 0"
+                class="text-center mt-4"
+              >
+                <p class="fs-16 text-muted">Aucune Offre trouvé</p>
+              </div>
             <div
               *ngFor="let post of paginatedPosts"
               class="candidate-list-box card mt-4"
@@ -154,6 +171,7 @@
                 </div>
               </div>
             </div>
+          </ng-template>
           </div>
         </div>
       </div>
