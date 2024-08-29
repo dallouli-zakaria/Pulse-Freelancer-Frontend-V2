@@ -480,8 +480,8 @@ export class ClientPostDetailsComponent implements OnInit {
     this.showadd = false;
   }
 //mail sending with popup
-   showadMail=false
-   showedModaleDarck=false
+   showMail=false
+   showModal=false
    selectedEmailFreelacner!:any
    selectedNameFreelacner!:any
    selectedIdFreelancer!:number
@@ -490,13 +490,13 @@ export class ClientPostDetailsComponent implements OnInit {
    this.selectedIdFreelancer=id
    this.selectedEmailFreelacner=email;
    this.selectedNameFreelacner=name;
-   this.showadMail = true;
-   this.showedModaleDarck = true;
+   this.showMail = true;
+   this.showModal = true;
   }
 
   onCloseModalMail(): void {
-   this.showadMail = false;
-   this.showedModaleDarck = false;   
+   this.showMail = false;
+   this.showModal = false;   
   }
 
   getFirstName(fullName: string | undefined): string {

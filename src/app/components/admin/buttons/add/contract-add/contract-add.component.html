@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h2 class="modal-title fs-5" id="exampleModalLabel">Ajouter contrat</h2>
+    <h2 class="modal-title fs-5" id="exampleModalLabel">Ajouter contrat </h2>
     <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="close()"></button>
 </div>
     <form [formGroup]="form" (ngSubmit)="add()">
@@ -10,7 +10,7 @@
         <input type="text" class="form-control" id="exampleInputEmail1" formControlName="title" aria-describedby="emailHelp">
       </div>
       
-      <!-- perdio -->
+      <!-- pedriod -->
       <div class="row">
         <div class="col-6">
           <label for="startDate">Date début</label>
@@ -22,10 +22,10 @@
         </div>
       </div>
       
-          <!-- Error message for date range -->
-          <div *ngIf="form.errors?.['dateRangeInvalid']" class="alert alert-danger">
-            The end date cannot be earlier than the start date.
-          </div>
+      <!-- Error message for date range -->
+      <div *ngIf="form.errors?.['dateRangeInvalid']" class="alert alert-danger">
+        La date de fin ne peut pas être antérieure à la date de début.
+      </div>
      
       
        <!-- description -->

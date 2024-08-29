@@ -15,40 +15,46 @@
         <h3 class="m-4">Découvrir les Différents offres</h3>
         <div class="col-lg-12">
           <div class="candidate-list-widgets mb-4">
-            <form action="#" class>
+            
               <div class="g-2 row">
                 <div class="col-lg-3">
                   <div class="filler-job-form">
                     <i class="uil uil-briefcase-alt"></i
                     ><input
-                      id="exampleFormControlInput1"
-                      placeholder="Rechercher dans offres..."
-                      type="search"
-                      class="form-control filler-job-input-box form-control"
-                    />
+                    id="exampleFormControlInput1"
+                    placeholder="Rechercher dans offres..."
+                    type="search"
+                    class="form-control filler-job-input-box form-control"
+                    [(ngModel)]="searchTerm"
+                    (ngModelChange)="onSearchTermChange($event)"
+                  />
                   </div>
                 </div>
 
                 <div class="col-lg-3">
                   <div class="filler-job-form">
-                    <i class="uil uil-location-point"></i>
+                    <i class="uil uil-clipboard-notes"></i>
                     <select
                       class="form-select selectForm__inner"
                       data-trigger="true"
-                      name="choices-single-location"
-                      id="choices-single-location"
+                      name="choices-single-categories"
+                      id="choices-single-categories"
                       aria-label="Default select example"
+                      [(ngModel)]="selectedSkill"
+                      (ngModelChange)="onSkillChange($event)"
                     >
                       <option value="">--Sélectionner une compétence--</option>
-                      <option *ngFor="let skill of skills" [value]="skill.title">{{ skill.title }}</option>
+                      <option
+                        *ngFor="let skill of skills"
+                        [value]="skill.title"
+                      >
+                        {{ skill.title }}
+                      </option>
                     </select>
                   </div>
-                </div>  
-
-                
-               
+                </div>
               </div>
-            </form>
+            
           </div>
         </div>
       </div>
@@ -58,24 +64,23 @@
           <div class="align-items-center row">
             <div class="col-lg-10">
               <div class="mb-3 mb-lg-0">
-                <h6 class="fs-16 mb-0">Showing 1 – 8 of 11 results</h6>
+                <h6 class="fs-16 mb-0">Affichage de {{ (currentPage - 1) * itemsPerPage + 1 }} à {{ getEndIndex() }} sur {{ filteredPosts.length }} resultats</h6>
               </div>
             </div>
             <div class="col-lg-2">
               <div class="candidate-list-widgets">
-                    <div class="selection-widget">
-                      <select
-                        class="form-select"
-                        data-trigger="true"
-                        name="choices-single-filter-orderby"
-                        id="choices-single-filter-orderby"
-                        aria-label="Default select example"
-                      >
-                      <option value="df">Par défaut</option>
-                      <option value="ne">Le plus récent</option>
-                      <option value="od">Le plus ancien</option>                   
-                      </select>
-                
+                <div class="selection-widget">
+                  <select
+                    class="form-select"
+                    data-trigger="true"
+                    name="choices-single-filter-orderby"
+                    id="choices-single-filter-orderby"
+                    aria-label="Default select example"
+                  >
+                    <option value="df">Par défaut</option>
+                    <option value="ne">Le plus récent</option>
+                    <option value="od">Le plus ancien</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -83,7 +88,7 @@
 
           <div class="candidate-list">
             <div
-              *ngFor="let post of posts"
+              *ngFor="let post of paginatedPosts"
               class="candidate-list-box card mt-4"
             >
               <div class="p-4 card-body">
@@ -149,32 +154,41 @@
                 </div>
               </div>
             </div>
-
-           
           </div>
         </div>
       </div>
+
+      <!-- Pagination -->
       <div class="row">
         <div class="mt-4 pt-2 col-lg-12">
-          <nav aria-label="Page navigation example">
-            <div class="pagination job-pagination mb-0 justify-content-center">
-              <li class="page-item disabled">
-                <a class="page-link" tabindex="-1" href="#"
-                  ><i class="mdi mdi-chevron-double-left fs-15"></i
-                ></a>
+          <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+              <li class="page-item" [class.disabled]="currentPage === 1">
+                <a
+                  class="page-link"
+                  (click)="onPageChange(currentPage - 1)"
+                  tabindex="-1"
+                  >                  <span aria-hidden="true">&laquo;</span>
+                  <span class="sr-only">Previous</span></a
+                >
               </li>
-              <li class="page-item active">
-                <a class="page-link" href="#">1</a>
+              <li
+                class="page-item"
+                *ngFor="let page of getPageNumbers()"
+                [class.active]="currentPage === page"
+              >
+                <a class="page-link" (click)="onPageChange(page)">{{ page }}</a>
               </li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">4</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#"
-                  ><i class="mdi mdi-chevron-double-right fs-15"></i
-                ></a>
+              <li
+                class="page-item"
+                [class.disabled]="currentPage === totalPages"
+              >
+                <a class="page-link" (click)="onPageChange(currentPage + 1)"
+                  >                  <span aria-hidden="true">&raquo;</span>
+                  <span class="sr-only">Next</span></a
+                >
               </li>
-            </div>
+            </ul>
           </nav>
         </div>
       </div>

@@ -30,7 +30,7 @@
     
 
     <button *ngIf="roles == 'superadmin_role' && post?.status =='closed'"  type="button" class="btn btn-primary btn-sm" (click)="onAdd()">
-      <i class="fas fa-download fa-sm text-white-50"></i>contrat
+      <i class="fas fa-paperclip fa-sm text-white-50"></i>&nbsp;contrat
       </button>
       </div>
     <div *ngIf="show2" class="modal-backdrop fade show"></div>
@@ -396,9 +396,9 @@
   </div>
 
   <!-- modale shadow -->
-  <div *ngIf="showedModaleDarck" class="modal-backdrop fade show"></div>
+  <div *ngIf="showModal" class="modal-backdrop fade show"></div>
   <!-- send mail popUp-->
-  <div  *ngIf="showadMail" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
+  <div  *ngIf="showMail" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
     <div class="modal-dialog modal-m"><div class="modal-content">
       <app-mail-send-to-user (closeModal)="onCloseModalMail()" [freelancerName]="selectedNameFreelacner" [freelancerEmail]="selectedEmailFreelacner" [freelancerId]="selectedIdFreelancer"></app-mail-send-to-user>
     </div>
