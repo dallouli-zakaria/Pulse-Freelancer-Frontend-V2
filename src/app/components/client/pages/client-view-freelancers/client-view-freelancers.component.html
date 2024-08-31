@@ -1,187 +1,265 @@
 <body>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css"
-      integrity="sha25 Mad6-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc="
-      crossorigin="anonymous"
-    />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css"
+    integrity="sha25 Mad6-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc="
+    crossorigin="anonymous"
+  />
 
-    
-    <section class="section">
-      <div class="container">
-        <nav aria-label="breadcrumb " >
-          <ol class="breadcrumb ">
-            <li class="breadcrumb-item text-danger "><a routerLink="../home">Accueil</a></li>
-            <li class="breadcrumb-item text-danger "><a routerLink="../client-dashboard">Client</a></li>
-            <li class="breadcrumb-item active " aria-current="page">Voir liste freelancers</li>
-          </ol>
-        </nav>
-        <div class="justify-content-center row">
-          <h3 class="m-4">Découvrez nos talents !</h3>
-          <div class="col-lg-12">
-            <div class="candidate-list-widgets mb-4">
-              <form>
-                <div class="g-2 row">
-                  <div class="col-lg-3">
-                    <div class="filler-job-form">
-                      <i class="uil uil-briefcase-alt"></i
-                      ><input
-                        id="exampleFormControlInput1"
-                        placeholder="Domaine d'expertise "
-                        name="searchTerm"
-                        class="form-control filler-job-input-box form-control"
-                        [(ngModel)]="searchTerm"
-                        (ngModelChange)="onSearchTermChange()"
-                      />
-                    </div>
+  <section class="section">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item text-danger">
+            <a routerLink="../home">Accueil</a>
+          </li>
+          <li class="breadcrumb-item text-danger">
+            <a routerLink="../client-dashboard">Client</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Voir liste freelancers
+          </li>
+        </ol>
+      </nav>
+      <div class="justify-content-center row">
+        <h3 class="m-4">Découvrez nos talents !</h3>
+        <div class="col-lg-12">
+          <div class="candidate-list-widgets mb-4">
+            <form>
+              <div class="g-2 row">
+                <div class="col-lg-3">
+                  <div class="filler-job-form">
+                    <i class="uil uil-briefcase-alt"></i>
+                    <input
+                      id="exampleFormControlInput1"
+                      placeholder="Domaine d'expertise"
+                      name="searchTerm"
+                      class="form-control filler-job-input-box form-control"
+                      [(ngModel)]="searchTerm"
+                      (ngModelChange)="onSearchTermChange()"
+                    />
                   </div>
-                  <div class="col-lg-3">
-                    <div class="filler-job-form">
-                      <i class="uil uil-clipboard-notes"></i>
-                      <select
-                        class="form-select selectForm__inner"
-                        data-trigger="true"
-                        name="choices-single-categories"
-                        id="choices-single-categories"
-                        aria-label="Default select example"
-                      >
+                </div>
+                <div class="col-lg-3">
+                  <div class="filler-job-form">
+                    <i class="uil uil-clipboard-notes"></i>
+                    <select
+                      class="form-select selectForm__inner"
+                      data-trigger="true"
+                      name="choices-single-categories"
+                      id="choices-single-categories"
+                      aria-label="Default select example"
+                      [(ngModel)]="selectedSkill"
+                      (ngModelChange)="onSkillChange($event)"
+                    >
                       <option value="">--Sélectionner une compétence--</option>
-                      <option *ngFor="let skill of skills" [value]="skill.title">{{skill.title}}</option>
-                      </select>
-                    </div>
+                      <option
+                        *ngFor="let skill of skills"
+                        [value]="skill.title"
+                      >
+                        {{ skill.title }}
+                      </option>
+                    </select>
                   </div>
-                  <span class="col-lg-6">
-                    <div class="row">
-                    <span class="col-6 d-flex justify-content-start" style="min-width: 60px;">Filtrer par TJM &nbsp;<i
-                      class="bi bi-question-circle"
-                      data-toggle="tooltip"
-                      data-placement="right"
-                      title=" le taux journalier moyen"
-                    ></i>
+                </div>
+                <span class="col-lg-6">
+                  <div class="row">
+                    <span
+                      class="col-6 d-flex justify-content-start"
+                      style="min-width: 60px"
+                    >
+                      Filtrer par TJM &nbsp;
+                      <i
+                        class="bi bi-question-circle"
+                        data-toggle="tooltip"
+                        data-placement="right"
+                        title="le taux journalier moyen"
+                      ></i>
                     </span>
-                    <span class="col-6 d-flex justify-content-end">{{maxTJM | number:'1.0-0'}} Mad / J</span>
+                    <span class="col-6 d-flex justify-content-end"
+                      >{{ maxTJM | number : "1.0-0" }} Mad / J</span
+                    >
                   </div>
-                        <input 
-                        type="range" 
-                        class="form-range" 
-                        id="maxTJM" 
-                        [min]="0" 
-                        [max]="5000" 
-                        [step]="50" 
-                        [(ngModel)]="maxTJM" 
-                        (ngModelChange)="onTJMChange()"
-                        name="maxTJM" 
-                        >
-                  </span>
-                  
-                     
-
-
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-        
-        <div class="row">
-          
-          <div class="col-lg-12">
-            <div class="align-items-center row">
-              <div class="col-lg-10">
-                <div class="mb-3 mb-lg-0">
-                  <h6 class="fs-16 mb-0"><span >
-                  </span> Showing 1 – 8 of 11 results</h6>
-                </div>
+                  <input
+                    type="range"
+                    class="form-range"
+                    id="maxTJM"
+                    [min]="0"
+                    [max]="5000"
+                    [step]="50"
+                    [(ngModel)]="maxTJM"
+                    (ngModelChange)="onTJMChange()"
+                    name="maxTJM"
+                  />
+                </span>
               </div>
-              
-            </div>
-            <div class="candidate-list">
-              <div *ngIf="isLoading; else dataLoaded" class="card-box">
-                <app-skeleton-loading></app-skeleton-loading>
-                <br>
-                <app-skeleton-loading></app-skeleton-loading>
-                <br>
-                <app-skeleton-loading></app-skeleton-loading>
-              </div>
-              <ng-template #dataLoaded>
-                
-                <div *ngFor="let freelancer of filteredFreelancersVariable" class="candidate-list-box card mt-4">
-                  <div class="card-body">
-                    <div class="row align-items-center">
-                      <!-- Freelancer image -->
-                      <div class="col-auto">
-                        <div class="candidate-list-images">
-                          <a [routerLink]="['../view-freelancerprofile', freelancer.id]">
-                            <img src="assets/img/gallery/user-demo.png" alt class="avatar-md img-thumbnail rounded-circle" />
-                          </a>
-                        </div>
-                      </div>
-                
-                      <!-- Freelancer details -->
-                      <div class="col-lg-5">
-                        <div class="candidate-list-content mt-3 mt-lg-0">
-                          <a [routerLink]="['../view-freelancerprofile', freelancer.id]" class="text-dark text-decoration-none">
-                            <h5 class="fs-19 mb-0">{{ getFirstName(freelancer.user.name) }}</h5>
-                            <p class="text-muted mb-2">{{ freelancer.title }}</p>
-                            <ul class="list-inline mb-0 text-muted">
-                              <li class="list-inline-item"><i class="mdi mdi-map-marker"></i> {{ freelancer.city }}</li>
-                              <li class="list-inline-item"><i class="mdi mdi-wallet"></i> {{ freelancer.TJM }} Mad / J</li>
-                            </ul>
-                          </a>
-                        </div>
-                      </div>
-                
-                      <!-- Freelancer skills -->
-                      <div class="col-lg-4">
-                        <div class="mt-2 mt-lg-0 d-flex flex-wrap align-items-start gap-1">
-                          <span *ngFor="let skill of freelancer.skills" class="badge bg-soft-secondary fs-14 mt-1">
-                            {{ skill.title }}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                
-                    <!-- Favorite icon -->
-                    <div class="favorite-icon position-absolute top-0 end-0 p-3">
-                      <a (click)="toggleFavorite(freelancer.id)">
-                        <i class="mdi mdi-heart fs-18" [ngClass]="{'text-danger': isFavorite(freelancer.id), 'text-muted': !isFavorite(freelancer.id)}"></i>
-                      </a>
-                    </div>
-                    
-                  </div>
-                </div>
-                
-           
-            </ng-template>
-            </div>
-          </div>
-        
-        </div>
-        <div class="row">
-          <div class="mt-4 pt-2 col-lg-12">
-            <nav aria-label="Page navigation example">
-              <ul class="pagination justify-content-center">
-                <li class="page-item" [ngClass]="{'disabled': currentPage === 1}">
-                  <a class="page-link" (click)="onPageChange(currentPage - 1)" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                  </a>
-                </li>
-            
-                <li *ngFor="let page of [].constructor(totalPages); let i = index" class="page-item" [ngClass]="{'active': i + 1 === currentPage}">
-                  <a class="page-link" (click)="onPageChange(i + 1)">{{ i + 1 }}</a>
-                </li>
-            
-                <li class="page-item" [ngClass]="{'disabled': currentPage === totalPages}">
-                  <a class="page-link" (click)="onPageChange(currentPage + 1)" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
+            </form>
           </div>
         </div>
       </div>
-      
-    </section>
-  
-  </body>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="align-items-center row">
+            <div class="col-lg-10">
+              <div class="mb-3 mb-lg-0">
+                <h6 class="fs-16 mb-0"><span></span> Affichage de {{ (currentPage - 1) * itemsPerPage + 1 }} à {{ getEndIndex() }} sur {{ filteredFreelancersVariable.length }} resultats</h6>
+              </div>
+            </div>
+          </div>
+
+          <!-- Skeletton loading -->
+          <div class="candidate-list">
+            <div *ngIf="isLoading; else dataLoaded" class="card-box">
+              <app-skeleton-loading></app-skeleton-loading>
+              <br />
+              <app-skeleton-loading></app-skeleton-loading>
+              <br />
+              <app-skeleton-loading></app-skeleton-loading>
+            </div>
+
+            <!-- Freelancer list -->
+            <ng-template #dataLoaded>
+              <div
+                *ngIf="paginatedFreelancers.length === 0"
+                class="text-center mt-4"
+              >
+                <p class="fs-16 text-muted">Aucun freelancer trouvé</p>
+              </div>
+              <div
+                *ngFor="let freelancer of paginatedFreelancers"
+                class="candidate-list-box card mt-4"
+              >
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <!-- Freelancer image -->
+                    <div class="col-auto">
+                      <div class="candidate-list-images">
+                        <a
+                          [routerLink]="[
+                            '../view-freelancerprofile',
+                            freelancer.id
+                          ]"
+                        >
+                          <img
+                            src="assets/img/gallery/user-demo.png"
+                            alt
+                            class="avatar-md img-thumbnail rounded-circle"
+                          />
+                        </a>
+                      </div>
+                    </div>
+
+                    <!-- Freelancer details -->
+                    <div class="col-lg-5">
+                      <div class="candidate-list-content mt-3 mt-lg-0">
+                        <a
+                          [routerLink]="[
+                            '../view-freelancerprofile',
+                            freelancer.id
+                          ]"
+                          class="text-dark text-decoration-none"
+                        >
+                          <h5 class="fs-19 mb-0">
+                            {{ getFirstName(freelancer.user.name) }}
+                          </h5>
+                          <p class="text-muted mb-2">{{ freelancer.title }}</p>
+                          <ul class="list-inline mb-0 text-muted">
+                            <li class="list-inline-item">
+                              <i class="mdi mdi-map-marker"></i>
+                              {{ freelancer.city }}
+                            </li>
+                            <li class="list-inline-item">
+                              <i class="mdi mdi-wallet"></i>
+                              {{ freelancer.TJM }} Mad / J
+                            </li>
+                          </ul>
+                        </a>
+                      </div>
+                    </div>
+
+                    <!-- Freelancer skills -->
+                    <div class="col-lg-4">
+                      <div
+                        class="mt-2 mt-lg-0 d-flex flex-wrap align-items-start gap-1"
+                      >
+                        <span
+                          *ngFor="let skill of freelancer.skills"
+                          class="badge bg-soft-secondary fs-14 mt-1"
+                        >
+                          {{ skill.title }}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Favorite icon -->
+                  <div class="favorite-icon position-absolute top-0 end-0 p-3">
+                    <a (click)="toggleFavorite(freelancer.id)">
+                      <i
+                        class="mdi mdi-heart fs-18"
+                        [ngClass]="{
+                          'text-danger': isFavorite(freelancer.id),
+                          'text-muted': !isFavorite(freelancer.id)
+                        }"
+                      ></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div class="row">
+        <div class="mt-4 pt-2 col-lg-12">
+          <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+              <li class="page-item" [class.disabled]="currentPage === 1">
+                <a
+                  class="page-link"
+                  aria-label="Previous"
+                  [ngClass]="{ 'text-danger': currentPage !== 1 }"
+                  (click)="onPageChange(currentPage - 1)"
+                  tabindex="-1"
+                >
+                  <span aria-hidden="true">&laquo;</span>
+                  <span class="sr-only">Previous</span>
+                </a>
+              </li>
+              <li
+                class="page-item"
+                *ngFor="let page of getPageNumbers()"
+                [class.active]="currentPage === page"
+              >
+                <a
+                  class="page-link"
+                  [ngClass]="{ 'text-danger': currentPage === page }"
+                  (click)="onPageChange(page)"
+                  >{{ page }}</a
+                >
+              </li>
+              <li
+                class="page-item"
+                [class.disabled]="currentPage === totalPages"
+              >
+                <a
+                  class="page-link"
+                  aria-label="Next"
+                  [ngClass]="{ 'text-danger': currentPage !== totalPages }"
+                  (click)="onPageChange(currentPage + 1)"
+                >
+                  <span aria-hidden="true">&raquo;</span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</body>

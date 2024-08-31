@@ -38,6 +38,17 @@ export class PostsService {
     );
     return this.post;
   }
+  //searsh by title 
+   public searchByTitle(title:any){
+    this.post = this.http.get(`${this.url}/searchTitle`,title);
+    return this.post;
+   }
+  
+    //searsh by Skills 
+   public searchBySkills(skill:any){
+    this.post = this.http.get(`${this.url}/searchSkills`,skill);
+    return this.post;
+   }
 
   // Create a new post
   public store(data: any): Observable<Post> {

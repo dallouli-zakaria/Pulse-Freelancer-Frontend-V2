@@ -52,7 +52,7 @@ import { PermissionTableComponent } from './components/admin/table/permission-ta
 import { RoleTableComponent } from './components/admin/table/role-table/role-table.component';
 import { UsersTableComponent } from './components/admin/table/users-table/users-table.component';
 import { LoginComponent } from './components/commun/auth/login/login.component';
-import { FormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { TimeAgoPipe } from './core/pipes/time-ago.pipe';
 import { AuthService } from './core/services/auth.service';
 import { PostCartComponent } from './components/admin/cards/post-cart/post-cart.component';
@@ -128,8 +128,7 @@ import { ForgetPAsswordComponent } from './components/commun/auth/forget-passwor
 import { EmailVerifyComponent } from './components/commun/auth/email-verify/email-verify.component';
 import { ClientPayementVerificationComponent } from './components/client/pages/client-payement-verification/client-payement-verification.component';
 import { MailSendToUserComponent } from './components/client/actions/mail-send-to-user/mail-send-to-user.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { ContactUsComponent } from './components/commun/contact-us/contact-us.component';
+;
 
 @NgModule({
   declarations: [
@@ -253,8 +252,7 @@ import { ContactUsComponent } from './components/commun/contact-us/contact-us.co
     ForgetPAsswordComponent,
     ClientPayementComponent,
     ClientPayementVerificationComponent,
-    MailSendToUserComponent,
-    ContactUsComponent
+    MailSendToUserComponent
     
   ],
   imports: [
