@@ -39,6 +39,9 @@ export class ClientPostDetailsComponent implements OnInit {
   disabledbutton: boolean = true;
   disabledbutton2: boolean = false;
   isLoadingClose = false;
+  isLoadingValidate = false;
+  validations:boolean=true;
+  validationAdmin:boolean=true;
   steps = [
     { label: 'Ouvert', progress: 25 },
     { label: 'En cours', progress: 50 },
@@ -71,7 +74,6 @@ export class ClientPostDetailsComponent implements OnInit {
   }
 
   verifyFreelancerPosts() {
-    // this.isLoadingClose = true;
     let freelancerId = this.authService.parseID();
     this.postService
       .verifyFreelancerPost(freelancerId, this.postId)
@@ -83,7 +85,6 @@ export class ClientPostDetailsComponent implements OnInit {
   }
 
   verifyClientPosts() {
-    // this.isLoadingClose = true;
     let clientId = this.authService.parseID();
     this.postService
       .verifyClientPost(clientId, this.postId)
@@ -295,6 +296,7 @@ export class ClientPostDetailsComponent implements OnInit {
           this.offerservice
             .getOffersByPostAndFreelancer(offerId, singlefreelancerid)
             .subscribe((res: any) => {
+              this.validations=false;
               const updateValue = { selected: 'declined' };
               this.offerservice.update(res.id, updateValue).subscribe(
                 (updatedOffer: Offer) => {
@@ -371,15 +373,17 @@ export class ClientPostDetailsComponent implements OnInit {
   }
 
   ValidateOffer(): void {
-    this.isLoading = true;
+    this.isLoadingValidate=true;
     const updateValue = { status: 'waiting' };
 
     this.postService.update(this.postId, updateValue).subscribe(
       (updatedPost: Post) => {
+        this.validationAdmin=false;
+        this.isLoadingValidate=false;
         console.log('Offer updated successfully:', updatedPost);
         this.refreshTableData();
-        this.initializeData();
-        this.isLoading = false;
+        this.initializeData();  
+       
         Swal.fire({
           icon: 'success',
           title: 'Offre validé',
@@ -389,17 +393,19 @@ export class ClientPostDetailsComponent implements OnInit {
       },
       (error) => {
         console.error('Error updating offer:', error);
-        this.isLoading = false;
+       
       }
     );
   }
 
   CloseOffer(): void {
+    
     this.isLoadingClose = true;
     const updateValue = { status: 'closed' };
 
     this.postService.update(this.postId, updateValue).subscribe(
       (updatedPost: Post) => {
+        this.validations=false;
         console.log('Offer updated successfully:', updatedPost);
         this.refreshTableData();
         this.initializeData();
@@ -413,6 +419,7 @@ export class ClientPostDetailsComponent implements OnInit {
             popup: 'custom-swal-popup',
           },
         });
+
       },
       (error) => {
         console.error('Error updating offer:', error);

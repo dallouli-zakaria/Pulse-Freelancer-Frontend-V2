@@ -16,13 +16,32 @@
       </div>
 
       <ng-template #dataLoaded>
+
+        <div *ngIf="paginatedContracts.length === 0; else contractlist">
+          <div class="container mb-3">
+            <div class="card pb-0 px-3">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12">
+                    <h5 class="card-title"><a>Vous n'avez aucune contrat!</a></h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <ng-template #contractlist>
+        
         <div class="container mb-3" *ngFor="let item of paginatedContracts; let i = index"> 
+          
+          <a (click)="openModal()">
           <div class="card pb-0 px-3">
             <div class="card-body">
               <div class="row">
                 <div class="col-12">
                   <h4 class="card-title">
-                    <a (click)="openModal()">{{i+1}}<span class="text-muted">- {{item.title}}</span></a>
+                    {{i+1}} <span class="text-muted">- {{item.title}}</span>
                   </h4>
                 </div>
                 <div class="col">
@@ -36,6 +55,8 @@
               </div>
             </div>
           </div>
+           </a>
+
         </div>
 
         <!-- Pagination -->
@@ -68,7 +89,9 @@
             </div>
             <app-client-contract-download></app-client-contract-download>
           </div>
+          
         </div>
+      </ng-template>
       </ng-template>
     </div>
   </div>
