@@ -49,7 +49,11 @@ import { ResetPasswordComponentComponent } from './components/commun/auth/reset-
 =======
 import { ForgetPAsswordComponent } from './components/commun/auth/forget-password/forget-password.component';
 import { ClientPayementVerificationComponent } from './components/client/pages/client-payement-verification/client-payement-verification.component';
+<<<<<<< HEAD
 >>>>>>> dd94db0b5ca0f069de021c41cf5fb4598027d2b4
+=======
+import { SkillsComponent } from './components/admin/pages/skills/skills.component';
+>>>>>>> be98bc551476694bf4066dcfc459a092313a5d5a
 
 const routes: Routes = [
   {
@@ -75,6 +79,7 @@ const routes: Routes = [
       { path: 'client-offer/:postId', component: ClientPostDetailsComponent },
       { path: 'viewPost/:itemId', component: PostViewComponent },
       { path: 'pack', component: PackComponent },
+      {path:'manageskills',component:SkillsComponent},
       { path: '**', redirectTo: 'dashboard', pathMatch: 'full' },
     ],
   },

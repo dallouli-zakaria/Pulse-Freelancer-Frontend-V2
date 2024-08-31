@@ -56,7 +56,7 @@ updated(){
   updatedData.id = this.clientId;
   this.clients.update(this.clientId,this.form.value).subscribe({
     next:(data:any)=>{this.updatedValue=true ;console.log(data);
-      this.clients.index();
+      this.clients.fetchPaginatedClient();
       this.close()
  
     },

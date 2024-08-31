@@ -22,6 +22,7 @@ export class ClientPostDetailsComponent implements OnInit {
   router = inject(Router);
   postdetails!: any;
   isLoading: boolean = true;
+  isTableloading:boolean=false;
   roles!: string;
   freelancers: any[] = [];
   isAuthenticated: boolean = false;
@@ -38,6 +39,9 @@ export class ClientPostDetailsComponent implements OnInit {
   disabledbutton: boolean = true;
   disabledbutton2: boolean = false;
   isLoadingClose = false;
+  isLoadingValidate = false;
+  validations:boolean=true;
+  validationAdmin:boolean=true;
   steps = [
     { label: 'Ouvert', progress: 25 },
     { label: 'En cours', progress: 50 },
@@ -70,7 +74,6 @@ export class ClientPostDetailsComponent implements OnInit {
   }
 
   verifyFreelancerPosts() {
-    // this.isLoadingClose = true;
     let freelancerId = this.authService.parseID();
     this.postService
       .verifyFreelancerPost(freelancerId, this.postId)
@@ -82,7 +85,6 @@ export class ClientPostDetailsComponent implements OnInit {
   }
 
   verifyClientPosts() {
-    // this.isLoadingClose = true;
     let clientId = this.authService.parseID();
     this.postService
       .verifyClientPost(clientId, this.postId)
@@ -232,6 +234,7 @@ export class ClientPostDetailsComponent implements OnInit {
     offerId: number,
     singlefreelancerid: number
   ): void {
+    
     this.disqualifiedFreelancer.add(index);
     this.offerservice
       .getOffersByPostAndFreelancer(offerId, singlefreelancerid)
@@ -241,19 +244,22 @@ export class ClientPostDetailsComponent implements OnInit {
           (updatedOffer: Offer) => {
             console.log('Offer updated successfully:', updatedOffer);
             this.refreshTableData();
+            
+            Swal.fire({
+              icon: 'error',
+              title: 'freelancer disqualifié !',
+              showConfirmButton: false,
+              timer: 1500,
+            });
           },
           (error) => {
             console.error('Error updating offer:', error);
+            
           }
         );
       });
 
-    Swal.fire({
-      icon: 'error',
-      title: 'freelancer disqualifié !',
-      showConfirmButton: false,
-      timer: 1500,
-    });
+   
   }
 
   declineFreelancer(
@@ -290,6 +296,7 @@ export class ClientPostDetailsComponent implements OnInit {
           this.offerservice
             .getOffersByPostAndFreelancer(offerId, singlefreelancerid)
             .subscribe((res: any) => {
+              this.validations=false;
               const updateValue = { selected: 'declined' };
               this.offerservice.update(res.id, updateValue).subscribe(
                 (updatedOffer: Offer) => {
@@ -323,28 +330,34 @@ export class ClientPostDetailsComponent implements OnInit {
   }
 
   getFreelancerTrue(postid: number): void {
+    this.isTableloading=true;
     this.offerservice
       .getFreelancerDetailsByPostIdTrue(postid)
       .subscribe((res: any[]) => {
         this.freelancertrue = res;
+        this.isTableloading=false;
         console.log(res);
       });
   }
 
   getFreelancerFalse(postid: number): void {
+    this.isTableloading=true;
     this.offerservice
       .getFreelancerDetailsByPostIdFalse(postid)
       .subscribe((res: any) => {
         this.freelancerfalse = res;
+        this.isTableloading=false;
         console.log(res);
       });
   }
 
   getFreelancerDeclined(postid: number): void {
+    this.isTableloading=true;
     this.offerservice
       .getFreelancerDetailsByPostIdDeclined(postid)
       .subscribe((res: any[]) => {
         this.freelancerDeclined = res;
+        this.isTableloading=false;
         console.log(res);
       });
   }
@@ -360,15 +373,17 @@ export class ClientPostDetailsComponent implements OnInit {
   }
 
   ValidateOffer(): void {
-    this.isLoading = true;
+    this.isLoadingValidate=true;
     const updateValue = { status: 'waiting' };
 
     this.postService.update(this.postId, updateValue).subscribe(
       (updatedPost: Post) => {
+        this.validationAdmin=false;
+        this.isLoadingValidate=false;
         console.log('Offer updated successfully:', updatedPost);
         this.refreshTableData();
-        this.initializeData();
-        this.isLoading = false;
+        this.initializeData();  
+       
         Swal.fire({
           icon: 'success',
           title: 'Offre validé',
@@ -378,17 +393,19 @@ export class ClientPostDetailsComponent implements OnInit {
       },
       (error) => {
         console.error('Error updating offer:', error);
-        this.isLoading = false;
+       
       }
     );
   }
 
   CloseOffer(): void {
+    
     this.isLoadingClose = true;
     const updateValue = { status: 'closed' };
 
     this.postService.update(this.postId, updateValue).subscribe(
       (updatedPost: Post) => {
+        this.validations=false;
         console.log('Offer updated successfully:', updatedPost);
         this.refreshTableData();
         this.initializeData();
@@ -402,6 +419,7 @@ export class ClientPostDetailsComponent implements OnInit {
             popup: 'custom-swal-popup',
           },
         });
+
       },
       (error) => {
         console.error('Error updating offer:', error);
@@ -467,5 +485,32 @@ export class ClientPostDetailsComponent implements OnInit {
   onCloseModal2(): void {
     this.show2 = false;
     this.showadd = false;
+  }
+//mail sending with popup
+   showMail=false
+   showModal=false
+   selectedEmailFreelacner!:any
+   selectedNameFreelacner!:any
+   selectedIdFreelancer!:number
+
+  mailSend(id:number,email:any,name:any): void {
+   this.selectedIdFreelancer=id
+   this.selectedEmailFreelacner=email;
+   this.selectedNameFreelacner=name;
+   this.showMail = true;
+   this.showModal = true;
+  }
+
+  onCloseModalMail(): void {
+   this.showMail = false;
+   this.showModal = false;   
+  }
+
+  getFirstName(fullName: string | undefined): string {
+    if (!fullName) {
+      return '';
+    }
+    const nameParts = fullName.split(' ');
+    return nameParts.length > 1 ? nameParts[0] : fullName;
   }
 }

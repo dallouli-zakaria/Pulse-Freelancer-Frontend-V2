@@ -70,6 +70,20 @@ export class FreelancerService {
       });
   }
 
+    //freelancer pagination
+    public VerifiedfreelancerPagination(page: number = 1): void {
+      const params = new HttpParams().set('page', page.toString());
+      this.http
+        .get<PaginatedResponse<Freelancer>>(`${this.url}/VerifiedfreelancerPagination`, {
+          params,
+        })
+        .pipe(shareReplay(1))
+        .subscribe({
+          next: (data: any) => this.subjectBe.next(data),
+          error: (error: any) => console.error(error),
+          complete: () => console.log('Fetched paginated freelancers data'),
+        });
+    }
   //add freelancer
   public store(data: any): Observable<Freelancer> {
     this.freelancer = this.http.post(
@@ -169,9 +183,19 @@ export class FreelancerService {
     return this.score;
   }
 
-  
+  //search function 
   searchFreelancers(searchTerm: string): Observable<Freelancer[]> {
     let params = new HttpParams().set('query', searchTerm);
     return this.http.get<Freelancer[]>(`${this.url}/searchBar`, { params });
+  }
+
+  searchVerifiedFreelancers(searchTerm: string): Observable<Freelancer[]> {
+    let params = new HttpParams().set('query', searchTerm);
+    return this.http.get<Freelancer[]>(`${this.url}/verifiedSearchBar`, { params });
+  }
+
+  searchFreelancersTitle(searchTerm: string): Observable<Freelancer[]> {
+    let params = new HttpParams().set('query', searchTerm);
+    return this.http.get<Freelancer[]>(`${this.url}/TitleSearchBar`, { params });
   }
 }

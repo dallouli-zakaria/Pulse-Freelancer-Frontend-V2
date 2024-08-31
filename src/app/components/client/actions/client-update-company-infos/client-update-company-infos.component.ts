@@ -4,6 +4,7 @@ import { Client } from '../../../../core/models/Client';
 import { AuthService } from '../../../../core/services/auth.service';
 import { ClientService } from '../../../../core/services/client.service';
 import Swal from 'sweetalert2';
+import { tr } from 'date-fns/locale';
 
 @Component({
   selector: 'app-client-update-company-infos',
@@ -15,7 +16,7 @@ export class ClientUpdateCompanyInfosComponent implements OnInit,OnChanges{
   clientId = this.authservice.parseID();
   form!: FormGroup;
   clientdetails!:Client;
-
+  isSubmitting:boolean=false;
   constructor(private clients: ClientService, private authservice: AuthService) {}
   ngOnChanges(): void {
   
@@ -37,28 +38,33 @@ export class ClientUpdateCompanyInfosComponent implements OnInit,OnChanges{
     });
   }
 
-  updated() {
+  updated() {   
+    
     if (this.form.invalid) {
       return; // Prevent submission if the form is invalid
+    }else{
+      this.isSubmitting=true;
+      this.clients.update(this.clientId, this.form.value).subscribe({
+        next: (data: any) => {
+          this.clients.show(this.clientId);
+          this.isSubmitting=false;
+          Swal.fire({
+            icon: "success",
+            title: "Modifié avec succès",
+            showConfirmButton: false,
+            timer: 1500
+          });
+        },
+        error: (error: any) => {
+          console.log(error);
+        },
+        complete: () => {
+          console.log('end operation');
+        }
+      });
+    }
     }
 
-    this.clients.update(this.clientId, this.form.value).subscribe({
-      next: (data: any) => {
-        this.clients.show(this.clientId);
-        Swal.fire({
-          icon: "success",
-          title: "Modifié avec succès",
-          showConfirmButton: false,
-          timer: 1500
-        });
-      },
-      error: (error: any) => {
-        console.log(error);
-      },
-      complete: () => {
-        console.log('end operation');
-      }
-    });
-  }
+   
   
 }

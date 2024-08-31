@@ -126,6 +126,9 @@ import { ResetPasswordComponentComponent } from './components/commun/auth/reset-
 import { ForgetPAsswordComponent } from './components/commun/auth/forget-password/forget-password.component';
 import { EmailVerifyComponent } from './components/commun/auth/email-verify/email-verify.component';
 import { ClientPayementVerificationComponent } from './components/client/pages/client-payement-verification/client-payement-verification.component';
+import { MailSendToUserComponent } from './components/client/actions/mail-send-to-user/mail-send-to-user.component';
+import { SkillsTableComponent } from './components/admin/table/skills-table/skills-table.component';
+import { SkillsComponent } from './components/admin/pages/skills/skills.component';
 import { FreelancerViewPostsComponent } from './components/freelancer/pages/freelancer-view-posts/freelancer-view-posts.component';
 ;
 
@@ -250,7 +253,10 @@ import { FreelancerViewPostsComponent } from './components/freelancer/pages/free
     ResetPasswordComponentComponent,
     ForgetPAsswordComponent,
     ClientPayementComponent,
-    ClientPayementVerificationComponent
+    ClientPayementVerificationComponent,
+    MailSendToUserComponent,
+    SkillsTableComponent,
+    SkillsComponent
     
   ],
   imports: [

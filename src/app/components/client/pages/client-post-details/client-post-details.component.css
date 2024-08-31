@@ -20,6 +20,7 @@ border-radius: .25rem;
 }
 a{
     color: black;
+    cursor: pointer;
 }
 a:hover{
     color: #da3746;
@@ -113,6 +114,10 @@ a:hover{
   margin-left: 2px;
 }
 
+
+.table-spinner{
+  margin: 200px 0;
+}
 
 
   

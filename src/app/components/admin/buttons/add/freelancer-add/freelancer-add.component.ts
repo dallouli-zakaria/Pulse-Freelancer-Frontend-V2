@@ -39,7 +39,7 @@ close(): void {
 add(){
   this.freelancerService.store(this.form.value).subscribe({
     next:(data:any)=>{console.log(data);
-      this.freelancerService.index();
+      this.freelancerService.fetchPaginatedFreelancers();
       this.close()
     },
     error:(error)=>{console.log(error);

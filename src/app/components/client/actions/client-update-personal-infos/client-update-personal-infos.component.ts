@@ -41,7 +41,7 @@ export class ClientUpdatePersonalInfosComponent implements OnInit,OnChanges{
   updated() {
     if (this.form.invalid) {
       return; // Prevent submission if the form is invalid
-    }
+    }else{
     this.isSubmitting=true;
     this.clients.update(this.clientId, this.form.value).subscribe({
       next: (data: any) => {
@@ -62,4 +62,5 @@ export class ClientUpdatePersonalInfosComponent implements OnInit,OnChanges{
       }
     });
   }
+}
 }

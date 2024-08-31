@@ -1,6 +1,6 @@
 <div class="container card-box mt-4">
     <div class="row">
-      <h4 class="col-lg-10">
+      <h4 class="col-6 d-flex justify-content-start">
         <span *ngIf="roles == 'Client'"><a routerLink="../../client-profile/client-offers-open"> <i class="fas fa-arrow-left"></i> </a></span> 
         <span *ngIf="roles == 'superadmin_role'" ><a routerLink="../../post-open"> <i class="fas fa-arrow-left"></i> </a></span>
         <span *ngIf="roles == 'Freelancer'"><a routerLink="../../freelancer-dashboard/freelancer-offers-open"> <i class="fas fa-arrow-left"></i> </a></span> 
@@ -8,28 +8,38 @@
 
       </h4>
 
-      <div class="btn-group col-lg-2" role="group" aria-label="Basic example">
+      <div class="col-6 d-flex justify-content-end" role="group" aria-label="Basic example">
 
-      <button *ngIf="roles == 'Client' || roles == 'superadmin_role'"  type="button" class="btn btn-danger "  data-bs-toggle="modal" data-bs-target="#exampleModal"  (click)="trackdata(post)" [disabled]="disabledbutton">Modifier</button>
+      <button *ngIf="roles == 'Client' || roles == 'superadmin_role'"  type="button" class="btn btn-danger "  data-bs-toggle="modal" data-bs-target="#exampleModal"  
+      (click)="trackdata(post)" [disabled]="disabledbutton">Modifier</button>
   
       &nbsp;  
 
-      <button *ngIf="roles == 'superadmin_role' && post?.status == 'open'"
+      <!-- <button *ngIf="roles == 'superadmin_role' && post?.status == 'open'"
       class="btn btn-primary " type="button"
       [disabled]="!isCloseOfferEnabled() || isLoading"
       (click)="ValidateOffer()">
       <ng-container *ngIf="!isLoading; else loadingTemplate">
         {{ isOfferClosed ? 'Valider' : 'Validé' }}
-      </ng-container>git
+      </ng-container>
       <ng-template #loadingTemplate>
         <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
         Chargement...
       </ng-template>
-    </button>
+    </button> -->
+    <span *ngIf="validationAdmin" class="Validation-buttons" >
+      <button *ngIf="roles == 'superadmin_role' && post?.status == 'open' && !isLoadingValidate" class="btn btn-primary " type="button" (click)="ValidateOffer()" [disabled]="!isCloseOfferEnabled()">
+        Valider
+      </button>
+      <button *ngIf="isLoadingValidate" class="btn btn-primary " type="button" disabled>
+        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+        Validation...
+      </button>
+    </span>
     
 
     <button *ngIf="roles == 'superadmin_role' && post?.status =='closed'"  type="button" class="btn btn-primary btn-sm" (click)="onAdd()">
-      <i class="fas fa-download fa-sm text-white-50"></i>contrat
+      <i class="fas fa-paperclip fa-sm text-white-50"></i>&nbsp;contrat
       </button>
       </div>
     <div *ngIf="show2" class="modal-backdrop fade show"></div>
@@ -148,10 +158,28 @@
         </div>
         <hr>
         <div class="row">
-          <h5 class="col-lg-4">date de création :</h5>
+          <h5 class="col-lg-4">Date de création :</h5>
           <h5 class="col-lg-8 text-muted">{{ post.created_at ? (post.created_at | timeAgo) : 'Date not available' }} le {{ post.created_at | date: 'dd-MM-yyyy' }}</h5>
         </div>
         <hr>
+
+      <!-- table loading -->
+     <span *ngIf="isTableloading" >
+
+      <div class="table-spinner d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div> 
+      
+      
+
+    </span>
+
+
+      <span *ngIf="!isTableloading" class="tables">
+
+        
         <h5 *ngIf="roles == 'superadmin_role'" class="mb-3 mt-4">
           <i class="mdi mdi-cards-variant mr-1"></i> Freelancers postulant
         </h5>
@@ -184,10 +212,12 @@
                   <div class="btn-group dropstart">
                     <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                       <i class="bi bi-three-dots-vertical"></i>
+
+              <!-- //popup buttons--------------------------- -->
                     </button>
                     <ul class="dropdown-menu">
                       <li><a class="dropdown-item" (click)="onEdited(item.id)"><i class="bi bi-eye"></i> Voir</a></li>
-                      <li *ngIf="roles == 'superadmin_role'"><a class="dropdown-item"routerLink="../../mailing" ><i class="bi bi-envelope-arrow-up"></i> Envoyer</a></li>
+                      <li *ngIf="roles == 'superadmin_role'"><a class="dropdown-item" (click)="mailSend(item.id,item.user.email,item.user.name)" ><i class="bi bi-envelope-arrow-up"></i> Envoyer</a></li>
                       <li *ngIf="post?.status =='open' && roles == 'superadmin_role'"><a class="dropdown-item" (click)="validateFreelancer(i,post.id,item.id)"><i class="bi bi-check-all"></i> Valider</a></li>
   
                     </ul>
@@ -223,7 +253,14 @@
             <tbody>
               <tr *ngFor="let item of freelancertrue ; let i = index">
                 <td>{{i+1}}</td>
-                <td>{{item.user.name}}</td>
+                <td>
+                  <ng-container *ngIf="roles === 'Client'; else defaultName">
+                    {{ getFirstName(item.user.name) }}
+                  </ng-container>
+                  <ng-template #defaultName>
+                    {{ item.user.name }}
+                  </ng-template>
+                </td>
                 <td>{{item.title}}</td>
 
                 <td>{{item.availability}}</td>
@@ -236,9 +273,10 @@
                     <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                       <i class="bi bi-three-dots-vertical"></i>
                     </button>
+                    <!-- //popup buttons--------------------------- -->
                     <ul class="dropdown-menu">
                       <li><a class="dropdown-item" (click)="onEdited(item.id)"><i class="bi bi-eye"></i> Voir</a></li>
-                      <li *ngIf="roles == 'superadmin_role'"><a class="dropdown-item"routerLink="../../mailing" ><i class="bi bi-envelope-arrow-up"></i> Envoyer</a></li>
+                      <li *ngIf="roles == 'superadmin_role'"><a class="dropdown-item" (click)="mailSend(item.id,item.user.email,item.user.name)"  ><i class="bi bi-envelope-arrow-up"></i> Envoyer</a></li>
                       <li *ngIf="post?.status =='open' && roles == 'superadmin_role'"><a class="dropdown-item" (click)="disqualifyFreelancer(i,post.id,item.id)"><i class="bi bi-x"></i> Disqualifier</a></li>
                       <li *ngIf="post?.status =='waiting' && roles == 'Client'"><a class="dropdown-item" (click)="declineFreelancer(i,post.id,item.id)" ><i class="bi bi-x"></i> Disqualifier</a></li>
 
@@ -258,8 +296,9 @@
 
 
         <h5 *ngIf="roles == 'superadmin_role' " class="mb-3 mt-4">
-          <i class="mdi mdi-cards-variant mr-1"></i> Freelancers Refusé
+          <i class="mdi mdi-cards-variant mr-1"></i> Freelancers refusé
         </h5>
+        <!-- freelancer details -->
         <div *ngIf="roles == 'superadmin_role'  " class="table-responsive">
           <table class="table table-borderless mb-0">
             <thead class="thead-light">
@@ -291,9 +330,10 @@
                     <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                       <i class="bi bi-three-dots-vertical"></i>
                     </button>
+                    <!-- //popup buttons--------------------------- -->
                     <ul class="dropdown-menu">
                       <li><a class="dropdown-item" (click)="onEdited(item.id)"><i class="bi bi-eye"></i> Voir</a></li>
-                      <li *ngIf="roles == 'superadmin_role'"><a class="dropdown-item"routerLink="../../mailing" ><i class="bi bi-envelope-arrow-up"></i> Envoyer</a></li>
+                      <li *ngIf="roles == 'superadmin_role'"><a class="dropdown-item" (click)="mailSend(item.id,item.user.email,item.user.name)"  ><i class="bi bi-envelope-arrow-up"></i> Envoyer</a></li>
                     </ul>
                   </div>
                 </td>
@@ -306,6 +346,8 @@
           <hr>
         </div>
 
+      </span>
+
 
 
 
@@ -315,15 +357,15 @@
 
       <div class="d-flex justify-content-end">
       <div *ngIf="roles == 'Client' && post!.status=='waiting'" >
-        <button type="button" class="btn btn-success" (click)="CloseOffer()" [disabled]="disabledbutton2 || isLoadingClose">
-          <ng-container *ngIf="!isLoadingClose; else loadingTemplateClose">
-            Valider
-          </ng-container>
-          <ng-template #loadingTemplateClose>
-            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-            Chargement...
-          </ng-template>
+      <span *ngIf="validations" class="validation-buttons">
+        <button *ngIf="!isLoadingClose" type="button" class="btn btn-success" (click)="CloseOffer()" >
+          Valider
         </button>&nbsp;&nbsp;
+        <button *ngIf="isLoadingClose"type="button" class="btn btn-success" disabled>
+          <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+          Validation...
+        </button>
+      </span>
         <!-- <button type="button" class="btn btn-danger" (click)="declineOffer()">Refuser</button> -->
       </div>
     </div>
@@ -361,4 +403,13 @@
       </div>
     </div>
   </div>
-  
+
+  <!-- modale shadow -->
+  <div *ngIf="showModal" class="modal-backdrop fade show"></div>
+  <!-- send mail popUp-->
+  <div  *ngIf="showMail" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-m"><div class="modal-content">
+      <app-mail-send-to-user (closeModal)="onCloseModalMail()" [freelancerName]="selectedNameFreelacner" [freelancerEmail]="selectedEmailFreelacner" [freelancerId]="selectedIdFreelancer"></app-mail-send-to-user>
+    </div>
+   </div>
+  </div>

@@ -54,10 +54,10 @@
               remplir le nombre des freelancers !
             </div>
           </div>
-          <div class="col-md-6 mb-3">
+          <div class="col-md-6">
             <label for="skills">Compétences requises</label>
             <app-skillchips (skillsSelected)="onSkillsSelected2($event)"></app-skillchips>
-            <div *ngIf="selectedSkills.length" class="mt-2">
+            <div *ngIf="selectedSkills.length" >
               <span class="badge badge-primary mr-1" *ngFor="let skill of selectedSkills">{{ skill }}</span>
             </div>
           </div>
@@ -74,19 +74,19 @@
         <!-- Period -->
         <div class="row">
           <div class="col-md-6 mb-3">
-            <label for="period">Periode</label>
+            <label for="period">Période</label>
             <select class="form-control" id="period" (change)="onSelectChange($event)" formControlName="period">
               <option value="undefined" selected>Indéfini</option>
               <option value="day">Par jour</option>
               <option value="month">Par Mois</option>
             </select>
             <div class="invalid-feedback">
-              Periode est obligatoire !
+              Période est obligatoire !
             </div>
           </div>
           <!-- Hidden div periode -->
           <div *ngIf="selectedPeriod === 'day' || selectedPeriod === 'month'" class="mb-3 col-6">
-            <label for="definedBudget">Durée de votre periode</label>
+            <label for="definedBudget">Durée de votre Période</label>
             <input type="number" class="form-control" id="definedperiode" placeholder="Entrer votre durée" formControlName="periodvalue" min="0">
           </div>
         </div>
@@ -123,8 +123,12 @@
 
         <hr class="mb-4">
         <!-- Submit button -->
-        <button class="btn btn-outline-danger btn-lg btn-block mb-4" type="submit" [disabled]="isSubmitting" data-bs-dismiss="modal">
-          {{ isSubmitting ? 'Modification...' : 'Modifier !' }}
+        <button *ngIf="!isSubmitting" class="btn btn-outline-danger btn-lg btn-block mb-4" type="submit" >
+          Modifier 
+        </button>
+        <button *ngIf="isSubmitting" class="btn btn-danger btn-lg btn-block mb-4" type="button" disabled>
+          <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+          Modification...
         </button>
       </form>
     </div>
