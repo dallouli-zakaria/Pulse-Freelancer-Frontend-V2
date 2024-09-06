@@ -1,7 +1,6 @@
 <!-- offer-form.component.html -->
-
-<!-- Breadcrumb navigation -->
 <div class="container mt-4">
+  <!-- Breadcrumb navigation -->
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item text-danger"><a routerLink="../home">Accueil</a></li>
@@ -11,7 +10,6 @@
   </nav>
 </div>
 
-<!-- Main content -->
 <div class="container card mt-4">
   <div class="py-5 text-center">
     <h2>Poster une offre, et laisser le reste pour nous !</h2>
@@ -22,15 +20,16 @@
       <h4 class="mb-3">Détails de l'offre</h4>
 
       <!-- Offer form -->
-      <form class="needs-validation" [formGroup]="form" (ngSubmit)="addoffer()">
+      <form [formGroup]="form" (ngSubmit)="addoffer()">
         <!-- Title -->
         <div class="row">
           <div class="col-md-6 mb-3">
-            <label for="firstName">Titre</label>
-            <input type="text" class="form-control" id="firstName" placeholder="" formControlName="title" required>
-            <div class="invalid-feedback">Saisissez le titre !</div>
+            <label for="title">Titre</label>
+            <input type="text" class="form-control" id="title" formControlName="title">
+            <div *ngIf="form.get('title')?.invalid && form.get('title')?.touched" class="text-danger">
+              Titre est obligatoire.
+            </div>
           </div>
-          <div class="col-md-6 mb-3"></div>
         </div>
 
         <!-- Location and Type -->
@@ -40,25 +39,33 @@
             <select class="form-control" id="location" formControlName="location">
               <option *ngFor="let city of cities" [value]="city">{{city}}</option>
             </select>
-            <div class="invalid-feedback">choisir votre localisation !</div>
+            <div *ngIf="form.get('location')?.invalid && form.get('location')?.touched" class="text-danger">
+              Choisissez une localisation.
+            </div>
           </div>
+
           <div class="col-md-6 mb-3">
             <label for="type">Type</label>
             <select class="form-control" id="type" formControlName="type">
               <option value="fulltime">Plein temps</option>
               <option value="partime">Temps partiel</option>
             </select>
-            <div class="invalid-feedback">choisissez une type !</div>
+            <div *ngIf="form.get('type')?.invalid && form.get('type')?.touched" class="text-danger">
+              Choisissez un type.
+            </div>
           </div>
         </div>
 
         <!-- Number of Freelancers and Skills -->
         <div class="row">
           <div class="col-md-6 mb-3">
-            <label for="nbrf">Nombre de freelancers</label>
-            <input type="number" class="form-control" id="nbrf" placeholder="" formControlName="freelancers_number" min="1" max="100" required>
-            <div class="invalid-feedback">remplir le nombre des freelancers !</div>
+            <label for="freelancers_number">Nombre de freelancers</label>
+            <input type="number" class="form-control" id="freelancers_number" formControlName="freelancers_number" min="1" max="100">
+            <div *ngIf="form.get('freelancers_number')?.invalid && form.get('freelancers_number')?.touched" class="text-danger">
+              Remplissez le nombre de freelancers.
+            </div>
           </div>
+
           <div class="col-md-6 mb-3">
             <label for="skills">Compétences requis</label>
             <app-skillchips (skillsSelected)="onSkillsSelected2($event)"></app-skillchips>
@@ -70,9 +77,12 @@
 
         <!-- Description -->
         <div class="mb-3">
-          <label for="desc">Description</label>
-          <div class="form-group">
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="description"></textarea>
+          <label for="description">Description</label>
+          <textarea class="form-control" id="description" rows="3" formControlName="description" (input)="onDescriptionInput()"></textarea>
+          <small class="text-danger" *ngIf="characterCount < 30 ">{{ characterCount }}/30 caractères</small>
+          <small class="text-muted" *ngIf="characterCount > 30 || characterCount == 30">{{ characterCount }}/30 caractères</small>
+          <div *ngIf="form.get('description')?.invalid && form.get('description')?.touched" class="text-danger">
+            Description est obligatoire .
           </div>
         </div>
 
@@ -80,17 +90,23 @@
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="period">Période</label>
-            <select class="form-control" id="period" (change)="onSelectChange($event)" formControlName="period">
+            <select class="form-control" id="period" formControlName="period">
               <option value="undefined" selected>Indéfini</option>
               <option value="day">Par jour</option>
               <option value="month">Par Mois</option>
             </select>
-            <div class="invalid-feedback">Période est obligatoire !</div>
+            <div *ngIf="form.get('period')?.invalid && form.get('period')?.touched" class="text-danger">
+              Choisissez une période.
+            </div>
           </div>
+
           <!-- Hidden div Période -->
           <div *ngIf="selectedPeriod === 'day' || selectedPeriod === 'month'" class="mb-3 col-6">
-            <label for="definedBudget">Durée de votre Période</label>
-            <input type="number" class="form-control" id="definedperiode" placeholder="Entrer votre durée" formControlName="periodvalue" min="0">
+            <label for="definedperiode">Durée de votre période</label>
+            <input type="number" class="form-control" id="definedperiode" formControlName="periodvalue" min="0">
+            <div *ngIf="form.get('periodvalue')?.invalid && form.get('periodvalue')?.touched" class="text-danger">
+              Durée de la période est obligatoire.
+            </div>
           </div>
         </div>
 
@@ -98,33 +114,38 @@
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="budget">Budget</label>
-            <select class="form-control" id="budget" (change)="onBudgetChange($event)" formControlName="budget">
+            <select class="form-control" id="budget" formControlName="budget">
               <option value="undefined" selected>Indéfini</option>
               <option value="day">Par jour</option>
               <option value="month">Par Mois</option>
             </select>
-            <div class="invalid-feedback">Budget est obligatoire !</div>
+            <div *ngIf="form.get('budget')?.invalid && form.get('budget')?.touched" class="text-danger">
+              Choisissez un budget.
+            </div>
           </div>
+
           <!-- Hidden div budget -->
           <div *ngIf="selectedBudget === 'day' || selectedBudget === 'month'" class="mb-3 col-6">
-            <label for="definedBudget">La montant de votre budget</label>
-            <input type="number" class="form-control" id="definedBudget" placeholder="Entrer la montant en MAD" formControlName="budgetvalue" min="0">
+            <label for="definedBudget">Montant de votre budget</label>
+            <input type="number" class="form-control" id="definedBudget" formControlName="budgetvalue" min="0">
+            <div *ngIf="form.get('budgetvalue')?.invalid && form.get('budgetvalue')?.touched" class="text-danger">
+              Montant du budget est obligatoire.
+            </div>
           </div>
         </div>
 
         <hr class="mb-4">
-        <!-- Submit button -->
 
-          <!-- Button when isSubmitting is true -->
-          <button *ngIf="isSubmitting" class="btn btn-danger btn-lg btn-block mb-4" type="button" disabled>
-            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-            Création...
-          </button>
+        <!-- Button when isSubmitting is true -->
+        <button *ngIf="isSubmitting" class="btn btn-danger btn-lg btn-block mb-4" type="button" disabled>
+          <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+          Création...
+        </button>
 
-          <!-- Button when isSubmitting is false -->
-          <button *ngIf="!isSubmitting" class="btn btn-outline-danger btn-lg btn-block mb-4" type="submit">
-            Poster !
-          </button>
+        <!-- Button when isSubmitting is false -->
+        <button *ngIf="!isSubmitting" class="btn btn-outline-danger btn-lg btn-block mb-4" type="submit" [disabled]="form.invalid || isSubmitting || characterCount < 30"> 
+          Poster !
+        </button>
       </form>
     </div>
   </div>

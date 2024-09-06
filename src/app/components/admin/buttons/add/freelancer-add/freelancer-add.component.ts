@@ -38,18 +38,20 @@ close(): void {
 
 add(){
   this.freelancerService.store(this.form.value).subscribe({
-    next:(data:any)=>{console.log(data);
+    next:(data:any)=>{
+      // console.log(data);
       this.freelancerService.fetchPaginatedFreelancers();
       this.close()
     },
-    error:(error)=>{console.log(error);
-      if ( error.error.errors) {
-        this.errorhandling = Object.values(error.error.errors).flat();
-      } else {
-        this.errorhandling = [error.message || 'An error occurred'];
-      }
-    },
-    complete:()=>console.log('add opperation ended')
+    // error:(error)=>{
+    //   console.log(error);
+    //   if ( error.error.errors) {
+    //     this.errorhandling = Object.values(error.error.errors).flat();
+    //   } else {
+    //     this.errorhandling = [error.message || 'An error occurred'];
+    //   }
+    // },
+    // complete:()=>console.log('add opperation ended')
     
   })
 }

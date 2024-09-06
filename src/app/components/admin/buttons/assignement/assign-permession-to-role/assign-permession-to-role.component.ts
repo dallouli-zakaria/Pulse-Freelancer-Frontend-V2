@@ -29,7 +29,7 @@ constructor(private fb:FormBuilder,private roleService:RoleService ){}
  
 //oninit
 ngOnInit(): void {
- console.log(this.role);
+//  console.log(this.role);
  this.index()
     this.getdata=this.roleService.RoleData;
     // this.form=this.fb.group(
@@ -49,22 +49,22 @@ this.roleName=$event.target.value
        this.roleService.RoleData.subscribe({
         next:(data:any)=>{
         this.role=data;
-        console.log(this.role);
+        // console.log(this.role);
      },
-      error:(error)=>{console.log(error);
-        if ( error.error.errors) {
-         this.errorhandling = Object.values(error.error.errors).flat();
-         } else {
-          this.errorhandling = [error.message || 'An error occurred'];
-          }
-     }, 
-      complete:()=>console.log('end Operation')
+    //   error:(error)=>{console.log(error);
+    //     if ( error.error.errors) {
+    //      this.errorhandling = Object.values(error.error.errors).flat();
+    //      } else {
+    //       this.errorhandling = [error.message || 'An error occurred'];
+    //       }
+    //  }, 
+    //   complete:()=>console.log('end Operation')
     })
    }
 
 
     gratroleToPermession(){
-      console.log(this.roleName);
+      // console.log(this.roleName);
       if(this.roleName !==undefined){
         const object:any={
                 name:this.roleName,

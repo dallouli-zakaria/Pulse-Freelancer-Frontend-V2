@@ -32,11 +32,12 @@ ngOnInit(): void {
   })
 }
  inserted(){
-  console.log(this.form.value);
+  // console.log(this.form.value);
   
     this.clients.store(this.form.value)
       .subscribe({
-        next:(data:any)=>{console.log(data)
+        next:(data:any)=>{
+          // console.log(data)
           this.clients.fetchPaginatedClient();
           this.close();
         },
@@ -47,7 +48,8 @@ ngOnInit(): void {
             this.errorhandling = [error.message || 'An error occurred'];
           }
         },
-        complet:()=>{console.log('completed');
+        complet:()=>{
+          // console.log('completed');
         }
       });
     

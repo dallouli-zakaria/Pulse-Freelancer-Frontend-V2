@@ -27,7 +27,8 @@ close(): void {
 
 addRole(){
   this.roleServece.store(this.form.value).subscribe({
-    next:(data)=>{console.log(data)
+    next:(data)=>{
+      // console.log(data)
     
       this.roleServece.index()},
     error:(error)=>{ if ( error.error.errors) {
