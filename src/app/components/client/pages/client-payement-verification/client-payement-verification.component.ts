@@ -16,12 +16,12 @@ export class ClientPayementVerificationComponent {
 
   constructor(private fb: FormBuilder,private router:Router) {
     this.confirmationForm = this.fb.group({
-      digit1: ['', [Validators.required, Validators.pattern('[0-9]')]],
-      digit2: ['', [Validators.required, Validators.pattern('[0-9]')]],
-      digit3: ['', [Validators.required, Validators.pattern('[0-9]')]],
-      digit4: ['', [Validators.required, Validators.pattern('[0-9]')]],
-      digit5: ['', [Validators.required, Validators.pattern('[0-9]')]],
-      digit6: ['', [Validators.required, Validators.pattern('[0-9]')]],
+      digit1: ['4', [Validators.required, Validators.pattern('[0-9]')]],
+      digit2: ['3', [Validators.required, Validators.pattern('[0-9]')]],
+      digit3: ['4', [Validators.required, Validators.pattern('[0-9]')]],
+      digit4: ['4', [Validators.required, Validators.pattern('[0-9]')]],
+      digit5: ['2', [Validators.required, Validators.pattern('[0-9]')]],
+      digit6: ['2', [Validators.required, Validators.pattern('[0-9]')]],
     });
   }
 
