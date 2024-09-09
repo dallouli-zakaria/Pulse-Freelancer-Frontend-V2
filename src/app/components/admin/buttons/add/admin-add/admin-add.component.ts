@@ -27,16 +27,19 @@ export class AdminAddComponent {
 
   add(){
     this.auth.register(this.form.value).subscribe({
-      next:(data:any)=>{console.log(data);this.userService.index()
+      next:(data:any)=>{
+        // console.log(data);
+        this.userService.index()
       },
-      error:(error:any)=>{console.log(error);
+      error:(error:any)=>{
+        // console.log(error);
         if ( error.error.errors) {
           this.errorhandling = Object.values(error.error.errors).flat();
         } else {
           this.errorhandling = [error.message || 'An error occurred'];
         }
       },
-      complete:()=>console.log('end operation users') 
+      // complete:()=>console.log('end operation users') 
       })
   }
 }

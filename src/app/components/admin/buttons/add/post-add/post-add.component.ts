@@ -37,16 +37,18 @@ add(){
  if(this.form.valid){
   const clientId = this.form.get('client_id')?.value;
   this.postService.store(this.form.value).subscribe({
-    next:(data:any)=>{console.log(data);
+    next:(data:any)=>{
+      // console.log(data);
      this.postService.index()},
-    error:(error:any)=>{console.log(error);
-      if ( error.error.errors) {
-        this.errorhandling = Object.values(error.error.errors).flat();
-      } else {
-        this.errorhandling = [error.message || 'An error occurred'];
-      }
-    },
-    complete:()=>console.log('end operation add')
+    // error:(error:any)=>{
+    //   console.log(error);
+    //   if ( error.error.errors) {
+    //     this.errorhandling = Object.values(error.error.errors).flat();
+    //   } else {
+    //     this.errorhandling = [error.message || 'An error occurred'];
+    //   }
+    // },
+    // complete:()=>console.log('end operation add')
     
     
   })

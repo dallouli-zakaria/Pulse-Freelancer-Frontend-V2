@@ -40,20 +40,12 @@ import { ConnectedLandingPageComponent } from './components/commun/connected-lan
 import { EmailVerifyComponent } from './components/commun/auth/email-verify/email-verify.component';
 import { WishlistComponent } from './components/client/pages/wishlist/wishlist.component';
 import { PostRegiterComponent } from './components/commun/auth/post-regiter/post-regiter.component';
-
 import { ForgetPAsswordComponent } from './components/commun/auth/forget-password/forget-password.component';
 import { ClientPayementComponent } from './components/client/pages/client-payement/client-payement.component';
 import { ResetPasswordComponentComponent } from './components/commun/auth/reset-password-component/reset-password-component.component';
-<<<<<<< HEAD
-
-=======
-import { ForgetPAsswordComponent } from './components/commun/auth/forget-password/forget-password.component';
 import { ClientPayementVerificationComponent } from './components/client/pages/client-payement-verification/client-payement-verification.component';
-<<<<<<< HEAD
->>>>>>> dd94db0b5ca0f069de021c41cf5fb4598027d2b4
-=======
 import { SkillsComponent } from './components/admin/pages/skills/skills.component';
->>>>>>> be98bc551476694bf4066dcfc459a092313a5d5a
+
 
 const routes: Routes = [
   {

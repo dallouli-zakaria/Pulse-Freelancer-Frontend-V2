@@ -33,16 +33,16 @@ export class PackAddComponent {
       next:(data:any)=>{
        this.packService.index();
        this.close();
-       console.log(data);
+      //  console.log(data);
       },
-      error:(error:any)=>{console.log(error);
-        if ( error.error.errors) {
-          this.errorhandling = Object.values(error.error.errors).flat();
-        } else {
-          this.errorhandling = [error.message || 'An error occurred'];
-        }
-      },
-      complete:()=>console.log('add opperation ended')
+      // error:(error:any)=>{console.log(error);
+      //   if ( error.error.errors) {
+      //     this.errorhandling = Object.values(error.error.errors).flat();
+      //   } else {
+      //     this.errorhandling = [error.message || 'An error occurred'];
+      //   }
+      // },
+      // complete:()=>console.log('add opperation ended')
       
     })
   }
