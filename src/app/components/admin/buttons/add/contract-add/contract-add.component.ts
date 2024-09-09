@@ -62,7 +62,7 @@ export class ContractAddComponent implements OnInit {
 
   add() {
     // if(this.form.valid){
-    console.log(this.form.value);
+    // console.log(this.form.value);
 
     this.contractService.store(this.form.value).subscribe({
       next: (data: any) => {
@@ -75,7 +75,7 @@ export class ContractAddComponent implements OnInit {
         this.close();
       },
       error: (error: any) => {
-        console.log(error);
+        // console.log(error);
         if (error.error.errors) {
           this.errorhandling = Object.values(error.error.errors).flat();
         } else {
@@ -94,10 +94,10 @@ export class ContractAddComponent implements OnInit {
         this.client = data.sort((a: any, b: any) =>
           a.user.name.localeCompare(b.user.name)
         );
-        console.log(data);
+        // console.log(data);
       },
-      error: (error) => console.log(error),
-      complete: () => console.log(' display data client completed'),
+      // error: (error) => console.log(error),
+      // complete: () => console.log(' display data client completed'),
     });
   }
   freelancerid!: number;
@@ -115,10 +115,10 @@ export class ContractAddComponent implements OnInit {
         this.freelancer = data.sort((a: any, b: any) =>
           a.user.name.localeCompare(b.user.name)
         );
-        console.log(data);
+        // console.log(data);
       },
-      error: (error) => console.log(error),
-      complete: () => console.log(' display data freelancer completed'),
+      // error: (error) => console.log(error),
+      // complete: () => console.log(' display data freelancer completed'),
     });
   }
 

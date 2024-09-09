@@ -28,7 +28,7 @@ export class AddPostComponent implements OnInit {
   // Predefined data
   skills: string[] = ['JavaScript', 'PHP', 'Python', 'Java', 'C#', 'Angular', 'React'];
   cities: string[] = ['Casablanca', 'Rabat', 'Fes', 'Marrakech', 'Tangier', 'Agadir', 'Meknes', 'Oujda', 'Kenitra', 'Tetouan', 'Autre'];
-
+  characterCount: number = 0;
   // UI control properties
   filteredSkills: string[] = [];
   showSuggestions = false;
@@ -41,7 +41,7 @@ export class AddPostComponent implements OnInit {
     private clientservice: ClientService,
     private loadingservice: LoadingService
   ) {
-    this.initForm();
+    
   }
 
   ngOnInit(): void {
@@ -151,6 +151,7 @@ export class AddPostComponent implements OnInit {
 
   // Access control method
   accessAddOffer(): void {
+    this.initForm();
     this.loadingservice.show();
     this.isAuthenticated = this.authservice.isLoggedIn();
     if (this.isAuthenticated) {
@@ -163,6 +164,13 @@ export class AddPostComponent implements OnInit {
           this.loadingservice.hide();
         }
       });
+    }
+  }
+
+  onDescriptionInput(): void {
+    const description = this.form.get('description');
+    if (description) {
+      this.characterCount = description.value?.length || 0;
     }
   }
 }

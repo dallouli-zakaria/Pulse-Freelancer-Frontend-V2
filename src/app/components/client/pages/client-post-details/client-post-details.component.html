@@ -1,6 +1,6 @@
 <div class="container card-box mt-4">
     <div class="row">
-      <h4 class="col-lg-10">
+      <h4 class="col-6 d-flex justify-content-start">
         <span *ngIf="roles == 'Client'"><a routerLink="../../client-profile/client-offers-open"> <i class="fas fa-arrow-left"></i> </a></span> 
         <span *ngIf="roles == 'superadmin_role'" ><a routerLink="../../post-open"> <i class="fas fa-arrow-left"></i> </a></span>
         <span *ngIf="roles == 'Freelancer'"><a routerLink="../../freelancer-dashboard/freelancer-offers-open"> <i class="fas fa-arrow-left"></i> </a></span> 
@@ -8,14 +8,14 @@
 
       </h4>
 
-      <div class="btn-group col-lg-2" role="group" aria-label="Basic example">
+      <div class="col-6 d-flex justify-content-end" role="group" aria-label="Basic example">
 
       <button *ngIf="roles == 'Client' || roles == 'superadmin_role'"  type="button" class="btn btn-danger "  data-bs-toggle="modal" data-bs-target="#exampleModal"  
       (click)="trackdata(post)" [disabled]="disabledbutton">Modifier</button>
   
       &nbsp;  
 
-      <button *ngIf="roles == 'superadmin_role' && post?.status == 'open'"
+      <!-- <button *ngIf="roles == 'superadmin_role' && post?.status == 'open'"
       class="btn btn-primary " type="button"
       [disabled]="!isCloseOfferEnabled() || isLoading"
       (click)="ValidateOffer()">
@@ -26,7 +26,16 @@
         <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
         Chargement...
       </ng-template>
-    </button>
+    </button> -->
+    <span *ngIf="validationAdmin" class="Validation-buttons" >
+      <button *ngIf="roles == 'superadmin_role' && post?.status == 'open' && !isLoadingValidate" class="btn btn-primary " type="button" (click)="ValidateOffer()" [disabled]="!isCloseOfferEnabled()">
+        Valider
+      </button>
+      <button *ngIf="isLoadingValidate" class="btn btn-primary " type="button" disabled>
+        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+        Validation...
+      </button>
+    </span>
     
 
     <button *ngIf="roles == 'superadmin_role' && post?.status =='closed'"  type="button" class="btn btn-primary btn-sm" (click)="onAdd()">
@@ -348,15 +357,15 @@
 
       <div class="d-flex justify-content-end">
       <div *ngIf="roles == 'Client' && post!.status=='waiting'" >
-        <button type="button" class="btn btn-success" (click)="CloseOffer()" [disabled]="disabledbutton2 || isLoadingClose">
-          <ng-container *ngIf="!isLoadingClose; else loadingTemplateClose">
-            Valider
-          </ng-container>
-          <ng-template #loadingTemplateClose>
-            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-            Chargement...
-          </ng-template>
+      <span *ngIf="validations" class="validation-buttons">
+        <button *ngIf="!isLoadingClose" type="button" class="btn btn-success" (click)="CloseOffer()" >
+          Valider
         </button>&nbsp;&nbsp;
+        <button *ngIf="isLoadingClose"type="button" class="btn btn-success" disabled>
+          <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+          Validation...
+        </button>
+      </span>
         <!-- <button type="button" class="btn btn-danger" (click)="declineOffer()">Refuser</button> -->
       </div>
     </div>
