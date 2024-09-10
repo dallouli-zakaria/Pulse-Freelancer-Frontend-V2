@@ -10,4 +10,4 @@ app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname +'/dist/pulse-freelancer-frontend-v2/browser/index.html')); 
 });
 
-// app.listen(process.env.PORT || 8080);
+app.listen(process.env.PORT || 4200);
