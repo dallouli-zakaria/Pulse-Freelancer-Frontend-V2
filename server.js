@@ -5,9 +5,9 @@ const app = express();
 // Serve static files from the dist folder
 app.use(express.static(__dirname + '/dist/pulse-freelancer-frontend-v2'));
 
-// Send all requests to index.html
+// Catch all requests and send them to index.html
 app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname + '/dist/pulse-freelancer-frontend-v2/index.html')); // Corrected this line
+  res.sendFile(path.join(__dirname + '/dist/pulse-freelancer-frontend-v2/browser/index.html'));  // Path to index.html
 });
 
 // Start the app by listening on the default Heroku port
