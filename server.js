@@ -7,7 +7,7 @@ app.use(express.static('dist/pulse-freelancer-frontend-v2'));
 
 // Redirect all requests to the Angular app's 'index.html'
 app.get('/*', function(req, res) {
-  res.sendFile('index.html',{root:'dist/pulse-freelancer-frontend-v2/'});
+  res.sendFile('index.html',{root:'dist/pulse-freelancer-frontend-v2/browser/'});
 });
 
 // Start the app by listening on the default Heroku port or port 8080
