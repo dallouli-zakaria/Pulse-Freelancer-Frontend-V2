@@ -2,12 +2,15 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-// Serve only the static files from the dist directory
-app.use(express.static(__dirname + '/dist/pulse-freelancer-frontend-v2'));
+// Serve static files from the Angular app's 'dist' directory
+app.use(express.static(path.join(__dirname, 'dist/pulse-freelancer-frontend-v2')));
 
-app.get('/*', function(req,res) {
-  res.sendFile(path.join(__dirname+'/dist/pulse-freelancer-frontend-v2/index.html'));
+// Redirect all requests to the Angular app's 'index.html'
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, 'dist/pulse-freelancer-frontend-v2/index.html'));
 });
 
-// Start the app by listening on the default Heroku port
-app.listen(process.env.PORT || 8080);
+// Start the app by listening on the default Heroku port or port 8080
+app.listen(process.env.PORT || 8080, () => {
+  console.log('Server is running');
+});

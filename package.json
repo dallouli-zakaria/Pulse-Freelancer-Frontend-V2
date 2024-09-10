@@ -2,12 +2,12 @@
   "name": "pulse-freelancer-frontend-v2",
   "version": "0.0.0",
   "scripts": {
-"start": "node server.js",
-"server": "nodemon server.js",
-"client": "npm start --prefix client",
-"clientinstall": "npm install --prefix client",
-"dev": "concurrently \"npm run server\" \"npm run client\"",
-"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "ng": "ng",
+    "start": "node server.js",
+    "build": "ng build",
+"heroku-postbuild": "ng build --configuration production",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test"
   },
   "engines": {
     "node": "20.12.2",
