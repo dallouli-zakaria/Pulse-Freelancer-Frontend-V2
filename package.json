@@ -10,9 +10,9 @@
     "test": "ng test"
   },
   "engines": {
-  "node": "16.x",
-  "npm": "7.x"
-},
+    "node": "20.12.2",
+    "npm": "10.8.1"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "^17.3.0",
