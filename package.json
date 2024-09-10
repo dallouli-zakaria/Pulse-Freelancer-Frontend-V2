@@ -2,11 +2,10 @@
   "name": "pulse-freelancer-frontend-v2",
   "version": "0.0.0",
   "scripts": {
-    "postinstall": "ng build --prod",
+    "postinstall": "ng build --configuration production",
     "ng": "ng",
     "start": "node server.js",
     "build": "ng build",
-    "heroku-postbuild": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
