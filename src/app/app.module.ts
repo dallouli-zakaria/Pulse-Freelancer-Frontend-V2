@@ -130,6 +130,7 @@ import { ClientPayementVerificationComponent } from './components/client/pages/c
 import { MailSendToUserComponent } from './components/client/actions/mail-send-to-user/mail-send-to-user.component';
 import { SkillsComponent } from './components/admin/pages/skills/skills.component';
 import { ContactUsComponent } from './components/commun/contact-us/contact-us.component';
+import { SkillsTableComponent } from './components/admin/table/skills-table/skills-table.component';
 ;
 
 @NgModule({
@@ -258,14 +259,15 @@ import { ContactUsComponent } from './components/commun/contact-us/contact-us.co
     SkillsComponent,
     FreelancerIndexComponent,
     ContactUsComponent,
-    FreelancerProjectsHistoryComponent
-
+    FreelancerProjectsHistoryComponent,
+    SkillsTableComponent
 
    
     
   ],
   imports: [
-      FormsModule,
+
+    FormsModule,
       BrowserModule,
       AppRoutingModule,
       NgbModule,
