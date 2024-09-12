@@ -20,8 +20,6 @@ export class AuthService {
   role!: string;
   roles!: string[];
   url=Constant.API_ENDPOINT;
-
-
   tokenn!: any;
   userid!:any;
   constructor() {}

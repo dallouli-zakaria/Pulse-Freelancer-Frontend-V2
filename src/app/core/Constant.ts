@@ -1,5 +1,5 @@
 export class Constant{
-    public static readonly API_ENDPOINT:string="http://localhost:8000/api";
+    public static readonly API_ENDPOINT:string="https://pulse-freelancer-backend-v2-fcfac5d0ae16.herokuapp.com/api";
     public static readonly FREELANCERS:string="freelancers";
     public static readonly CLIENTS:string="clients";
     public static readonly CONTARCTS:string="contract";

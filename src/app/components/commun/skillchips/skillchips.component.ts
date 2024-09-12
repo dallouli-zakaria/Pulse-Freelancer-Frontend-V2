@@ -129,9 +129,9 @@ export class SkillchipsComponent implements OnInit {
   onSubmit(): void {
     if (this.selectedSkills.length > 0 && this.roles == 'freelancer_role') {
       const skillIds = this.selectedSkills; // Use the selectedSkills array directly
-
+  
       console.log('Skills to be updated:', { skills: skillIds }); // Log the data
-
+  
       this.skillservice
         .updateFreelancerSkills(this.freelancerId, { skills: skillIds })
         .subscribe(
@@ -139,6 +139,7 @@ export class SkillchipsComponent implements OnInit {
             console.log('Skills updated successfully:', response);
             this.selectedSkills = [];
             this.form.reset();
+            window.location.reload();
           },
           (error) => {
             console.error('Error updating skills:', error);
@@ -151,6 +152,7 @@ export class SkillchipsComponent implements OnInit {
         );
     }
   }
+  
 
   getSkillTitleById(skillId: number): string {
     const skill = this.skills.find((s) => s.id === skillId);
