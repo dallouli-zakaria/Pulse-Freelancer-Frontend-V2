@@ -25,7 +25,6 @@ export class FreelancerViewPostDetailsComponent implements OnInit,OnChanges{
   freelancerstatus!: string;
   offerExists: boolean | null = null;
 
-  successMessage: string = '';
   isButtonDisabled: boolean = false;
 
   constructor(
@@ -83,8 +82,6 @@ export class FreelancerViewPostDetailsComponent implements OnInit,OnChanges{
 
     this.offerservice.store(data).subscribe((res) => {
       console.log(data);
-      
-      this.successMessage = 'Vous avez postulé avec succès!';
       this.offerExists = true; 
       this.isButtonDisabled = false; 
       
