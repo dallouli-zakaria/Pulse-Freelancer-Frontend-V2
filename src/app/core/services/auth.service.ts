@@ -19,16 +19,14 @@ export class AuthService {
   isLoading: boolean = true;
   role!: string;
   roles!: string[];
-
-
-  API_URL2: any = 'http://127.0.0.1:8000/api/auth';
+  url=Constant.API_ENDPOINT;
   tokenn!: any;
   userid!:any;
   constructor() {}
 
   login(user: { email: string; password: string }): Observable<any> {
     return this.http
-      .post(`${this.API_URL2}/login`, user)
+      .post(`${this.url}/auth/login`, user)
       .pipe(
         tap((tokens: any) =>
           this.doLoginUser(user.email, JSON.stringify(tokens))
@@ -64,7 +62,7 @@ export class AuthService {
   ): Observable<any> {
 
     // return this.http.post(this.API_URL + 'signup', {
-    return this.http.post(this.API_URL2 + '/register', {
+    return this.http.post(this.url + '/auth/register', {
      data
     });
   }
@@ -90,12 +88,12 @@ export class AuthService {
   
 
   getUser():Observable<any> {
-    return this.http.get<any>(`${this.API_URL2}/user`);
+    return this.http.get<any>(`${this.url}/auth/user`);
   }
 
 
   getuserdetails(userid:any):Observable<any>{
-    return this.http.get<any>(`${this.API_URL2}/user/${userid}`);
+    return this.http.get<any>(`${this.url}/auth/user/${userid}`);
   }
 
 
