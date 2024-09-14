@@ -4,6 +4,7 @@ import { SkillService } from '../../../../core/services/skill.service';
 import { AuthService } from '../../../../core/services/auth.service';
 import { Skill } from '../../../../core/models/skill';
 import { FreelanceSkillsService } from '../../../../core/services/freelance-skills.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-freelancer-skills',
@@ -74,6 +75,12 @@ export class FreelancerSkillsComponent implements OnInit {
       .subscribe({
         next: () => {
           this.index();
+          Swal.fire({
+            icon: "success",
+            title: "Supprimé avec succès",
+            showConfirmButton: false,
+            timer: 1500
+          })
         },
         error: (error: any) => {
           console.log(error);

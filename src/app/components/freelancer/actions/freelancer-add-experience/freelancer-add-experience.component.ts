@@ -120,7 +120,7 @@ export class FreelancerAddExperienceComponent implements OnInit {
         next: (res) => {
           Swal.fire({
             icon: "success",
-            title: "Modifié avec succès",
+            title: "Ajouté avec succès",
             showConfirmButton: false,
             timer: 1500
           });

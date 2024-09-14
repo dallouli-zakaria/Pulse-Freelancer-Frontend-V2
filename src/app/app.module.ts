@@ -109,7 +109,6 @@ import { FreelancerProfileComponent } from './components/freelancer/pages/freela
 import { FreelancerProjectsHistoryComponent } from './components/freelancer/pages/freelancer-projects-history/freelancer-projects-history.component';
 import { FreelancerSideprofileComponent } from './components/freelancer/pages/freelancer-sideprofile/freelancer-sideprofile.component';
 import { FreelancerSkillsComponent } from './components/freelancer/pages/freelancer-skills/freelancer-skills.component';
-import { FreelancerViewPostsComponent } from './components/freelancer/pages/freelancer-view-posts/freelancer-view-posts.component';
 import { PackComponent } from './components/admin/pages/pack/pack.component';
 import { PackTableComponent } from './components/admin/table/pack-table/pack-table.component';
 import { PackAddComponent } from './components/admin/buttons/add/pack-add/pack-add.component';
@@ -128,9 +127,10 @@ import { ForgetPAsswordComponent } from './components/commun/auth/forget-passwor
 import { EmailVerifyComponent } from './components/commun/auth/email-verify/email-verify.component';
 import { ClientPayementVerificationComponent } from './components/client/pages/client-payement-verification/client-payement-verification.component';
 import { MailSendToUserComponent } from './components/client/actions/mail-send-to-user/mail-send-to-user.component';
-import { SkillsComponent } from './components/admin/pages/skills/skills.component';
-import { ContactUsComponent } from './components/commun/contact-us/contact-us.component';
 import { SkillsTableComponent } from './components/admin/table/skills-table/skills-table.component';
+import { SkillsComponent } from './components/admin/pages/skills/skills.component';
+import { FreelancerViewPostsComponent } from './components/freelancer/pages/freelancer-view-posts/freelancer-view-posts.component';
+import { ContactUsComponent } from './components/commun/contact-us/contact-us.component';
 ;
 
 @NgModule({
