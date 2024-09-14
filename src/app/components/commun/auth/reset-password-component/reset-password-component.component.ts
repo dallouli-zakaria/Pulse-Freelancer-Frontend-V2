@@ -40,25 +40,25 @@ export class ResetPasswordComponentComponent {
     const hasNumber = /\d+/.test(value);
     const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]+/.test(value);
 
-    const valid = hasUpperCase && hasNumber && hasSpecialChar;
-    return !valid ? { passwordStrength: true } : null;
+    if (!(hasUpperCase && hasNumber && hasSpecialChar)) {
+      return { passwordStrength: true };
+    }
+    return null;
   }
 
   passwordsMatchValidator(form: AbstractControl) {
     const password = form.get('password')?.value;
     const confirmPassword = form.get('password_confirmation')?.value;
 
-    return password === confirmPassword ? null : { passwordMismatch: true };
+    if (password !== confirmPassword) {
+      return { passwordMismatch: true };
+    }
+    return null;
   }
 
   ngOnInit(): void {
     this.token = this.route.snapshot.queryParamMap.get('token')!;
     this.email = this.route.snapshot.queryParamMap.get('email')!;
-
-    this.resetPasswordForm = this.fb.group({
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      password_confirmation: ['', [Validators.required]],
-    });
   }
 
   onSubmit() {
