@@ -137,7 +137,7 @@ export class AuthService {
 
 
   verifyEmail(id: number, hash: string): Observable<any> {
-    return this.http.get(`http://localhost:8000/api/email/verify/${id}/${hash}`);
+    return this.http.get(`${Constant.API_ENDPOINT}/email/verify/${id}/${hash}`);
   }
 
   resetPassword(data: any): Observable<any> {
