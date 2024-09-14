@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../../core/services/auth.service';
 
@@ -18,7 +18,38 @@ export class ResetPasswordComponentComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) {
+    this.resetPasswordForm = this.fb.group({
+      password: [
+        '', 
+        [
+          Validators.required,
+          Validators.minLength(6),
+          this.passwordStrengthValidator
+        ]
+      ],
+      password_confirmation: ['', Validators.required]
+    }, { validators: this.passwordsMatchValidator });
+  }
+
+  passwordStrengthValidator(control: AbstractControl) {
+    const value = control.value;
+    if (!value) return null;
+
+    const hasUpperCase = /[A-Z]+/.test(value);
+    const hasNumber = /\d+/.test(value);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]+/.test(value);
+
+    const valid = hasUpperCase && hasNumber && hasSpecialChar;
+    return !valid ? { passwordStrength: true } : null;
+  }
+
+  passwordsMatchValidator(form: AbstractControl) {
+    const password = form.get('password')?.value;
+    const confirmPassword = form.get('password_confirmation')?.value;
+
+    return password === confirmPassword ? null : { passwordMismatch: true };
+  }
 
   ngOnInit(): void {
     this.token = this.route.snapshot.queryParamMap.get('token')!;
