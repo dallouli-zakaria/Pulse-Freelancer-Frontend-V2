@@ -10,7 +10,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class ContactUsComponent {
 
-
+  showErrorMessage: boolean = false;
+  showSuccessMessage: boolean = false;
   from!:FormGroup;
 
   constructor(
@@ -32,20 +33,26 @@ export class ContactUsComponent {
   })
   }
   
-   contact(){
-
+  contact() {
     this.mailservice.contactUS(this.from.value).subscribe({
-      next:(data:any)=>{
+      next: (data: any) => {
         console.log(data);
-        
+        if (data.message === 'Email envoyé') {
+          this.showSuccessMessage = true;  // Affiche le message de succès si l'email est envoyé
+          this.showErrorMessage = false;   // Cache le message d'erreur
+        } else {
+          this.showErrorMessage = true;    // Si la réponse n'est pas 'Email envoyé', affiche un message d'erreur
+          this.showSuccessMessage = false;
+        }
       },
-      error:(error:any)=>{
+      error: (error: any) => {
         console.log(error);
-        
-        
+        this.showErrorMessage = true;      // Affiche un message d'erreur en cas d'échec
+        this.showSuccessMessage = false;
       }
-    })
-   }
+    });
+  }
+
   
   
 }
