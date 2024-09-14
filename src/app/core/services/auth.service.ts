@@ -21,7 +21,7 @@ export class AuthService {
   roles!: string[];
 
 
-  API_URL2: any = 'http://127.0.0.1:8000/api/auth';
+  API_URL2: any = 'https://pulse-freelancer-backend-v2-fcfac5d0ae16.herokuapp.com/api/auth';
   tokenn!: any;
   userid!:any;
   constructor() {}
@@ -139,7 +139,7 @@ export class AuthService {
 
 
   verifyEmail(id: number, hash: string): Observable<any> {
-    return this.http.get(`http://localhost:8000/api/email/verify/${id}/${hash}`);
+    return this.http.get(`https://pulse-freelancer-backend-v2-fcfac5d0ae16.herokuapp.com/api/email/verify/${id}/${hash}`);
   }
 
   resetPassword(data: any): Observable<any> {
