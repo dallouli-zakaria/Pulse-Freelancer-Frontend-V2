@@ -13,4 +13,9 @@ sendMail(message:any){
 this.email=this.http.post(`${this.url}/email`,message)
 return this.email
 }
+public contactUS(object:any){
+  this.email=this.http.post(`${this.url}/contactUsMail`,object)
+  return this.email
+  }
+
 }

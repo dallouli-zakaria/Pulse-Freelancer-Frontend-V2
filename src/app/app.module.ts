@@ -52,7 +52,7 @@ import { PermissionTableComponent } from './components/admin/table/permission-ta
 import { RoleTableComponent } from './components/admin/table/role-table/role-table.component';
 import { UsersTableComponent } from './components/admin/table/users-table/users-table.component';
 import { LoginComponent } from './components/commun/auth/login/login.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { TimeAgoPipe } from './core/pipes/time-ago.pipe';
 import { AuthService } from './core/services/auth.service';
 import { PostCartComponent } from './components/admin/cards/post-cart/post-cart.component';
@@ -130,6 +130,7 @@ import { MailSendToUserComponent } from './components/client/actions/mail-send-t
 import { SkillsTableComponent } from './components/admin/table/skills-table/skills-table.component';
 import { SkillsComponent } from './components/admin/pages/skills/skills.component';
 import { FreelancerViewPostsComponent } from './components/freelancer/pages/freelancer-view-posts/freelancer-view-posts.component';
+import { ContactUsComponent } from './components/commun/contact-us/contact-us.component';
 ;
 
 @NgModule({
@@ -255,17 +256,24 @@ import { FreelancerViewPostsComponent } from './components/freelancer/pages/free
     ClientPayementComponent,
     ClientPayementVerificationComponent,
     MailSendToUserComponent,
-    SkillsTableComponent,
-    SkillsComponent
+    SkillsComponent,
+    FreelancerIndexComponent,
+    ContactUsComponent,
+    FreelancerProjectsHistoryComponent,
+    SkillsTableComponent
+
+   
     
   ],
   imports: [
-     FormsModule,
-    BrowserModule,
+
+    FormsModule,
+      BrowserModule,
       AppRoutingModule,
       NgbModule,
       ReactiveFormsModule,
-      CommonModule,NgxPaginationModule,FormsModule 
+      CommonModule,
+      NgxPaginationModule,FormsModule 
   ],
   providers: [provideHttpClient(),AuthService,  { provide: HTTP_INTERCEPTORS, useFactory: () => tokenInterceptor, multi: true },],
   bootstrap: [AppComponent]
