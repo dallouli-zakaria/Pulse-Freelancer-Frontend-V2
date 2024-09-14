@@ -12,7 +12,7 @@ export class ResetPasswordComponentComponent {
   resetPasswordForm!: FormGroup;
   token!: string;
   email!: string;
-
+  disabled:boolean=false;
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
@@ -62,6 +62,8 @@ export class ResetPasswordComponentComponent {
   }
 
   onSubmit() {
+    this.disabled=true;
+
     if (this.resetPasswordForm.valid) {
       const formData = {
         token: this.token,
@@ -73,6 +75,7 @@ export class ResetPasswordComponentComponent {
 
       this.authService.resetPassword(formData).subscribe((response) => {
         // Gérez la réponse et redirigez l'utilisateur
+        this.disabled=false;
         this.router.navigate(['/login']);
       });
     }
