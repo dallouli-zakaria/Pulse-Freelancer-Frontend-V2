@@ -38,24 +38,26 @@
     </span>
     
 
-    <button *ngIf="roles == 'superadmin_role' && post?.status =='closed'"  type="button" class="btn btn-primary btn-sm" (click)="onAdd()">
-      <i class="fas fa-paperclip fa-sm text-white-50"></i>&nbsp;contrat
-      </button>
-      </div>
-    <div *ngIf="show2" class="modal-backdrop fade show"></div>
-    <!-- add -->
-    <div  *ngIf="showadd" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
+    <button *ngIf="roles == 'superadmin_role' && post?.status =='closed'"  type="button" class="btn btn-primary btn-sm" (click)="ContractAdd()">
+      <i class="fas fa-paperclip fa-sm text-white-50"></i>&nbsp;Contrat
+    </button>
+  </div>
+
+    <!-- Client Contract -->
+    <div  *ngIf="showContractAdd" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
      <div class="modal-dialog modal-m"><div class="modal-content">
-       <app-contract-add (closeModal)="onCloseModal2()"></app-contract-add>
-     </div>
+      <app-client-contract-add (closeModal)="onCloseModal2()"></app-client-contract-add>
+    </div>
     </div>
   </div>
 
-
-       
-
-
-
+    <!-- Freelancer Contract -->
+    <div  *ngIf="showContractAddF" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
+      <div class="modal-dialog modal-m"><div class="modal-content">
+        <app-freelancer-contract-add (closeModal)="onCloseModal2()"></app-freelancer-contract-add>
+      </div>
+      </div>
+    
 
 
       <!-- <button *ngIf="roles == 'superadmin_role' && post?.status =='waiting'  " 
@@ -72,6 +74,8 @@
 
 
       </div>
+
+      
   
     <div *ngIf="isLoading" class="loading-skeleton">
       <div class="skeleton-header"></div>

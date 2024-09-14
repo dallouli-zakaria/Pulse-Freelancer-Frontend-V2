@@ -473,53 +473,44 @@ export class ClientPostDetailsComponent implements OnInit {
     );
   }
 
-  createcontract() {}
 
-  showadd = false;
-  show2 = false;
 
-  onAdd(): void {
-
+  showContractAdd = false;
+  showContractAddF= false;
+  ContractAdd(): void {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
-        confirmButton: "btn btn-success",
-        cancelButton: "btn btn-danger"
+        confirmButton: "btn btn-outline-primary mr-2 ",
+        cancelButton: "btn btn-primary ml-2 ",
+        actions: 'my-actions',
       },
       buttonsStyling: false
     });
     swalWithBootstrapButtons.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      title: "Création du contrat",
+      text: "Choisissez votre utilisateur",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonText: "Yes, delete it!",
-      cancelButtonText: "No, cancel!",
+      confirmButtonText: "Freelancer",
+      cancelButtonText: "Client",
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-        swalWithBootstrapButtons.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success"
-        });
+        this.showContractAddF = true;
       } else if (
-        /* Read more about handling dismissals below */
         result.dismiss === Swal.DismissReason.cancel
       ) {
-        swalWithBootstrapButtons.fire({
-          title: "Cancelled",
-          text: "Your imaginary file is safe :)",
-          icon: "error"
-        });
+        this.showContractAdd = true;
       }
     });
-
-    // this.show2 = true;
-    // this.showadd = true;
   }
+  
+
+
   onCloseModal2(): void {
-    this.show2 = false;
-    this.showadd = false;
+    this.showContractAdd = false;
+    this.showContractAddF = false;
+
   }
 //mail sending with popup
    showMail=false

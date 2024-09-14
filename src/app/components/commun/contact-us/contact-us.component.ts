@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class ContactUsComponent {
 
+
+  sendmail:boolean=false;
+
+  SendMail(){
+    this.sendmail=true;
+  }
 }

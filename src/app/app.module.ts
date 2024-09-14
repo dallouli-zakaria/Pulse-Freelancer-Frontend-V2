@@ -130,6 +130,9 @@ import { MailSendToUserComponent } from './components/client/actions/mail-send-t
 import { SkillsTableComponent } from './components/admin/table/skills-table/skills-table.component';
 import { SkillsComponent } from './components/admin/pages/skills/skills.component';
 import { FreelancerViewPostsComponent } from './components/freelancer/pages/freelancer-view-posts/freelancer-view-posts.component';
+import { ClientContractAddComponent } from './components/admin/buttons/add/client-contract-add/client-contract-add.component';
+import { FreelancerContractAddComponent } from './components/admin/buttons/add/freelancer-contract-add/freelancer-contract-add.component';
+import { ContactUsComponent } from './components/commun/contact-us/contact-us.component';
 ;
 
 @NgModule({
@@ -169,6 +172,7 @@ import { FreelancerViewPostsComponent } from './components/freelancer/pages/free
     ClientUpdatePostComponent,
     ClientViewFreelancerDetailsComponent,
     ClientViewFreelancersComponent,
+    ContactUsComponent,
     ConnectedLandingPageComponent,
     ContractAddComponent,
     ContractCartComponent,
@@ -256,7 +260,9 @@ import { FreelancerViewPostsComponent } from './components/freelancer/pages/free
     ClientPayementVerificationComponent,
     MailSendToUserComponent,
     SkillsTableComponent,
-    SkillsComponent
+    SkillsComponent,
+    ClientContractAddComponent,
+    FreelancerContractAddComponent
     
   ],
   imports: [
