@@ -1,3 +1,4 @@
+import { ClientcontractService } from './../../../../../core/services/clientcontract.service';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -23,12 +24,14 @@ export class ClientContractAddComponent {
   clientsubject!: Observable<Client[]>;
   freelnacerSubject!: Observable<Freelancer[]>;
   errorhandling: any;
+  client_id:any=24;
   constructor(
     private contractService: ContractService,
     private fb: FormBuilder,
     private clientservices: ClientService,
     private freelancerService: FreelancerService,
-    private postsService: PostsService
+    private postsService: PostsService,
+    private ClientContract:ClientcontractService,
   ) {}
   @Output() closeModal = new EventEmitter<void>();
   close(): void {
@@ -53,8 +56,7 @@ export class ClientContractAddComponent {
         startDate: ['', Validators.required],
         endDate: ['', Validators.required],
         project_description: ['', Validators.required],
-        client_id: [this.freelancerid],
-        freelancer_id: [this.clientid],
+        client_id: [this.client_id],
       },
       { validators: dateRangeValidator() }
     );
@@ -64,7 +66,7 @@ export class ClientContractAddComponent {
     // if(this.form.valid){
     // console.log(this.form.value);
 
-    this.contractService.store(this.form.value).subscribe({
+    this.ClientContract.store(this.form.value).subscribe({
       next: (data: any) => {
         Swal.fire({
           icon: 'success',
