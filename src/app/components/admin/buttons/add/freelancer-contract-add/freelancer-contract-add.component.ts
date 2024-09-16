@@ -62,8 +62,8 @@ export class FreelancerContractAddComponent {
   }
 
   add() {
-    // if(this.form.valid){
-    // console.log(this.form.value);
+    if(this.form.valid){
+    console.log(this.form.value);
 
     this.freelancercontract.store(this.form.value).subscribe({
       next: (data: any) => {
@@ -84,9 +84,9 @@ export class FreelancerContractAddComponent {
         }
       },
     });
-    // }else{
-    //   this.errorhandeling='error validation'
-    // }
+    }else{
+      this.errorhandeling='error validation'
+    }
   }
   clientIndex() {
     this.clientservices.index();
