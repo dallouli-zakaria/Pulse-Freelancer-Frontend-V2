@@ -52,8 +52,8 @@ export class FreelancerContractAddComponent {
     this.form = this.fb.group(
       {
         title: ['', [Validators.required, Validators.maxLength(255)]],
-        startDate: ['', Validators.required],
-        endDate: ['', Validators.required],
+        start_date: ['', Validators.required],
+        end_date: ['', Validators.required],
         project_description: ['', Validators.required],
         freelancer_id: [this.freelancerid]
       },
