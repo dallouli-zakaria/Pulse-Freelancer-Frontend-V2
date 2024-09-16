@@ -1,3 +1,4 @@
+import { FreelancercontractService } from './../../../../../core/services/freelancercontract.service';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -28,7 +29,8 @@ export class FreelancerContractAddComponent {
     private fb: FormBuilder,
     private clientservices: ClientService,
     private freelancerService: FreelancerService,
-    private postsService: PostsService
+    private postsService: PostsService,
+    private freelancercontract : FreelancercontractService
   ) {}
   @Output() closeModal = new EventEmitter<void>();
   close(): void {
@@ -53,8 +55,7 @@ export class FreelancerContractAddComponent {
         startDate: ['', Validators.required],
         endDate: ['', Validators.required],
         project_description: ['', Validators.required],
-        client_id: [this.freelancerid],
-        freelancer_id: [this.clientid],
+        freelancer_id: [this.freelancerid]
       },
       { validators: dateRangeValidator() }
     );
@@ -64,7 +65,7 @@ export class FreelancerContractAddComponent {
     // if(this.form.valid){
     // console.log(this.form.value);
 
-    this.contractService.store(this.form.value).subscribe({
+    this.freelancercontract.store(this.form.value).subscribe({
       next: (data: any) => {
         Swal.fire({
           icon: 'success',

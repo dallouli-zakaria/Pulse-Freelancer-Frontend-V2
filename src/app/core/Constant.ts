@@ -4,6 +4,7 @@ export class Constant{
     public static readonly CLIENTS:string="clients";
     public static readonly CONTARCTS:string="contract";
     public static readonly CLIENTCONTARCTS:string="clientcontract";
+    public static readonly FREELANCERCONTRACT:string="freelancercontract";
     public static readonly POSTS:string="posts";
     public static readonly OFFERS:string="offers";
     public static readonly CLIENTCOUNT:string="clientCount";

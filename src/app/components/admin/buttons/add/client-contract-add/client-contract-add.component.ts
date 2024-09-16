@@ -24,7 +24,6 @@ export class ClientContractAddComponent {
   clientsubject!: Observable<Client[]>;
   freelnacerSubject!: Observable<Freelancer[]>;
   errorhandling: any;
-  client_id:any=24;
   constructor(
     private contractService: ContractService,
     private fb: FormBuilder,
@@ -56,7 +55,7 @@ export class ClientContractAddComponent {
         startDate: ['', Validators.required],
         endDate: ['', Validators.required],
         project_description: ['', Validators.required],
-        client_id: [this.client_id],
+        client_id: [this.clientid],
       },
       { validators: dateRangeValidator() }
     );
