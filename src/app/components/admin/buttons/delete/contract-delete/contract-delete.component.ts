@@ -20,7 +20,8 @@ constructor(private contractService:ContractService){}
   
   this.contractService.delete(this.idContract).subscribe({
     next:(data)=>{console.log(data);
-      this.close()
+      this.close();
+      this.contractService.index();
     },
     error:(error)=>{console.log(error);
     }
