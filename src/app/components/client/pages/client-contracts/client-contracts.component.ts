@@ -1,3 +1,4 @@
+import { ClientcontractService } from './../../../../core/services/clientcontract.service';
 import { Component, OnInit } from '@angular/core';
 import { ContractService } from '../../../../core/services/contract.service';
 import { FreelancerService } from '../../../../core/services/freelancer.service';
@@ -12,8 +13,8 @@ import { AuthService } from '../../../../core/services/auth.service';
 })
 export class ClientContractsComponent implements OnInit {
   isModalOpen = false;
-  contract: Contract[] = [];
-  paginatedContracts: Contract[] = [];
+  contract: any[] = [];
+  paginatedContracts: any[] = [];
   freelancerMap: { [key: number]: Freelancer } = {};
   isLoading = true;
   searchTerm = '';
@@ -22,7 +23,7 @@ export class ClientContractsComponent implements OnInit {
   contractsPerPage = 5;
   client_id!:number;
 
-  constructor(private contractService: ContractService, private freelancerService: FreelancerService,private authsevice:AuthService) {}
+  constructor(private contractService: ContractService, private freelancerService: FreelancerService,private authsevice:AuthService,private clientcontractservice: ClientcontractService) {}
 
   ngOnInit(): void {
     this.fetchData();
@@ -30,7 +31,8 @@ export class ClientContractsComponent implements OnInit {
 
   fetchData() {
     this.client_id = this.authsevice.parseID();
-    this.contractService.showbyclient(this.client_id).subscribe(
+
+    this.clientcontractservice.index().subscribe(
       (contracts:any) => {
         this.contract = contracts;
         this.totalPages = Math.ceil(this.contract.length / this.contractsPerPage);

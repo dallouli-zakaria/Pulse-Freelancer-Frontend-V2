@@ -26,7 +26,7 @@ public subject:BehaviorSubject<Contract[]>=new BehaviorSubject<Contract[]>([]);
  
 //get data from index function using event subject behavior 
  public index(){
-   this.contract=this.http.get<Contract[]>(`${this.url}/${Constant.CONTARCTS}`).subscribe({
+   this.contract=this.http.get<Contract[]>(`${this.url}/${Constant.FREELANCERCONTRACT}`).subscribe({
     next:(data: any)=>{this.subject.next(data)
     console.log(data);
      },
@@ -47,24 +47,24 @@ public subject:BehaviorSubject<Contract[]>=new BehaviorSubject<Contract[]>([]);
  }
  //update function
   public update(id:number,data:any):Observable<Contract>{
-    this.contract=this.http.put(`${this.url}/${Constant.CONTARCTS}/${id}`,data);
+    this.contract=this.http.put(`${this.url}/${Constant.FREELANCERCONTRACT}/${id}`,data);
     return this.contract
    }
 
  //deleted function
   public delete(id:any):Observable<Contract> {
-   this.contract=this.http.delete(`${this.url}/${Constant.CONTARCTS}/${id}`);
+   this.contract=this.http.delete(`${this.url}/${Constant.FREELANCERCONTRACT}/${id}`);
    return this.contract
   }
 
   //show by client_id
   public showbyclient(client_id:number):Observable<Contract>{
-    this.contract=this.http.get(`${this.url}/${Constant.CONTARCTS}/client/${client_id}`);
+    this.contract=this.http.get(`${this.url}/${Constant.FREELANCERCONTRACT}/client/${client_id}`);
     return this.contract
    }
   //show by freelancer_id
   public showbyfreelancer(freelancer_id:number):Observable<Contract>{
-    this.contract=this.http.get(`${this.url}/${Constant.CONTARCTS}/freelancer/${freelancer_id}`);
+    this.contract=this.http.get(`${this.url}/${Constant.FREELANCERCONTRACT}/freelancer/${freelancer_id}`);
     return this.contract
    }
 }

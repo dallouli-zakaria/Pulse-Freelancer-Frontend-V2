@@ -30,7 +30,7 @@ export class DashboardComponent {
         label: 'Line Dataset',
         data: [], // Données statiques
       }],
-      labels: ['Clients', 'freelancers', 'Contarcts', 'Posts']
+      labels: ['Clients', 'freelancers', 'CONTRACTS', 'Posts']
     },
     options: {
       responsive: true,

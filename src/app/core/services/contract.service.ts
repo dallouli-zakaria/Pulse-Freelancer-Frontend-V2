@@ -27,7 +27,7 @@ export class ContractService {
    
   //get data from index function using event subject behavior 
    public index(){
-     this.contract=this.http.get<Contract[]>(`${this.url}/${Constant.CONTARCTS}`).subscribe({
+     this.contract=this.http.get<Contract[]>(`${this.url}/${Constant.CONTRACTS}`).subscribe({
       next:(data: any)=>{this.subject.next(data)
       console.log(data);
        },
@@ -43,29 +43,29 @@ export class ContractService {
      }
     // get contracts by id
     public store(data:any):Observable<Contract>{
-    this.contract=this.http.post(`${this.url}/${Constant.CONTARCTS}`,data)
+    this.contract=this.http.post(`${this.url}/${Constant.CONTRACTS}`,data)
     return this.contract
    }
    //update function
     public update(id:number,data:any):Observable<Contract>{
-      this.contract=this.http.put(`${this.url}/${Constant.CONTARCTS}/${id}`,data);
+      this.contract=this.http.put(`${this.url}/${Constant.CONTRACTS}/${id}`,data);
       return this.contract
      }
 
    //deleted function
     public delete(id:any):Observable<Contract> {
-     this.contract=this.http.delete(`${this.url}/${Constant.CONTARCTS}/${id}`);
+     this.contract=this.http.delete(`${this.url}/${Constant.CONTRACTS}/${id}`);
      return this.contract
     }
 
     //show by client_id
     public showbyclient(client_id:number):Observable<Contract>{
-      this.contract=this.http.get(`${this.url}/${Constant.CONTARCTS}/client/${client_id}`);
+      this.contract=this.http.get(`${this.url}/${Constant.CONTRACTS}/client/${client_id}`);
       return this.contract
      }
     //show by freelancer_id
     public showbyfreelancer(freelancer_id:number):Observable<Contract>{
-      this.contract=this.http.get(`${this.url}/${Constant.CONTARCTS}/freelancer/${freelancer_id}`);
+      this.contract=this.http.get(`${this.url}/${Constant.CONTRACTS}/freelancer/${freelancer_id}`);
       return this.contract
      }
 
