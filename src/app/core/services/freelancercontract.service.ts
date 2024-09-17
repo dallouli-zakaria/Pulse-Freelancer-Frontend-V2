@@ -25,14 +25,9 @@ public subject:BehaviorSubject<Contract[]>=new BehaviorSubject<Contract[]>([]);
  }
  
 //get data from index function using event subject behavior 
- public index(){
-   this.contract=this.http.get<Contract[]>(`${this.url}/${Constant.FREELANCERCONTRACT}`).subscribe({
-    next:(data: any)=>{this.subject.next(data)
-    console.log(data);
-     },
-    error:(error)=>console.log(error),
-    complete:()=>console.log('end operation')
-  }).add(console.log('subjetc contract'));
+ public index():Observable<any>{
+   this.contract=this.http.get<any[]>(`${this.url}/${Constant.FREELANCERCONTRACT}`);
+   return this.contract;
  } 
  
  // pagination contract

@@ -34,6 +34,8 @@ export class ClientContractsComponent implements OnInit {
 
     this.clientcontractservice.index().subscribe(
       (contracts:any) => {
+        console.log(contracts);
+        
         this.contract = contracts;
         this.totalPages = Math.ceil(this.contract.length / this.contractsPerPage);
         this.applyPagination();

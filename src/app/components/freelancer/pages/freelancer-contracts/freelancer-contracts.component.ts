@@ -1,3 +1,4 @@
+import { FreelancercontractService } from './../../../../core/services/freelancercontract.service';
 import { Component } from '@angular/core';
 import { Contract } from '../../../../core/models/Contract';
 import { Observable } from 'rxjs';
@@ -13,8 +14,8 @@ import { AuthService } from '../../../../core/services/auth.service';
 })
 export class FreelancerContractsComponent {
   isModalOpen = false;
-  contract: Contract[] = [];
-  paginatedContracts: Contract[] = [];
+  contract: any[] = [];
+  paginatedContracts: any[] = [];
   isLoading = true;
   data: any[] = [];
   subject!: Observable<Contract[]>;
@@ -26,7 +27,8 @@ export class FreelancerContractsComponent {
   constructor(
     private contractService: ContractService,
     private clientService: ClientService,
-    private authservice: AuthService
+    private authservice: AuthService,
+    private freelancercontract:FreelancercontractService
   ) {}
 
   ngOnInit(): void {
@@ -35,7 +37,7 @@ export class FreelancerContractsComponent {
 
   fetchData() {
     this.freelancer_id = this.authservice.parseID();
-    this.contractService.showbyfreelancer(this.freelancer_id).subscribe(
+    this.freelancercontract.index().subscribe(
       (contracts: any) => {
         this.contract = contracts;
         this.totalPages = Math.ceil(
@@ -65,7 +67,7 @@ export class FreelancerContractsComponent {
   }
 
   applyPagination() {
-    const filteredContracts = this.contract.filter((contract) =>
+    const filteredContracts = this.contract.filter(contract =>
       contract.title.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
     this.totalPages = Math.ceil(

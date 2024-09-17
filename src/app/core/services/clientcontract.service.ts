@@ -25,10 +25,8 @@ public subject:BehaviorSubject<any[]>=new BehaviorSubject<any[]>([]);
  }
  
 //get data from index function using event subject behavior 
- public index(){
-   this.http.get<any[]>(`${this.url}/${Constant.CLIENTCONTRACTS}`).subscribe((res)=>{
-    this.contract=res;
-   })
+ public index():Observable<any>{
+  this.contract=this.http.get<any[]>(`${this.url}/${Constant.CLIENTCONTRACTS}`);
    return this.contract;
    
  } 

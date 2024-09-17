@@ -27,21 +27,21 @@
           class="container mb-3"
           *ngFor="let item of paginatedContracts; let i = index"
         >
+
+        <a (click)="openModal()">
           <div class="card pb-0 px-3">
             <div class="card-body">
               <div class="row">
                 <div class="col-12">
                   <h4 class="card-title">
-                    <a (click)="openModal()"
-                      >{{ i + 1
-                      }}<span class="text-muted">- {{ item.title }}</span></a
-                    >
+                    {{ i + 1
+                      }}<span class="text-muted"> - {{ item.title }}</span>
                   </h4>
                 </div>
                 <div class="col">
                   <h6 class="row card-subtitle mb-2">
-                    <span> Budget: {{ item.start_date | date:'dd/MM/yyyy' }}</span>
-                    <span> Period: {{ item.end_date | date:'dd/MM/yyyy' }}</span>
+                    <span> Date début: {{ item.start_date | date:'dd/MM/yyyy' }}</span>
+                    <span> Date fin: {{ item.end_date | date:'dd/MM/yyyy' }}</span>
                     <p class="card-text text-muted">
                       <strong>La date de creation:</strong>
                       {{ item.created_at | date }}
@@ -51,6 +51,7 @@
               </div>
             </div>
           </div>
+          </a>
         </div>
 
         <!-- Pagination -->
