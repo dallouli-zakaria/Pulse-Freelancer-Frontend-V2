@@ -19,9 +19,10 @@ constructor(private contractService:ContractService){}
   console.log(this.idContract);
   
   this.contractService.delete(this.idContract).subscribe({
-    next:(data)=>{console.log(data);
+    next:(data)=>{console.log(data)
+   
       this.close();
-      this.contractService.index();
+    
     },
     error:(error)=>{console.log(error);
     }
