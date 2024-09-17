@@ -1,22 +1,44 @@
 import { Component } from '@angular/core';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-contract',
   templateUrl: './contract.component.html',
-  styleUrl: './contract.component.css'
+  styleUrls: ['./contract.component.css']
 })
 export class ContractComponent {
+  showContractAdd = false;
+  showContractAddF = false;
 
-  showadd=false
-  show=false
-  
-  onAdd(): void {
-    this.show = true;
-      this.showadd = true;
+  ContractAdd(): void {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-outline-primary mr-2",
+        cancelButton: "btn btn-primary ml-2",
+        actions: 'my-actions',
+      },
+      buttonsStyling: false
+    });
+
+    swalWithBootstrapButtons.fire({
+      title: "Création du contrat",
+      text: "Choisissez votre utilisateur",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Freelancer",
+      cancelButtonText: "Client",
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.showContractAddF = true;
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        this.showContractAdd = true;
+      }
+    });
   }
-    onCloseModal(): void {
-      this.show = false;
-      this.showadd = false;
-     
-    }
+
+  onCloseModal2(): void {
+    this.showContractAdd = false;
+    this.showContractAddF = false;
+  }
 }

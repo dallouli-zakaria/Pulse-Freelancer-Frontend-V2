@@ -1,15 +1,36 @@
 
+
+
 <div  class="container">
-   <button type="button" class="btn btn-primary btn-sm" (click)="onAdd()">
-    <i class="fas fa-plus fa-sm text-white-50"></i>  Ajouter contrat
-    </button>
+
+
+  <button   type="button" class="btn btn-primary btn-sm" (click)="ContractAdd()">
+    <i class="fas fa-paperclip fa-sm text-white-50"></i>&nbsp;Contrat
+  </button>
    <app-contract-table></app-contract-table>    
+
+
+</div>
+
+
+<div *ngIf="showContractAddF" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-m">
+    <div class="modal-content">
+      <app-freelancer-contract-add (closeModal)="onCloseModal2()"></app-freelancer-contract-add>
+    </div>
   </div>
-  <div *ngIf="show" class="modal-backdrop fade show"></div>
-  <!-- add -->
-  <div  *ngIf="showadd" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
-   <div class="modal-dialog modal-m"><div class="modal-content">
-     <app-contract-add (closeModal)="onCloseModal()"></app-contract-add>
-   </div>
+</div>
+
+<div *ngIf="showContractAdd" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-m">
+    <div class="modal-content">
+      <app-client-contract-add (closeModal)="onCloseModal2()"></app-client-contract-add>
+    </div>
   </div>
- </div>
+</div>
+  
+
+
+
+
+
